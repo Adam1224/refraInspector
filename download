@@ -1,0 +1,6 @@
+# Locally generated inspection data and private assets
+*.log
+.DS_Store
+Thumbs.db
+inspection_data/
+private/
