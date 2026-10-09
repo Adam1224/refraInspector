@@ -1,6 +1,23 @@
 # RN Plate Pair Inspector — Complete Version Update History
 
-**Current release:** Version 8.0  
+## Version 8.1 — 2026-10-09 (JST)
+
+**Type:** Modified / Fix — iPhone browser compatibility.
+
+**New / modified features:**
+- Open the photo picker directly from the Import PL Photo and Exchange/Replace controls to improve iPhone Safari usability.
+- Make the native file input accessible to Safari while visually hiding it.
+- Show the loading animation before asynchronous photo processing begins.
+- Reduce oversized image working resolution to 2300 px (longest side) on iOS and 4200 px on desktop to improve memory reliability.
+- Use asynchronous canvas Blob creation for photo previews, avoiding synchronous large Base64 strings.
+- Skip automatic leveling during iPhone import; the user may choose Auto level or Level by 2 points afterward.
+- Enlarge touch targets and adapt the layout for narrow screens.
+- Preserve independent Upper/Lower photos, calibration, manual measurement inputs, and existing exports.
+
+**Limitations:** iPhone Safari behavior has not yet been confirmed on a physical device. Resizing a photo reduces pixel detail; ruler calibration is based on the resized working image. v8.0 remains available in Git history.
+
+
+**Current release:** Version 8.1  
 **Release date:** 2026-10-09 (JST)  
 **Earliest documented source:** `rn_plate_annotation_tool(2).html` (original five-horizontal/two-vertical annotation tool).  
 **Source base:** `refra_inspector_v7_39_photo_import_ui.html` (v7.38 ruler algorithm + updated photo import UI).
