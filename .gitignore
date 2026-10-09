@@ -1,0 +1,6 @@
+# Local inspection records, private data and temporary files
+*.log
+.DS_Store
+Thumbs.db
+inspection_data/
+private/
