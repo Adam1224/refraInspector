@@ -1,5 +1,20 @@
 # RN Plate Pair Inspector — Complete Version Update History
 
+## Version 9.2 Beta — 2026-10-13 (JST)
+**Type:** Experimental / Modified / UI / Export
+
+- Adds feature-specific **Auto Align** with separate inner used-bore and outer edge-damage ellipse contour detection. Candidate contour points are fitted, filtered for outliers and refitted before positioning H3/H4, inner bore guides, H2/H5 and V1/V2; H1/H6 use separate plate-reference edge searches.
+- Keeps automatic suggestions subject to inspector review: high image-edge confidence is not validated physical measurement accuracy, especially for surface damage.
+- Hides all contour dots and ellipse outlines in the photo workspace while preserving the two-ellipse calculations and manual line adjustment.
+- Reorders workspace controls into numbered steps: 1. Auto Level, 2. Auto Align, 3. Level with 2 Points, 4. Undo Alignment, 5. Reset Lines.
+- Expands the Paste Campaign Geometry textbox by default in its original location.
+- Refines Copy pair report for Excel into Mark/Abbreviation and Upper/Lower data columns in the specified 25-item order. Uses Mark where provided and abbreviation otherwise; unavailable values remain blank and copied numeric data uses one decimal place.
+- Removes the redundant selected-PL Excel copy button, selected image + JSON export button and the associated preview textbox. Retains the main pair Excel copy and pair JSON/image exports.
+- Adds measurement Mark codes to available calculated-result labels.
+- Updates browser title and Help & User Manual version labels to v9.2 Beta.
+
+**Limitations:** Auto-alignment is experimental and has not yet been benchmarked against reference PL measurements. Operator confirmation and ruler calibration remain essential.
+
 ## Version 8.4 — 2026-10-13 (JST)
 **Type:** Modified / Fix
 - Bore Enlargement Area ⓘ now shows S = π × rₓ × rᵧ with current Upper/Lower radii, calibrated px/mm, and substituted numerical result.
