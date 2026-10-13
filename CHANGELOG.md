@@ -1,5 +1,23 @@
 # RN Plate Pair Inspector — Complete Version Update History
 
+## Version 8.4 — 2026-10-13 (JST)
+**Type:** Modified / Fix
+- Bore Enlargement Area ⓘ now shows S = π × rₓ × rᵧ with current Upper/Lower radii, calibrated px/mm, and substituted numerical result.
+- Shows ΔS = S − π × Y² with numerical substitution when Y is entered.
+- Fixes incorrect W dependency highlighting and highlights the inner bore ellipse measurement region.
+- Calculation formulas remain unchanged; only explanation and highlighting are modified.
+
+## Version 8.3 — Date not recorded
+**Type:** Modified
+- Adds units in Excel pair-report column headers, including mm, mm/min, mm/heat, min, counts and mm².
+- Adds units to selected-PL copy labels; numerical cell values remain suitable for Excel calculations.
+
+## Version 8.2 — Date not recorded
+**Type:** New / Modified
+- Links crack-related Remarks tags to the numeric Cracks panel.
+- Adds + / − controls and quantity indicators for four crack categories.
+- Synchronizes direct Cracks panel edits with Remarks indicators for each PL.
+
 ## Version 8.1 — 2026-10-09 (JST)
 
 **Type:** Modified / Fix — iPhone browser compatibility.
@@ -17,7 +35,7 @@
 **Limitations:** iPhone Safari behavior has not yet been confirmed on a physical device. Resizing a photo reduces pixel detail; ruler calibration is based on the resized working image. v8.0 remains available in Git history.
 
 
-**Current release:** Version 8.1  
+**Current release:** Version 8.4  
 **Release date:** 2026-10-09 (JST)  
 **Earliest documented source:** `rn_plate_annotation_tool(2).html` (original five-horizontal/two-vertical annotation tool).  
 **Source base:** `refra_inspector_v7_39_photo_import_ui.html` (v7.38 ruler algorithm + updated photo import UI).
