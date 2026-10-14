@@ -398,11 +398,17 @@
 .dimtable .afValueInput.afManualOverride{background:#fff9e7!important;border-color:#c99832!important;color:#30240b!important}
 .dimtable .afValueInput:not(.afManualOverride){background:#f4f8fd!important;color:#24517e!important}
 .dimtable .compactUsed{display:none!important}
+</style><style id="v941SavedCampaignCopyLayout">
+/* Single header row: photo filename in the center, no second header row. */
+.photoheader:has(#photoTitle){display:grid;grid-template-columns:minmax(115px,1fr) minmax(100px,1.4fr) auto;align-items:center;gap:6px}
+.photoheader #photoTitle{display:block;text-align:center;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#315c85;font-weight:650}
+.photoheader:has(#photoTitle)>.inline{justify-self:end}
+@media(max-width:650px){.photoheader:has(#photoTitle){grid-template-columns:minmax(0,1fr) auto}.photoheader #photoTitle{grid-column:1 / -1;grid-row:2;text-align:center}.photoheader:has(#photoTitle)>.inline{grid-column:2;grid-row:1}}
 </style></head><body><header><div><h1>RN Plate Pair Inspector <span class="small">v9.4.10 Beta</span></h1><div class="small">Upper / Lower pair · ruler-referenced measurements · campaign performance</div></div><div class="inline"><button id="showUserManual" type="button" aria-haspopup="dialog">? Help &amp; Manual</button><button class="primary" id="exportAll">Export pair JSON + images</button><button id="copyAll">Copy pair report for Excel</button></div></header><main class="three">
 <section class="panel"><details class="leftCollapsible" open><summary>PL Geometry</summary><div class="leftCollapseBody"><details class="bulkPaste" open><summary>Paste campaign geometry (Excel / TSV)</summary><p class="small">Paste six columns (W0, X0, Y0, Z0, R0, H0), or name/value rows. H0 = 2×Y0 and expected R0 = Z0 − H0 are checked for consistency.</p><textarea aria-label="Campaign geometry paste" id="campaignPaste" placeholder="W0	X0	Y0	Z0	R0	H0
 200	5	45	270	180	90" style="min-height:115px"></textarea><div id="campaignPasteStatus" role="status" hidden></div></details><div class="field"><label for="cid">Campaign ID</label><input id="cid" value="CMP-001"/></div><div class="field"><label for="bore">Bore radius before use · Y (mm)</label><input id="bore" min="0" placeholder="Enter Y" step="0.1" type="number"/></div><div class="field"><label for="W">W: Center-to-edge incl. band (mm)</label><input id="W" min="0" placeholder="W" step="0.1" type="number"/></div><div class="field"><label for="X">X: Band thickness (mm)</label><input id="X" min="0" step="0.1" type="number" value="0"/></div><div class="field"><label for="Z">Z: Closed center distance (mm)</label><input id="Z" min="0" placeholder="Z" step="0.1" type="number"/></div><div class="field"><label for="R0">R0 / SD: Initial stroke (mm)</label><input id="R0" min="0" placeholder="R0" step="0.1" type="number"/></div><div class="field"><label for="H0">H0 / BDia: Bore diameter before use (mm)</label><input aria-label="Calculated original bore diameter" id="H0" placeholder="2 × Y0" readonly="" type="number"/></div><div class="field"><label for="safe">Remaining stroke safe limit (mm) *</label><input id="safe" required aria-required="true" min="0" step="0.1" type="number" value="10"/></div><p class="small">Y is entered as the unused bore radius. F is required for stroke calculations on each PL.</p></div></details><details class="leftCollapsible" open><summary id="plPerformanceTitle">PL performance at CMP-001</summary><div class="leftCollapseBody"><div class="stat"><span class="small">Recorded sets</span><b id="pairsCount">0</b></div>
-<div class="stat"><span class="small">Sets below safe limit <button aria-label="Formula: Sets below safe limit" class="formulaInfo" data-formula="belowCount" title="Count of saved sets where remaining stroke &lt; safe limit." type="button">ⓘ</button></span><b id="belowCount">—</b></div><div class="stat"><span class="small">Average erosion · mm/min <button aria-label="Formula: Average erosion per minute" class="formulaInfo" data-formula="avgTime" title="Mean of saved pair ER values: (R0 − R) / total runtime (min)." type="button">ⓘ</button></span><b id="avgTime">—</b></div><div class="stat"><span class="small">Average erosion · mm/heat <button aria-label="Formula: Average erosion per heat" class="formulaInfo" data-formula="avgHeat" title="Mean of saved pair EPH values: (R0 − R) / heats used." type="button">ⓘ</button></span><b id="avgHeat">—</b></div><div class="stat"><span class="small">Average remaining stroke (mm) <button aria-label="Formula: Average remaining stroke" class="formulaInfo" data-formula="avgStroke" title="Mean of valid saved pair remaining stroke values." type="button">ⓘ</button></span><b id="avgStroke">—</b></div><div class="inline" style="margin-top:11px"><button id="savePair">Save set to campaign</button><button id="clearRecords">Clear saved pairs</button></div><div class="small" id="savedStatus" style="margin-top:8px">Session-only records; export JSON to preserve data.</div><div class="separator"></div><div class="small">Performance aggregates use saved complete PL pairs. Runtime and heats are pair-level quantities, not duplicated for Upper and Lower.</div></div></details></section>
-<div class="workspaceDivider" id="leftWidthDivider" role="separator" aria-label="Resize PL Geometry panel" aria-orientation="vertical" tabindex="0" title="Drag to resize PL Geometry · arrow keys to adjust"></div><section class="panel"><div class="photoheader"><h2 style="margin:0">PL photo workspace</h2><div class="inline"><button aria-selected="true" class="tab" id="upperTab">Upper PL</button><button aria-selected="false" class="tab" id="lowerTab">Lower PL</button><button type="button" id="photoExchange" aria-label="Replace photos: 1 for selected PL, 2 for Upper then Lower" class="minibtn photoUploadIcon" title="Import photos: select 1 photo for the active PL, or 2 photos (first Upper, second Lower)"><svg aria-hidden="true" fill="none" height="21" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="21"><path d="M7 7h14l-4-4m4 4-4 4M17 17H3l4 4m-4-4 4-4"></path></svg></button></div></div><div class="photoheader"><strong class="small" id="photoTitle">Upper · no photo</strong></div><div class="workspaceStepGroup"><div class="workspaceStepTitle">#1 Level</div><div class="toolbar"><button class="minibtn" id="autoLevel">Auto Level</button><button class="minibtn" id="manualLevel">Level with 2 Points</button></div></div>
+<div class="stat"><span class="small">Sets below safe limit <button aria-label="Formula: Sets below safe limit" class="formulaInfo" data-formula="belowCount" title="Count of saved sets where remaining stroke &lt; safe limit." type="button">ⓘ</button></span><b id="belowCount">—</b></div><div class="stat"><span class="small">Average erosion · mm/min <button aria-label="Formula: Average erosion per minute" class="formulaInfo" data-formula="avgTime" title="Mean of saved pair ER values: (R0 − R) / total runtime (min)." type="button">ⓘ</button></span><b id="avgTime">—</b></div><div class="stat"><span class="small">Average erosion · mm/heat <button aria-label="Formula: Average erosion per heat" class="formulaInfo" data-formula="avgHeat" title="Mean of saved pair EPH values: (R0 − R) / heats used." type="button">ⓘ</button></span><b id="avgHeat">—</b></div><div class="stat"><span class="small">Average remaining stroke (mm) <button aria-label="Formula: Average remaining stroke" class="formulaInfo" data-formula="avgStroke" title="Mean of valid saved pair remaining stroke values." type="button">ⓘ</button></span><b id="avgStroke">—</b></div><div class="inline" style="margin-top:11px"><button id="savePair">Save set to campaign</button><button type="button" id="exportCampaign">Copy campaign data</button><button id="clearRecords">Clear saved pairs</button></div><div class="small" id="savedStatus" style="margin-top:8px">Session-only records; copy campaign data to Excel to preserve a readable summary.</div><div class="separator"></div><div class="small">Performance aggregates use saved complete PL pairs. Runtime and heats are pair-level quantities, not duplicated for Upper and Lower.</div></div></details></section>
+<div class="workspaceDivider" id="leftWidthDivider" role="separator" aria-label="Resize PL Geometry panel" aria-orientation="vertical" tabindex="0" title="Drag to resize PL Geometry · arrow keys to adjust"></div><section class="panel"><div class="photoheader"><h2 style="margin:0">PL photo workspace</h2><strong class="small" id="photoTitle" title="Current PL photo filename">Upper · no photo</strong><div class="inline"><button aria-selected="true" class="tab" id="upperTab">Upper PL</button><button aria-selected="false" class="tab" id="lowerTab">Lower PL</button><button type="button" id="photoExchange" aria-label="Replace photos: 1 for selected PL, 2 for Upper then Lower" class="minibtn photoUploadIcon" title="Import photos: select 1 photo for the active PL, or 2 photos (first Upper, second Lower)"><svg aria-hidden="true" fill="none" height="21" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="21"><path d="M7 7h14l-4-4m4 4-4 4M17 17H3l4 4m-4-4 4-4"></path></svg></button></div></div><div class="workspaceStepGroup"><div class="workspaceStepTitle">#1 Level</div><div class="toolbar"><button class="minibtn" id="autoLevel">Auto Level</button><button class="minibtn" id="manualLevel">Level with 2 Points</button></div></div>
 <div class="workspaceStepGroup"><details class="workspaceCal" open><summary>#2 Calibration · X / Y (px/mm)</summary><div class="workspaceCalBody"><h3>Ruler calibration</h3><div class="calBtns"><button id="autoCal">Auto 100mm Calibration</button><span id="autoScaleSummary" class="small" aria-live="polite" style="font-weight:650;white-space:nowrap">X: — · Y: — px/mm</span><span id="autoScaleMismatch" role="alert" hidden style="color:#991b1b;background:#fee2e2;border:2px solid #dc2626;border-radius:6px;padding:6px 9px;font-weight:750;font-size:12px;line-height:1.35"></span><button id="manualCalBoth" type="button">Start Manual Calibration</button><button type="button" id="manualRulerDone" hidden style="display:none!important" aria-hidden="true" tabindex="-1">Manual Ruler Calibration Done</button></div><div id="manualRulerControls" hidden style="display:none"><strong>Manual ruler calibration · 100 mm each direction</strong><p class="small">Set vertical guide spacing to X = 100 mm and horizontal guide spacing to Y = 100 mm.</p><span id="manualRulerSpan" class="small" role="status" style="display:block;margin-top:5px"></span></div><div id="rulerReadout" class="small" role="status">Auto detects X/Y ruler scales. If unsuccessful, adjust the four 100 mm guides.</div><div class="calibrationScalePair"><div class="field"><label for="sx">Horizontal (px/mm)</label><input id="sx" min="0.1" placeholder="—" step="0.001" type="number"/></div><div class="field"><label for="sy">Vertical (px/mm)</label><input id="sy" min="0.1" placeholder="—" step="0.001" type="number"/></div></div><div class="small">X/Y scales are independent. Verify against physical ruler marks.</div></div></details></div>
 <div class="workspaceStepGroup"><div class="workspaceStepTitle">#3 Alignment</div><div class="toolbar"><button class="minibtn" id="autoAlignAll">Auto Align</button><button class="minibtn" id="undoAutoAlign" disabled>Undo Alignment</button><button class="minibtn" id="resetLines">Reset Lines</button><button type="button" class="minibtn" id="verifyAlignment" aria-pressed="false" style="font-weight:750;border:2px solid #bd3434">Verify Alignment *</button><span id="alignmentVerifyState" role="status" style="font-size:11px;color:#a11b1b">Required</span></div><div id="autoAlignStatus" class="small" role="status" aria-live="polite" style="display:none;padding:5px 8px;margin:5px 0"></div></div><div class="photoarea photoareaWrap"><input accept="image/*,.heic,.heif" aria-label="Select one or two PL photos" id="photoFile" multiple type="file"/><button aria-label="Show PL measurement legend" class="workspaceInfoFloating" id="workspaceHelpBtn" title="Show PL measurement legend" type="button">i</button><div class="placeholder" id="empty"><button type="button" id="photoImportPrompt" class="photoImportPrompt"><svg aria-hidden="true" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 16V3m0 0L7 8m5-5 5 5"></path><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"></path></svg><strong>Import PL photo</strong><span>Choose one image for the selected PL, or two images (Upper then Lower)</span></button></div><div id="photoLoadingOverlay" class="photoLoadingOverlay" hidden role="status" aria-live="polite"><span class="photoLoadingSpinner" aria-hidden="true"></span><strong id="photoLoadingMessage">Loading photos…</strong><span class="small">Decoding and preparing image</span></div><div class="stage" id="stage"><img alt="Selected plate photo" id="photo"/><svg id="arrows" preserveaspectratio="none" viewbox="0 0 1000 1000"></svg></div></div><div class="hint" id="actionHint" style="display:none"></div><div class="ind" id="calStatus" hidden>No image. Each PL has independent ruler calibration and dimension lines.</div><div class="areaInfo" hidden><h3 style="margin:0 0 5px">Nested ellipse area model</h3><div class="small">Area model: the used bore is bounded by H3/H4 and its detected left/right edges; the edge-damage boundary is the outer ellipse. The unused bore remains a calculation reference but is not drawn.</div><div class="small" style="margin:8px 0 6px"><strong>Inner ellipse</strong>: H3/H4 tangency and photo-estimated bore left/right edges.<br/><strong>Outer ellipse</strong>: tangent to V1, V2, H2 and H5.</div><button class="minibtn" id="rescanBore" type="button">Detect bore left/right from photo</button><div aria-live="polite" class="small" id="innerDetectStatus">Not scanned</div><div class="small" id="contourStatus">Area model uses current dimension lines and a photo-edge estimate. Calibrate both rulers and enter Y for area values.</div></div></section>
 <div class="workspaceDivider" id="rightWidthDivider" role="separator" aria-label="Resize PL Data and Calculated Results panel" aria-orientation="vertical" tabindex="0" title="Drag to resize PL Data & Results · arrow keys to adjust"></div><section class="panel right"><div class="photoheader"><h2 style="margin:0">PL data and calculated results</h2><span class="mode" id="activeLabel">Upper PL</span></div><div class="results"><div class="inspectionColumn measuredColumn"><h3 class="inspectionColumnTitle">Measured / Entered Data</h3><details class="stackBox usageBox" open=""><summary>PL Set Usage Info</summary><div class="stackBody"><div class="field"><label for="plpair">PL pair ID</label><input id="plpair" value="PL-001"/></div><div class="pairdata"><div class="field"><label for="runtime">Total runtime (min)</label><input id="runtime" min="0" step="0.1" type="number"/></div><div class="field"><label for="heats">Heats used (total pair)</label><input id="heats" min="0" step="1" type="number"/></div></div></div></details><details class="stackBox dimensionsBox" open=""><summary><span>PL A–F Dimensions · Upper / Lower</span><button aria-label="Show PL measurement legend" class="summaryInfoBtn" id="afLegendBtn" title="Show PL measurement legend" type="button">i</button></summary><div class="stackBody"><table class="dimtable"><thead><tr><th>Dim.</th><th>Upper PL</th><th>Lower PL</th></tr></thead><tbody id="dimensionRows"></tbody></table><div aria-live="polite" class="rulerValidationNotice" id="rulerValidationNotice"></div><div class="measureSourceNote">A = Auto, M = Manual. Toggle the switch to choose; selected values are black, unused values gray. Manual fields remain editable.</div></div></details><details class="subSection" open=""><summary>Cracks · selected PL</summary><div class="subBody"><div class="small">Automatic image-based candidates are experimental and require inspector confirmation.</div><div class="inline" style="margin:8px 0"><button id="detectCracks">Scan crack candidates</button><button id="clearCracks">Clear counts</button></div><div class="small" id="crackStatus">Not assessed</div><div id="crackRows"></div><div class="stat"><span class="small">Cracks Count · CC (selected PL) <button aria-label="Formula: Cracks Count" class="formulaInfo" data-formula="cc" title="Sum of four inspector-confirmed crack category counts for the selected PL." type="button">ⓘ</button></span><b id="cc">—</b></div><div class="small" style="margin-top:7px">Values respond to dragging. Manually entered overrides are optional when photo calibration is uncertain.</div></div></details><details class="resultSection remarksSection" open=""><summary>Remarks · selected PL</summary><div class="resultBody">
@@ -1227,6 +1233,7 @@ $('photoFile').addEventListener('change',async e=>{
  const files=Array.from(e.target.files);e.target.value='';
  if(!files.length||photoImportBusy)return;
  if(files.length>2){alert('Select one image or exactly two images (Upper first, Lower second).');return;}
+ if(window.__savedPairImportGuard&&!window.__savedPairImportGuard(files))return;
  setPhotoLoading(true,files.length===2?'Loading Upper photo (1 of 2)…':'Loading '+files[0].name+'…');
  await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
  try{
@@ -1494,7 +1501,24 @@ $('autoLevel').onclick=autoLevel;$('manualLevel').onclick=()=>manualMode('level'
  ];
  copyText([cols,...rows.map((row,i)=>[i===0?'PL ID':(String(row[5]??'').trim()||String(row[4]??'').trim()),row[7],row[8]])].map(row=>row.map(clean).join('\t')).join('\n'));
 };$('exportAll').onclick=()=>exportData(true);
-$('savePair').onclick=()=>{const safeEl=$('safe');if(!valid(num('safe'))||num('safe')<0){safeEl.setCustomValidity('Enter a valid remaining stroke safe limit (mm).');safeEl.reportValidity();safeEl.focus();$('savedStatus').textContent='Cannot save: Remaining stroke safe limit is required.';return;}safeEl.setCustomValidity('');const c=calculate();if(!valid(c.stroke)||!valid(c.deltaR)||!valid(c.runtime)||c.runtime<=0||!valid(c.heats)||c.heats<=0){$('savedStatus').textContent='Cannot save: both F values, W/X/Z, R0, runtime and heats are required.';return}const id=($('cid').value||'CMP')+' / '+($('plpair').value||'PL');records=records.filter(q=>q.id!==id);records.push({id,stroke:c.stroke,eTime:c.eTime,eHeat:c.eHeat,safe:num('safe')});$('savedStatus').textContent=`Saved ${id} (session only).`;updateStats()};$('clearRecords').onclick=()=>{if(confirm('Clear session performance records?')){records=[];$('savedStatus').textContent='Session records cleared.';updateStats()}};
+$('savePair').onclick=()=>{
+ const c=calculate(),issues=[];
+ const pairName=$('plpair').value.trim(),campaignName=$('cid').value.trim();
+ if(!campaignName)issues.push('Campaign ID');
+ if(!pairName)issues.push('PL pair ID');
+ if(!valid(num('safe'))||num('safe')<0)issues.push('Remaining stroke safe limit');
+ if(!valid(c.stroke)||!valid(c.deltaR))issues.push('F for both PLs and/or W, X, Y, Z, R0');
+ if(!valid(c.runtime)||c.runtime<=0)issues.push('Total runtime');
+ if(!valid(c.heats)||c.heats<=0)issues.push('Heats used');
+ if(issues.length&&!confirm('Some required fields are missing or invalid:\n• '+issues.join('\n• ')+'\n\nSave this incomplete PL set anyway?')){
+  $('savedStatus').textContent='Save cancelled; incomplete fields have not been saved.';return;
+ }
+ const id=(campaignName||'CMP')+' / '+(pairName||'PL');
+ records=records.filter(q=>q.id!==id);
+ records.push({id,stroke:c.stroke,eTime:c.eTime,eHeat:c.eHeat,safe:valid(num('safe'))?num('safe'):null,incomplete:issues.length>0,missing:issues});
+ $('savedStatus').textContent='Saved '+id+(issues.length?' (incomplete; session only).':' (session only).');
+ updateStats();
+};$('clearRecords').onclick=()=>{if(confirm('Clear session performance records?')){records=[];$('savedStatus').textContent='Session records cleared.';updateStats()}};
 function updateCrackRows(){const state=crackState[active];$('crackStatus').textContent=state.status;const rows=$('crackRows');if(rows.dataset.active===active)return;rows.dataset.active=active;rows.innerHTML='';crackTypes.forEach((k,i)=>{const div=document.createElement('div');div.className='crackrow';const lab=document.createElement('label');lab.textContent=k;const inp=document.createElement('input');inp.type='number';inp.min='0';inp.max='99';inp.step='1';inp.placeholder='—';inp.value=state.counts[i]??'';inp.addEventListener('input',()=>{crackState[active].counts[i]=inp.value===''?null:Math.max(0,Math.min(99,Math.floor(+inp.value)));crackState[active].status='Inspector-entered / edited';$('crackStatus').textContent=crackState[active].status;renderRemarkTags();updateResults()});div.append(lab,inp);rows.appendChild(div)})}
 // Experimental orientation-based screening, not a trained crack classifier.
 function scanCracks(){const pl=p();if(!pl.image){alert('Import a PL photo first.');return}const c=document.createElement('canvas'),w=300,h=Math.max(200,Math.round(pl.image.height*300/pl.image.width));c.width=w;c.height=h;const ctx=c.getContext('2d',{willReadFrequently:true});ctx.drawImage(pl.image,0,0,w,h);const data=ctx.getImageData(0,0,w,h).data;const yStart=Math.max(2,Math.round(pl.pos.H2*h)),yEnd=Math.min(h-2,Math.round(pl.pos.H6*h));const xL=Math.round(pl.pos.V1*w),xR=Math.round(pl.pos.V2*w);let vertical=0,horizontal=0,radial=0;const cx=(xL+xR)/2,cy=(pl.pos.H3+pl.pos.H4)*h/2;for(let y=yStart+2;y<yEnd-2;y+=3){for(let x=Math.max(3,xL-35);x<Math.min(w-3,xR+35);x+=3){let i=(y*w+x)*4;const bright=at=>.299*data[at]+.587*data[at+1]+.114*data[at+2];const gX=Math.abs(bright(i+8)-bright(i-8)),gY=Math.abs(bright(i+8*w)-bright(i-8*w));if(gX+gY<78)continue;const dx=x-cx,dy=y-cy; if(Math.abs(dx)>10&&Math.abs(dy)>10&&Math.abs(gX-gY)<20)radial++;if(gX>gY*1.8)vertical++;if(gY>gX*1.8)horizontal++}}
@@ -1704,7 +1728,7 @@ function copyVerifiedReport(){
  const ted=d=>[d.B,d.C,d.D].every(valid)?d.B+d.C+d.D:null;
  const pct=g=>valid(g.bore)&&c.originalArea>0?100*g.bore/c.originalArea:null;
  const plid=$('plpair').value.trim();
- const rows=[['Mark','Upper PL','Lower PL'],['PL ID',upper&&plid?'U-'+plid:'',lower&&plid?'L-'+plid:''],one('CC',c.heats),one('DDD',c.runtime),['OLT','',''],both('CC',cc('upper'),cc('lower'))];
+ const rows=[['Mark','Upper PL','Lower PL'],['PL ID',upper&&plid?'U-'+plid:'',lower&&plid?'L-'+plid:''],['Image Name',upper?(plates.upper.filename||''):'',lower?(plates.lower.filename||''):''],one('CC',c.heats),one('DDD',c.runtime),['OLT','',''],both('CC',cc('upper'),cc('lower'))];
  for(const k of ['A','B','C','D','E','F'])rows.push(both(k,u[k],l[k]));
  rows.push(both('G',ted(u),ted(l)),['H','',''],['I','',''],both('J',gu.usedBore,gl.usedBore),both('K',gu.bore,gl.bore),both('L',gu.edge,gl.edge),both('M',pct(gu),pct(gl)),both('T',c.tU,c.tL));
  const pairOnce=(code,v)=>[code,pair?f(v):'',''];
@@ -1731,6 +1755,162 @@ document.getElementById('exportAll').onclick=()=>{
  if(importedSides().some(side=>!verified(side)))verifyState.textContent='Partial export: verify the other PL to enable its data and complete pair calculations.';
 };
 syncAlignmentVerification();
+// Local v9.4.10 saved-set navigator. Photos and their inspection state stay in this session.
+(()=>{
+ const tabbar=$('lowerTab')?.parentElement;if(!tabbar)return;
+ const picker=document.createElement('select');picker.id='savedPairSelector';
+ picker.setAttribute('aria-label','Saved PL sets');
+ picker.title='Switch saved PL sets (this browser session)';
+ picker.style.cssText='width:auto;min-width:155px;max-width:240px;padding:6px;border-radius:7px;border:1px solid #cbd4df;background:white;font-size:12px';
+ tabbar.insertBefore(picker,$('lowerTab').nextSibling);
+ const saved=new Map();let selected=null;
+ const fields=['cid','plpair','W','X','bore','Z','R0','safe','runtime','heats','olt'];
+ const pairID=()=>($('cid').value.trim()||'CMP')+' / '+($('plpair').value.trim()||'PL');
+ const nameKey=s=>String(s||'').trim().toLocaleLowerCase();
+ const clone=(v)=>{
+  if(Array.isArray(v))return v.map(clone);
+  if(v&&Object.getPrototypeOf(v)===Object.prototype)return Object.fromEntries(Object.entries(v).map(([k,x])=>[k,clone(x)]));
+  return v; // Image / canvas instances are immutable snapshot references for this workflow.
+ };
+ const snapshot=()=>({
+  fields:Object.fromEntries(fields.filter(id=>$(id)).map(id=>[id,$(id).value])),
+  plates:{upper:clone(plates.upper),lower:clone(plates.lower)},
+  remarks:clone(remarks),cracks:clone(crackState),
+  verification:{...verification},
+  alignBackup:clone(alignBackup),traces:clone(v91Traces),active
+ });
+ function refresh(){
+  picker.replaceChildren(new Option('Saved PL sets…',''));
+  for(const id of saved.keys())picker.add(new Option(id,id));
+  picker.value=selected&&saved.has(selected)?selected:'';
+ }
+ function restore(data){
+  for(const [id,value] of Object.entries(data.fields))if($(id))$(id).value=value;
+  for(const side of ['upper','lower']){
+   Object.assign(plates[side],clone(data.plates[side]));
+   remarks[side]=clone(data.remarks[side]);
+   crackState[side]=clone(data.cracks[side]);
+   verification[side]=data.verification[side];
+   alignBackup[side]=clone(data.alignBackup[side]);
+   v91Traces[side]=clone(data.traces[side]);
+  }
+  $('crackRows').dataset.active='';
+  select(data.active||'upper');
+  syncAlignmentVerification();
+  updateStats();
+ }
+ picker.addEventListener('change',()=>{
+  const target=picker.value;if(!saved.has(target)){refresh();return;}
+  if(selected&&saved.has(selected))saved.set(selected,snapshot());
+  selected=target;restore(saved.get(target));refresh();
+  $('savedStatus').textContent='Loaded '+target+' (session only).';
+ });
+ const saveOld=$('savePair').onclick;
+ $('savePair').onclick=function(e){
+  const id=pairID();
+  // The original save handler signals success by upserting a matching record.
+  saveOld.call(this,e);
+  if(!$('savedStatus').textContent.startsWith('Saved '+id+' '))return;
+  saved.set(id,snapshot());selected=id;refresh();
+ };
+ // Copy human-readable, tab-separated campaign data (one row for each plate).
+ $('exportCampaign').addEventListener('click',()=>{
+  if(!saved.size){alert('No saved PL sets to copy. Save a PL set first.');return;}
+  if(selected&&saved.has(selected))saved.set(selected,snapshot());
+  const campaign=$('cid').value.trim()||'CMP';
+  const entries=[...saved].filter(([id,data])=>(data.fields.cid||'CMP')===campaign);
+  if(!entries.length){alert('No saved PL sets match campaign '+campaign+'.');return;}
+  const clean=v=>String(v??'').replace(/[\t\r\n]+/g,' ').trim();
+  const headers=['Campaign ID','PL Pair ID','Plate','Image Name','Photo Imported','Alignment Verified',
+   'W (mm)','X (mm)','Y (mm)','Z (mm)','R0 (mm)','Safe Limit (mm)',
+   'Runtime (min)','Heats','A (mm)','B (mm)','C (mm)','D (mm)','E (mm)','F (mm)',
+   'A Source','B Source','C Source','D Source','E Source','F Source',
+   'Scale X (px/mm)','Scale Y (px/mm)',
+   'Crack 1','Crack 2','Crack 3','Crack 4','Crack Status','Remark Tags','Remark Note',
+   'Remaining Stroke (mm)','Erosion (mm/min)','Erosion (mm/heat)','Saved Set Status'];
+  // Copy the five PL Performance figures above the detailed Excel table.
+  // These values match the currently displayed campaign-performance panel.
+  const summary=[
+   ['PL Performance Summary',''],
+   ['Campaign ID',campaign],
+   ['Recorded sets',$('pairsCount').textContent.trim()],
+   ['Sets below safe limit',$('belowCount').textContent.trim()],
+   ['Average erosion (mm/min)',$('avgTime').textContent.trim()],
+   ['Average erosion (mm/heat)',$('avgHeat').textContent.trim()],
+   ['Average remaining stroke (mm)',$('avgStroke').textContent.trim()],
+   [],
+   ['Saved PL Set Details'],
+  ];
+  const rows=[...summary,headers];
+  for(const [id,data] of entries){
+   const fields=data.fields||{},record=records.find(r=>r.id===id)||{};
+   const status=data.incomplete?'Incomplete':'Saved';
+   for(const side of ['upper','lower']){
+    const pl=data.plates[side],remarks=data.remarks[side]||{},cracks=data.cracks[side]||{};
+    const manual=pl.manual||{},mode=pl.sourceMode||{};
+    const values=dimensionValues(pl);
+    const dimension=k=>Number.isFinite(values[k])?Number(values[k].toFixed(2)):'';
+    rows.push([fields.cid||campaign,fields.plpair||id.split(' / ').pop(),side==='upper'?'Upper':'Lower',
+     pl.filename||'',pl.image?'Yes':'No',data.verification?.[side]?'Yes':'No',
+     fields.W,fields.X,fields.bore,fields.Z,fields.R0,fields.safe,fields.runtime,fields.heats,
+     ...['A','B','C','D','E','F'].map(dimension),
+     ...['A','B','C','D','E','F'].map(k=>mode[k]||''),
+     pl.sx,pl.sy,...[0,1,2,3].map(i=>cracks.counts?.[i]??''),cracks.status||'',
+     (remarks.tags||[]).join('; '),remarks.note||'',record.stroke,record.eTime,record.eHeat,status]);
+   }
+  }
+  copyText(rows.map(row=>row.map(clean).join('\t')).join('\n'));
+  $('savedStatus').textContent='Copied '+entries.length+' saved PL set(s) for '+campaign+' as an Excel-ready table.';
+ });
+ const clearOld=$('clearRecords').onclick;
+ $('clearRecords').onclick=function(e){
+  clearOld.call(this,e);
+  if(!records.length){saved.clear();selected=null;refresh();}
+ };
+ function nextPairId(){
+  const current=$('plpair').value.trim(),m=/^(.*?)(\d+)$/.exec(current);
+  if(!m)return current+'-001';
+  const prefix=m[1],width=m[2].length;
+  const ids=[current,...saved.keys()].map(id=>id.includes(' / ')?id.split(' / ').slice(1).join(' / '):id);
+  const values=ids.filter(id=>id.startsWith(prefix)&&/^\d+$/.test(id.slice(prefix.length))).map(id=>+id.slice(prefix.length));
+  return prefix+String(Math.max(0,...values)+1).padStart(width,'0');
+ }
+ window.__savedPairImportGuard=(files)=>{
+  const names=files.map(f=>nameKey(f.name));
+  const existing=new Set();
+  for(const data of saved.values())for(const side of ['upper','lower']){
+   const n=nameKey(data.plates[side]?.filename);if(n)existing.add(n);
+  }
+  // Protect current unsaved photographs as well as committed saved photographs.
+  // A user may import another photo, but not overwrite with an identically named one.
+  for(const side of ['upper','lower']){
+   const n=nameKey(plates[side]?.filename);if(n)existing.add(n);
+  }
+  const duplicates=names.filter((n,i)=>existing.has(n)||names.indexOf(n)!==i);
+  if(duplicates.length){
+   alert('Import cancelled: duplicate photo filename detected:\n'+[...new Set(duplicates)].join('\n')+'\nExisting PL photographs were left unchanged.');
+   return false;
+  }
+  // Start a new pair only after a successful save of the current pair.
+  if(selected&&saved.has(selected)&&pairID()===selected){
+   const next=nextPairId(),initialSide=active;
+   for(const side of ['upper','lower']){
+    Object.assign(plates[side],plate());
+    remarks[side]={tags:[],note:''};
+    crackState[side]={counts:Array(crackTypes.length).fill(null),status:'Not assessed'};
+    verification[side]=false;alignBackup[side]=null;v91Traces[side]=null;
+   }
+   for(const id of ['runtime','heats','olt','remarkNote'])if($(id))$(id).value='';
+   $('plpair').value=next;selected=null;
+   $('crackRows').dataset.active='';
+   select(files.length===2?'upper':initialSide);
+   syncAlignmentVerification();refresh();
+   $('savedStatus').textContent='New PL pair '+next+' prepared. Previous sets are retained.';
+  }
+  return true;
+ };
+ refresh();
+})();
 })();
 </script><style id="v8-manual-style">
 #userManualDialog{border:0;border-radius:13px;width:min(1000px,96vw);max-height:90vh;padding:0;color:#223249;box-shadow:0 18px 55px #0006}
