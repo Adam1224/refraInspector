@@ -1,5 +1,14 @@
 # RN Plate Pair Inspector — Complete Version Update History
 
+## Version 9.4.10 Beta — 2026-10-14 (JST)
+**Type:** UI / Measurement interaction
+- Adds an **i** icon to the PL A–F Dimensions · Upper / Lower header; opens the existing PL photo workspace measurement legend without toggling the panel.
+- Preserves editable side-by-side Upper/Lower A–F value boxes with automatic measurement as the default and manual override on entry (v9.4.8).
+- Clearing an A–F manual override and leaving the textbox restores its automatically measured value when available (v9.4.9).
+- Builds upon v9.4.7's per-photo alignment verification, iPhone ruler-calibration improvements, responsive workspace and Excel export restrictions.
+
+**Note:** This is beta software; image detection and iPhone interactions need validation on actual devices.
+
 ## Version 9.4.7 Beta — 2026-10-14 (JST)
 **Type:** New / Modified / Calibration / Responsive UI / Verification
 
