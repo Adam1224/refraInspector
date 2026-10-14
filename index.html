@@ -404,13 +404,92 @@
 .photoheader #photoTitle{display:block;text-align:center;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#315c85;font-weight:650}
 .photoheader:has(#photoTitle)>.inline{justify-self:end}
 @media(max-width:650px){.photoheader:has(#photoTitle){grid-template-columns:minmax(0,1fr) auto}.photoheader #photoTitle{grid-column:1 / -1;grid-row:2;text-align:center}.photoheader:has(#photoTitle)>.inline{grid-column:2;grid-row:1}}
+</style><style id="compactWorkspaceSaveStyle">
+/* Keep step #4 on one compact row instead of adding a tall panel. */
+.compactSaveStep{display:flex!important;align-items:center;gap:9px;margin:2px 0 5px!important;padding:3px 7px!important}
+.compactSaveStep .workspaceStepTitle{display:block!important;margin:0!important;min-width:75px!important;white-space:nowrap}
+.compactSaveStep .toolbar{display:flex!important;margin:0!important;padding:0!important}
+.compactSaveStep #savePair{min-height:28px!important;padding:4px 9px!important;font-size:11px!important;white-space:nowrap}
+@media(max-width:420px){.compactSaveStep{flex-wrap:wrap;gap:4px}}
+</style><style id="workspaceSameHeightSaveStyle">
+/* Place #3 and #4 together in the bottom-right cell of the existing compact grid. */
+.photoControlGrid .alignmentSaveRow{display:grid;grid-template-columns:minmax(0,1fr) minmax(105px,30%);gap:5px;min-width:0;align-items:stretch}
+.photoControlGrid .alignmentSaveRow>.workspaceStepGroup{height:100%;min-width:0;margin:0!important;border:1px solid #e0e7f0;border-radius:7px;padding:5px 7px!important}
+.photoControlGrid .alignmentSaveRow>.compactSaveStep{display:flex!important;flex-direction:column;justify-content:flex-start;align-items:stretch;gap:3px!important}
+.photoControlGrid .alignmentSaveRow>.compactSaveStep .workspaceStepTitle{min-width:0!important;white-space:normal!important;margin:0!important}
+.photoControlGrid .alignmentSaveRow>.compactSaveStep .toolbar{display:flex!important;margin:0!important}
+.photoControlGrid .alignmentSaveRow #savePair{white-space:normal!important;width:100%;min-height:30px!important;text-align:center;line-height:1.2}
+@media(max-width:720px){.photoControlGrid .alignmentSaveRow{grid-template-columns:minmax(0,1fr) minmax(100px,32%)}}
+</style><style id="threeControlsTopRow">
+/* #0 / #1 / #2 share the first row; #3 / #4 remain equal-height below. */
+.photoControlGrid{grid-template-columns:minmax(95px,.76fr) minmax(115px,.9fr) minmax(210px,1.7fr)!important;gap:5px!important;align-items:stretch!important}
+.photoControlGrid>.workspaceStepGroup{height:100%;min-width:0}
+.photoControlGrid>.alignmentSaveRow{grid-column:1/-1;display:grid!important;grid-template-columns:minmax(0,2fr) minmax(135px,1fr)!important;align-items:stretch!important}
+.photoControlGrid>.alignmentSaveRow>.workspaceStepGroup{height:100%}
+.photoControlGrid .workspaceStepTitle{margin-bottom:2px!important}
+.photoControlGrid .workspaceStepGroup{padding:4px 6px!important}
+.photoControlGrid .workspaceCalBody{padding:2px 0 0!important}
+@media(max-width:680px){.photoControlGrid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important}.photoControlGrid>.workspaceStepGroup:nth-child(3){grid-column:1/-1}.photoControlGrid>.alignmentSaveRow{grid-column:1/-1}}
+</style><style id="saveSetAttentionStyle">
+@keyframes saveSetGentlePulse{0%,100%{background:#195b99;box-shadow:0 0 0 0 rgba(25,91,153,.13)}50%{background:#347abb;box-shadow:0 0 0 5px rgba(25,91,153,.17)}}
+#savePair.saveSetNeedsAttention{animation:saveSetGentlePulse 2.8s ease-in-out infinite;border-color:#195b99;color:#fff}
+@media(prefers-reduced-motion:reduce){#savePair.saveSetNeedsAttention{animation:none;outline:2px solid #e0a83a;outline-offset:2px}}
+</style><style id="v949LowHeightCalibration">
+/* Two-line calibration: title and actions; two scales and scale readout. */
+.photoControlGrid .workspaceStepGroup:has(#autoCal) .workspaceCal[open]{
+ display:grid!important;grid-template-columns:auto minmax(0,1fr);column-gap:6px;row-gap:3px;align-items:center;
+}
+.photoControlGrid .workspaceStepGroup:has(#autoCal) .workspaceCal>summary{
+ grid-column:1;grid-row:1;white-space:nowrap!important;padding:2px 1px!important;margin:0!important;
+ font-size:11px!important;
+}
+.photoControlGrid .workspaceStepGroup:has(#autoCal) .workspaceCalBody{display:contents!important}
+.photoControlGrid .workspaceStepGroup:has(#autoCal) .calBtns{
+ grid-column:2;grid-row:1;display:flex!important;flex-wrap:nowrap!important;align-items:center!important;
+ gap:4px!important;min-width:0;
+}
+.photoControlGrid .workspaceStepGroup:has(#autoCal) .calBtns button{
+ white-space:nowrap!important;font-size:10px!important;padding:3px 5px!important;min-height:25px!important;
+}
+.photoControlGrid .workspaceStepGroup:has(#autoCal) .calibrationScalePair{
+ grid-column:1/-1;grid-row:2;display:flex!important;flex-flow:row nowrap!important;align-items:center!important;
+ gap:6px!important;min-width:0;
+}
+.photoControlGrid .workspaceStepGroup:has(#autoCal) .calibrationScalePair>.field{
+ display:flex!important;flex:0 1 auto!important;align-items:center!important;justify-content:start!important;
+ gap:3px!important;margin:0!important;min-width:0!important;
+}
+.photoControlGrid .workspaceStepGroup:has(#autoCal) .calibrationScalePair label{font-size:10px!important;white-space:nowrap!important}
+.photoControlGrid .workspaceStepGroup:has(#autoCal) .calibrationScalePair input{
+ width:60px!important;min-width:48px!important;max-width:60px!important;height:25px!important;
+ padding:2px 4px!important;font-size:11px!important;
+}
+.photoControlGrid .workspaceStepGroup:has(#autoCal) #autoScaleSummary{
+ font-size:10px!important;white-space:nowrap!important;margin-left:auto;min-width:0;
+}
+.photoControlGrid .workspaceStepGroup:has(#autoCal) #autoScaleMismatch:not([hidden]){
+ grid-column:1/-1;white-space:normal!important;
+}
+/* Narrow workspace fallback: allow wrapping rather than clipping controls. */
+@media(max-width:950px){
+ .photoControlGrid .workspaceStepGroup:has(#autoCal) .calBtns{flex-wrap:wrap!important}
+ .photoControlGrid .workspaceStepGroup:has(#autoCal) .calibrationScalePair{flex-wrap:wrap!important}
+}
+</style><style id="restoreTwoRowWorkspaceLayout">
+.photoControlGrid{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;gap:5px 9px!important;align-items:stretch!important}
+.photoControlGrid>.importStep{grid-column:1!important;grid-row:1!important}
+.photoControlGrid>.workspaceStepGroup:nth-child(2){grid-column:2!important;grid-row:1!important}
+.photoControlGrid>.workspaceStepGroup:nth-child(3){grid-column:1!important;grid-row:2!important}
+.photoControlGrid>.alignmentSaveRow{grid-column:2!important;grid-row:2!important;display:grid!important;grid-template-columns:minmax(0,2fr) minmax(120px,1fr)!important;gap:5px!important;align-items:stretch!important}
+.photoControlGrid>.alignmentSaveRow>.workspaceStepGroup{height:100%!important}
+@media(max-width:710px){.photoControlGrid{grid-template-columns:minmax(0,1fr)!important}.photoControlGrid>.importStep,.photoControlGrid>.workspaceStepGroup:nth-child(2),.photoControlGrid>.workspaceStepGroup:nth-child(3),.photoControlGrid>.alignmentSaveRow{grid-column:1!important;grid-row:auto!important}}
 </style></head><body><header><div><h1>RN Plate Pair Inspector <span class="small">v9.4.10 Beta</span></h1><div class="small">Upper / Lower pair · ruler-referenced measurements · campaign performance</div></div><div class="inline"><button id="showUserManual" type="button" aria-haspopup="dialog">? Help &amp; Manual</button><button class="primary" id="exportAll">Export pair JSON + images</button><button id="copyAll">Copy pair report for Excel</button></div></header><main class="three">
 <section class="panel"><details class="leftCollapsible" open><summary>PL Geometry</summary><div class="leftCollapseBody"><details class="bulkPaste" open><summary>Paste campaign geometry (Excel / TSV)</summary><p class="small">Paste six columns (W0, X0, Y0, Z0, R0, H0), or name/value rows. H0 = 2×Y0 and expected R0 = Z0 − H0 are checked for consistency.</p><textarea aria-label="Campaign geometry paste" id="campaignPaste" placeholder="W0	X0	Y0	Z0	R0	H0
 200	5	45	270	180	90" style="min-height:115px"></textarea><div id="campaignPasteStatus" role="status" hidden></div></details><div class="field"><label for="cid">Campaign ID</label><input id="cid" value="CMP-001"/></div><div class="field"><label for="bore">Bore radius before use · Y (mm)</label><input id="bore" min="0" placeholder="Enter Y" step="0.1" type="number"/></div><div class="field"><label for="W">W: Center-to-edge incl. band (mm)</label><input id="W" min="0" placeholder="W" step="0.1" type="number"/></div><div class="field"><label for="X">X: Band thickness (mm)</label><input id="X" min="0" step="0.1" type="number" value="0"/></div><div class="field"><label for="Z">Z: Closed center distance (mm)</label><input id="Z" min="0" placeholder="Z" step="0.1" type="number"/></div><div class="field"><label for="R0">R0 / SD: Initial stroke (mm)</label><input id="R0" min="0" placeholder="R0" step="0.1" type="number"/></div><div class="field"><label for="H0">H0 / BDia: Bore diameter before use (mm)</label><input aria-label="Calculated original bore diameter" id="H0" placeholder="2 × Y0" readonly="" type="number"/></div><div class="field"><label for="safe">Remaining stroke safe limit (mm) *</label><input id="safe" required aria-required="true" min="0" step="0.1" type="number" value="10"/></div><p class="small">Y is entered as the unused bore radius. F is required for stroke calculations on each PL.</p></div></details><details class="leftCollapsible" open><summary id="plPerformanceTitle">PL performance at CMP-001</summary><div class="leftCollapseBody"><div class="stat"><span class="small">Recorded sets</span><b id="pairsCount">0</b></div>
-<div class="stat"><span class="small">Sets below safe limit <button aria-label="Formula: Sets below safe limit" class="formulaInfo" data-formula="belowCount" title="Count of saved sets where remaining stroke &lt; safe limit." type="button">ⓘ</button></span><b id="belowCount">—</b></div><div class="stat"><span class="small">Average erosion · mm/min <button aria-label="Formula: Average erosion per minute" class="formulaInfo" data-formula="avgTime" title="Mean of saved pair ER values: (R0 − R) / total runtime (min)." type="button">ⓘ</button></span><b id="avgTime">—</b></div><div class="stat"><span class="small">Average erosion · mm/heat <button aria-label="Formula: Average erosion per heat" class="formulaInfo" data-formula="avgHeat" title="Mean of saved pair EPH values: (R0 − R) / heats used." type="button">ⓘ</button></span><b id="avgHeat">—</b></div><div class="stat"><span class="small">Average remaining stroke (mm) <button aria-label="Formula: Average remaining stroke" class="formulaInfo" data-formula="avgStroke" title="Mean of valid saved pair remaining stroke values." type="button">ⓘ</button></span><b id="avgStroke">—</b></div><div class="inline" style="margin-top:11px"><button id="savePair">Save set to campaign</button><button type="button" id="exportCampaign">Copy campaign data</button><button id="clearRecords">Clear saved pairs</button></div><div class="small" id="savedStatus" style="margin-top:8px">Session-only records; copy campaign data to Excel to preserve a readable summary.</div><div class="separator"></div><div class="small">Performance aggregates use saved complete PL pairs. Runtime and heats are pair-level quantities, not duplicated for Upper and Lower.</div></div></details></section>
+<div class="stat"><span class="small">Sets below safe limit <button aria-label="Formula: Sets below safe limit" class="formulaInfo" data-formula="belowCount" title="Count of saved sets where remaining stroke &lt; safe limit." type="button">ⓘ</button></span><b id="belowCount">—</b></div><div class="stat"><span class="small">Average erosion · mm/min <button aria-label="Formula: Average erosion per minute" class="formulaInfo" data-formula="avgTime" title="Mean of saved pair ER values: (R0 − R) / total runtime (min)." type="button">ⓘ</button></span><b id="avgTime">—</b></div><div class="stat"><span class="small">Average erosion · mm/heat <button aria-label="Formula: Average erosion per heat" class="formulaInfo" data-formula="avgHeat" title="Mean of saved pair EPH values: (R0 − R) / heats used." type="button">ⓘ</button></span><b id="avgHeat">—</b></div><div class="stat"><span class="small">Average remaining stroke (mm) <button aria-label="Formula: Average remaining stroke" class="formulaInfo" data-formula="avgStroke" title="Mean of valid saved pair remaining stroke values." type="button">ⓘ</button></span><b id="avgStroke">—</b></div><div class="inline" style="margin-top:11px"><button type="button" id="exportCampaign">Copy campaign data</button><button id="clearRecords">Clear saved pairs</button></div><div class="small" id="savedStatus" style="margin-top:8px">Session-only records; copy campaign data to Excel to preserve a readable summary.</div><div class="separator"></div><div class="small">Performance aggregates use saved complete PL pairs. Runtime and heats are pair-level quantities, not duplicated for Upper and Lower.</div></div></details></section>
 <div class="workspaceDivider" id="leftWidthDivider" role="separator" aria-label="Resize PL Geometry panel" aria-orientation="vertical" tabindex="0" title="Drag to resize PL Geometry · arrow keys to adjust"></div><section class="panel"><div class="photoheader"><h2 style="margin:0">PL photo workspace</h2><strong class="small" id="photoTitle" title="Current PL photo filename">Upper · no photo</strong><div class="inline"><button aria-selected="true" class="tab" id="upperTab">Upper PL</button><button aria-selected="false" class="tab" id="lowerTab">Lower PL</button><button type="button" id="photoExchange" aria-label="Replace photos: 1 for selected PL, 2 for Upper then Lower" class="minibtn photoUploadIcon" title="Import photos: select 1 photo for the active PL, or 2 photos (first Upper, second Lower)"><svg aria-hidden="true" fill="none" height="21" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="21"><path d="M7 7h14l-4-4m4 4-4 4M17 17H3l4 4m-4-4 4-4"></path></svg></button></div></div><div class="workspaceStepGroup"><div class="workspaceStepTitle">#1 Level</div><div class="toolbar"><button class="minibtn" id="autoLevel">Auto Level</button><button class="minibtn" id="manualLevel">Level with 2 Points</button></div></div>
 <div class="workspaceStepGroup"><details class="workspaceCal" open><summary>#2 Calibration · X / Y (px/mm)</summary><div class="workspaceCalBody"><h3>Ruler calibration</h3><div class="calBtns"><button id="autoCal">Auto 100mm Calibration</button><span id="autoScaleSummary" class="small" aria-live="polite" style="font-weight:650;white-space:nowrap">X: — · Y: — px/mm</span><span id="autoScaleMismatch" role="alert" hidden style="color:#991b1b;background:#fee2e2;border:2px solid #dc2626;border-radius:6px;padding:6px 9px;font-weight:750;font-size:12px;line-height:1.35"></span><button id="manualCalBoth" type="button">Start Manual Calibration</button><button type="button" id="manualRulerDone" hidden style="display:none!important" aria-hidden="true" tabindex="-1">Manual Ruler Calibration Done</button></div><div id="manualRulerControls" hidden style="display:none"><strong>Manual ruler calibration · 100 mm each direction</strong><p class="small">Set vertical guide spacing to X = 100 mm and horizontal guide spacing to Y = 100 mm.</p><span id="manualRulerSpan" class="small" role="status" style="display:block;margin-top:5px"></span></div><div id="rulerReadout" class="small" role="status">Auto detects X/Y ruler scales. If unsuccessful, adjust the four 100 mm guides.</div><div class="calibrationScalePair"><div class="field"><label for="sx">Horizontal (px/mm)</label><input id="sx" min="0.1" placeholder="—" step="0.001" type="number"/></div><div class="field"><label for="sy">Vertical (px/mm)</label><input id="sy" min="0.1" placeholder="—" step="0.001" type="number"/></div></div><div class="small">X/Y scales are independent. Verify against physical ruler marks.</div></div></details></div>
-<div class="workspaceStepGroup"><div class="workspaceStepTitle">#3 Alignment</div><div class="toolbar"><button class="minibtn" id="autoAlignAll">Auto Align</button><button class="minibtn" id="undoAutoAlign" disabled>Undo Alignment</button><button class="minibtn" id="resetLines">Reset Lines</button><button type="button" class="minibtn" id="verifyAlignment" aria-pressed="false" style="font-weight:750;border:2px solid #bd3434">Verify Alignment *</button><span id="alignmentVerifyState" role="status" style="font-size:11px;color:#a11b1b">Required</span></div><div id="autoAlignStatus" class="small" role="status" aria-live="polite" style="display:none;padding:5px 8px;margin:5px 0"></div></div><div class="photoarea photoareaWrap"><input accept="image/*,.heic,.heif" aria-label="Select one or two PL photos" id="photoFile" multiple type="file"/><button aria-label="Show PL measurement legend" class="workspaceInfoFloating" id="workspaceHelpBtn" title="Show PL measurement legend" type="button">i</button><div class="placeholder" id="empty"><button type="button" id="photoImportPrompt" class="photoImportPrompt"><svg aria-hidden="true" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 16V3m0 0L7 8m5-5 5 5"></path><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"></path></svg><strong>Import PL photo</strong><span>Choose one image for the selected PL, or two images (Upper then Lower)</span></button></div><div id="photoLoadingOverlay" class="photoLoadingOverlay" hidden role="status" aria-live="polite"><span class="photoLoadingSpinner" aria-hidden="true"></span><strong id="photoLoadingMessage">Loading photos…</strong><span class="small">Decoding and preparing image</span></div><div class="stage" id="stage"><img alt="Selected plate photo" id="photo"/><svg id="arrows" preserveaspectratio="none" viewbox="0 0 1000 1000"></svg></div></div><div class="hint" id="actionHint" style="display:none"></div><div class="ind" id="calStatus" hidden>No image. Each PL has independent ruler calibration and dimension lines.</div><div class="areaInfo" hidden><h3 style="margin:0 0 5px">Nested ellipse area model</h3><div class="small">Area model: the used bore is bounded by H3/H4 and its detected left/right edges; the edge-damage boundary is the outer ellipse. The unused bore remains a calculation reference but is not drawn.</div><div class="small" style="margin:8px 0 6px"><strong>Inner ellipse</strong>: H3/H4 tangency and photo-estimated bore left/right edges.<br/><strong>Outer ellipse</strong>: tangent to V1, V2, H2 and H5.</div><button class="minibtn" id="rescanBore" type="button">Detect bore left/right from photo</button><div aria-live="polite" class="small" id="innerDetectStatus">Not scanned</div><div class="small" id="contourStatus">Area model uses current dimension lines and a photo-edge estimate. Calibrate both rulers and enter Y for area values.</div></div></section>
+<div class="workspaceStepGroup"><div class="workspaceStepTitle">#3 Alignment</div><div class="toolbar"><button class="minibtn" id="autoAlignAll">Auto Align</button><button class="minibtn" id="undoAutoAlign" disabled>Undo Alignment</button><button class="minibtn" id="resetLines">Reset Lines</button><button type="button" class="minibtn" id="verifyAlignment" aria-pressed="false" style="font-weight:750;border:2px solid #bd3434">Verify Alignment *</button><span id="alignmentVerifyState" role="status" style="font-size:11px;color:#a11b1b">Required</span></div><div id="autoAlignStatus" class="small" role="status" aria-live="polite" style="display:none;padding:5px 8px;margin:5px 0"></div></div><div class="workspaceStepGroup compactSaveStep"><div class="workspaceStepTitle">#4 Save Set</div><div class="toolbar"><button type="button" class="minibtn primary" id="savePair">Save set to campaign</button></div></div><div class="photoarea photoareaWrap"><input accept="image/*,.heic,.heif" aria-label="Select one or two PL photos" id="photoFile" multiple type="file"/><button aria-label="Show PL measurement legend" class="workspaceInfoFloating" id="workspaceHelpBtn" title="Show PL measurement legend" type="button">i</button><div class="placeholder" id="empty"><button type="button" id="photoImportPrompt" class="photoImportPrompt"><svg aria-hidden="true" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 16V3m0 0L7 8m5-5 5 5"></path><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"></path></svg><strong>Import PL photo</strong><span>Choose one image for the selected PL, or two images (Upper then Lower)</span></button></div><div id="photoLoadingOverlay" class="photoLoadingOverlay" hidden role="status" aria-live="polite"><span class="photoLoadingSpinner" aria-hidden="true"></span><strong id="photoLoadingMessage">Loading photos…</strong><span class="small">Decoding and preparing image</span></div><div class="stage" id="stage"><img alt="Selected plate photo" id="photo"/><svg id="arrows" preserveaspectratio="none" viewbox="0 0 1000 1000"></svg></div></div><div class="hint" id="actionHint" style="display:none"></div><div class="ind" id="calStatus" hidden>No image. Each PL has independent ruler calibration and dimension lines.</div><div class="areaInfo" hidden><h3 style="margin:0 0 5px">Nested ellipse area model</h3><div class="small">Area model: the used bore is bounded by H3/H4 and its detected left/right edges; the edge-damage boundary is the outer ellipse. The unused bore remains a calculation reference but is not drawn.</div><div class="small" style="margin:8px 0 6px"><strong>Inner ellipse</strong>: H3/H4 tangency and photo-estimated bore left/right edges.<br/><strong>Outer ellipse</strong>: tangent to V1, V2, H2 and H5.</div><button class="minibtn" id="rescanBore" type="button">Detect bore left/right from photo</button><div aria-live="polite" class="small" id="innerDetectStatus">Not scanned</div><div class="small" id="contourStatus">Area model uses current dimension lines and a photo-edge estimate. Calibrate both rulers and enter Y for area values.</div></div></section>
 <div class="workspaceDivider" id="rightWidthDivider" role="separator" aria-label="Resize PL Data and Calculated Results panel" aria-orientation="vertical" tabindex="0" title="Drag to resize PL Data & Results · arrow keys to adjust"></div><section class="panel right"><div class="photoheader"><h2 style="margin:0">PL data and calculated results</h2><span class="mode" id="activeLabel">Upper PL</span></div><div class="results"><div class="inspectionColumn measuredColumn"><h3 class="inspectionColumnTitle">Measured / Entered Data</h3><details class="stackBox usageBox" open=""><summary>PL Set Usage Info</summary><div class="stackBody"><div class="field"><label for="plpair">PL pair ID</label><input id="plpair" value="PL-001"/></div><div class="pairdata"><div class="field"><label for="runtime">Total runtime (min)</label><input id="runtime" min="0" step="0.1" type="number"/></div><div class="field"><label for="heats">Heats used (total pair)</label><input id="heats" min="0" step="1" type="number"/></div></div></div></details><details class="stackBox dimensionsBox" open=""><summary><span>PL A–F Dimensions · Upper / Lower</span><button aria-label="Show PL measurement legend" class="summaryInfoBtn" id="afLegendBtn" title="Show PL measurement legend" type="button">i</button></summary><div class="stackBody"><table class="dimtable"><thead><tr><th>Dim.</th><th>Upper PL</th><th>Lower PL</th></tr></thead><tbody id="dimensionRows"></tbody></table><div aria-live="polite" class="rulerValidationNotice" id="rulerValidationNotice"></div><div class="measureSourceNote">A = Auto, M = Manual. Toggle the switch to choose; selected values are black, unused values gray. Manual fields remain editable.</div></div></details><details class="subSection" open=""><summary>Cracks · selected PL</summary><div class="subBody"><div class="small">Automatic image-based candidates are experimental and require inspector confirmation.</div><div class="inline" style="margin:8px 0"><button id="detectCracks">Scan crack candidates</button><button id="clearCracks">Clear counts</button></div><div class="small" id="crackStatus">Not assessed</div><div id="crackRows"></div><div class="stat"><span class="small">Cracks Count · CC (selected PL) <button aria-label="Formula: Cracks Count" class="formulaInfo" data-formula="cc" title="Sum of four inspector-confirmed crack category counts for the selected PL." type="button">ⓘ</button></span><b id="cc">—</b></div><div class="small" style="margin-top:7px">Values respond to dragging. Manually entered overrides are optional when photo calibration is uncertain.</div></div></details><details class="resultSection remarksSection" open=""><summary>Remarks · selected PL</summary><div class="resultBody">
 <div class="small">Tap a crack tag or + to increase its count; tap − to decrease it. Counts sync with Cracks. Other tags toggle normally. Saved independently for Upper and Lower PL.</div>
 <div class="tagChoices" id="remarkTags"></div>
@@ -1764,6 +1843,20 @@ syncAlignmentVerification();
  picker.style.cssText='width:auto;min-width:155px;max-width:240px;padding:6px;border-radius:7px;border:1px solid #cbd4df;background:white;font-size:12px';
  tabbar.insertBefore(picker,$('lowerTab').nextSibling);
  const saved=new Map();let selected=null;
+ let hasUnsavedChanges=true;
+ const saveButton=$('savePair');
+ const refreshSaveAttention=()=>saveButton.classList.toggle('saveSetNeedsAttention',hasUnsavedChanges);
+ const markUnsaved=()=>{hasUnsavedChanges=true;refreshSaveAttention();};
+ const markSaved=()=>{hasUnsavedChanges=false;refreshSaveAttention();};
+ // Track edits to inspection inputs, including dragged measurement lines.
+ document.addEventListener('input',event=>{
+  if(event.target.closest('#campaignPaste')||event.target.id==='savedPairSelector')return;
+  if(event.target.matches('input,textarea,select'))markUnsaved();
+ },true);
+ document.getElementById('stage')?.addEventListener('pointerup',markUnsaved,true);
+ document.getElementById('stage')?.addEventListener('touchend',markUnsaved,true);
+ document.querySelectorAll('#autoLevel,#manualLevel,#autoCal,#manualCalBoth,#autoAlignAll,#undoAutoAlign,#resetLines,#verifyAlignment,#detectCracks,#clearCracks').forEach(button=>button.addEventListener('click',markUnsaved));
+ refreshSaveAttention();
  const fields=['cid','plpair','W','X','bore','Z','R0','safe','runtime','heats','olt'];
  const pairID=()=>($('cid').value.trim()||'CMP')+' / '+($('plpair').value.trim()||'PL');
  const nameKey=s=>String(s||'').trim().toLocaleLowerCase();
@@ -1802,7 +1895,7 @@ syncAlignmentVerification();
  picker.addEventListener('change',()=>{
   const target=picker.value;if(!saved.has(target)){refresh();return;}
   if(selected&&saved.has(selected))saved.set(selected,snapshot());
-  selected=target;restore(saved.get(target));refresh();
+  selected=target;restore(saved.get(target));markSaved();refresh();
   $('savedStatus').textContent='Loaded '+target+' (session only).';
  });
  const saveOld=$('savePair').onclick;
@@ -1811,7 +1904,7 @@ syncAlignmentVerification();
   // The original save handler signals success by upserting a matching record.
   saveOld.call(this,e);
   if(!$('savedStatus').textContent.startsWith('Saved '+id+' '))return;
-  saved.set(id,snapshot());selected=id;refresh();
+  saved.set(id,snapshot());selected=id;markSaved();refresh();
  };
  // Copy human-readable, tab-separated campaign data (one row for each plate).
  $('exportCampaign').addEventListener('click',()=>{
@@ -1891,6 +1984,11 @@ syncAlignmentVerification();
    alert('Import cancelled: duplicate photo filename detected:\n'+[...new Set(duplicates)].join('\n')+'\nExisting PL photographs were left unchanged.');
    return false;
   }
+  const currentPhotosPresent=!!(plates.upper.image||plates.lower.image||plates.upper.filename||plates.lower.filename);
+  if(currentPhotosPresent&&hasUnsavedChanges){
+   const proceed=confirm('The current PL set has unsaved changes and has not been saved to campaign.\n\nImporting new photos may replace its existing photographs and measurements.\n\nPress OK to import without saving, or Cancel to return and save the current set.');
+   if(!proceed)return false;
+  }
   // Start a new pair only after a successful save of the current pair.
   if(selected&&saved.has(selected)&&pairID()===selected){
    const next=nextPairId(),initialSide=active;
@@ -1907,6 +2005,7 @@ syncAlignmentVerification();
    syncAlignmentVerification();refresh();
    $('savedStatus').textContent='New PL pair '+next+' prepared. Previous sets are retained.';
   }
+  markUnsaved();
   return true;
  };
  refresh();
@@ -2004,12 +2103,27 @@ syncAlignmentVerification();
  const calibrate=document.getElementById('autoCal')?.closest('.workspaceStepGroup');
  const align=document.getElementById('autoAlignAll')?.closest('.workspaceStepGroup');
  if(!photoTitle||!exchange||!level||!calibrate||!align)return;
+ const calDetails=calibrate.querySelector('.workspaceCal');
+ const calSummary=calDetails?.querySelector('summary');
+ const calButtons=calDetails?.querySelector('.calBtns');
+ const calPair=calDetails?.querySelector('.calibrationScalePair');
+ const scaleSummary=document.getElementById('autoScaleSummary');
+ if(calDetails&&calSummary&&calButtons&&calPair){
+  calSummary.textContent='#2 Calibration · X/Y';
+  calSummary.insertAdjacentElement('afterend',calButtons);
+  if(scaleSummary)calPair.append(scaleSummary);
+ }
  const grid=document.createElement('div');grid.className='photoControlGrid';
  const importGroup=document.createElement('div');importGroup.className='workspaceStepGroup importStep';
  const t=document.createElement('div');t.className='workspaceStepTitle';t.textContent='#0 Import / Replace';
  importGroup.append(t,exchange);
  photoTitle.closest('.photoheader').insertAdjacentElement('afterend',grid);
- grid.append(importGroup,level,calibrate,align);
+ const save=document.querySelector('.compactSaveStep');
+ if(save){
+  const rightSteps=document.createElement('div');rightSteps.className='alignmentSaveRow';
+  rightSteps.append(align,save);
+  grid.append(importGroup,level,calibrate,rightSteps);
+ }else grid.append(importGroup,level,calibrate,align);
  const status=document.getElementById('autoAlignStatus');
  if(status){status.hidden=true;status.setAttribute('aria-hidden','true')}
 
