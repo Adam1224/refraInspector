@@ -1,5 +1,31 @@
 # RN Plate Pair Inspector — Complete Version Update History
 
+## Version 9.4.7 Beta — 2026-10-14 (JST)
+**Type:** New / Modified / Calibration / Responsive UI / Verification
+
+### iPhone ruler calibration (v9.3–v9.3.4)
+- Increases image detail for ruler tick recognition and adds an adaptive retry for low-contrast graduation patterns, with separate X/Y diagnostics.
+- When auto 100 mm calibration fails, hides measurement lines and shows two vertical X guides and two horizontal Y guides for independently marking 100 mm spans. Guide dragging updates px/mm readings live.
+- Combines horizontal/vertical manual calibration into a single workflow. Auto 100 mm Calibration clears prior manual settings before attempting a new independent auto scan.
+- Retains the last auto X/Y values near the button even after manual calibration; flags X/Y disagreement greater than a provisional 12% threshold. Never substitutes a guessed scale on failure.
+
+### Workspace and usability (v9.3.5–v9.4.5)
+- Groups photo actions by #0 Import/Replace, #1 Level, #2 Calibration, and #3 Alignment; reorganizes controls into a compact responsive 2×2 layout.
+- Removes verbose ruler/ellipse status blocks and redundant geometry-paste controls. Campaign geometry paste remains automatically applied.
+- Adds adjustable left geometry/right results widths, independent desktop scrolling, a wider photo-first default, and responsive stacking of Measured versus Calculated results when needed.
+- Improves narrow A–F measurement rows, removes duplicate “Used” readout, preserves inline manual input space on Auto/Manual toggles, and prevents overlapping values.
+- Replaces separate Start/Done calibration buttons with a single Start Manual Calibration / Finish Manual Calibration toggle that temporarily disables other workspace actions.
+- Runs automatic leveling, ruler calibration, and feature alignment after photo import; initializes manual calibration guides near estimated ruler positions.
+
+### Verification and export gating (v9.4.6–v9.4.7)
+- Adds a required **Verify Alignment*** confirmation for each imported PL. Changes to its photo/lines/calibration invalidate only that plate's confirmation.
+- Allows verified Upper or Lower PL data and per-plate exports independently, including when only one photo was imported.
+- Warns when a second imported PL remains unverified; the unverified PL's values remain locked while already-verified data remains available.
+- Keeps pair-dependent R/ΔR/ER and other paired calculations unavailable until both relevant photos are verified.
+- Retains the standardized Excel Mark-or-Abbreviation + Upper/Lower table, missing-value blanks, and one-decimal numeric export format.
+
+**Validation limitations:** JavaScript syntax validation completed during beta iterations; photo-processing accuracy and browser/iPhone interactions require real-device testing. Auto-alignment and photo-derived area estimates are not independently validated.
+
 ## Version 9.2 Beta — 2026-10-13 (JST)
 **Type:** Experimental / Modified / UI / Export
 
