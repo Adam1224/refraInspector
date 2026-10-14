@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>RefraInspector v9.4.10 Beta</title><style>
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>RefraInspector Ver10 Beta</title><style>
 :root{font:14px system-ui,-apple-system,Segoe UI,sans-serif;color:#202734;background:#f3f5f8}*{box-sizing:border-box}body{margin:0;padding:16px}button,input,select{font:inherit}button{background:white;color:#243447;border:1px solid #cbd4df;border-radius:7px;padding:8px 10px;cursor:pointer}button:hover{background:#edf3fa}button.primary{background:#195b99;color:white;border-color:#195b99}input{width:100%;padding:6px;border:1px solid #c9d2df;border-radius:6px;min-width:0}input[type=file]{display:none}header{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:12px}h1{font-size:21px;margin:0}h2{font-size:16px;margin:0 0 12px}h3{font-size:14px;margin:15px 0 8px}.small{color:#657487;font-size:12px;line-height:1.5}.three{display:grid;grid-template-columns:minmax(210px,260px) minmax(390px,1fr) minmax(410px,520px);gap:12px;align-items:start;max-width:2000px;margin:auto}.panel{background:white;border:1px solid #dfe5ed;border-radius:11px;padding:13px;min-width:0}.field{display:grid;grid-template-columns:1fr 94px;align-items:center;gap:8px;margin:8px 0}.field label{font-size:12px;color:#4d5c70}.stat{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid #eef1f6;align-items:center}.stat b{font-variant-numeric:tabular-nums;text-align:right}.stat .small{max-width:66%}.toolbar{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin-bottom:10px}.tab[aria-selected=true]{background:#175b9a;color:white;border-color:#175b9a}.photoheader{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin:8px 0}.photoarea{background:#222830;border-radius:8px;padding:7px;min-height:390px;display:flex;align-items:center;justify-content:center}.stage{position:relative;line-height:0;touch-action:none;user-select:none;max-width:100%;width:100%;display:none}.stage img{display:block;width:100%;height:auto}.stage .line{position:absolute;z-index:4;touch-action:none;cursor:grab}.stage .line.h{height:18px;left:0;right:0;transform:translateY(-9px)}.stage .line.v{width:18px;top:0;bottom:0;transform:translateX(-9px)}.line.h:before{content:'';position:absolute;left:0;right:0;top:8px;border-top:2px solid var(--lc);filter:drop-shadow(0 0 1px #000)}.line.v:before{content:'';position:absolute;top:0;bottom:0;left:8px;border-left:2px solid var(--lc);filter:drop-shadow(0 0 1px #000)}.stage svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3;overflow:visible}.stage.contour{cursor:crosshair}.stage.contour .line{pointer-events:none}.areaInfo{border:1px solid #dbe3ec;border-radius:8px;padding:9px;margin:8px 0;background:#f8fafc}.areaInfo button{font-size:12px;padding:6px 8px}.areaInfo .inline{margin-top:7px}.placeholder{color:#c4cbd6;text-align:center;padding:60px 10px}.ind{background:#f2f6fc;border-radius:7px;padding:7px 9px;font-size:12px;line-height:1.5;margin:8px 0}.dimtable{width:100%;border-collapse:collapse;font-size:13px}.dimtable th{text-align:left;background:#f0f4f8;font-size:12px;padding:8px 5px}.dimtable td{border-bottom:1px solid #e9edf2;padding:5px}.dimtable input{width:90px}.crackrow{display:flex;justify-content:space-between;align-items:center;gap:8px;border-bottom:1px solid #ecf0f5;padding:5px 0}.crackrow label{font-size:12px}.crackrow input{width:70px}.crackrow small{color:#657487}.dimtable td:last-child{text-align:right;font-variant-numeric:tabular-nums;font-weight:650}.results{display:grid;grid-template-columns:minmax(180px,1.05fr) minmax(170px,.95fr);gap:12px}.results>div{min-width:0}textarea{display:block;width:100%;min-height:175px;font:12px/1.5 ui-monospace,monospace;border:1px solid #cbd3df;border-radius:7px;padding:8px;resize:vertical}.pairdata{border:1px solid #d5deea;border-radius:8px;padding:9px;margin:12px 0}.warn{color:#a15b17}.good{color:#206b39}.inline{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.inline input[type=range]{width:150px}.mode{background:#e8f0fa;padding:6px;border-radius:6px;font-size:12px}.separator{border-top:1px solid #e6eaf0;margin:12px 0}.calBtns{display:flex;gap:6px;flex-wrap:wrap}.calstatus{font-size:12px;margin-top:7px}.hint{font-size:12px;background:#fffae9;color:#725716;padding:8px;border-radius:6px;margin:8px 0}.minibtn{padding:5px 7px;font-size:12px}@media(max-width:1300px){.three{grid-template-columns:230px minmax(330px,1fr)}.right{grid-column:1/-1}.results{grid-template-columns:1fr 1fr}}@media(max-width:720px){body{padding:8px}.three{display:block}.panel{margin-bottom:10px}.results{grid-template-columns:1fr 1fr}}@media(max-width:450px){.results{grid-template-columns:1fr}.dimtable input{width:73px}}
 .formulaInfo{display:inline-grid;place-items:center;vertical-align:middle;margin-left:4px;padding:0;border:0;background:transparent;color:#23639d;font-size:15px;font-weight:700;line-height:1;min-width:22px;min-height:22px;border-radius:50%;cursor:pointer}.formulaInfo:hover,.formulaInfo:focus-visible{background:#e7f1fc;outline:2px solid #a8c9e7;outline-offset:1px}.formulaPopover{position:fixed;z-index:1000;max-width:min(440px,calc(100vw - 24px));padding:12px 34px 12px 13px;border-radius:9px;border:1px solid #a7b8c9;background:#fff;color:#202734;box-shadow:0 6px 22px #0002;font-size:13px;line-height:1.55}.formulaPopover{max-height:calc(100vh - 24px);overflow:auto}.formulaPopover[hidden]{display:none}.formulaPopover strong{display:block;margin-bottom:5px}.formulaPopover .closeInfo{position:absolute;right:5px;top:5px;border:0;padding:3px 7px}.stat .small{max-width:none}details.bulkPaste{border:1px solid #cbd7e4;border-radius:9px;padding:10px;margin:0 0 14px;background:#f8fbff}details.bulkPaste summary{cursor:pointer;font-weight:650;color:#195b99}details.bulkPaste textarea{margin:9px 0;min-height:110px}#H0{background:#edf2f8;color:#42556a}</style><style id="v66styles">.formulaDep{background:#fff3b0!important;outline:2px solid #e19a16!important;outline-offset:2px;transition:background .12s}.formulaDepTitle{background:#fff3b0;border-radius:4px}.autoRulerValue{text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:2px;text-decoration-color:#1d72b8}.originalBore{padding:7px;background:#f0f7fe;border:1px solid #b6cde6;border-radius:8px}.measureSourceNote{color:#566475;font-size:11px;margin:5px 0} .focusPhotoArea{outline:3px solid #eab308;outline-offset:-3px} .areaFocusLegend{font-size:12px;color:#755600;font-weight:700}</style><style id="v73styles">
 .three{grid-template-columns:minmax(205px,245px) minmax(360px,1fr) minmax(610px,740px);max-width:2200px}
@@ -420,70 +420,11 @@
 .photoControlGrid .alignmentSaveRow>.compactSaveStep .toolbar{display:flex!important;margin:0!important}
 .photoControlGrid .alignmentSaveRow #savePair{white-space:normal!important;width:100%;min-height:30px!important;text-align:center;line-height:1.2}
 @media(max-width:720px){.photoControlGrid .alignmentSaveRow{grid-template-columns:minmax(0,1fr) minmax(100px,32%)}}
-</style><style id="threeControlsTopRow">
-/* #0 / #1 / #2 share the first row; #3 / #4 remain equal-height below. */
-.photoControlGrid{grid-template-columns:minmax(95px,.76fr) minmax(115px,.9fr) minmax(210px,1.7fr)!important;gap:5px!important;align-items:stretch!important}
-.photoControlGrid>.workspaceStepGroup{height:100%;min-width:0}
-.photoControlGrid>.alignmentSaveRow{grid-column:1/-1;display:grid!important;grid-template-columns:minmax(0,2fr) minmax(135px,1fr)!important;align-items:stretch!important}
-.photoControlGrid>.alignmentSaveRow>.workspaceStepGroup{height:100%}
-.photoControlGrid .workspaceStepTitle{margin-bottom:2px!important}
-.photoControlGrid .workspaceStepGroup{padding:4px 6px!important}
-.photoControlGrid .workspaceCalBody{padding:2px 0 0!important}
-@media(max-width:680px){.photoControlGrid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important}.photoControlGrid>.workspaceStepGroup:nth-child(3){grid-column:1/-1}.photoControlGrid>.alignmentSaveRow{grid-column:1/-1}}
 </style><style id="saveSetAttentionStyle">
 @keyframes saveSetGentlePulse{0%,100%{background:#195b99;box-shadow:0 0 0 0 rgba(25,91,153,.13)}50%{background:#347abb;box-shadow:0 0 0 5px rgba(25,91,153,.17)}}
 #savePair.saveSetNeedsAttention{animation:saveSetGentlePulse 2.8s ease-in-out infinite;border-color:#195b99;color:#fff}
 @media(prefers-reduced-motion:reduce){#savePair.saveSetNeedsAttention{animation:none;outline:2px solid #e0a83a;outline-offset:2px}}
-</style><style id="v949LowHeightCalibration">
-/* Two-line calibration: title and actions; two scales and scale readout. */
-.photoControlGrid .workspaceStepGroup:has(#autoCal) .workspaceCal[open]{
- display:grid!important;grid-template-columns:auto minmax(0,1fr);column-gap:6px;row-gap:3px;align-items:center;
-}
-.photoControlGrid .workspaceStepGroup:has(#autoCal) .workspaceCal>summary{
- grid-column:1;grid-row:1;white-space:nowrap!important;padding:2px 1px!important;margin:0!important;
- font-size:11px!important;
-}
-.photoControlGrid .workspaceStepGroup:has(#autoCal) .workspaceCalBody{display:contents!important}
-.photoControlGrid .workspaceStepGroup:has(#autoCal) .calBtns{
- grid-column:2;grid-row:1;display:flex!important;flex-wrap:nowrap!important;align-items:center!important;
- gap:4px!important;min-width:0;
-}
-.photoControlGrid .workspaceStepGroup:has(#autoCal) .calBtns button{
- white-space:nowrap!important;font-size:10px!important;padding:3px 5px!important;min-height:25px!important;
-}
-.photoControlGrid .workspaceStepGroup:has(#autoCal) .calibrationScalePair{
- grid-column:1/-1;grid-row:2;display:flex!important;flex-flow:row nowrap!important;align-items:center!important;
- gap:6px!important;min-width:0;
-}
-.photoControlGrid .workspaceStepGroup:has(#autoCal) .calibrationScalePair>.field{
- display:flex!important;flex:0 1 auto!important;align-items:center!important;justify-content:start!important;
- gap:3px!important;margin:0!important;min-width:0!important;
-}
-.photoControlGrid .workspaceStepGroup:has(#autoCal) .calibrationScalePair label{font-size:10px!important;white-space:nowrap!important}
-.photoControlGrid .workspaceStepGroup:has(#autoCal) .calibrationScalePair input{
- width:60px!important;min-width:48px!important;max-width:60px!important;height:25px!important;
- padding:2px 4px!important;font-size:11px!important;
-}
-.photoControlGrid .workspaceStepGroup:has(#autoCal) #autoScaleSummary{
- font-size:10px!important;white-space:nowrap!important;margin-left:auto;min-width:0;
-}
-.photoControlGrid .workspaceStepGroup:has(#autoCal) #autoScaleMismatch:not([hidden]){
- grid-column:1/-1;white-space:normal!important;
-}
-/* Narrow workspace fallback: allow wrapping rather than clipping controls. */
-@media(max-width:950px){
- .photoControlGrid .workspaceStepGroup:has(#autoCal) .calBtns{flex-wrap:wrap!important}
- .photoControlGrid .workspaceStepGroup:has(#autoCal) .calibrationScalePair{flex-wrap:wrap!important}
-}
-</style><style id="restoreTwoRowWorkspaceLayout">
-.photoControlGrid{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;gap:5px 9px!important;align-items:stretch!important}
-.photoControlGrid>.importStep{grid-column:1!important;grid-row:1!important}
-.photoControlGrid>.workspaceStepGroup:nth-child(2){grid-column:2!important;grid-row:1!important}
-.photoControlGrid>.workspaceStepGroup:nth-child(3){grid-column:1!important;grid-row:2!important}
-.photoControlGrid>.alignmentSaveRow{grid-column:2!important;grid-row:2!important;display:grid!important;grid-template-columns:minmax(0,2fr) minmax(120px,1fr)!important;gap:5px!important;align-items:stretch!important}
-.photoControlGrid>.alignmentSaveRow>.workspaceStepGroup{height:100%!important}
-@media(max-width:710px){.photoControlGrid{grid-template-columns:minmax(0,1fr)!important}.photoControlGrid>.importStep,.photoControlGrid>.workspaceStepGroup:nth-child(2),.photoControlGrid>.workspaceStepGroup:nth-child(3),.photoControlGrid>.alignmentSaveRow{grid-column:1!important;grid-row:auto!important}}
-</style></head><body><header><div><h1>RN Plate Pair Inspector <span class="small">v9.4.10 Beta</span></h1><div class="small">Upper / Lower pair · ruler-referenced measurements · campaign performance</div></div><div class="inline"><button id="showUserManual" type="button" aria-haspopup="dialog">? Help &amp; Manual</button><button class="primary" id="exportAll">Export pair JSON + images</button><button id="copyAll">Copy pair report for Excel</button></div></header><main class="three">
+</style></head><body><header><div><h1>RN Plate Pair Inspector <span class="small">Ver10 Beta</span></h1><div class="small">Upper / Lower pair · ruler-referenced measurements · campaign performance</div></div><div class="inline"><button id="showUserManual" type="button" aria-haspopup="dialog">? Help &amp; Manual</button><button class="primary" id="exportAll">Export pair JSON + images</button><button id="copyAll">Copy pair report for Excel</button></div></header><main class="three">
 <section class="panel"><details class="leftCollapsible" open><summary>PL Geometry</summary><div class="leftCollapseBody"><details class="bulkPaste" open><summary>Paste campaign geometry (Excel / TSV)</summary><p class="small">Paste six columns (W0, X0, Y0, Z0, R0, H0), or name/value rows. H0 = 2×Y0 and expected R0 = Z0 − H0 are checked for consistency.</p><textarea aria-label="Campaign geometry paste" id="campaignPaste" placeholder="W0	X0	Y0	Z0	R0	H0
 200	5	45	270	180	90" style="min-height:115px"></textarea><div id="campaignPasteStatus" role="status" hidden></div></details><div class="field"><label for="cid">Campaign ID</label><input id="cid" value="CMP-001"/></div><div class="field"><label for="bore">Bore radius before use · Y (mm)</label><input id="bore" min="0" placeholder="Enter Y" step="0.1" type="number"/></div><div class="field"><label for="W">W: Center-to-edge incl. band (mm)</label><input id="W" min="0" placeholder="W" step="0.1" type="number"/></div><div class="field"><label for="X">X: Band thickness (mm)</label><input id="X" min="0" step="0.1" type="number" value="0"/></div><div class="field"><label for="Z">Z: Closed center distance (mm)</label><input id="Z" min="0" placeholder="Z" step="0.1" type="number"/></div><div class="field"><label for="R0">R0 / SD: Initial stroke (mm)</label><input id="R0" min="0" placeholder="R0" step="0.1" type="number"/></div><div class="field"><label for="H0">H0 / BDia: Bore diameter before use (mm)</label><input aria-label="Calculated original bore diameter" id="H0" placeholder="2 × Y0" readonly="" type="number"/></div><div class="field"><label for="safe">Remaining stroke safe limit (mm) *</label><input id="safe" required aria-required="true" min="0" step="0.1" type="number" value="10"/></div><p class="small">Y is entered as the unused bore radius. F is required for stroke calculations on each PL.</p></div></details><details class="leftCollapsible" open><summary id="plPerformanceTitle">PL performance at CMP-001</summary><div class="leftCollapseBody"><div class="stat"><span class="small">Recorded sets</span><b id="pairsCount">0</b></div>
 <div class="stat"><span class="small">Sets below safe limit <button aria-label="Formula: Sets below safe limit" class="formulaInfo" data-formula="belowCount" title="Count of saved sets where remaining stroke &lt; safe limit." type="button">ⓘ</button></span><b id="belowCount">—</b></div><div class="stat"><span class="small">Average erosion · mm/min <button aria-label="Formula: Average erosion per minute" class="formulaInfo" data-formula="avgTime" title="Mean of saved pair ER values: (R0 − R) / total runtime (min)." type="button">ⓘ</button></span><b id="avgTime">—</b></div><div class="stat"><span class="small">Average erosion · mm/heat <button aria-label="Formula: Average erosion per heat" class="formulaInfo" data-formula="avgHeat" title="Mean of saved pair EPH values: (R0 − R) / heats used." type="button">ⓘ</button></span><b id="avgHeat">—</b></div><div class="stat"><span class="small">Average remaining stroke (mm) <button aria-label="Formula: Average remaining stroke" class="formulaInfo" data-formula="avgStroke" title="Mean of valid saved pair remaining stroke values." type="button">ⓘ</button></span><b id="avgStroke">—</b></div><div class="inline" style="margin-top:11px"><button type="button" id="exportCampaign">Copy campaign data</button><button id="clearRecords">Clear saved pairs</button></div><div class="small" id="savedStatus" style="margin-top:8px">Session-only records; copy campaign data to Excel to preserve a readable summary.</div><div class="separator"></div><div class="small">Performance aggregates use saved complete PL pairs. Runtime and heats are pair-level quantities, not duplicated for Upper and Lower.</div></div></details></section>
@@ -1834,7 +1775,7 @@ document.getElementById('exportAll').onclick=()=>{
  if(importedSides().some(side=>!verified(side)))verifyState.textContent='Partial export: verify the other PL to enable its data and complete pair calculations.';
 };
 syncAlignmentVerification();
-// Local v9.4.10 saved-set navigator. Photos and their inspection state stay in this session.
+// Ver10 saved-set navigator. Photos and their inspection state stay in this session.
 (()=>{
  const tabbar=$('lowerTab')?.parentElement;if(!tabbar)return;
  const picker=document.createElement('select');picker.id='savedPairSelector';
@@ -2103,16 +2044,6 @@ syncAlignmentVerification();
  const calibrate=document.getElementById('autoCal')?.closest('.workspaceStepGroup');
  const align=document.getElementById('autoAlignAll')?.closest('.workspaceStepGroup');
  if(!photoTitle||!exchange||!level||!calibrate||!align)return;
- const calDetails=calibrate.querySelector('.workspaceCal');
- const calSummary=calDetails?.querySelector('summary');
- const calButtons=calDetails?.querySelector('.calBtns');
- const calPair=calDetails?.querySelector('.calibrationScalePair');
- const scaleSummary=document.getElementById('autoScaleSummary');
- if(calDetails&&calSummary&&calButtons&&calPair){
-  calSummary.textContent='#2 Calibration · X/Y';
-  calSummary.insertAdjacentElement('afterend',calButtons);
-  if(scaleSummary)calPair.append(scaleSummary);
- }
  const grid=document.createElement('div');grid.className='photoControlGrid';
  const importGroup=document.createElement('div');importGroup.className='workspaceStepGroup importStep';
  const t=document.createElement('div');t.className='workspaceStepTitle';t.textContent='#0 Import / Replace';
