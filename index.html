@@ -1227,6 +1227,7 @@ $('photoFile').addEventListener('change',async e=>{
  const files=Array.from(e.target.files);e.target.value='';
  if(!files.length||photoImportBusy)return;
  if(files.length>2){alert('Select one image or exactly two images (Upper first, Lower second).');return;}
+ if(window.__v9SavedSetBeforeImport&&!window.__v9SavedSetBeforeImport(files))return;
  setPhotoLoading(true,files.length===2?'Loading Upper photo (1 of 2)…':'Loading '+files[0].name+'…');
  await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
  try{
@@ -1731,6 +1732,120 @@ document.getElementById('exportAll').onclick=()=>{
  if(importedSides().some(side=>!verified(side)))verifyState.textContent='Partial export: verify the other PL to enable its data and complete pair calculations.';
 };
 syncAlignmentVerification();
+// Version 9.4.10 extension: session-only full saved-pair snapshots and import duplicate protection.
+(()=>{
+ const tabs=$('lowerTab')?.parentElement;
+ if(!tabs)return;
+ const picker=document.createElement('select');
+ picker.id='savedPLSetSelector';
+ picker.setAttribute('aria-label','Select saved PL set');
+ picker.title='Switch among PL sets saved during this browser session';
+ picker.style.cssText='width:auto;min-width:160px;max-width:240px;height:34px;padding:4px;border-radius:6px;border:1px solid #b7c8d9;background:white;font-size:12px';
+ tabs.insertBefore(picker,$('lowerTab').nextSibling);
+ const saved=new Map();
+ let selectedSavedId=null;
+ const textFields=['cid','plpair','W','X','bore','Z','R0','safe','runtime','heats','olt'];
+ const key=()=>($('cid').value.trim()||'CMP')+' / '+($('plpair').value.trim()||'PL');
+ const normalized=s=>String(s||'').trim().toLocaleLowerCase();
+ const copyPlate=pl=>({
+  ...pl,pos:{...pl.pos},manual:{...pl.manual},sourceMode:{...pl.sourceMode},
+  calX:pl.calX&&typeof pl.calX==='object'?{...pl.calX}:pl.calX,
+  calY:pl.calY&&typeof pl.calY==='object'?{...pl.calY}:pl.calY,
+  innerBounds:pl.innerBounds?{...pl.innerBounds}:null,
+  boreContour:Array.isArray(pl.boreContour)?pl.boreContour.map(p=>Array.isArray(p)?[...p]:{...p}):[],
+  edgeContour:Array.isArray(pl.edgeContour)?pl.edgeContour.map(p=>Array.isArray(p)?[...p]:{...p}):[]
+ });
+ const capture=()=>({
+  fields:Object.fromEntries(textFields.filter(id=>$(id)).map(id=>[id,$(id).value])),
+  plates:{upper:copyPlate(plates.upper),lower:copyPlate(plates.lower)},
+  remarks:Object.fromEntries(['upper','lower'].map(side=>[side,{tags:[...remarks[side].tags],note:remarks[side].note}])),
+  cracks:Object.fromEntries(['upper','lower'].map(side=>[side,{counts:[...crackState[side].counts],status:crackState[side].status}])),
+  verification:{...verification},
+  side:active
+ });
+ function refresh(){
+  picker.replaceChildren(new Option('Select saved PL set…',''));
+  for(const id of saved.keys())picker.add(new Option(id,id));
+  picker.value=selectedSavedId&&saved.has(selectedSavedId)?selectedSavedId:'';
+ }
+ function restore(snapshot){
+  for(const [id,value] of Object.entries(snapshot.fields))if($(id))$(id).value=value;
+  for(const side of ['upper','lower']){
+   Object.assign(plates[side],copyPlate(snapshot.plates[side]));
+   remarks[side].tags=[...snapshot.remarks[side].tags];remarks[side].note=snapshot.remarks[side].note;
+   crackState[side].counts=[...snapshot.cracks[side].counts];crackState[side].status=snapshot.cracks[side].status;
+   verification[side]=snapshot.verification[side];
+  }
+  $('crackRows').dataset.active='';
+  select(snapshot.side||'upper');
+  updateResults();syncAlignmentVerification();updateStats();
+ }
+ picker.addEventListener('change',()=>{
+  const destination=picker.value;if(!saved.has(destination)){refresh();return}
+  // Preserve edits to a currently displayed saved set when switching.
+  if(selectedSavedId&&saved.has(selectedSavedId))saved.set(selectedSavedId,capture());
+  selectedSavedId=destination;
+  restore(saved.get(destination));
+  refresh();$('savedStatus').textContent='Loaded '+destination+' (current session).';
+ });
+ const priorSave=$('savePair').onclick;
+ $('savePair').onclick=function(event){
+  priorSave?.call(this,event);
+  // Save callbacks only mark successful validation with this message.
+  if(!$('savedStatus').textContent.startsWith('Saved '))return;
+  const id=key();
+  saved.set(id,capture());selectedSavedId=id;refresh();
+ };
+ const priorClear=$('clearRecords').onclick;
+ $('clearRecords').onclick=function(event){
+  priorClear?.call(this,event);
+  if(records.length===0){saved.clear();selectedSavedId=null;refresh()}
+ };
+ function nextPLId(){
+  const current=$('plpair').value.trim();
+  const m=/^(.*?)(\d+)$/.exec(current);
+  if(!m)return current+'-001';
+  const prefix=m[1],width=m[2].length;
+  const candidates=[current,...saved.keys()].map(s=>s.includes(' / ')?s.split(' / ').slice(1).join(' / '):s);
+  const nums=candidates.filter(s=>s.startsWith(prefix)&&/^\d+$/.test(s.slice(prefix.length)))
+   .map(s=>Number(s.slice(prefix.length)));
+  return prefix+String(Math.max(0,...nums)+1).padStart(width,'0');
+ }
+ window.__v9SavedSetBeforeImport=files=>{
+  const incoming=files.map(f=>normalized(f.name));
+  const existing=new Set();
+  for(const item of saved.values())for(const side of ['upper','lower']){
+   const name=normalized(item.plates[side].filename);if(name)existing.add(name);
+  }
+  const duplicate=incoming.filter((name,i)=>existing.has(name)||incoming.indexOf(name)!==i);
+  if(duplicate.length){
+   alert('Import cancelled: duplicate photo filename in a saved PL set or selected batch:\n'+
+    [...new Set(duplicate)].join('\n')+'\nExisting photos were not changed.');
+   return false;
+  }
+  // Imported photos after a saved pair belong to a new unsaved PL pair.
+  if(selectedSavedId&&saved.has(selectedSavedId)&&key()===selectedSavedId){
+   const next=nextPLId(),side=active;
+   for(const plateSide of ['upper','lower']){
+    Object.assign(plates[plateSide],plate());
+    remarks[plateSide].tags=[];remarks[plateSide].note='';
+    crackState[plateSide].counts=Array(crackTypes.length).fill(null);
+    crackState[plateSide].status='Not assessed';
+    verification[plateSide]=false;
+    alignBackup[plateSide]=null;
+   }
+   for(const id of ['runtime','heats','olt','remarkNote'])if($(id))$(id).value='';
+   $('plpair').value=next;
+   selectedSavedId=null;
+   $('crackRows').dataset.active='';
+   select(files.length===2?'upper':side);
+   updateResults();syncAlignmentVerification();refresh();
+   $('savedStatus').textContent='New PL pair '+next+' prepared. Prior saved pairs remain available.';
+  }
+  return true;
+ };
+ refresh();
+})();
 })();
 </script><style id="v8-manual-style">
 #userManualDialog{border:0;border-radius:13px;width:min(1000px,96vw);max-height:90vh;padding:0;color:#223249;box-shadow:0 18px 55px #0006}
