@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>RefraInspector Ver10 Beta</title><style>
+<html lang="en"><head><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2214%22%20fill%3D%22%23165b9c%22%2F%3E%3Cpath%20d%3D%22M12%2018%20Q12%2012%2018%2012%20H46%20Q52%2012%2052%2018%20V46%20Q52%2052%2046%2052%20H18%20Q12%2052%2012%2046%20Z%22%20fill%3D%22none%22%20stroke%3D%22%23ffffff%22%20stroke-width%3D%225%22%2F%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2212%22%20fill%3D%22%23ffffff%22%2F%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%226%22%20fill%3D%22%23165b9c%22%2F%3E%3Cpath%20d%3D%22M32%204v10M32%2050v10M4%2032h10M50%2032h10%22%20stroke%3D%22%238ed3ff%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22%2F%3E%3C%2Fsvg%3E"/><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>RefraInspector Ver10.1 Beta</title><style>
 :root{font:14px system-ui,-apple-system,Segoe UI,sans-serif;color:#202734;background:#f3f5f8}*{box-sizing:border-box}body{margin:0;padding:16px}button,input,select{font:inherit}button{background:white;color:#243447;border:1px solid #cbd4df;border-radius:7px;padding:8px 10px;cursor:pointer}button:hover{background:#edf3fa}button.primary{background:#195b99;color:white;border-color:#195b99}input{width:100%;padding:6px;border:1px solid #c9d2df;border-radius:6px;min-width:0}input[type=file]{display:none}header{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:12px}h1{font-size:21px;margin:0}h2{font-size:16px;margin:0 0 12px}h3{font-size:14px;margin:15px 0 8px}.small{color:#657487;font-size:12px;line-height:1.5}.three{display:grid;grid-template-columns:minmax(210px,260px) minmax(390px,1fr) minmax(410px,520px);gap:12px;align-items:start;max-width:2000px;margin:auto}.panel{background:white;border:1px solid #dfe5ed;border-radius:11px;padding:13px;min-width:0}.field{display:grid;grid-template-columns:1fr 94px;align-items:center;gap:8px;margin:8px 0}.field label{font-size:12px;color:#4d5c70}.stat{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid #eef1f6;align-items:center}.stat b{font-variant-numeric:tabular-nums;text-align:right}.stat .small{max-width:66%}.toolbar{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin-bottom:10px}.tab[aria-selected=true]{background:#175b9a;color:white;border-color:#175b9a}.photoheader{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin:8px 0}.photoarea{background:#222830;border-radius:8px;padding:7px;min-height:390px;display:flex;align-items:center;justify-content:center}.stage{position:relative;line-height:0;touch-action:none;user-select:none;max-width:100%;width:100%;display:none}.stage img{display:block;width:100%;height:auto}.stage .line{position:absolute;z-index:4;touch-action:none;cursor:grab}.stage .line.h{height:18px;left:0;right:0;transform:translateY(-9px)}.stage .line.v{width:18px;top:0;bottom:0;transform:translateX(-9px)}.line.h:before{content:'';position:absolute;left:0;right:0;top:8px;border-top:2px solid var(--lc);filter:drop-shadow(0 0 1px #000)}.line.v:before{content:'';position:absolute;top:0;bottom:0;left:8px;border-left:2px solid var(--lc);filter:drop-shadow(0 0 1px #000)}.stage svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3;overflow:visible}.stage.contour{cursor:crosshair}.stage.contour .line{pointer-events:none}.areaInfo{border:1px solid #dbe3ec;border-radius:8px;padding:9px;margin:8px 0;background:#f8fafc}.areaInfo button{font-size:12px;padding:6px 8px}.areaInfo .inline{margin-top:7px}.placeholder{color:#c4cbd6;text-align:center;padding:60px 10px}.ind{background:#f2f6fc;border-radius:7px;padding:7px 9px;font-size:12px;line-height:1.5;margin:8px 0}.dimtable{width:100%;border-collapse:collapse;font-size:13px}.dimtable th{text-align:left;background:#f0f4f8;font-size:12px;padding:8px 5px}.dimtable td{border-bottom:1px solid #e9edf2;padding:5px}.dimtable input{width:90px}.crackrow{display:flex;justify-content:space-between;align-items:center;gap:8px;border-bottom:1px solid #ecf0f5;padding:5px 0}.crackrow label{font-size:12px}.crackrow input{width:70px}.crackrow small{color:#657487}.dimtable td:last-child{text-align:right;font-variant-numeric:tabular-nums;font-weight:650}.results{display:grid;grid-template-columns:minmax(180px,1.05fr) minmax(170px,.95fr);gap:12px}.results>div{min-width:0}textarea{display:block;width:100%;min-height:175px;font:12px/1.5 ui-monospace,monospace;border:1px solid #cbd3df;border-radius:7px;padding:8px;resize:vertical}.pairdata{border:1px solid #d5deea;border-radius:8px;padding:9px;margin:12px 0}.warn{color:#a15b17}.good{color:#206b39}.inline{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.inline input[type=range]{width:150px}.mode{background:#e8f0fa;padding:6px;border-radius:6px;font-size:12px}.separator{border-top:1px solid #e6eaf0;margin:12px 0}.calBtns{display:flex;gap:6px;flex-wrap:wrap}.calstatus{font-size:12px;margin-top:7px}.hint{font-size:12px;background:#fffae9;color:#725716;padding:8px;border-radius:6px;margin:8px 0}.minibtn{padding:5px 7px;font-size:12px}@media(max-width:1300px){.three{grid-template-columns:230px minmax(330px,1fr)}.right{grid-column:1/-1}.results{grid-template-columns:1fr 1fr}}@media(max-width:720px){body{padding:8px}.three{display:block}.panel{margin-bottom:10px}.results{grid-template-columns:1fr 1fr}}@media(max-width:450px){.results{grid-template-columns:1fr}.dimtable input{width:73px}}
 .formulaInfo{display:inline-grid;place-items:center;vertical-align:middle;margin-left:4px;padding:0;border:0;background:transparent;color:#23639d;font-size:15px;font-weight:700;line-height:1;min-width:22px;min-height:22px;border-radius:50%;cursor:pointer}.formulaInfo:hover,.formulaInfo:focus-visible{background:#e7f1fc;outline:2px solid #a8c9e7;outline-offset:1px}.formulaPopover{position:fixed;z-index:1000;max-width:min(440px,calc(100vw - 24px));padding:12px 34px 12px 13px;border-radius:9px;border:1px solid #a7b8c9;background:#fff;color:#202734;box-shadow:0 6px 22px #0002;font-size:13px;line-height:1.55}.formulaPopover{max-height:calc(100vh - 24px);overflow:auto}.formulaPopover[hidden]{display:none}.formulaPopover strong{display:block;margin-bottom:5px}.formulaPopover .closeInfo{position:absolute;right:5px;top:5px;border:0;padding:3px 7px}.stat .small{max-width:none}details.bulkPaste{border:1px solid #cbd7e4;border-radius:9px;padding:10px;margin:0 0 14px;background:#f8fbff}details.bulkPaste summary{cursor:pointer;font-weight:650;color:#195b99}details.bulkPaste textarea{margin:9px 0;min-height:110px}#H0{background:#edf2f8;color:#42556a}</style><style id="v66styles">.formulaDep{background:#fff3b0!important;outline:2px solid #e19a16!important;outline-offset:2px;transition:background .12s}.formulaDepTitle{background:#fff3b0;border-radius:4px}.autoRulerValue{text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:2px;text-decoration-color:#1d72b8}.originalBore{padding:7px;background:#f0f7fe;border:1px solid #b6cde6;border-radius:8px}.measureSourceNote{color:#566475;font-size:11px;margin:5px 0} .focusPhotoArea{outline:3px solid #eab308;outline-offset:-3px} .areaFocusLegend{font-size:12px;color:#755600;font-weight:700}</style><style id="v73styles">
 .three{grid-template-columns:minmax(205px,245px) minmax(360px,1fr) minmax(610px,740px);max-width:2200px}
@@ -424,7 +424,11 @@
 @keyframes saveSetGentlePulse{0%,100%{background:#195b99;box-shadow:0 0 0 0 rgba(25,91,153,.13)}50%{background:#347abb;box-shadow:0 0 0 5px rgba(25,91,153,.17)}}
 #savePair.saveSetNeedsAttention{animation:saveSetGentlePulse 2.8s ease-in-out infinite;border-color:#195b99;color:#fff}
 @media(prefers-reduced-motion:reduce){#savePair.saveSetNeedsAttention{animation:none;outline:2px solid #e0a83a;outline-offset:2px}}
-</style></head><body><header><div><h1>RN Plate Pair Inspector <span class="small">Ver10 Beta</span></h1><div class="small">Upper / Lower pair · ruler-referenced measurements · campaign performance</div></div><div class="inline"><button id="showUserManual" type="button" aria-haspopup="dialog">? Help &amp; Manual</button><button class="primary" id="exportAll">Export pair JSON + images</button><button id="copyAll">Copy pair report for Excel</button></div></header><main class="three">
+</style><style id="ver10ImportSwapButtons">
+.photoControlGrid .importActionButtons{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.photoControlGrid .importActionButtons #photoExchange,.photoControlGrid .importActionButtons #photoExchange.photoReady{width:auto!important;min-width:0!important;max-width:100%!important;white-space:normal!important;padding:5px 8px!important;box-shadow:none!important}
+.photoControlGrid .importActionButtons #swapUpperLowerPL{padding:5px 8px!important;white-space:normal!important}
+</style></head><body><header><div><h1>RN Plate Pair Inspector <span class="small">Ver10.1 Beta</span></h1><div class="small">Upper / Lower pair · ruler-referenced measurements · campaign performance</div></div><div class="inline"><button id="showUserManual" type="button" aria-haspopup="dialog">? Help &amp; Manual</button><button class="primary" id="exportAll">Export pair JSON + images</button><button id="copyAll">Copy pair report for Excel</button></div></header><main class="three">
 <section class="panel"><details class="leftCollapsible" open><summary>PL Geometry</summary><div class="leftCollapseBody"><details class="bulkPaste" open><summary>Paste campaign geometry (Excel / TSV)</summary><p class="small">Paste six columns (W0, X0, Y0, Z0, R0, H0), or name/value rows. H0 = 2×Y0 and expected R0 = Z0 − H0 are checked for consistency.</p><textarea aria-label="Campaign geometry paste" id="campaignPaste" placeholder="W0	X0	Y0	Z0	R0	H0
 200	5	45	270	180	90" style="min-height:115px"></textarea><div id="campaignPasteStatus" role="status" hidden></div></details><div class="field"><label for="cid">Campaign ID</label><input id="cid" value="CMP-001"/></div><div class="field"><label for="bore">Bore radius before use · Y (mm)</label><input id="bore" min="0" placeholder="Enter Y" step="0.1" type="number"/></div><div class="field"><label for="W">W: Center-to-edge incl. band (mm)</label><input id="W" min="0" placeholder="W" step="0.1" type="number"/></div><div class="field"><label for="X">X: Band thickness (mm)</label><input id="X" min="0" step="0.1" type="number" value="0"/></div><div class="field"><label for="Z">Z: Closed center distance (mm)</label><input id="Z" min="0" placeholder="Z" step="0.1" type="number"/></div><div class="field"><label for="R0">R0 / SD: Initial stroke (mm)</label><input id="R0" min="0" placeholder="R0" step="0.1" type="number"/></div><div class="field"><label for="H0">H0 / BDia: Bore diameter before use (mm)</label><input aria-label="Calculated original bore diameter" id="H0" placeholder="2 × Y0" readonly="" type="number"/></div><div class="field"><label for="safe">Remaining stroke safe limit (mm) *</label><input id="safe" required aria-required="true" min="0" step="0.1" type="number" value="10"/></div><p class="small">Y is entered as the unused bore radius. F is required for stroke calculations on each PL.</p></div></details><details class="leftCollapsible" open><summary id="plPerformanceTitle">PL performance at CMP-001</summary><div class="leftCollapseBody"><div class="stat"><span class="small">Recorded sets</span><b id="pairsCount">0</b></div>
 <div class="stat"><span class="small">Sets below safe limit <button aria-label="Formula: Sets below safe limit" class="formulaInfo" data-formula="belowCount" title="Count of saved sets where remaining stroke &lt; safe limit." type="button">ⓘ</button></span><b id="belowCount">—</b></div><div class="stat"><span class="small">Average erosion · mm/min <button aria-label="Formula: Average erosion per minute" class="formulaInfo" data-formula="avgTime" title="Mean of saved pair ER values: (R0 − R) / total runtime (min)." type="button">ⓘ</button></span><b id="avgTime">—</b></div><div class="stat"><span class="small">Average erosion · mm/heat <button aria-label="Formula: Average erosion per heat" class="formulaInfo" data-formula="avgHeat" title="Mean of saved pair EPH values: (R0 − R) / heats used." type="button">ⓘ</button></span><b id="avgHeat">—</b></div><div class="stat"><span class="small">Average remaining stroke (mm) <button aria-label="Formula: Average remaining stroke" class="formulaInfo" data-formula="avgStroke" title="Mean of valid saved pair remaining stroke values." type="button">ⓘ</button></span><b id="avgStroke">—</b></div><div class="inline" style="margin-top:11px"><button type="button" id="exportCampaign">Copy campaign data</button><button id="clearRecords">Clear saved pairs</button></div><div class="small" id="savedStatus" style="margin-top:8px">Session-only records; copy campaign data to Excel to preserve a readable summary.</div><div class="separator"></div><div class="small">Performance aggregates use saved complete PL pairs. Runtime and heats are pair-level quantities, not duplicated for Upper and Lower.</div></div></details></section>
@@ -1224,14 +1228,15 @@ function exportData(all){const base=($('cid').value||'CMP')+'_'+($('plpair').val
 async function copyText(txt){try{await navigator.clipboard.writeText(txt)}catch(e){const el=document.createElement('textarea');el.value=txt;el.setAttribute('readonly','');el.style.position='fixed';el.style.opacity='0';document.body.appendChild(el);el.focus();el.select();try{document.execCommand('copy')}finally{el.remove()}}}
 let photoImportBusy=false;
 function refreshPhotoImportUI(){
- const hasAnyPhoto=!!(plates.upper.image||plates.lower.image);
  const exchange=document.getElementById('photoExchange');
  if(exchange){
   exchange.hidden=photoImportBusy;
   const ready=!!plates[active].image;
   exchange.classList.toggle('photoReady',ready);
-  if(ready){exchange.innerHTML='<svg aria-hidden="true" fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="20"><path d="M7 7h14l-4-4m4 4-4 4M17 17H3l4 4m-4-4-4-4"></path></svg>';exchange.setAttribute('aria-label','Replace selected PL photo');exchange.title='Replace photo';}
-  else{exchange.textContent='#0 Import';exchange.setAttribute('aria-label','#0 Import PL photo');exchange.title='Import photo';}
+  // Keep the visible caption even when the selected plate already has an image.
+  exchange.textContent='Import / Replace Photo';
+  exchange.setAttribute('aria-label','Import or replace selected PL photo');
+  exchange.title=ready?'Replace the selected PL photo or import an Upper/Lower pair':'Import a PL photo';
  }
  const prompt=document.getElementById('photoImportPrompt');
  if(prompt)prompt.setAttribute('aria-label','Import '+active+' PL photo');
@@ -1243,12 +1248,78 @@ function setPhotoLoading(loading,message){
  refreshPhotoImportUI();
 }
 const photoInput=document.getElementById('photoFile');
-const openPhotoPicker=()=>{if(photoImportBusy)return;photoInput.click()};
+const openPhotoPicker=()=>{if(photoImportBusy)return;photoInput.disabled=false;photoInput.click()};
 document.getElementById('photoExchange')?.addEventListener('click',openPhotoPicker);
 const importPrompt=document.getElementById('photoImportPrompt');
 importPrompt?.addEventListener('click',openPhotoPicker);
 if(importPrompt)importPrompt.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();document.getElementById('photoFile').click()}});
 refreshPhotoImportUI();
+// Advisory Lower-PL long-end circular closure-mark check (not an identification guarantee).
+// A mark is expected on Lower PL; inspector must confirm any reassignment.
+const plSideReview=document.createElement('div');
+plSideReview.id='plSideReview';plSideReview.hidden=true;
+plSideReview.setAttribute('role','status');plSideReview.setAttribute('aria-live','polite');
+plSideReview.style.cssText='display:none;margin:5px 0 7px;padding:8px 10px;border:1px solid #ce9d45;border-left:4px solid #cf8b19;border-radius:7px;background:#fff9e9;font-size:12px;line-height:1.45';
+const photoGrid=document.querySelector('.photoControlGrid');
+if(photoGrid)photoGrid.insertAdjacentElement('afterend',plSideReview);
+else $('autoAlignAll')?.closest('.workspaceStepGroup')?.insertAdjacentElement('afterend',plSideReview);
+function hidePLSideReview(){plSideReview.hidden=true;plSideReview.style.display='none';plSideReview.replaceChildren()}
+function closureMarkEvidence(pl){
+ const im=pl?.image;if(!im)return null;
+ // Use a normalized low-resolution copy. The expected mark is below the bore,
+ // in the long-end half with the current LONG END down photographic convention.
+ const cv=document.createElement('canvas');cv.width=96;cv.height=128;
+ const ctx=cv.getContext('2d',{willReadFrequently:true});ctx.drawImage(im,0,0,96,128);
+ const rgba=ctx.getImageData(0,0,96,128).data,gray=new Float32Array(96*128);
+ for(let i=0;i<gray.length;i++){const k=i*4;gray[i]=.2126*rgba[k]+.7152*rgba[k+1]+.0722*rgba[k+2]}
+ const sample=(cx,cy,r0,r1)=>{let n=0,sum=0,sumsq=0;
+  for(let y=Math.max(0,Math.floor(cy-r1));y<Math.min(128,Math.ceil(cy+r1));y++)
+   for(let x=Math.max(0,Math.floor(cx-r1));x<Math.min(96,Math.ceil(cx+r1));x++){
+    const d=Math.hypot(x-cx,y-cy);if(d<r0||d>r1)continue;
+    const v=gray[y*96+x];n++;sum+=v;sumsq+=v*v;
+   }
+  const mean=sum/Math.max(1,n);return {mean,sd:Math.sqrt(Math.max(0,sumsq/Math.max(1,n)-mean*mean))};
+ };
+ let best={score:-Infinity,x:0,y:0};
+ for(let y=83;y<=110;y+=4)for(let x=31;x<=65;x+=4){
+  const inside=sample(x,y,0,10),outside=sample(x,y,15,23);
+  // Dark locally rough patch against brighter surrounding ceramic.
+  const contrast=outside.mean-inside.mean;
+  const score=contrast+.18*Math.max(0,inside.sd-outside.sd);
+  if(score>best.score)best={score,x,y,contrast};
+ }
+ return {...best,likely:best.contrast>=14&&best.score>=17};
+}
+function checkUpperLowerClosureMark(){
+ hidePLSideReview();
+ if(!plates.upper.image||!plates.lower.image)return;
+ const upper=closureMarkEvidence(plates.upper),lower=closureMarkEvidence(plates.lower);
+ // This evidence is a hint only: superficial discoloration, glare and slag can mislead.
+ if(!upper?.likely || (lower?.likely && upper.score<lower.score+9))return;
+ const msg=document.createElement('div');
+ msg.textContent='⚠ Possible Upper / Lower PL mix-up: a roughly circular long-end closure mark, normally associated with the LOWER PL, appears on the photo assigned to UPPER PL. Please inspect both photos and confirm their assignments.';
+ const actions=document.createElement('div');actions.style.cssText='display:flex;gap:7px;flex-wrap:wrap;margin-top:7px';
+ const swap=document.createElement('button');swap.type='button';swap.className='minibtn';swap.textContent='Swap Upper / Lower photos';
+ const keep=document.createElement('button');keep.type='button';keep.className='minibtn';keep.textContent='Keep current assignments';
+ const swapPLAssignments=()=>{
+  if(!plates.upper.image||!plates.lower.image){alert('Import both Upper and Lower PL photos before swapping assignments.');return}
+  [plates.upper,plates.lower]=[plates.lower,plates.upper];
+  [remarks.upper,remarks.lower]=[remarks.lower,remarks.upper];
+  [crackState.upper,crackState.lower]=[crackState.lower,crackState.upper];
+  // Existing alignment must be checked again after changing plate identities.
+  if(typeof alignBackup!=='undefined'){alignBackup.upper=null;alignBackup.lower=null}
+  hidePLSideReview();select('upper');
+  $('savedStatus').textContent='Upper / Lower photo assignments swapped. Recheck alignment and save the corrected set.';
+  document.dispatchEvent(new CustomEvent('refraInspectorPlateAssignmentsSwapped'));
+  // A manual swap must re-evaluate the NEW Upper/Lower assignments every time.
+  checkUpperLowerClosureMark();
+ };
+ window.refraInspectorSwapPL=swapPLAssignments;
+ swap.onclick=swapPLAssignments;
+ keep.onclick=()=>hidePLSideReview();
+ actions.append(swap,keep);plSideReview.append(msg,actions);
+ plSideReview.hidden=false;plSideReview.style.display='block';
+}
 $('photoFile').addEventListener('change',async e=>{
  const files=Array.from(e.target.files);e.target.value='';
  if(!files.length||photoImportBusy)return;
@@ -1264,6 +1335,7 @@ $('photoFile').addEventListener('change',async e=>{
    await processFile(files[1],'lower');
    select('upper');
   }
+   checkUpperLowerClosureMark();
  }catch(err){console.error('Unexpected photo import error:',err);$('calStatus').textContent='Import workflow error: '+(err?.message||String(err));}
  finally{setPhotoLoading(false);refreshPhotoImportUI();}
 });$('upperTab').onclick=()=>select('upper');$('lowerTab').onclick=()=>select('lower');
@@ -1411,7 +1483,7 @@ function updateManualRulerDisplay(){
  manualBtn.textContent=state.active?'Finish Manual Calibration':'Start Manual Calibration';
  manualBtn.classList.toggle('primary',state.active);
  // Prevent conflicting workspace actions while the four calibration guides are in use.
- ['upperTab','lowerTab','photoExchange','autoLevel','manualLevel','autoCal','autoAlignAll','undoAutoAlign','resetLines','rescanBore','photoImportPrompt'].forEach(id=>{
+ ['autoLevel','manualLevel','autoCal','autoAlignAll','undoAutoAlign','resetLines','rescanBore'].forEach(id=>{
   const btn=$(id);if(!btn)return;
   if(state.active){if(!btn.hasAttribute('data-cal-prev-disabled'))btn.setAttribute('data-cal-prev-disabled',btn.disabled?'1':'0');btn.disabled=true}
   else if(btn.hasAttribute('data-cal-prev-disabled')){btn.disabled=btn.getAttribute('data-cal-prev-disabled')==='1';btn.removeAttribute('data-cal-prev-disabled')}
@@ -1667,6 +1739,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape' && !$('workspaceHelp
 buildMeasurements();syncH0();select('upper');
 // v9.4.6: inspector verification is per PL and becomes invalid if measurement geometry is edited.
 const verification={upper:false,lower:false};
+document.addEventListener('refraInspectorPlateAssignmentsSwapped',()=>{verification.upper=false;verification.lower=false;syncAlignmentVerification()});
 const verifyBtn=document.getElementById('verifyAlignment');
 const verifyState=document.getElementById('alignmentVerifyState');
 const exportButtons=['copyAll','exportAll'];
@@ -2047,7 +2120,19 @@ syncAlignmentVerification();
  const grid=document.createElement('div');grid.className='photoControlGrid';
  const importGroup=document.createElement('div');importGroup.className='workspaceStepGroup importStep';
  const t=document.createElement('div');t.className='workspaceStepTitle';t.textContent='#0 Import / Replace';
- importGroup.append(t,exchange);
+ exchange.textContent='Import / Replace Photo';
+ exchange.setAttribute('aria-label','Import / Replace Photo');
+ exchange.title='Import or replace the selected Upper/Lower PL photo';
+ const swapButton=document.createElement('button');
+ swapButton.type='button';swapButton.id='swapUpperLowerPL';swapButton.className='minibtn';
+ swapButton.textContent='Swap U/L PL';
+ swapButton.title='Swap Upper and Lower photos, measurements and remarks';
+ swapButton.addEventListener('click',()=>{
+  if(typeof window.refraInspectorSwapPL==='function')window.refraInspectorSwapPL();
+ });
+ const controls=document.createElement('div');controls.className='importActionButtons';
+ controls.append(exchange,swapButton);
+ importGroup.append(t,controls);
  photoTitle.closest('.photoheader').insertAdjacentElement('afterend',grid);
  const save=document.querySelector('.compactSaveStep');
  if(save){
