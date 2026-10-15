@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2214%22%20fill%3D%22%23165b9c%22%2F%3E%3Cpath%20d%3D%22M12%2018%20Q12%2012%2018%2012%20H46%20Q52%2012%2052%2018%20V46%20Q52%2052%2046%2052%20H18%20Q12%2052%2012%2046%20Z%22%20fill%3D%22none%22%20stroke%3D%22%23ffffff%22%20stroke-width%3D%225%22%2F%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2212%22%20fill%3D%22%23ffffff%22%2F%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%226%22%20fill%3D%22%23165b9c%22%2F%3E%3Cpath%20d%3D%22M32%204v10M32%2050v10M4%2032h10M50%2032h10%22%20stroke%3D%22%238ed3ff%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22%2F%3E%3C%2Fsvg%3E"/><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>RefraInspector v10.1</title><style>
+<html lang="en"><head><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2214%22%20fill%3D%22%23165b9c%22%2F%3E%3Cpath%20d%3D%22M12%2018%20Q12%2012%2018%2012%20H46%20Q52%2012%2052%2018%20V46%20Q52%2052%2046%2052%20H18%20Q12%2052%2012%2046%20Z%22%20fill%3D%22none%22%20stroke%3D%22%23ffffff%22%20stroke-width%3D%225%22%2F%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2212%22%20fill%3D%22%23ffffff%22%2F%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%226%22%20fill%3D%22%23165b9c%22%2F%3E%3Cpath%20d%3D%22M32%204v10M32%2050v10M4%2032h10M50%2032h10%22%20stroke%3D%22%238ed3ff%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22%2F%3E%3C%2Fsvg%3E"/><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>RefraInspector v10.2.4</title><style>
 :root{font:14px system-ui,-apple-system,Segoe UI,sans-serif;color:#202734;background:#f3f5f8}*{box-sizing:border-box}body{margin:0;padding:16px}button,input,select{font:inherit}button{background:white;color:#243447;border:1px solid #cbd4df;border-radius:7px;padding:8px 10px;cursor:pointer}button:hover{background:#edf3fa}button.primary{background:#195b99;color:white;border-color:#195b99}input{width:100%;padding:6px;border:1px solid #c9d2df;border-radius:6px;min-width:0}input[type=file]{display:none}header{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:12px}h1{font-size:21px;margin:0}h2{font-size:16px;margin:0 0 12px}h3{font-size:14px;margin:15px 0 8px}.small{color:#657487;font-size:12px;line-height:1.5}.three{display:grid;grid-template-columns:minmax(210px,260px) minmax(390px,1fr) minmax(410px,520px);gap:12px;align-items:start;max-width:2000px;margin:auto}.panel{background:white;border:1px solid #dfe5ed;border-radius:11px;padding:13px;min-width:0}.field{display:grid;grid-template-columns:1fr 94px;align-items:center;gap:8px;margin:8px 0}.field label{font-size:12px;color:#4d5c70}.stat{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid #eef1f6;align-items:center}.stat b{font-variant-numeric:tabular-nums;text-align:right}.stat .small{max-width:66%}.toolbar{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin-bottom:10px}.tab[aria-selected=true]{background:#175b9a;color:white;border-color:#175b9a}.photoheader{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin:8px 0}.photoarea{background:#222830;border-radius:8px;padding:7px;min-height:390px;display:flex;align-items:center;justify-content:center}.stage{position:relative;line-height:0;touch-action:none;user-select:none;max-width:100%;width:100%;display:none}.stage img{display:block;width:100%;height:auto}.stage .line{position:absolute;z-index:4;touch-action:none;cursor:grab}.stage .line.h{height:18px;left:0;right:0;transform:translateY(-9px)}.stage .line.v{width:18px;top:0;bottom:0;transform:translateX(-9px)}.line.h:before{content:'';position:absolute;left:0;right:0;top:8px;border-top:2px solid var(--lc);filter:drop-shadow(0 0 1px #000)}.line.v:before{content:'';position:absolute;top:0;bottom:0;left:8px;border-left:2px solid var(--lc);filter:drop-shadow(0 0 1px #000)}.stage svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3;overflow:visible}.stage.contour{cursor:crosshair}.stage.contour .line{pointer-events:none}.areaInfo{border:1px solid #dbe3ec;border-radius:8px;padding:9px;margin:8px 0;background:#f8fafc}.areaInfo button{font-size:12px;padding:6px 8px}.areaInfo .inline{margin-top:7px}.placeholder{color:#c4cbd6;text-align:center;padding:60px 10px}.ind{background:#f2f6fc;border-radius:7px;padding:7px 9px;font-size:12px;line-height:1.5;margin:8px 0}.dimtable{width:100%;border-collapse:collapse;font-size:13px}.dimtable th{text-align:left;background:#f0f4f8;font-size:12px;padding:8px 5px}.dimtable td{border-bottom:1px solid #e9edf2;padding:5px}.dimtable input{width:90px}.crackrow{display:flex;justify-content:space-between;align-items:center;gap:8px;border-bottom:1px solid #ecf0f5;padding:5px 0}.crackrow label{font-size:12px}.crackrow input{width:70px}.crackrow small{color:#657487}.dimtable td:last-child{text-align:right;font-variant-numeric:tabular-nums;font-weight:650}.results{display:grid;grid-template-columns:minmax(180px,1.05fr) minmax(170px,.95fr);gap:12px}.results>div{min-width:0}textarea{display:block;width:100%;min-height:175px;font:12px/1.5 ui-monospace,monospace;border:1px solid #cbd3df;border-radius:7px;padding:8px;resize:vertical}.pairdata{border:1px solid #d5deea;border-radius:8px;padding:9px;margin:12px 0}.warn{color:#a15b17}.good{color:#206b39}.inline{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.inline input[type=range]{width:150px}.mode{background:#e8f0fa;padding:6px;border-radius:6px;font-size:12px}.separator{border-top:1px solid #e6eaf0;margin:12px 0}.calBtns{display:flex;gap:6px;flex-wrap:wrap}.calstatus{font-size:12px;margin-top:7px}.hint{font-size:12px;background:#fffae9;color:#725716;padding:8px;border-radius:6px;margin:8px 0}.minibtn{padding:5px 7px;font-size:12px}@media(max-width:1300px){.three{grid-template-columns:230px minmax(330px,1fr)}.right{grid-column:1/-1}.results{grid-template-columns:1fr 1fr}}@media(max-width:720px){body{padding:8px}.three{display:block}.panel{margin-bottom:10px}.results{grid-template-columns:1fr 1fr}}@media(max-width:450px){.results{grid-template-columns:1fr}.dimtable input{width:73px}}
 .formulaInfo{display:inline-grid;place-items:center;vertical-align:middle;margin-left:4px;padding:0;border:0;background:transparent;color:#23639d;font-size:15px;font-weight:700;line-height:1;min-width:22px;min-height:22px;border-radius:50%;cursor:pointer}.formulaInfo:hover,.formulaInfo:focus-visible{background:#e7f1fc;outline:2px solid #a8c9e7;outline-offset:1px}.formulaPopover{position:fixed;z-index:1000;max-width:min(440px,calc(100vw - 24px));padding:12px 34px 12px 13px;border-radius:9px;border:1px solid #a7b8c9;background:#fff;color:#202734;box-shadow:0 6px 22px #0002;font-size:13px;line-height:1.55}.formulaPopover{max-height:calc(100vh - 24px);overflow:auto}.formulaPopover[hidden]{display:none}.formulaPopover strong{display:block;margin-bottom:5px}.formulaPopover .closeInfo{position:absolute;right:5px;top:5px;border:0;padding:3px 7px}.stat .small{max-width:none}details.bulkPaste{border:1px solid #cbd7e4;border-radius:9px;padding:10px;margin:0 0 14px;background:#f8fbff}details.bulkPaste summary{cursor:pointer;font-weight:650;color:#195b99}details.bulkPaste textarea{margin:9px 0;min-height:110px}#H0{background:#edf2f8;color:#42556a}</style><style id="v66styles">.formulaDep{background:#fff3b0!important;outline:2px solid #e19a16!important;outline-offset:2px;transition:background .12s}.formulaDepTitle{background:#fff3b0;border-radius:4px}.autoRulerValue{text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:2px;text-decoration-color:#1d72b8}.originalBore{padding:7px;background:#f0f7fe;border:1px solid #b6cde6;border-radius:8px}.measureSourceNote{color:#566475;font-size:11px;margin:5px 0} .focusPhotoArea{outline:3px solid #eab308;outline-offset:-3px} .areaFocusLegend{font-size:12px;color:#755600;font-weight:700}</style><style id="v73styles">
 .three{grid-template-columns:minmax(205px,245px) minmax(360px,1fr) minmax(610px,740px);max-width:2200px}
@@ -428,14 +428,52 @@
 .photoControlGrid .importActionButtons{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
 .photoControlGrid .importActionButtons #photoExchange,.photoControlGrid .importActionButtons #photoExchange.photoReady{width:auto!important;min-width:0!important;max-width:100%!important;white-space:normal!important;padding:5px 8px!important;box-shadow:none!important}
 .photoControlGrid .importActionButtons #swapUpperLowerPL{padding:5px 8px!important;white-space:normal!important}
-</style></head><body><header><div><h1>RN Plate Pair Inspector <span class="small">v10.1</span></h1><div class="small">Upper / Lower pair · ruler-referenced measurements · campaign performance</div></div><div class="inline"><button id="showUserManual" type="button" aria-haspopup="dialog">? Help &amp; Manual</button><button class="primary" id="exportAll">Export pair JSON + images</button><button id="copyAll">Copy pair report for Excel</button></div></header><main class="three">
+</style><style id="v1011MobilePhotoHeaderFix">
+/* iPhone: title, controls, and filename each get a dedicated row. */
+@media(max-width:720px){
+ .photoheader:has(#photoTitle){
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr)!important;
+  gap:7px!important;
+  align-items:stretch!important;
+  margin:6px 0 9px!important;
+ }
+ .photoheader:has(#photoTitle)>h2{
+  grid-column:1!important;grid-row:1!important;
+  width:100%!important;min-width:0!important;
+  line-height:1.3!important;overflow-wrap:normal!important;
+ }
+ .photoheader:has(#photoTitle)>.inline{
+  grid-column:1!important;grid-row:2!important;
+  width:100%!important;min-width:0!important;
+  display:flex!important;flex-wrap:wrap!important;
+  justify-content:flex-start!important;align-items:center!important;
+  gap:6px!important;
+ }
+ .photoheader:has(#photoTitle)>.inline>button{
+  flex:0 0 auto!important;min-width:0!important;
+  white-space:nowrap!important;
+ }
+ .photoheader:has(#photoTitle) #savedPairSelector{
+  flex:1 1 132px!important;width:auto!important;min-width:0!important;
+  max-width:100%!important;
+  text-overflow:ellipsis!important;
+ }
+ .photoheader:has(#photoTitle)>#photoTitle{
+  grid-column:1!important;grid-row:3!important;
+  width:100%!important;min-width:0!important;
+  text-align:center!important;overflow:hidden!important;
+  text-overflow:ellipsis!important;white-space:nowrap!important;
+ }
+}
+</style></head><body><header><div><h1>RN Plate Pair Inspector <span class="small">v10.2.4</span></h1><div class="small">Upper / Lower pair · ruler-referenced measurements · campaign performance</div></div><div class="inline"><button id="showUserManual" type="button" aria-haspopup="dialog">? Help &amp; Manual</button><button class="primary" id="exportAll">Export pair JSON + images</button><button id="copyAll">Copy pair report for Excel</button></div></header><main class="three">
 <section class="panel"><details class="leftCollapsible" open><summary>PL Geometry</summary><div class="leftCollapseBody"><details class="bulkPaste" open><summary>Paste campaign geometry (Excel / TSV)</summary><p class="small">Paste six columns (W0, X0, Y0, Z0, R0, H0), or name/value rows. H0 = 2×Y0 and expected R0 = Z0 − H0 are checked for consistency.</p><textarea aria-label="Campaign geometry paste" id="campaignPaste" placeholder="W0	X0	Y0	Z0	R0	H0
 200	5	45	270	180	90" style="min-height:115px"></textarea><div id="campaignPasteStatus" role="status" hidden></div></details><div class="field"><label for="cid">Campaign ID</label><input id="cid" value="CMP-001"/></div><div class="field"><label for="bore">Bore radius before use · Y (mm)</label><input id="bore" min="0" placeholder="Enter Y" step="0.1" type="number"/></div><div class="field"><label for="W">W: Center-to-edge incl. band (mm)</label><input id="W" min="0" placeholder="W" step="0.1" type="number"/></div><div class="field"><label for="X">X: Band thickness (mm)</label><input id="X" min="0" step="0.1" type="number" value="0"/></div><div class="field"><label for="Z">Z: Closed center distance (mm)</label><input id="Z" min="0" placeholder="Z" step="0.1" type="number"/></div><div class="field"><label for="R0">R0 / SD: Initial stroke (mm)</label><input id="R0" min="0" placeholder="R0" step="0.1" type="number"/></div><div class="field"><label for="H0">H0 / BDia: Bore diameter before use (mm)</label><input aria-label="Calculated original bore diameter" id="H0" placeholder="2 × Y0" readonly="" type="number"/></div><div class="field"><label for="safe">Remaining stroke safe limit (mm) *</label><input id="safe" required aria-required="true" min="0" step="0.1" type="number" value="10"/></div><p class="small">Y is entered as the unused bore radius. F is required for stroke calculations on each PL.</p></div></details><details class="leftCollapsible" open><summary id="plPerformanceTitle">PL performance at CMP-001</summary><div class="leftCollapseBody"><div class="stat"><span class="small">Recorded sets</span><b id="pairsCount">0</b></div>
 <div class="stat"><span class="small">Sets below safe limit <button aria-label="Formula: Sets below safe limit" class="formulaInfo" data-formula="belowCount" title="Count of saved sets where remaining stroke &lt; safe limit." type="button">ⓘ</button></span><b id="belowCount">—</b></div><div class="stat"><span class="small">Average erosion · mm/min <button aria-label="Formula: Average erosion per minute" class="formulaInfo" data-formula="avgTime" title="Mean of saved pair ER values: (R0 − R) / total runtime (min)." type="button">ⓘ</button></span><b id="avgTime">—</b></div><div class="stat"><span class="small">Average erosion · mm/heat <button aria-label="Formula: Average erosion per heat" class="formulaInfo" data-formula="avgHeat" title="Mean of saved pair EPH values: (R0 − R) / heats used." type="button">ⓘ</button></span><b id="avgHeat">—</b></div><div class="stat"><span class="small">Average remaining stroke (mm) <button aria-label="Formula: Average remaining stroke" class="formulaInfo" data-formula="avgStroke" title="Mean of valid saved pair remaining stroke values." type="button">ⓘ</button></span><b id="avgStroke">—</b></div><div class="inline" style="margin-top:11px"><button type="button" id="exportCampaign">Copy campaign data</button><button id="clearRecords">Clear saved pairs</button></div><div class="small" id="savedStatus" style="margin-top:8px">Session-only records; copy campaign data to Excel to preserve a readable summary.</div><div class="separator"></div><div class="small">Performance aggregates use saved complete PL pairs. Runtime and heats are pair-level quantities, not duplicated for Upper and Lower.</div></div></details></section>
 <div class="workspaceDivider" id="leftWidthDivider" role="separator" aria-label="Resize PL Geometry panel" aria-orientation="vertical" tabindex="0" title="Drag to resize PL Geometry · arrow keys to adjust"></div><section class="panel"><div class="photoheader"><h2 style="margin:0">PL photo workspace</h2><strong class="small" id="photoTitle" title="Current PL photo filename">Upper · no photo</strong><div class="inline"><button aria-selected="true" class="tab" id="upperTab">Upper PL</button><button aria-selected="false" class="tab" id="lowerTab">Lower PL</button><button type="button" id="photoExchange" aria-label="Replace photos: 1 for selected PL, 2 for Upper then Lower" class="minibtn photoUploadIcon" title="Import photos: select 1 photo for the active PL, or 2 photos (first Upper, second Lower)"><svg aria-hidden="true" fill="none" height="21" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="21"><path d="M7 7h14l-4-4m4 4-4 4M17 17H3l4 4m-4-4 4-4"></path></svg></button></div></div><div class="workspaceStepGroup"><div class="workspaceStepTitle">#1 Level</div><div class="toolbar"><button class="minibtn" id="autoLevel">Auto Level</button><button class="minibtn" id="manualLevel">Level with 2 Points</button></div></div>
 <div class="workspaceStepGroup"><details class="workspaceCal" open><summary>#2 Calibration · X / Y (px/mm)</summary><div class="workspaceCalBody"><h3>Ruler calibration</h3><div class="calBtns"><button id="autoCal">Auto 100mm Calibration</button><span id="autoScaleSummary" class="small" aria-live="polite" style="font-weight:650;white-space:nowrap">X: — · Y: — px/mm</span><span id="autoScaleMismatch" role="alert" hidden style="color:#991b1b;background:#fee2e2;border:2px solid #dc2626;border-radius:6px;padding:6px 9px;font-weight:750;font-size:12px;line-height:1.35"></span><button id="manualCalBoth" type="button">Start Manual Calibration</button><button type="button" id="manualRulerDone" hidden style="display:none!important" aria-hidden="true" tabindex="-1">Manual Ruler Calibration Done</button></div><div id="manualRulerControls" hidden style="display:none"><strong>Manual ruler calibration · 100 mm each direction</strong><p class="small">Set vertical guide spacing to X = 100 mm and horizontal guide spacing to Y = 100 mm.</p><span id="manualRulerSpan" class="small" role="status" style="display:block;margin-top:5px"></span></div><div id="rulerReadout" class="small" role="status">Auto detects X/Y ruler scales. If unsuccessful, adjust the four 100 mm guides.</div><div class="calibrationScalePair"><div class="field"><label for="sx">Horizontal (px/mm)</label><input id="sx" min="0.1" placeholder="—" step="0.001" type="number"/></div><div class="field"><label for="sy">Vertical (px/mm)</label><input id="sy" min="0.1" placeholder="—" step="0.001" type="number"/></div></div><div class="small">X/Y scales are independent. Verify against physical ruler marks.</div></div></details></div>
 <div class="workspaceStepGroup"><div class="workspaceStepTitle">#3 Alignment</div><div class="toolbar"><button class="minibtn" id="autoAlignAll">Auto Align</button><button class="minibtn" id="undoAutoAlign" disabled>Undo Alignment</button><button class="minibtn" id="resetLines">Reset Lines</button><button type="button" class="minibtn" id="verifyAlignment" aria-pressed="false" style="font-weight:750;border:2px solid #bd3434">Verify Alignment *</button><span id="alignmentVerifyState" role="status" style="font-size:11px;color:#a11b1b">Required</span></div><div id="autoAlignStatus" class="small" role="status" aria-live="polite" style="display:none;padding:5px 8px;margin:5px 0"></div></div><div class="workspaceStepGroup compactSaveStep"><div class="workspaceStepTitle">#4 Save Set</div><div class="toolbar"><button type="button" class="minibtn primary" id="savePair">Save set to campaign</button></div></div><div class="photoarea photoareaWrap"><input accept="image/*,.heic,.heif" aria-label="Select one or two PL photos" id="photoFile" multiple type="file"/><button aria-label="Show PL measurement legend" class="workspaceInfoFloating" id="workspaceHelpBtn" title="Show PL measurement legend" type="button">i</button><div class="placeholder" id="empty"><button type="button" id="photoImportPrompt" class="photoImportPrompt"><svg aria-hidden="true" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 16V3m0 0L7 8m5-5 5 5"></path><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"></path></svg><strong>Import PL photo</strong><span>Choose one image for the selected PL, or two images (Upper then Lower)</span></button></div><div id="photoLoadingOverlay" class="photoLoadingOverlay" hidden role="status" aria-live="polite"><span class="photoLoadingSpinner" aria-hidden="true"></span><strong id="photoLoadingMessage">Loading photos…</strong><span class="small">Decoding and preparing image</span></div><div class="stage" id="stage"><img alt="Selected plate photo" id="photo"/><svg id="arrows" preserveaspectratio="none" viewbox="0 0 1000 1000"></svg></div></div><div class="hint" id="actionHint" style="display:none"></div><div class="ind" id="calStatus" hidden>No image. Each PL has independent ruler calibration and dimension lines.</div><div class="areaInfo" hidden><h3 style="margin:0 0 5px">Nested ellipse area model</h3><div class="small">Area model: the used bore is bounded by H3/H4 and its detected left/right edges; the edge-damage boundary is the outer ellipse. The unused bore remains a calculation reference but is not drawn.</div><div class="small" style="margin:8px 0 6px"><strong>Inner ellipse</strong>: H3/H4 tangency and photo-estimated bore left/right edges.<br/><strong>Outer ellipse</strong>: tangent to V1, V2, H2 and H5.</div><button class="minibtn" id="rescanBore" type="button">Detect bore left/right from photo</button><div aria-live="polite" class="small" id="innerDetectStatus">Not scanned</div><div class="small" id="contourStatus">Area model uses current dimension lines and a photo-edge estimate. Calibrate both rulers and enter Y for area values.</div></div></section>
-<div class="workspaceDivider" id="rightWidthDivider" role="separator" aria-label="Resize PL Data and Calculated Results panel" aria-orientation="vertical" tabindex="0" title="Drag to resize PL Data & Results · arrow keys to adjust"></div><section class="panel right"><div class="photoheader"><h2 style="margin:0">PL data and calculated results</h2><span class="mode" id="activeLabel">Upper PL</span></div><div class="results"><div class="inspectionColumn measuredColumn"><h3 class="inspectionColumnTitle">Measured / Entered Data</h3><details class="stackBox usageBox" open=""><summary>PL Set Usage Info</summary><div class="stackBody"><div class="field"><label for="plpair">PL pair ID</label><input id="plpair" value="PL-001"/></div><div class="pairdata"><div class="field"><label for="runtime">Total runtime (min)</label><input id="runtime" min="0" step="0.1" type="number"/></div><div class="field"><label for="heats">Heats used (total pair)</label><input id="heats" min="0" step="1" type="number"/></div></div></div></details><details class="stackBox dimensionsBox" open=""><summary><span>PL A–F Dimensions · Upper / Lower</span><button aria-label="Show PL measurement legend" class="summaryInfoBtn" id="afLegendBtn" title="Show PL measurement legend" type="button">i</button></summary><div class="stackBody"><table class="dimtable"><thead><tr><th>Dim.</th><th>Upper PL</th><th>Lower PL</th></tr></thead><tbody id="dimensionRows"></tbody></table><div aria-live="polite" class="rulerValidationNotice" id="rulerValidationNotice"></div><div class="measureSourceNote">A = Auto, M = Manual. Toggle the switch to choose; selected values are black, unused values gray. Manual fields remain editable.</div></div></details><details class="subSection" open=""><summary>Cracks · selected PL</summary><div class="subBody"><div class="small">Automatic image-based candidates are experimental and require inspector confirmation.</div><div class="inline" style="margin:8px 0"><button id="detectCracks">Scan crack candidates</button><button id="clearCracks">Clear counts</button></div><div class="small" id="crackStatus">Not assessed</div><div id="crackRows"></div><div class="stat"><span class="small">Cracks Count · CC (selected PL) <button aria-label="Formula: Cracks Count" class="formulaInfo" data-formula="cc" title="Sum of four inspector-confirmed crack category counts for the selected PL." type="button">ⓘ</button></span><b id="cc">—</b></div><div class="small" style="margin-top:7px">Values respond to dragging. Manually entered overrides are optional when photo calibration is uncertain.</div></div></details><details class="resultSection remarksSection" open=""><summary>Remarks · selected PL</summary><div class="resultBody">
+<div class="workspaceDivider" id="rightWidthDivider" role="separator" aria-label="Resize PL Dimensions and Results panel" aria-orientation="vertical" tabindex="0" title="Drag to resize PL Dimensions & Results · arrow keys to adjust"></div><section class="panel right"><div class="photoheader"><h2 style="margin:0">PL dimensions and results</h2><span class="mode" id="activeLabel">Upper PL</span></div><div class="results"><div class="inspectionColumn measuredColumn"><h3 class="inspectionColumnTitle">Measured / Entered Data</h3><details class="stackBox usageBox" open=""><summary>PL Set Usage Info</summary><div class="stackBody"><div class="field"><label for="plpair">PL pair ID</label><input id="plpair" value="PL-001"/></div><div class="pairdata"><div class="field"><label for="runtime">Total runtime (min)</label><input id="runtime" min="0" step="0.1" type="number"/></div><div class="field"><label for="heats">Heats used (total pair)</label><input id="heats" min="0" step="1" type="number"/></div></div></div></details><details class="stackBox dimensionsBox" open=""><summary><span>PL A–F Dimensions · Upper / Lower</span><button aria-label="Show PL measurement legend" class="summaryInfoBtn" id="afLegendBtn" title="Show PL measurement legend" type="button">i</button></summary><div class="stackBody"><table class="dimtable"><thead><tr><th>Dim.</th><th>Upper PL</th><th>Lower PL</th></tr></thead><tbody id="dimensionRows"></tbody></table><div aria-live="polite" class="rulerValidationNotice" id="rulerValidationNotice"></div><div class="measureSourceNote">A = Auto, M = Manual. Toggle the switch to choose; selected values are black, unused values gray. Manual fields remain editable.</div></div></details><details class="subSection" open=""><summary>Cracks · selected PL</summary><div class="subBody"><div class="small">Automatic image-based candidates are experimental and require inspector confirmation.</div><div class="inline" style="margin:8px 0"><button id="detectCracks">Scan crack candidates</button><button id="clearCracks">Clear counts</button></div><div class="small" id="crackStatus">Not assessed</div><div id="crackRows"></div><div class="stat"><span class="small">Cracks Count · CC (selected PL) <button aria-label="Formula: Cracks Count" class="formulaInfo" data-formula="cc" title="Sum of four inspector-confirmed crack category counts for the selected PL." type="button">ⓘ</button></span><b id="cc">—</b></div><div class="small" style="margin-top:7px">Values respond to dragging. Manually entered overrides are optional when photo calibration is uncertain.</div></div></details><details class="resultSection remarksSection" open=""><summary>Remarks · selected PL</summary><div class="resultBody">
 <div class="small">Tap a crack tag or + to increase its count; tap − to decrease it. Counts sync with Cracks. Other tags toggle normally. Saved independently for Upper and Lower PL.</div>
 <div class="tagChoices" id="remarkTags"></div>
 <label class="small" for="remarkNote" style="display:block;margin:12px 0 5px">Free-text remarks</label>
@@ -463,7 +501,11 @@
 </main><script>
 (()=>{'use strict';
 const $=id=>document.getElementById(id),keys=['A','B','C','D','E','F'],ids=['H1','H2','H3','H4','H5','H6','V1','V2'],colors=['#ef4444','#fb923c','#d5aa00','#32bc7c','#338be3','#a855f7','#44c9d9','#c0cbd8'];
+const lineHints={H1:'H1: Short-end PL edge (steel band excluded)',H2:'H2: Used bore damage edge',H3:'H3: Used bore enlargement edge',H4:'H4: Used bore enlargement edge',H5:'H5: Used bore edge damage edge',H6:'H6: Used bore surface damage edge',V1:'V1: Used bore damage edge (left)',V2:'V2: Used bore damage edge (right)'};
 const defaults=()=>({H1:.075,H2:.28,H3:.315,H4:.46,H5:.485,H6:.51,V1:.38,V2:.60});
+function lineHintText(id){return lineHints[id]||`${id}: Dimension reference line`;}
+function showLineHint(id){if(pending||traceMode)return;const el=$('actionHint');if(!el)return;el.textContent=lineHintText(id);el.dataset.hoverHint='1';el.style.display='block';}
+function hideLineHint(){const el=$('actionHint');if(!el||!el.dataset.hoverHint)return;delete el.dataset.hoverHint;el.style.display='none';el.textContent='';}
 const plate=()=>({filename:'',source:null,image:null,rotation:0,pos:defaults(),sx:null,sy:null,calX:null,calY:null,manual:{},sourceMode:Object.fromEntries(keys.map(k=>[k,'auto'])),innerBounds:null,innerStatus:'Not scanned',boreContour:[],edgeContour:[],method:'Uncalibrated'});
 const plates={upper:plate(),lower:plate()};
 const recommendedRemarkTags=['Bore enlargement','Edge damage','Bore-radial crack','Long-end transverse crack','Bore-transverse crack','Bore-longitudinal crack','Steel adhesion','Mortar residue','Oxygen lancing','Measurement uncertain'];
@@ -560,6 +602,7 @@ function applyCampaignGeometryPaste(){
  // Derive R0 from Z0 and Y0 only when the paste does not contain R0 and field is blank.
  if(!valid(vals.R0)&&$('R0').value===''&&valid(y)&&valid(z)){$('R0').value=z-2*y;assigned.push('R0 (derived)');}
  syncH0();updateResults();
+ if(typeof window.__applyCampaignWideGeometry==='function')window.__applyCampaignWideGeometry(vals);
  status.textContent='Applied: '+assigned.join(', ')+(warnings.length?' • Check: '+warnings.join('; '):' • H0 = 2 × Y0');
  status.className='small '+(warnings.length?'warn':'good');
 }
@@ -763,7 +806,7 @@ const publishPreview=(blob)=>{
  $('photo').src=currentObjectURL;
 };
 if(canvas.toBlob){canvas.toBlob(publishPreview,'image/jpeg',.83)}
-else {publishPreview(dataUrlToBlob(canvas.toDataURL('image/jpeg',.8)))}$('empty').style.display='none';stage.style.display='block';refreshPhotoImportUI();$('photoTitle').textContent=active.toUpperCase()+' · '+pl.filename;ids.forEach((id,i)=>{const el=document.createElement('div');el.className='line '+(id[0]==='H'?'h':'v');el.style.setProperty('--lc',colors[i]);el.title=id;el.setAttribute('aria-label','Drag '+id);el.dataset.id=id;stage.appendChild(el);if(['H4','H5','H6'].includes(id)){const marker=document.createElement('span');marker.className='overlapLineMarker';marker.textContent=id;el.appendChild(marker);}let drag=false;el.addEventListener('pointerdown',e=>{if(pending||traceMode)return;drag=true;lineDragging=true;el.setPointerCapture(e.pointerId);e.stopPropagation();e.preventDefault()});el.addEventListener('pointermove',e=>{if(!drag)return;const r=stage.getBoundingClientRect(),isH=id[0]==='H';let q=isH?(e.clientY-r.top)/r.height:(e.clientX-r.left)/r.width;q=Math.min(1,Math.max(0,q));const n=+id[1];if(isH){const prev=n>1?pl.pos['H'+(n-1)]+(n>=5?0:.002):0,next=n<6?pl.pos['H'+(n+1)]-(n>=4?0:.002):1;q=Math.max(prev,Math.min(next,q))}else{const other=id==='V1'?pl.pos.V2-.003:pl.pos.V1+.003;q=id==='V1'?Math.min(q,other):Math.max(q,other)}pl.pos[id]=q;v91Traces[active]=null;drawPositions();refreshLiveDimensions();updateResults()});el.addEventListener('pointerup',()=>{drag=false;lineDragging=false;updateResults()});el.addEventListener('pointercancel',()=>{drag=false;lineDragging=false;updateResults()})});setupInnerHandles(stage,pl);drawPositions()}
+else {publishPreview(dataUrlToBlob(canvas.toDataURL('image/jpeg',.8)))}$('empty').style.display='none';stage.style.display='block';refreshPhotoImportUI();$('photoTitle').textContent=active.toUpperCase()+' · '+pl.filename;ids.forEach((id,i)=>{const el=document.createElement('div');const hint=lineHintText(id);el.className='line '+(id[0]==='H'?'h':'v');el.style.setProperty('--lc',colors[i]);el.title=hint;el.setAttribute('aria-label','Drag '+hint);el.dataset.id=id;stage.appendChild(el);if(['H4','H5','H6'].includes(id)){const marker=document.createElement('span');marker.className='overlapLineMarker';marker.textContent=id;marker.title=hint;el.appendChild(marker);}let drag=false;el.addEventListener('mouseenter',()=>showLineHint(id));el.addEventListener('mouseleave',()=>hideLineHint());el.addEventListener('focus',()=>showLineHint(id));el.addEventListener('blur',()=>hideLineHint());el.addEventListener('pointerdown',e=>{if(pending||traceMode)return;hideLineHint();drag=true;lineDragging=true;el.setPointerCapture(e.pointerId);e.stopPropagation();e.preventDefault()});el.addEventListener('pointermove',e=>{if(!drag)return;const r=stage.getBoundingClientRect(),isH=id[0]==='H';let q=isH?(e.clientY-r.top)/r.height:(e.clientX-r.left)/r.width;q=Math.min(1,Math.max(0,q));const n=+id[1];if(isH){const prev=n>1?pl.pos['H'+(n-1)]+(n>=5?0:.002):0,next=n<6?pl.pos['H'+(n+1)]-(n>=4?0:.002):1;q=Math.max(prev,Math.min(next,q))}else{const other=id==='V1'?pl.pos.V2-.003:pl.pos.V1+.003;q=id==='V1'?Math.min(q,other):Math.max(q,other)}pl.pos[id]=q;v91Traces[active]=null;drawPositions();refreshLiveDimensions();updateResults()});el.addEventListener('pointerup',()=>{drag=false;lineDragging=false;updateResults()});el.addEventListener('pointercancel',()=>{drag=false;lineDragging=false;updateResults()})});setupInnerHandles(stage,pl);drawPositions()}
 function dataUrlToBlob(url){const [meta,b64]=url.split(','),bytes=atob(b64),arr=new Uint8Array(bytes.length);for(let i=0;i<bytes.length;i++)arr[i]=bytes.charCodeAt(i);return new Blob([arr],{type:meta.match(/:(.*?);/)[1]})}
 
 function setupInnerHandles(stage,pl){
@@ -811,7 +854,7 @@ if(activeAreaFormula==='bore'){
  svg+=E(g.ocx,g.ocy,g.orx,g.ory,'fill="#facc15" fill-opacity=".4" mask="url(#minusInner)"');
 }
 el.innerHTML=svg}
-function select(which){active=which;if($('autoAlignStatus'))$('autoAlignStatus').style.display='none';showLastAutoScale(plates[which]);if($('undoAutoAlign'))$('undoAutoAlign').disabled=!alignBackup[which];renderRemarkTags();traceMode=null;$('stage').classList.remove('contour');pending=null;$('actionHint').style.display='none';$('upperTab').setAttribute('aria-selected',which==='upper');$('lowerTab').setAttribute('aria-selected',which==='lower');$('activeLabel').textContent=which==='upper'?'Upper PL':'Lower PL';resetDOMImage();const pl=p();$('sx').value=valid(pl.sx)?pl.sx.toFixed(3):'';$('sy').value=valid(pl.sy)?pl.sy.toFixed(3):'';$('calStatus').textContent=pl.method;$('innerDetectStatus').textContent=pl.innerStatus;$('contourStatus').textContent='Area model uses current dimension lines and a photo-edge estimate. Calibrate both rulers and enter Y for area values.';keys.forEach(k=>{const el=$('override'+k);if(el)el.value=valid(pl.manual[k])?pl.manual[k]:'';const mode=$('mode'+k);if(mode){mode.textContent='Use '+(pl.sourceMode[k]==='manual'?'Manual':'Auto');mode.setAttribute('aria-pressed',String(pl.sourceMode[k]==='manual'))}});updateResults()}
+function select(which){active=which;if($('autoAlignStatus'))$('autoAlignStatus').style.display='none';showLastAutoScale(plates[which]);if($('undoAutoAlign'))$('undoAutoAlign').disabled=!alignBackup[which];renderRemarkTags();traceMode=null;$('stage').classList.remove('contour');pending=null;hideLineHint();$('actionHint').style.display='none';$('upperTab').setAttribute('aria-selected',which==='upper');$('lowerTab').setAttribute('aria-selected',which==='lower');$('activeLabel').textContent=which==='upper'?'Upper PL':'Lower PL';resetDOMImage();const pl=p();$('sx').value=valid(pl.sx)?pl.sx.toFixed(3):'';$('sy').value=valid(pl.sy)?pl.sy.toFixed(3):'';$('calStatus').textContent=pl.method;$('innerDetectStatus').textContent=pl.innerStatus;$('contourStatus').textContent='Area model uses current dimension lines and a photo-edge estimate. Calibrate both rulers and enter Y for area values.';keys.forEach(k=>{const el=$('override'+k);if(el)el.value=valid(pl.manual[k])?pl.manual[k]:'';const mode=$('mode'+k);if(mode){mode.textContent='Use '+(pl.sourceMode[k]==='manual'?'Manual':'Auto');mode.setAttribute('aria-pressed',String(pl.sourceMode[k]==='manual'))}});updateResults()}
 function buildMeasurements(){
  let html='';
  for(const k of keys){
@@ -1224,7 +1267,15 @@ function autoCalibrate(){
 function serialize(){const c=calculate();return{format:'RNPlatePair-v6',campaign:{id:$('cid').value,pair_id:$('plpair').value,bore_radius_before_mm:num('bore'),bore_before_mm:valid(num('bore'))?2*num('bore'):null,W:num('W'),X:num('X'),Z:num('Z'),R0:num('R0'),safe_limit_mm:num('safe')},usage:{runtime_min:c.runtime,heats:c.heats,oxygen_lancing_time_min:c.olt},plates:Object.fromEntries(['upper','lower'].map(k=>[k,{filename:plates[k].filename,rotation_deg:plates[k].rotation,lines:plates[k].pos,manual_dimensions:plates[k].manual,dimension_sources:plates[k].sourceMode,remarks:{tags:[...remarks[k].tags],note:remarks[k].note},cracks:{categories:crackTypes,counts:crackState[k].counts,status:crackState[k].status},calibration:{x_px_per_mm:plates[k].sx,y_px_per_mm:plates[k].sy,x_ruler:plates[k].calX,y_ruler:plates[k].calY,method:plates[k].method},dimensions_mm:dimensionValues(plates[k]),ellipse_model:{inner_boundaries:['H3','H4','image_detected_left','image_detected_right'],outer_boundaries:['V1','V2','H2','H5'],inner_photo_edges:plates[k].innerBounds,inner_detection_status:plates[k].innerStatus,original_bore_center_reference:'H1 + W (vertical); midpoint V1/V2 (horizontal)',mode:'outer_from_dimension_lines_inner_from_image'},area_grid_mm2:areaGrid(plates[k])}])),results:{upper_edge_damage_mm2:c.gridU.edge,lower_edge_damage_mm2:c.gridL.edge,area_method:'bore_gain=grid_counted_full_inner_ellipse_area_minus_pi_Y_squared;edge=outer_minus_inner_grid_cells',upper_bore_area_change_mm2:c.areaU,lower_bore_area_change_mm2:c.areaL,upper_bore_area_change_pct:valid(c.areaU)&&num('bore')>0?100*c.areaU/(Math.PI*num('bore')**2):null,lower_bore_area_change_pct:valid(c.areaL)&&num('bore')>0?100*c.areaL/(Math.PI*num('bore')**2):null,upper_T_mm:c.tU,lower_T_mm:c.tL,absolute_T_difference_mm:c.tDiff,total_recession_mm:c.total,remaining_stroke_mm:c.stroke,stroke_reduction_mm:c.deltaR,crack_count_upper:crackState.upper.counts.every(valid)?crackState.upper.counts.reduce((a,b)=>a+b,0):null,crack_count_lower:crackState.lower.counts.every(valid)?crackState.lower.counts.reduce((a,b)=>a+b,0):null,erosion_mm_per_min:c.eTime,erosion_mm_per_heat:c.eHeat},saved_pairs:records}}
 function saveFile(name,data,mime){const b=data instanceof Blob?data:new Blob([data],{type:mime});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),3000)}
 function annotated(pl){if(!pl.image)return null;const c=document.createElement('canvas');c.width=pl.image.width;c.height=pl.image.height;const ctx=c.getContext('2d');ctx.drawImage(pl.image,0,0);ctx.lineWidth=Math.max(2,c.width/1400);ids.forEach((id,i)=>{ctx.strokeStyle=colors[i];ctx.beginPath();if(id[0]==='H'){const y=pl.pos[id]*c.height;ctx.moveTo(0,y);ctx.lineTo(c.width,y)}else{const x=pl.pos[id]*c.width;ctx.moveTo(x,0);ctx.lineTo(x,c.height)}ctx.stroke()});const g=ellipseGeometry(pl);ctx.lineWidth=Math.max(2,c.width/1300);for(const [cx,cy,rx,ry,color] of [[g.cx,g.cy,g.rx,g.ry,'#db2777'],[g.ocx,g.ocy,g.orx,g.ory,'#ca8a04'],[g.cx,g.cy,g.crx,g.cry,'#0891b2']]){if(!valid(rx)||!valid(ry))continue;ctx.beginPath();ctx.ellipse(cx*c.width,cy*c.height,rx*c.width,ry*c.height,0,0,2*Math.PI);ctx.strokeStyle=color;ctx.stroke();}return c}
-function exportData(all){const base=($('cid').value||'CMP')+'_'+($('plpair').value||'PL');saveFile(base+'_pair.json',JSON.stringify(serialize(),null,2),'application/json');(all?['upper','lower']:[active]).forEach(k=>{const c=annotated(plates[k]);if(c)c.toBlob(b=>{if(b)saveFile(base+'_'+k+'_annotated.jpg',b,'image/jpeg')},'image/jpeg',.96)})}
+function annotatedExportName(base,side){
+ // Preserve the uploaded image's original name (including HEIC extension) in
+ // the exported annotated JPEG filename, while replacing unsafe path characters.
+ const original=String(plates[side]?.filename||'unnamed-photo')
+  .split(/[\\/]/).pop().replace(/[\x00-\x1f<>:"|?*]/g,'_').trim()
+  .replace(/[. ]+$/,'')||'unnamed-photo';
+ return `${base}_${side}_${original}_annotated.jpg`;
+}
+function exportData(all){const base=($('cid').value||'CMP')+'_'+($('plpair').value||'PL');saveFile(base+'_pair.json',JSON.stringify(serialize(),null,2),'application/json');(all?['upper','lower']:[active]).forEach(k=>{const c=annotated(plates[k]);if(c)c.toBlob(b=>{if(b)saveFile(annotatedExportName(base,k),b,'image/jpeg')},'image/jpeg',.96)})}
 async function copyText(txt){try{await navigator.clipboard.writeText(txt)}catch(e){const el=document.createElement('textarea');el.value=txt;el.setAttribute('readonly','');el.style.position='fixed';el.style.opacity='0';document.body.appendChild(el);el.focus();el.select();try{document.execCommand('copy')}finally{el.remove()}}}
 let photoImportBusy=false;
 function refreshPhotoImportUI(){
@@ -1811,7 +1862,7 @@ document.getElementById('copyAll').onclick=()=>{
  if(importedSides().some(side=>!verified(side)))verifyState.textContent='Other imported PL needs alignment verification for its data / complete pair results.';
  copyVerifiedReport();
 };
-function copyVerifiedReport(){
+function copyVerifiedReport(returnText=false){
  const c=calculate(),upper=verified('upper'),lower=verified('lower'),pair=upper&&lower;
  const u=c.u,l=c.l,gu=c.gridU,gl=c.gridL;
  const f=v=>typeof v==='number'&&Number.isFinite(v)?v.toFixed(1):'';
@@ -1826,7 +1877,9 @@ function copyVerifiedReport(){
  rows.push(both('G',ted(u),ted(l)),['H','',''],['I','',''],both('J',gu.usedBore,gl.usedBore),both('K',gu.bore,gl.bore),both('L',gu.edge,gl.edge),both('M',pct(gu),pct(gl)),both('T',c.tU,c.tL));
  const pairOnce=(code,v)=>[code,pair?f(v):'',''];
  rows.push(pairOnce('T_Diff',c.tDiff),pairOnce('R',c.stroke),pairOnce('△R',c.deltaR),pairOnce('RSR',valid(c.stroke)&&valid(num('R0'))&&num('R0')!==0?100*c.stroke/num('R0'):null),pairOnce('EPH',c.eHeat),pairOnce('ER',c.eTime));
- copyText(rows.map(row=>row.map(v=>String(v??'').replace(/[\t\r\n]+/g,' ')).join('\t')).join('\n'));
+ const reportText=rows.map(row=>row.map(v=>String(v??'').replace(/[\t\r\n]+/g,' ')).join('\t')).join('\n');
+ if(returnText)return reportText;
+ copyText(reportText);
 }
 // JSON + annotated images: exclude all unverified PL results and pair-specific outputs.
 document.getElementById('exportAll').onclick=()=>{
@@ -1844,7 +1897,7 @@ document.getElementById('exportAll').onclick=()=>{
  if(!pair)obj.saved_pairs=[];
  const base=($('cid').value||'CMP')+'_'+($('plpair').value||'PL');
  saveFile(base+'_verified.json',JSON.stringify(obj,null,2),'application/json');
- for(const side of sides){const canvas=annotated(plates[side]);if(canvas)canvas.toBlob(blob=>{if(blob)saveFile(base+'_'+side+'_annotated.jpg',blob,'image/jpeg')},'image/jpeg',.96)}
+ for(const side of sides){const canvas=annotated(plates[side]);if(canvas)canvas.toBlob(blob=>{if(blob)saveFile(annotatedExportName(base,side),blob,'image/jpeg')},'image/jpeg',.96)}
  if(importedSides().some(side=>!verified(side)))verifyState.textContent='Partial export: verify the other PL to enable its data and complete pair calculations.';
 };
 syncAlignmentVerification();
@@ -1872,6 +1925,47 @@ syncAlignmentVerification();
  document.querySelectorAll('#autoLevel,#manualLevel,#autoCal,#manualCalBoth,#autoAlignAll,#undoAutoAlign,#resetLines,#verifyAlignment,#detectCracks,#clearCracks').forEach(button=>button.addEventListener('click',markUnsaved));
  refreshSaveAttention();
  const fields=['cid','plpair','W','X','bore','Z','R0','safe','runtime','heats','olt'];
+ // Geometry is a campaign property, not an individual plate-set property.
+ // Values are session-scoped just like the existing saved-set manager.
+ const geometryFields=['W','X','bore','Z','R0'];
+ const campaignGeometry=new Map();
+ const campaignKey=()=>($('cid').value.trim()||'CMP');
+ const geometryFor=cid=>campaignGeometry.get(cid);
+ const applyGeometry=(geometry)=>{
+  if(!geometry)return;
+  for(const key of geometryFields)if(Object.prototype.hasOwnProperty.call(geometry,key))$(key).value=geometry[key];
+  syncH0();
+ };
+ const geometryFromFields=fields=>Object.fromEntries(geometryFields.filter(k=>fields?.[k]!==undefined).map(k=>[k,fields[k]]));
+ const geometryFromForm=()=>Object.fromEntries(geometryFields.map(k=>[k,$(k).value]));
+ const syncSavedGeometry=(cid,geometry)=>{
+  for(const data of saved.values())if((data.fields.cid||'CMP')===cid){
+   for(const key of geometryFields)if(Object.prototype.hasOwnProperty.call(geometry,key))data.fields[key]=geometry[key];
+  }
+ };
+ const trackCampaignGeometry=(cid,geometry)=>{
+  const next={...(geometryFor(cid)||{}),...geometry};
+  campaignGeometry.set(cid,next);
+  syncSavedGeometry(cid,next);
+  return next;
+ };
+ window.__applyCampaignWideGeometry=(parsed)=>{
+  const patch={};
+  for(const key of geometryFields)if(Number.isFinite(parsed[key]))patch[key]=String(parsed[key]);
+  if(!Object.keys(patch).length)return;
+  const cid=campaignKey();
+  const geometry=trackCampaignGeometry(cid,patch);
+  applyGeometry(geometry);
+  // All saved sets now carry the same values, including when reloaded later.
+  markUnsaved();
+  $('savedStatus').textContent='Campaign geometry synchronized to all saved PL sets in '+cid+'. Save the active set to preserve other edits.';
+ };
+ // Direct edits to geometry also update all saved sets for the current campaign.
+ geometryFields.forEach(key=>$(key).addEventListener('change',()=>{
+  const cid=campaignKey(),geometry=trackCampaignGeometry(cid,{[key]:$(key).value});
+  syncSavedGeometry(cid,geometry);syncH0();updateResults();
+ }));
+
  const pairID=()=>($('cid').value.trim()||'CMP')+' / '+($('plpair').value.trim()||'PL');
  const nameKey=s=>String(s||'').trim().toLocaleLowerCase();
  const clone=(v)=>{
@@ -1880,7 +1974,7 @@ syncAlignmentVerification();
   return v; // Image / canvas instances are immutable snapshot references for this workflow.
  };
  const snapshot=()=>({
-  fields:Object.fromEntries(fields.filter(id=>$(id)).map(id=>[id,$(id).value])),
+  fields:{...Object.fromEntries(fields.filter(id=>$(id)).map(id=>[id,$(id).value])),...(geometryFor(campaignKey())||{})},
   plates:{upper:clone(plates.upper),lower:clone(plates.lower)},
   remarks:clone(remarks),cracks:clone(crackState),
   verification:{...verification},
@@ -1892,7 +1986,10 @@ syncAlignmentVerification();
   picker.value=selected&&saved.has(selected)?selected:'';
  }
  function restore(data){
+  const cid=data.fields.cid||'CMP';
+  if(!geometryFor(cid))campaignGeometry.set(cid,geometryFromFields(data.fields));
   for(const [id,value] of Object.entries(data.fields))if($(id))$(id).value=value;
+  applyGeometry(geometryFor(cid));
   for(const side of ['upper','lower']){
    Object.assign(plates[side],clone(data.plates[side]));
    remarks[side]=clone(data.remarks[side]);
@@ -1918,8 +2015,88 @@ syncAlignmentVerification();
   // The original save handler signals success by upserting a matching record.
   saveOld.call(this,e);
   if(!$('savedStatus').textContent.startsWith('Saved '+id+' '))return;
-  saved.set(id,snapshot());selected=id;markSaved();refresh();
+  trackCampaignGeometry(campaignKey(),geometryFor(campaignKey())||geometryFromForm());
+  saved.set(id,snapshot());selected=id;markSaved();refresh();syncAlignmentVerification();
  };
+ // The main Copy pair report button copies ALL saved sets of the current campaign,
+ // arranging one column per individual PL with measurement marks in rows.
+ // Never silently include a draft or override unsaved edits in a saved snapshot.
+ const pairReportButton=$('copyAll');
+ const originalVerificationSync=syncAlignmentVerification;
+ syncAlignmentVerification=function(...args){
+  const result=originalVerificationSync(...args);
+  const campaign=$('cid').value.trim()||'CMP';
+  const savedAvailable=[...saved.values()].some(data=>(data.fields.cid||'CMP')===campaign);
+  pairReportButton.disabled=!savedAvailable&&!importedSides().some(verified);
+  return result;
+ };
+ // Override the older single-pair onclick path completely: this button has ONE copy owner.
+ pairReportButton.onclick=null;
+ pairReportButton.addEventListener('click',event=>{
+  event.preventDefault();
+  event.stopImmediatePropagation();
+  const campaign=$('cid').value.trim()||'CMP';
+  const entries=[...saved].filter(([,data])=>(data.fields.cid||'CMP')===campaign);
+  if(!entries.length){
+   copyVerifiedReport(); // Legacy single-pair behavior only when no saved set exists.
+   return;
+  }
+  const current=snapshot();
+  const reports=[];
+  try{
+   for(const [id,data] of entries){
+    restore(data);
+    const report=copyVerifiedReport(true);
+    const parsed=report.split('\n').map(line=>line.split('\t'));
+    reports.push({id,rows:parsed});
+   }
+  }finally{
+   restore(current);
+   refresh();
+  }
+  // One worksheet-style table: Mark in column A, then a separate column
+  // for each Upper/Lower PL from every saved pair (no vertically stacked sets).
+  const clean=v=>String(v??'').replace(/[\t\r\n]+/g,' ');
+  const marks=[];
+  const seen=new Set();
+  for(const {rows} of reports){
+   for(const row of rows.slice(1)){
+    const mark=row[0];
+    if(mark&&!seen.has(mark)){seen.add(mark);marks.push(mark);}
+   }
+  }
+  const columns=reports.flatMap(({id})=>[id+' Upper PL',id+' Lower PL']);
+  const output=[['Mark',...columns]];
+  const byReport=reports.map(({rows})=>new Map(rows.slice(1).map(row=>[row[0],[row[1]||'',row[2]||'']])));
+  for(const mark of marks){
+   const row=[mark];
+   for(const values of byReport)row.push(...(values.get(mark)||['','']));
+   output.push(row);
+  }
+  const text=output.map(row=>row.map(clean).join('\t')).join('\n');
+  // A synchronous clipboard write prevents a later single-pair copy overwriting
+  // the campaign report if the browser schedules async Clipboard API calls.
+  const ta=document.createElement('textarea');
+  ta.value=text;
+  ta.setAttribute('readonly','');
+  ta.style.cssText='position:fixed;top:0;left:0;width:1px;height:1px;opacity:0;z-index:-1';
+  document.body.appendChild(ta);
+  ta.focus();ta.select();ta.setSelectionRange(0,ta.value.length);
+  let copied=false;
+  try{copied=document.execCommand('copy')}catch(e){}
+  ta.remove();
+  if(!copied&&navigator.clipboard&&navigator.clipboard.writeText){
+   navigator.clipboard.writeText(text).then(()=>{
+    $('savedStatus').textContent='Copied '+entries.length+' saved PL sets ('+text.length+' characters) for '+campaign+'.';
+   }).catch(()=>{
+    $('savedStatus').textContent='Clipboard blocked. Please allow clipboard access and retry.';
+   });
+  }else if(copied){
+   $('savedStatus').textContent='Copied '+entries.length+' saved PL sets ('+text.length+' characters) for '+campaign+'.';
+  }else{
+   $('savedStatus').textContent='Clipboard unavailable. Please allow clipboard access and retry.';
+  }
+ },true);
  // Copy human-readable, tab-separated campaign data (one row for each plate).
  $('exportCampaign').addEventListener('click',()=>{
   if(!saved.size){alert('No saved PL sets to copy. Save a PL set first.');return;}
@@ -1972,7 +2149,7 @@ syncAlignmentVerification();
  const clearOld=$('clearRecords').onclick;
  $('clearRecords').onclick=function(e){
   clearOld.call(this,e);
-  if(!records.length){saved.clear();selected=null;refresh();}
+  if(!records.length){saved.clear();selected=null;refresh();syncAlignmentVerification();}
  };
  function nextPairId(){
   const current=$('plpair').value.trim(),m=/^(.*?)(\d+)$/.exec(current);
