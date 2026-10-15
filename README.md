@@ -1,6 +1,6 @@
 # RefraInspector
 
-**Version:** 8.0
+**Version:** Ver10.1 Beta
 
 Web-based refractory sliding gate plate inspection application.
 
