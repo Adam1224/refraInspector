@@ -1,5 +1,23 @@
 # RN Plate Pair Inspector — Complete Version Update History
 
+## Ver10.1 Beta — 2026-10-15 (JST)
+**Type:** Photo workflow / Identification safeguards / UI / Version release
+- Shows the full **Import / Replace Photo** label in the #0 workspace panel, including after a photograph is loaded.
+- Adds **Swap U/L PL** in #0 to exchange Upper/Lower photographs and associated inspection data; alignment requires re-verification after swapping.
+- Rechecks potential Upper/Lower photo misidentification each time the swap action is used.
+- Adds an advisory visual check for the characteristic circular long-end closure mark usually present on RN Lower PLs, with manual confirmation rather than automatic reassignment.
+- Suppresses mix-up warnings unless both Upper and Lower photographs have been imported.
+- Allows switching PLs and importing/replacing photos even when automatic ruler calibration fails.
+- Adds a self-contained RefraInspector browser favicon.
+- Preserves the restored Save Reminder workspace control layout, in-session saved sets, and campaign exports from Ver10 Beta.
+
+**Validation:** JavaScript syntax checks passed in local iterations; real-image recognition accuracy and interactive browser/device behavior have not yet been validated.
+
+## Ver10 Beta — 2026-10-15 (JST)
+**Type:** Major version / Workspace & campaign functionality
+- Restores the compact workspace layout based on the Save Reminder reference, with #0 Import/Replace, #1 Level, #2 Calibration, #3 Alignment, and #4 Save Set.
+- Includes saved PL-set navigation, campaign data copying, save attention reminder, and existing per-photo alignment verification.
+
 ## Version 9.4.10 Beta — 2026-10-14 (JST)
 **Type:** UI / Measurement interaction
 - Adds an **i** icon to the PL A–F Dimensions · Upper / Lower header; opens the existing PL photo workspace measurement legend without toggling the panel.
