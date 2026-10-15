@@ -103,12 +103,12 @@
 **Limitations:** iPhone Safari behavior has not yet been confirmed on a physical device. Resizing a photo reduces pixel detail; ruler calibration is based on the resized working image. v8.0 remains available in Git history.
 
 
-**Current release:** Version 8.4  
-**Release date:** 2026-10-09 (JST)  
+**Current release:** Ver10.1 Beta  
+**Release date:** 2026-10-15 (JST)  
 **Earliest documented source:** `rn_plate_annotation_tool(2).html` (original five-horizontal/two-vertical annotation tool).  
 **Source base:** `refra_inspector_v7_39_photo_import_ui.html` (v7.38 ruler algorithm + updated photo import UI).
 
-## Current capabilities in Version 8.0
+## Version 8.0 baseline capabilities
 
 - Upper and Lower PL photos, including JPEG/PNG/HEIC/HEIF (HEIC fallback may require internet).
 - Photo import in the empty workspace, loading spinner, and replace/exchange icon once loaded.
@@ -120,7 +120,7 @@
 
 ## Chronological changelog — from the original annotation tool
 
-| Version | Update date/time | Type | New feature / focus | Modified features / details | Status in v8.0 |
+| Version | Update date/time | Type | New feature / focus | Modified features / details | Status as of Ver10.1 |
 |---|---|---|---|---|---|
 | 1.0 | Not recorded | New | Initial RN Plate Line Annotation Tool | Image import, five draggable horizontal / two vertical lines, editable labels, VGG-like JSON export and copy | Historical starting point |
 | 1.x (6H) | Not recorded | Modified | Six-horizontal-line prototype | Expanded the initial five-line layout to six horizontal reference lines | Superseded |
@@ -194,7 +194,19 @@
 | 7.37 | 2026-10-09 JST* | Experimental | Virtual-tilt ruler detection fallback | Try small internal rotations | Rolled back to 7.35 |
 | 7.38 | 2026-10-09 JST* | Modified | Per-image ruler ROI and subpixel spacing | Reduce fixture false positives and coarse quantization | Integrated |
 | 7.39 | 2026-10-09 JST* | New | Improved photo import UX | Centered initial import button, loading spinner, replace icon | Integrated |
-| 8.0 | 2026-10-09 JST* | Release | Major-version milestone from 7.39 | Visible version updated; version-history dialog and changelog added | Current |
+| 8.0 | 2026-10-09 JST* | Release | Major-version milestone from 7.39 | Visible version updated; version-history dialog and changelog added | Historical milestone |
+| 8.1 | 2026-10-09 JST | Fix / Modified | iPhone Safari photo import reliability | Accessible file picker, loading spinner before processing, reduced working image sizes, asynchronous preview creation and larger mobile touch targets | Integrated |
+| 8.2 | Not recorded | New / Modified | Crack-count and remarks-tag synchronization | Per-category plus/minus controls, quantitative tags and two-way Cracks/Remarks updates | Integrated |
+| 8.3 | Not recorded | Modified | Units for Excel output | Include measurement units in pair report headers and selected-PL copy labels | Integrated |
+| 8.4 | 2026-10-13 JST | Modified / Fix | Bore enlargement formula explanation | Numeric substitution for used-bore and enlargement-area popovers; fix W-dependency highlighting | Integrated |
+| 9.2 Beta | 2026-10-13 JST | Experimental / Modified | Photo contour auto-alignment and standardized pair export | Inner/outer ellipse contour suggestions, numbered workspace actions and 25-item Upper/Lower Excel report; inspector review remains necessary | Integrated / experimental |
+| 9.3–9.3.4 Beta | 2026-10-14 JST | Modified / Fix | Robust ruler calibration and manual 100 mm guides | Higher-resolution/adaptive tick detection; independent X/Y guide calibration; report significant scale disagreement without guessing | Integrated / requires testing |
+| 9.3.5–9.4.5 Beta | 2026-10-14 JST | Modified | Compact resizable workspace and A–F input improvements | Grouped numbered controls, responsive photo-first layout, single manual-calibration toggle, automatic post-import workflow and less overlapping data | Integrated |
+| 9.4.6–9.4.7 Beta | 2026-10-14 JST | New / Verification | Per-photo alignment confirmation and export gating | Require Verify Alignment per imported PL; independent verified data access; pair-dependent calculations require both relevant verifications | Integrated |
+| 9.4.8–9.4.9 Beta | 2026-10-14 JST | Modified / Fix | Editable Upper/Lower A–F value boxes | Direct manual override, automatic measured defaults and restoration of automatic values after clearing overrides | Integrated |
+| 9.4.10 Beta | 2026-10-14 JST | Modified | A–F measurement legend shortcut | Add ⓘ in A–F Dimensions panel; retain editable side-by-side entries | Integrated |
+| Ver10 Beta | 2026-10-15 JST | Major release / Modified | Restored Save Reminder control layout and campaign navigation | #0–#4 workspace controls, saved PL sets, campaign copying, save reminders and alignment verification | Superseded by Ver10.1 |
+| Ver10.1 Beta | 2026-10-15 JST | Modified / Fix | Upper/Lower identification and photo-import workflow | Characteristic Lower PL closure-mark warning when two photos exist; manual U/L swap and repeat checking; calibration-independent import/replace; visible button label; embedded favicon | Current beta / detection unvalidated |
 
 ## Date and traceability notes
 
@@ -203,4 +215,4 @@ Entries for the earliest stages are based on the available source filenames and 
 `Not recorded` means the available source files and chat history do not establish a reliable release date/time. 
 `2026-10-09 JST*` indicates the change was documented in the October 9 conversation, **not** a verified precise build timestamp. 
 The user-facing Version 8.0 release is dated 2026-10-09 JST; exact minute has not been verified independently. 
-Historical items describe development iterations, including experiments that were rolled back; they are **not** a guarantee that every historical feature is active in 8.0.
+Historical items describe development iterations, including experiments that were rolled back; they are **not** a guarantee that every historical feature remains active in Ver10.1 Beta. Newer computer-vision warnings are advisory and have not been validated against reference inspection data.
