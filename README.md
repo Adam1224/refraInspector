@@ -1,6 +1,8 @@
 # RefraInspector
 
-**Version:** Ver10.1 Beta
+**Version:** v10.1
+
+**Development status:** Beta — automatic image recognition and measurement accuracy require further validation.
 
 Web-based refractory sliding gate plate inspection application.
 
