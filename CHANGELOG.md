@@ -1,6 +1,6 @@
 # RN Plate Pair Inspector — Complete Version Update History
 
-## Ver10.1 Beta — 2026-10-15 (JST)
+## v10.1 — 2026-10-15 (JST)
 **Type:** Photo workflow / Identification safeguards / UI / Version release
 - Shows the full **Import / Replace Photo** label in the #0 workspace panel, including after a photograph is loaded.
 - Adds **Swap U/L PL** in #0 to exchange Upper/Lower photographs and associated inspection data; alignment requires re-verification after swapping.
@@ -9,16 +9,16 @@
 - Suppresses mix-up warnings unless both Upper and Lower photographs have been imported.
 - Allows switching PLs and importing/replacing photos even when automatic ruler calibration fails.
 - Adds a self-contained RefraInspector browser favicon.
-- Preserves the restored Save Reminder workspace control layout, in-session saved sets, and campaign exports from Ver10 Beta.
+- Preserves the restored Save Reminder workspace control layout, in-session saved sets, and campaign exports from v10.0.
 
 **Validation:** JavaScript syntax checks passed in local iterations; real-image recognition accuracy and interactive browser/device behavior have not yet been validated.
 
-## Ver10 Beta — 2026-10-15 (JST)
+## v10.0 — 2026-10-15 (JST)
 **Type:** Major version / Workspace & campaign functionality
 - Restores the compact workspace layout based on the Save Reminder reference, with #0 Import/Replace, #1 Level, #2 Calibration, #3 Alignment, and #4 Save Set.
 - Includes saved PL-set navigation, campaign data copying, save attention reminder, and existing per-photo alignment verification.
 
-## Version 9.4.10 Beta — 2026-10-14 (JST)
+## v9.4.10 — 2026-10-14 (JST)
 **Type:** UI / Measurement interaction
 - Adds an **i** icon to the PL A–F Dimensions · Upper / Lower header; opens the existing PL photo workspace measurement legend without toggling the panel.
 - Preserves editable side-by-side Upper/Lower A–F value boxes with automatic measurement as the default and manual override on entry (v9.4.8).
@@ -27,7 +27,7 @@
 
 **Note:** This is beta software; image detection and iPhone interactions need validation on actual devices.
 
-## Version 9.4.7 Beta — 2026-10-14 (JST)
+## v9.4.7 — 2026-10-14 (JST)
 **Type:** New / Modified / Calibration / Responsive UI / Verification
 
 ### iPhone ruler calibration (v9.3–v9.3.4)
@@ -53,7 +53,7 @@
 
 **Validation limitations:** JavaScript syntax validation completed during beta iterations; photo-processing accuracy and browser/iPhone interactions require real-device testing. Auto-alignment and photo-derived area estimates are not independently validated.
 
-## Version 9.2 Beta — 2026-10-13 (JST)
+## v9.2 — 2026-10-13 (JST)
 **Type:** Experimental / Modified / UI / Export
 
 - Adds feature-specific **Auto Align** with separate inner used-bore and outer edge-damage ellipse contour detection. Candidate contour points are fitted, filtered for outliers and refitted before positioning H3/H4, inner bore guides, H2/H5 and V1/V2; H1/H6 use separate plate-reference edge searches.
@@ -64,7 +64,7 @@
 - Refines Copy pair report for Excel into Mark/Abbreviation and Upper/Lower data columns in the specified 25-item order. Uses Mark where provided and abbreviation otherwise; unavailable values remain blank and copied numeric data uses one decimal place.
 - Removes the redundant selected-PL Excel copy button, selected image + JSON export button and the associated preview textbox. Retains the main pair Excel copy and pair JSON/image exports.
 - Adds measurement Mark codes to available calculated-result labels.
-- Updates browser title and Help & User Manual version labels to v9.2 Beta.
+- Updates browser title and Help & User Manual version labels to v9.2.
 
 **Limitations:** Auto-alignment is experimental and has not yet been benchmarked against reference PL measurements. Operator confirmation and ruler calibration remain essential.
 
@@ -103,7 +103,7 @@
 **Limitations:** iPhone Safari behavior has not yet been confirmed on a physical device. Resizing a photo reduces pixel detail; ruler calibration is based on the resized working image. v8.0 remains available in Git history.
 
 
-**Current release:** Ver10.1 Beta  
+**Current release:** v10.1  
 **Release date:** 2026-10-15 (JST)  
 **Earliest documented source:** `rn_plate_annotation_tool(2).html` (original five-horizontal/two-vertical annotation tool).  
 **Source base:** `refra_inspector_v7_39_photo_import_ui.html` (v7.38 ruler algorithm + updated photo import UI).
@@ -120,7 +120,7 @@
 
 ## Chronological changelog — from the original annotation tool
 
-| Version | Update date/time | Type | New feature / focus | Modified features / details | Status as of Ver10.1 |
+| Version | Update date/time | Type | New feature / focus | Modified features / details | Status as of v10.1 |
 |---|---|---|---|---|---|
 | 1.0 | Not recorded | New | Initial RN Plate Line Annotation Tool | Image import, five draggable horizontal / two vertical lines, editable labels, VGG-like JSON export and copy | Historical starting point |
 | 1.x (6H) | Not recorded | Modified | Six-horizontal-line prototype | Expanded the initial five-line layout to six horizontal reference lines | Superseded |
@@ -205,8 +205,8 @@
 | 9.4.6–9.4.7 Beta | 2026-10-14 JST | New / Verification | Per-photo alignment confirmation and export gating | Require Verify Alignment per imported PL; independent verified data access; pair-dependent calculations require both relevant verifications | Integrated |
 | 9.4.8–9.4.9 Beta | 2026-10-14 JST | Modified / Fix | Editable Upper/Lower A–F value boxes | Direct manual override, automatic measured defaults and restoration of automatic values after clearing overrides | Integrated |
 | 9.4.10 Beta | 2026-10-14 JST | Modified | A–F measurement legend shortcut | Add ⓘ in A–F Dimensions panel; retain editable side-by-side entries | Integrated |
-| Ver10 Beta | 2026-10-15 JST | Major release / Modified | Restored Save Reminder control layout and campaign navigation | #0–#4 workspace controls, saved PL sets, campaign copying, save reminders and alignment verification | Superseded by Ver10.1 |
-| Ver10.1 Beta | 2026-10-15 JST | Modified / Fix | Upper/Lower identification and photo-import workflow | Characteristic Lower PL closure-mark warning when two photos exist; manual U/L swap and repeat checking; calibration-independent import/replace; visible button label; embedded favicon | Current beta / detection unvalidated |
+| v10.0 | 2026-10-15 JST | Major release / Modified | Restored Save Reminder control layout and campaign navigation | #0–#4 workspace controls, saved PL sets, campaign copying, save reminders and alignment verification | Superseded by v10.1 |
+| v10.1 | 2026-10-15 JST | Modified / Fix | Upper/Lower identification and photo-import workflow | Characteristic Lower PL closure-mark warning when two photos exist; manual U/L swap and repeat checking; calibration-independent import/replace; visible button label; embedded favicon | Current / detection unvalidated |
 
 ## Date and traceability notes
 
@@ -215,4 +215,4 @@ Entries for the earliest stages are based on the available source filenames and 
 `Not recorded` means the available source files and chat history do not establish a reliable release date/time. 
 `2026-10-09 JST*` indicates the change was documented in the October 9 conversation, **not** a verified precise build timestamp. 
 The user-facing Version 8.0 release is dated 2026-10-09 JST; exact minute has not been verified independently. 
-Historical items describe development iterations, including experiments that were rolled back; they are **not** a guarantee that every historical feature remains active in Ver10.1 Beta. Newer computer-vision warnings are advisory and have not been validated against reference inspection data.
+Historical items describe development iterations, including experiments that were rolled back; they are **not** a guarantee that every historical feature remains active in v10.1. Newer computer-vision warnings are advisory and have not been validated against reference inspection data.
