@@ -1,6 +1,6 @@
 # RefraInspector
 
-**Version:** v10.1
+**Version:** v10.2.4
 
 **Development status:** Beta — automatic image recognition and measurement accuracy require further validation.
 
