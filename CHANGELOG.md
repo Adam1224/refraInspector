@@ -1,5 +1,11 @@
 # RN Plate Pair Inspector — Complete Version Update History
 
+## v10.2.4 — 2026-10-15 (JST)
+**Type:** Patch / Measurement-line guidance
+- Shows contextual hover hints for H1–H6 and V1–V2 photo-workspace measuring lines, using the inspector-provided edge and damage definitions.
+- Keeps measurement geometry and drag behavior unchanged.
+- Includes prior local development through v10.2.3: campaign-wide W0/X0/Y0/Z0/R0 inputs and all-saved-set Excel copying with one column per individual PL.
+
 ## v10.1 — 2026-10-15 (JST)
 **Type:** Photo workflow / Identification safeguards / UI / Version release
 - Shows the full **Import / Replace Photo** label in the #0 workspace panel, including after a photograph is loaded.
@@ -103,7 +109,7 @@
 **Limitations:** iPhone Safari behavior has not yet been confirmed on a physical device. Resizing a photo reduces pixel detail; ruler calibration is based on the resized working image. v8.0 remains available in Git history.
 
 
-**Current release:** v10.1  
+**Current release:** v10.2.4  
 **Release date:** 2026-10-15 (JST)  
 **Earliest documented source:** `rn_plate_annotation_tool(2).html` (original five-horizontal/two-vertical annotation tool).  
 **Source base:** `refra_inspector_v7_39_photo_import_ui.html` (v7.38 ruler algorithm + updated photo import UI).
@@ -206,7 +212,8 @@
 | 9.4.8–9.4.9 Beta | 2026-10-14 JST | Modified / Fix | Editable Upper/Lower A–F value boxes | Direct manual override, automatic measured defaults and restoration of automatic values after clearing overrides | Integrated |
 | 9.4.10 Beta | 2026-10-14 JST | Modified | A–F measurement legend shortcut | Add ⓘ in A–F Dimensions panel; retain editable side-by-side entries | Integrated |
 | v10.0 | 2026-10-15 JST | Major release / Modified | Restored Save Reminder control layout and campaign navigation | #0–#4 workspace controls, saved PL sets, campaign copying, save reminders and alignment verification | Superseded by v10.1 |
-| v10.1 | 2026-10-15 JST | Modified / Fix | Upper/Lower identification and photo-import workflow | Characteristic Lower PL closure-mark warning when two photos exist; manual U/L swap and repeat checking; calibration-independent import/replace; visible button label; embedded favicon | Current / detection unvalidated |
+| v10.1 | 2026-10-15 JST | Modified / Fix | Upper/Lower identification and photo-import workflow | Characteristic Lower PL closure-mark warning when two photos exist; manual U/L swap and repeat checking; calibration-independent import/replace; visible button label; embedded favicon | Historical / detection unvalidated |
+| v10.2.4 | 2026-10-15 JST | Patch | Measurement-line hover hints | H1–H6 and V1–V2 definitions visible on hover; retains prior saved-set Excel and campaign geometry improvements | Current |
 
 ## Date and traceability notes
 
