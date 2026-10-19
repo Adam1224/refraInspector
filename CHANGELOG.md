@@ -1,5 +1,14 @@
 # RN Plate Pair Inspector — Complete Version Update History
 
+## v11.0.0 — 2026-10-19 (JST)
+**Type:** Major release / Consolidated Campaign inspection workflow
+- Consolidates local improvements through v10.2.31 into the main application.
+- Separates importing a new PL set from replacing photos in the active set, with confirmation before discarding unsaved work; fixes Upper/Lower photo assignment swapping.
+- Shows five saved-set alignment/save statuses and blocks Save to Campaign until every imported PL photo is alignment-verified.
+- Adds PL Performance animation after successful saves that change campaign summary values.
+- Includes prior automatic IndexedDB recovery, capture-time extraction, Excel export refinements, Remaining Stroke judgments, and Upper/Lower selector controls.
+- This major number is a release consolidation; it does not imply production validation. Browser and real-photo testing remain necessary.
+
 ## v10.2.25 — 2026-10-19 (JST)
 **Type:** Photo workspace UI / usability and reporting
 - Replaced Upper/Lower photo cards with a compact two-position selector, and restored the saved PL-set dropdown alongside it above workspace controls.
@@ -127,7 +136,7 @@
 **Limitations:** iPhone Safari behavior has not yet been confirmed on a physical device. Resizing a photo reduces pixel detail; ruler calibration is based on the resized working image. v8.0 remains available in Git history.
 
 
-**Current release:** v10.2.25  
+**Current release:** v11.0.0  
 **Release date:** 2026-10-15 (JST)  
 **Earliest documented source:** `rn_plate_annotation_tool(2).html` (original five-horizontal/two-vertical annotation tool).  
 **Source base:** `refra_inspector_v7_39_photo_import_ui.html` (v7.38 ruler algorithm + updated photo import UI).
@@ -231,7 +240,8 @@
 | 9.4.10 Beta | 2026-10-14 JST | Modified | A–F measurement legend shortcut | Add ⓘ in A–F Dimensions panel; retain editable side-by-side entries | Integrated |
 | v10.0 | 2026-10-15 JST | Major release / Modified | Restored Save Reminder control layout and campaign navigation | #0–#4 workspace controls, saved PL sets, campaign copying, save reminders and alignment verification | Superseded by v10.1 |
 | v10.1 | 2026-10-15 JST | Modified / Fix | Upper/Lower identification and photo-import workflow | Characteristic Lower PL closure-mark warning when two photos exist; manual U/L swap and repeat checking; calibration-independent import/replace; visible button label; embedded favicon | Historical / detection unvalidated |
-| v10.2.25 | 2026-10-19 JST | UI / Fix / Recovery | Upper–Lower slider and saved-set selector, timestamps, auto-recovery, reporting fixes | Improved in-browser inspection workflow | Current |
+| v11.0.0 | 2026-10-19 JST | Major | Consolidated verified campaign workflow | New/replace photo controls, mandatory alignment verification, save status and performance animation | Current |
+| v10.2.25 | 2026-10-19 JST | UI / Fix / Recovery | Upper–Lower slider and saved-set selector, timestamps, auto-recovery, reporting fixes | Improved in-browser inspection workflow | Historical |
 | v10.2.14 | 2026-10-16 JST | Modified / New | Campaign backup, line precision, standardized reporting | Merged campaign and per-PL Excel reporting with provenance and English abbreviations/remarks | Historical |
 | v10.2.4 | 2026-10-15 JST | Patch | Measurement-line hover hints | H1–H6 and V1–V2 definitions visible on hover; retains prior saved-set Excel and campaign geometry improvements | Historical |
 
