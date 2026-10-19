@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2214%22%20fill%3D%22%23165b9c%22%2F%3E%3Cpath%20d%3D%22M12%2018%20Q12%2012%2018%2012%20H46%20Q52%2012%2052%2018%20V46%20Q52%2052%2046%2052%20H18%20Q12%2052%2012%2046%20Z%22%20fill%3D%22none%22%20stroke%3D%22%23ffffff%22%20stroke-width%3D%225%22%2F%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2212%22%20fill%3D%22%23ffffff%22%2F%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%226%22%20fill%3D%22%23165b9c%22%2F%3E%3Cpath%20d%3D%22M32%204v10M32%2050v10M4%2032h10M50%2032h10%22%20stroke%3D%22%238ed3ff%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22%2F%3E%3C%2Fsvg%3E"/><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>RefraInspector v10.2.4</title><style>
+<html lang="en"><head><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2214%22%20fill%3D%22%23165b9c%22%2F%3E%3Cpath%20d%3D%22M12%2018%20Q12%2012%2018%2012%20H46%20Q52%2012%2052%2018%20V46%20Q52%2052%2046%2052%20H18%20Q12%2052%2012%2046%20Z%22%20fill%3D%22none%22%20stroke%3D%22%23ffffff%22%20stroke-width%3D%225%22%2F%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2212%22%20fill%3D%22%23ffffff%22%2F%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%226%22%20fill%3D%22%23165b9c%22%2F%3E%3Cpath%20d%3D%22M32%204v10M32%2050v10M4%2032h10M50%2032h10%22%20stroke%3D%22%238ed3ff%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22%2F%3E%3C%2Fsvg%3E"/><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>RefraInspector v10.2.14</title><style>
 :root{font:14px system-ui,-apple-system,Segoe UI,sans-serif;color:#202734;background:#f3f5f8}*{box-sizing:border-box}body{margin:0;padding:16px}button,input,select{font:inherit}button{background:white;color:#243447;border:1px solid #cbd4df;border-radius:7px;padding:8px 10px;cursor:pointer}button:hover{background:#edf3fa}button.primary{background:#195b99;color:white;border-color:#195b99}input{width:100%;padding:6px;border:1px solid #c9d2df;border-radius:6px;min-width:0}input[type=file]{display:none}header{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:12px}h1{font-size:21px;margin:0}h2{font-size:16px;margin:0 0 12px}h3{font-size:14px;margin:15px 0 8px}.small{color:#657487;font-size:12px;line-height:1.5}.three{display:grid;grid-template-columns:minmax(210px,260px) minmax(390px,1fr) minmax(410px,520px);gap:12px;align-items:start;max-width:2000px;margin:auto}.panel{background:white;border:1px solid #dfe5ed;border-radius:11px;padding:13px;min-width:0}.field{display:grid;grid-template-columns:1fr 94px;align-items:center;gap:8px;margin:8px 0}.field label{font-size:12px;color:#4d5c70}.stat{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid #eef1f6;align-items:center}.stat b{font-variant-numeric:tabular-nums;text-align:right}.stat .small{max-width:66%}.toolbar{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin-bottom:10px}.tab[aria-selected=true]{background:#175b9a;color:white;border-color:#175b9a}.photoheader{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin:8px 0}.photoarea{background:#222830;border-radius:8px;padding:7px;min-height:390px;display:flex;align-items:center;justify-content:center}.stage{position:relative;line-height:0;touch-action:none;user-select:none;max-width:100%;width:100%;display:none}.stage img{display:block;width:100%;height:auto}.stage .line{position:absolute;z-index:4;touch-action:none;cursor:grab}.stage .line.h{height:18px;left:0;right:0;transform:translateY(-9px)}.stage .line.v{width:18px;top:0;bottom:0;transform:translateX(-9px)}.line.h:before{content:'';position:absolute;left:0;right:0;top:8px;border-top:2px solid var(--lc);filter:drop-shadow(0 0 1px #000)}.line.v:before{content:'';position:absolute;top:0;bottom:0;left:8px;border-left:2px solid var(--lc);filter:drop-shadow(0 0 1px #000)}.stage svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3;overflow:visible}.stage.contour{cursor:crosshair}.stage.contour .line{pointer-events:none}.areaInfo{border:1px solid #dbe3ec;border-radius:8px;padding:9px;margin:8px 0;background:#f8fafc}.areaInfo button{font-size:12px;padding:6px 8px}.areaInfo .inline{margin-top:7px}.placeholder{color:#c4cbd6;text-align:center;padding:60px 10px}.ind{background:#f2f6fc;border-radius:7px;padding:7px 9px;font-size:12px;line-height:1.5;margin:8px 0}.dimtable{width:100%;border-collapse:collapse;font-size:13px}.dimtable th{text-align:left;background:#f0f4f8;font-size:12px;padding:8px 5px}.dimtable td{border-bottom:1px solid #e9edf2;padding:5px}.dimtable input{width:90px}.crackrow{display:flex;justify-content:space-between;align-items:center;gap:8px;border-bottom:1px solid #ecf0f5;padding:5px 0}.crackrow label{font-size:12px}.crackrow input{width:70px}.crackrow small{color:#657487}.dimtable td:last-child{text-align:right;font-variant-numeric:tabular-nums;font-weight:650}.results{display:grid;grid-template-columns:minmax(180px,1.05fr) minmax(170px,.95fr);gap:12px}.results>div{min-width:0}textarea{display:block;width:100%;min-height:175px;font:12px/1.5 ui-monospace,monospace;border:1px solid #cbd3df;border-radius:7px;padding:8px;resize:vertical}.pairdata{border:1px solid #d5deea;border-radius:8px;padding:9px;margin:12px 0}.warn{color:#a15b17}.good{color:#206b39}.inline{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.inline input[type=range]{width:150px}.mode{background:#e8f0fa;padding:6px;border-radius:6px;font-size:12px}.separator{border-top:1px solid #e6eaf0;margin:12px 0}.calBtns{display:flex;gap:6px;flex-wrap:wrap}.calstatus{font-size:12px;margin-top:7px}.hint{font-size:12px;background:#fffae9;color:#725716;padding:8px;border-radius:6px;margin:8px 0}.minibtn{padding:5px 7px;font-size:12px}@media(max-width:1300px){.three{grid-template-columns:230px minmax(330px,1fr)}.right{grid-column:1/-1}.results{grid-template-columns:1fr 1fr}}@media(max-width:720px){body{padding:8px}.three{display:block}.panel{margin-bottom:10px}.results{grid-template-columns:1fr 1fr}}@media(max-width:450px){.results{grid-template-columns:1fr}.dimtable input{width:73px}}
 .formulaInfo{display:inline-grid;place-items:center;vertical-align:middle;margin-left:4px;padding:0;border:0;background:transparent;color:#23639d;font-size:15px;font-weight:700;line-height:1;min-width:22px;min-height:22px;border-radius:50%;cursor:pointer}.formulaInfo:hover,.formulaInfo:focus-visible{background:#e7f1fc;outline:2px solid #a8c9e7;outline-offset:1px}.formulaPopover{position:fixed;z-index:1000;max-width:min(440px,calc(100vw - 24px));padding:12px 34px 12px 13px;border-radius:9px;border:1px solid #a7b8c9;background:#fff;color:#202734;box-shadow:0 6px 22px #0002;font-size:13px;line-height:1.55}.formulaPopover{max-height:calc(100vh - 24px);overflow:auto}.formulaPopover[hidden]{display:none}.formulaPopover strong{display:block;margin-bottom:5px}.formulaPopover .closeInfo{position:absolute;right:5px;top:5px;border:0;padding:3px 7px}.stat .small{max-width:none}details.bulkPaste{border:1px solid #cbd7e4;border-radius:9px;padding:10px;margin:0 0 14px;background:#f8fbff}details.bulkPaste summary{cursor:pointer;font-weight:650;color:#195b99}details.bulkPaste textarea{margin:9px 0;min-height:110px}#H0{background:#edf2f8;color:#42556a}</style><style id="v66styles">.formulaDep{background:#fff3b0!important;outline:2px solid #e19a16!important;outline-offset:2px;transition:background .12s}.formulaDepTitle{background:#fff3b0;border-radius:4px}.autoRulerValue{text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:2px;text-decoration-color:#1d72b8}.originalBore{padding:7px;background:#f0f7fe;border:1px solid #b6cde6;border-radius:8px}.measureSourceNote{color:#566475;font-size:11px;margin:5px 0} .focusPhotoArea{outline:3px solid #eab308;outline-offset:-3px} .areaFocusLegend{font-size:12px;color:#755600;font-weight:700}</style><style id="v73styles">
 .three{grid-template-columns:minmax(205px,245px) minmax(360px,1fr) minmax(610px,740px);max-width:2200px}
@@ -466,13 +466,26 @@
   text-overflow:ellipsis!important;white-space:nowrap!important;
  }
 }
-</style></head><body><header><div><h1>RN Plate Pair Inspector <span class="small">v10.2.4</span></h1><div class="small">Upper / Lower pair · ruler-referenced measurements · campaign performance</div></div><div class="inline"><button id="showUserManual" type="button" aria-haspopup="dialog">? Help &amp; Manual</button><button class="primary" id="exportAll">Export pair JSON + images</button><button id="copyAll">Copy pair report for Excel</button></div></header><main class="three">
-<section class="panel"><details class="leftCollapsible" open><summary>PL Geometry</summary><div class="leftCollapseBody"><details class="bulkPaste" open><summary>Paste campaign geometry (Excel / TSV)</summary><p class="small">Paste six columns (W0, X0, Y0, Z0, R0, H0), or name/value rows. H0 = 2×Y0 and expected R0 = Z0 − H0 are checked for consistency.</p><textarea aria-label="Campaign geometry paste" id="campaignPaste" placeholder="W0	X0	Y0	Z0	R0	H0
-200	5	45	270	180	90" style="min-height:115px"></textarea><div id="campaignPasteStatus" role="status" hidden></div></details><div class="field"><label for="cid">Campaign ID</label><input id="cid" value="CMP-001"/></div><div class="field"><label for="bore">Bore radius before use · Y (mm)</label><input id="bore" min="0" placeholder="Enter Y" step="0.1" type="number"/></div><div class="field"><label for="W">W: Center-to-edge incl. band (mm)</label><input id="W" min="0" placeholder="W" step="0.1" type="number"/></div><div class="field"><label for="X">X: Band thickness (mm)</label><input id="X" min="0" step="0.1" type="number" value="0"/></div><div class="field"><label for="Z">Z: Closed center distance (mm)</label><input id="Z" min="0" placeholder="Z" step="0.1" type="number"/></div><div class="field"><label for="R0">R0 / SD: Initial stroke (mm)</label><input id="R0" min="0" placeholder="R0" step="0.1" type="number"/></div><div class="field"><label for="H0">H0 / BDia: Bore diameter before use (mm)</label><input aria-label="Calculated original bore diameter" id="H0" placeholder="2 × Y0" readonly="" type="number"/></div><div class="field"><label for="safe">Remaining stroke safe limit (mm) *</label><input id="safe" required aria-required="true" min="0" step="0.1" type="number" value="10"/></div><p class="small">Y is entered as the unused bore radius. F is required for stroke calculations on each PL.</p></div></details><details class="leftCollapsible" open><summary id="plPerformanceTitle">PL performance at CMP-001</summary><div class="leftCollapseBody"><div class="stat"><span class="small">Recorded sets</span><b id="pairsCount">0</b></div>
-<div class="stat"><span class="small">Sets below safe limit <button aria-label="Formula: Sets below safe limit" class="formulaInfo" data-formula="belowCount" title="Count of saved sets where remaining stroke &lt; safe limit." type="button">ⓘ</button></span><b id="belowCount">—</b></div><div class="stat"><span class="small">Average erosion · mm/min <button aria-label="Formula: Average erosion per minute" class="formulaInfo" data-formula="avgTime" title="Mean of saved pair ER values: (R0 − R) / total runtime (min)." type="button">ⓘ</button></span><b id="avgTime">—</b></div><div class="stat"><span class="small">Average erosion · mm/heat <button aria-label="Formula: Average erosion per heat" class="formulaInfo" data-formula="avgHeat" title="Mean of saved pair EPH values: (R0 − R) / heats used." type="button">ⓘ</button></span><b id="avgHeat">—</b></div><div class="stat"><span class="small">Average remaining stroke (mm) <button aria-label="Formula: Average remaining stroke" class="formulaInfo" data-formula="avgStroke" title="Mean of valid saved pair remaining stroke values." type="button">ⓘ</button></span><b id="avgStroke">—</b></div><div class="inline" style="margin-top:11px"><button type="button" id="exportCampaign">Copy campaign data</button><button id="clearRecords">Clear saved pairs</button></div><div class="small" id="savedStatus" style="margin-top:8px">Session-only records; copy campaign data to Excel to preserve a readable summary.</div><div class="separator"></div><div class="small">Performance aggregates use saved complete PL pairs. Runtime and heats are pair-level quantities, not duplicated for Upper and Lower.</div></div></details></section>
+</style><style id="v1027geometryUI">
+/* Keep the established geometry IDs for calculation, save/restore and exports, but
+   present only the Excel-style six-column editor to the operator. */
+.leftCollapseBody>.field:has(> #W),.leftCollapseBody>.field:has(> #X),
+.leftCollapseBody>.field:has(> #bore),.leftCollapseBody>.field:has(> #Z),
+.leftCollapseBody>.field:has(> #R0),.leftCollapseBody>.field:has(> #H0){display:none!important}
+#campaignPaste{font:12px/1.75 ui-monospace,SFMono-Regular,Consolas,monospace;
+  white-space:pre;overflow-x:auto;resize:vertical;min-height:78px!important;
+  background:#fff;color:#152238}
+#exportAll{display:none!important}
+body>header>.inline{justify-content:flex-end}
+body>header .campaignBackupActions{display:inline-flex;align-items:center;gap:6px;flex-wrap:wrap}
+@media(max-width:600px){body>header .campaignBackupActions{width:100%;justify-content:flex-end}}
+</style><style id="refraPrecisionStyle">#stage .line.precisionSelected:before{border-color:#fde047!important;filter:drop-shadow(0 0 4px #000);border-width:3px}#stage .line:focus-visible{outline:2px dashed #fde047;outline-offset:2px}#precisionLineStatus{font-size:12px;color:#23496d;background:#edf6ff;border:1px solid #d4e8fa;border-radius:6px;padding:5px 8px;margin:5px 0}</style><style id="refraStatusStyle">.measureSourceBadge{display:inline-block;margin-left:5px;padding:1px 5px;border-radius:4px;font-size:10px;font-weight:650;white-space:nowrap;vertical-align:middle}.sourceAuto{background:#e7f1fd;color:#17578a}.sourceManual{background:#fff0cc;color:#80541b}.sourceVerified{background:#ddf7e7;color:#216b3e}.sourceReview{background:#fce5e4;color:#963630}.dimPlateCell .measureSourceBadge{display:block;width:max-content;margin-top:2px}.dimPlateCell{vertical-align:middle}</style></head><body><header><div><h1>RN Plate Pair Inspector <span class="small">v10.2.14</span></h1><div class="small">Upper / Lower pair · ruler-referenced measurements · campaign performance</div></div><div class="inline"><button id="showUserManual" type="button" aria-haspopup="dialog">? Help &amp; Manual</button><button class="primary" id="exportAll" hidden aria-hidden="true" tabindex="-1">Export pair JSON + images</button><button id="copyAll">Copy pair report for Excel</button></div></header><main class="three">
+<section class="panel"><details class="leftCollapsible" open><summary>PL Geometry</summary><div class="leftCollapseBody"><details class="bulkPaste" open><summary>Campaign geometry (Excel / TSV)</summary><p class="small">Paste or edit the six-column geometry table below (W0, X0, Y0, Z0, R0, H0). Values are recognized automatically; H0 = 2×Y0. Other Excel layouts are accepted on paste.</p><textarea aria-label="Campaign geometry paste" id="campaignPaste" placeholder="W0	X0	Y0	Z0	R0	H0
+200	5	45	270	180	90" style="min-height:78px"></textarea><div id="campaignPasteStatus" role="status" hidden></div></details><div class="field"><label for="cid">Campaign ID</label><input id="cid" value="CMP-001"/></div><div class="field"><label for="bore">Bore radius before use · Y (mm)</label><input id="bore" min="0" placeholder="Enter Y" step="0.1" type="number"/></div><div class="field"><label for="W">W: Center-to-edge incl. band (mm)</label><input id="W" min="0" placeholder="W" step="0.1" type="number"/></div><div class="field"><label for="X">X: Band thickness (mm)</label><input id="X" min="0" step="0.1" type="number" value="0"/></div><div class="field"><label for="Z">Z: Closed center distance (mm)</label><input id="Z" min="0" placeholder="Z" step="0.1" type="number"/></div><div class="field"><label for="R0">R0 / SD: Initial stroke (mm)</label><input id="R0" min="0" placeholder="R0" step="0.1" type="number"/></div><div class="field"><label for="H0">H0 / BDia: Bore diameter before use (mm)</label><input aria-label="Calculated original bore diameter" id="H0" placeholder="2 × Y0" readonly="" type="number"/></div><div class="field"><label for="safe">Remaining stroke safe limit (mm) *</label><input id="safe" required aria-required="true" min="0" step="0.1" type="number" value="10"/></div><p class="small">Y is entered as the unused bore radius. F is required for stroke calculations on each PL.</p></div></details><details class="leftCollapsible" open><summary id="plPerformanceTitle">PL performance at CMP-001</summary><div class="leftCollapseBody"><div class="stat"><span class="small">Recorded sets</span><b id="pairsCount">0</b></div>
+<div class="stat"><span class="small">Sets below safe limit <button aria-label="Formula: Sets below safe limit" class="formulaInfo" data-formula="belowCount" title="Count of saved sets where remaining stroke &lt; safe limit." type="button">ⓘ</button></span><b id="belowCount">—</b></div><div class="stat"><span class="small">Average erosion · mm/min <button aria-label="Formula: Average erosion per minute" class="formulaInfo" data-formula="avgTime" title="Mean of saved pair ER values: (R0 − R) / total runtime (min)." type="button">ⓘ</button></span><b id="avgTime">—</b></div><div class="stat"><span class="small">Average erosion · mm/heat <button aria-label="Formula: Average erosion per heat" class="formulaInfo" data-formula="avgHeat" title="Mean of saved pair EPH values: (R0 − R) / heats used." type="button">ⓘ</button></span><b id="avgHeat">—</b></div><div class="stat"><span class="small">Average remaining stroke (mm) <button aria-label="Formula: Average remaining stroke" class="formulaInfo" data-formula="avgStroke" title="Mean of valid saved pair remaining stroke values." type="button">ⓘ</button></span><b id="avgStroke">—</b></div><div class="inline" style="margin-top:11px"><button id="clearRecords">Clear saved pairs</button></div><div class="small" id="savedStatus" style="margin-top:8px">Session-only records; use Copy pair report for Excel to preserve a readable summary.</div><div class="separator"></div><div class="small">Performance aggregates use saved complete PL pairs. Runtime and heats are pair-level quantities, not duplicated for Upper and Lower.</div></div></details></section>
 <div class="workspaceDivider" id="leftWidthDivider" role="separator" aria-label="Resize PL Geometry panel" aria-orientation="vertical" tabindex="0" title="Drag to resize PL Geometry · arrow keys to adjust"></div><section class="panel"><div class="photoheader"><h2 style="margin:0">PL photo workspace</h2><strong class="small" id="photoTitle" title="Current PL photo filename">Upper · no photo</strong><div class="inline"><button aria-selected="true" class="tab" id="upperTab">Upper PL</button><button aria-selected="false" class="tab" id="lowerTab">Lower PL</button><button type="button" id="photoExchange" aria-label="Replace photos: 1 for selected PL, 2 for Upper then Lower" class="minibtn photoUploadIcon" title="Import photos: select 1 photo for the active PL, or 2 photos (first Upper, second Lower)"><svg aria-hidden="true" fill="none" height="21" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="21"><path d="M7 7h14l-4-4m4 4-4 4M17 17H3l4 4m-4-4 4-4"></path></svg></button></div></div><div class="workspaceStepGroup"><div class="workspaceStepTitle">#1 Level</div><div class="toolbar"><button class="minibtn" id="autoLevel">Auto Level</button><button class="minibtn" id="manualLevel">Level with 2 Points</button></div></div>
 <div class="workspaceStepGroup"><details class="workspaceCal" open><summary>#2 Calibration · X / Y (px/mm)</summary><div class="workspaceCalBody"><h3>Ruler calibration</h3><div class="calBtns"><button id="autoCal">Auto 100mm Calibration</button><span id="autoScaleSummary" class="small" aria-live="polite" style="font-weight:650;white-space:nowrap">X: — · Y: — px/mm</span><span id="autoScaleMismatch" role="alert" hidden style="color:#991b1b;background:#fee2e2;border:2px solid #dc2626;border-radius:6px;padding:6px 9px;font-weight:750;font-size:12px;line-height:1.35"></span><button id="manualCalBoth" type="button">Start Manual Calibration</button><button type="button" id="manualRulerDone" hidden style="display:none!important" aria-hidden="true" tabindex="-1">Manual Ruler Calibration Done</button></div><div id="manualRulerControls" hidden style="display:none"><strong>Manual ruler calibration · 100 mm each direction</strong><p class="small">Set vertical guide spacing to X = 100 mm and horizontal guide spacing to Y = 100 mm.</p><span id="manualRulerSpan" class="small" role="status" style="display:block;margin-top:5px"></span></div><div id="rulerReadout" class="small" role="status">Auto detects X/Y ruler scales. If unsuccessful, adjust the four 100 mm guides.</div><div class="calibrationScalePair"><div class="field"><label for="sx">Horizontal (px/mm)</label><input id="sx" min="0.1" placeholder="—" step="0.001" type="number"/></div><div class="field"><label for="sy">Vertical (px/mm)</label><input id="sy" min="0.1" placeholder="—" step="0.001" type="number"/></div></div><div class="small">X/Y scales are independent. Verify against physical ruler marks.</div></div></details></div>
-<div class="workspaceStepGroup"><div class="workspaceStepTitle">#3 Alignment</div><div class="toolbar"><button class="minibtn" id="autoAlignAll">Auto Align</button><button class="minibtn" id="undoAutoAlign" disabled>Undo Alignment</button><button class="minibtn" id="resetLines">Reset Lines</button><button type="button" class="minibtn" id="verifyAlignment" aria-pressed="false" style="font-weight:750;border:2px solid #bd3434">Verify Alignment *</button><span id="alignmentVerifyState" role="status" style="font-size:11px;color:#a11b1b">Required</span></div><div id="autoAlignStatus" class="small" role="status" aria-live="polite" style="display:none;padding:5px 8px;margin:5px 0"></div></div><div class="workspaceStepGroup compactSaveStep"><div class="workspaceStepTitle">#4 Save Set</div><div class="toolbar"><button type="button" class="minibtn primary" id="savePair">Save set to campaign</button></div></div><div class="photoarea photoareaWrap"><input accept="image/*,.heic,.heif" aria-label="Select one or two PL photos" id="photoFile" multiple type="file"/><button aria-label="Show PL measurement legend" class="workspaceInfoFloating" id="workspaceHelpBtn" title="Show PL measurement legend" type="button">i</button><div class="placeholder" id="empty"><button type="button" id="photoImportPrompt" class="photoImportPrompt"><svg aria-hidden="true" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 16V3m0 0L7 8m5-5 5 5"></path><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"></path></svg><strong>Import PL photo</strong><span>Choose one image for the selected PL, or two images (Upper then Lower)</span></button></div><div id="photoLoadingOverlay" class="photoLoadingOverlay" hidden role="status" aria-live="polite"><span class="photoLoadingSpinner" aria-hidden="true"></span><strong id="photoLoadingMessage">Loading photos…</strong><span class="small">Decoding and preparing image</span></div><div class="stage" id="stage"><img alt="Selected plate photo" id="photo"/><svg id="arrows" preserveaspectratio="none" viewbox="0 0 1000 1000"></svg></div></div><div class="hint" id="actionHint" style="display:none"></div><div class="ind" id="calStatus" hidden>No image. Each PL has independent ruler calibration and dimension lines.</div><div class="areaInfo" hidden><h3 style="margin:0 0 5px">Nested ellipse area model</h3><div class="small">Area model: the used bore is bounded by H3/H4 and its detected left/right edges; the edge-damage boundary is the outer ellipse. The unused bore remains a calculation reference but is not drawn.</div><div class="small" style="margin:8px 0 6px"><strong>Inner ellipse</strong>: H3/H4 tangency and photo-estimated bore left/right edges.<br/><strong>Outer ellipse</strong>: tangent to V1, V2, H2 and H5.</div><button class="minibtn" id="rescanBore" type="button">Detect bore left/right from photo</button><div aria-live="polite" class="small" id="innerDetectStatus">Not scanned</div><div class="small" id="contourStatus">Area model uses current dimension lines and a photo-edge estimate. Calibrate both rulers and enter Y for area values.</div></div></section>
+<div class="workspaceStepGroup"><div class="workspaceStepTitle">#3 Alignment</div><div class="toolbar"><button class="minibtn" id="autoAlignAll">Auto Align</button><button class="minibtn" id="undoAutoAlign" disabled>Undo Alignment</button><button class="minibtn" id="resetLines">Reset Lines</button><button type="button" class="minibtn" id="verifyAlignment" aria-pressed="false" style="font-weight:750;border:2px solid #bd3434">Verify Alignment *</button><span id="alignmentVerifyState" role="status" style="font-size:11px;color:#a11b1b">Required</span></div><div id="autoAlignStatus" class="small" role="status" aria-live="polite" style="display:none;padding:5px 8px;margin:5px 0"></div></div><div class="workspaceStepGroup compactSaveStep"><div class="workspaceStepTitle">#4 Save Set</div><div class="toolbar"><button type="button" class="minibtn primary" id="savePair">Save set to campaign</button></div></div><div class="photoarea photoareaWrap"><input accept="image/*,.heic,.heif" aria-label="Select one or two PL photos" id="photoFile" multiple type="file"/><button aria-label="Show PL measurement legend" class="workspaceInfoFloating" id="workspaceHelpBtn" title="Show PL measurement legend" type="button">i</button><div class="placeholder" id="empty"><button type="button" id="photoImportPrompt" class="photoImportPrompt"><svg aria-hidden="true" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 16V3m0 0L7 8m5-5 5 5"></path><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"></path></svg><strong>Import PL photo</strong><span>Choose one image for the selected PL, or two images (Upper then Lower)</span></button></div><div id="photoLoadingOverlay" class="photoLoadingOverlay" hidden role="status" aria-live="polite"><span class="photoLoadingSpinner" aria-hidden="true"></span><strong id="photoLoadingMessage">Loading photos…</strong><span class="small">Decoding and preparing image</span></div><div class="stage" id="stage"><img alt="Selected plate photo" id="photo"/><svg id="arrows" preserveaspectratio="none" viewbox="0 0 1000 1000"></svg></div></div><div id="precisionLineStatus" role="status" aria-live="polite">Precision alignment: click a guide line, then use arrow keys (1 px); Shift + arrow (10 px). Re-verify afterward.</div><div class="hint" id="actionHint" style="display:none"></div><div class="ind" id="calStatus" hidden>No image. Each PL has independent ruler calibration and dimension lines.</div><div class="areaInfo" hidden><h3 style="margin:0 0 5px">Nested ellipse area model</h3><div class="small">Area model: the used bore is bounded by H3/H4 and its detected left/right edges; the edge-damage boundary is the outer ellipse. The unused bore remains a calculation reference but is not drawn.</div><div class="small" style="margin:8px 0 6px"><strong>Inner ellipse</strong>: H3/H4 tangency and photo-estimated bore left/right edges.<br/><strong>Outer ellipse</strong>: tangent to V1, V2, H2 and H5.</div><button class="minibtn" id="rescanBore" type="button">Detect bore left/right from photo</button><div aria-live="polite" class="small" id="innerDetectStatus">Not scanned</div><div class="small" id="contourStatus">Area model uses current dimension lines and a photo-edge estimate. Calibrate both rulers and enter Y for area values.</div></div></section>
 <div class="workspaceDivider" id="rightWidthDivider" role="separator" aria-label="Resize PL Dimensions and Results panel" aria-orientation="vertical" tabindex="0" title="Drag to resize PL Dimensions & Results · arrow keys to adjust"></div><section class="panel right"><div class="photoheader"><h2 style="margin:0">PL dimensions and results</h2><span class="mode" id="activeLabel">Upper PL</span></div><div class="results"><div class="inspectionColumn measuredColumn"><h3 class="inspectionColumnTitle">Measured / Entered Data</h3><details class="stackBox usageBox" open=""><summary>PL Set Usage Info</summary><div class="stackBody"><div class="field"><label for="plpair">PL pair ID</label><input id="plpair" value="PL-001"/></div><div class="pairdata"><div class="field"><label for="runtime">Total runtime (min)</label><input id="runtime" min="0" step="0.1" type="number"/></div><div class="field"><label for="heats">Heats used (total pair)</label><input id="heats" min="0" step="1" type="number"/></div></div></div></details><details class="stackBox dimensionsBox" open=""><summary><span>PL A–F Dimensions · Upper / Lower</span><button aria-label="Show PL measurement legend" class="summaryInfoBtn" id="afLegendBtn" title="Show PL measurement legend" type="button">i</button></summary><div class="stackBody"><table class="dimtable"><thead><tr><th>Dim.</th><th>Upper PL</th><th>Lower PL</th></tr></thead><tbody id="dimensionRows"></tbody></table><div aria-live="polite" class="rulerValidationNotice" id="rulerValidationNotice"></div><div class="measureSourceNote">A = Auto, M = Manual. Toggle the switch to choose; selected values are black, unused values gray. Manual fields remain editable.</div></div></details><details class="subSection" open=""><summary>Cracks · selected PL</summary><div class="subBody"><div class="small">Automatic image-based candidates are experimental and require inspector confirmation.</div><div class="inline" style="margin:8px 0"><button id="detectCracks">Scan crack candidates</button><button id="clearCracks">Clear counts</button></div><div class="small" id="crackStatus">Not assessed</div><div id="crackRows"></div><div class="stat"><span class="small">Cracks Count · CC (selected PL) <button aria-label="Formula: Cracks Count" class="formulaInfo" data-formula="cc" title="Sum of four inspector-confirmed crack category counts for the selected PL." type="button">ⓘ</button></span><b id="cc">—</b></div><div class="small" style="margin-top:7px">Values respond to dragging. Manually entered overrides are optional when photo calibration is uncertain.</div></div></details><details class="resultSection remarksSection" open=""><summary>Remarks · selected PL</summary><div class="resultBody">
 <div class="small">Tap a crack tag or + to increase its count; tap − to decrease it. Counts sync with Cracks. Other tags toggle normally. Saved independently for Upper and Lower PL.</div>
 <div class="tagChoices" id="remarkTags"></div>
@@ -498,7 +511,13 @@
 <div class="workspaceHelpHint">Click the <strong>i</strong> button in the photo workspace to reopen this reference at any time.</div>
 </div>
 </div>
-</main><script>
+</main><script id="refraModulesScript">/* RefraInspector UI/reporting modules: self-contained, no network dependencies. */
+window.RefraModules=Object.freeze({
+ reporting:Object.freeze({version:'1',columns:Object.freeze(['Mark','Upper PL','Lower PL']),reportDate:()=>new Date().toISOString().slice(0,10)}),
+ measurementStatus:Object.freeze({cssClass:(name)=>({Manual:'sourceManual',Verified:'sourceVerified',Auto:'sourceAuto',Review:'sourceReview'}[name]||'sourceReview')}),
+ precision:Object.freeze({pixelStep:(image,axis,shift)=>image?(shift?10:1)/(axis==='H'?image.height:image.width):0})
+});
+</script><script>
 (()=>{'use strict';
 const $=id=>document.getElementById(id),keys=['A','B','C','D','E','F'],ids=['H1','H2','H3','H4','H5','H6','V1','V2'],colors=['#ef4444','#fb923c','#d5aa00','#32bc7c','#338be3','#a855f7','#44c9d9','#c0cbd8'];
 const lineHints={H1:'H1: Short-end PL edge (steel band excluded)',H2:'H2: Used bore damage edge',H3:'H3: Used bore enlargement edge',H4:'H4: Used bore enlargement edge',H5:'H5: Used bore edge damage edge',H6:'H6: Used bore surface damage edge',V1:'V1: Used bore damage edge (left)',V2:'V2: Used bore damage edge (right)'};
@@ -561,6 +580,14 @@ const crackTypes=['Bore-Radial','Long-end Transverse','Bore-Transverse','Bore-Lo
 const crackState={upper:{counts:[null,null,null,null],status:'Not assessed'},lower:{counts:[null,null,null,null],status:'Not assessed'}};let active='upper',pending=null,records=[],fineBase=0,traceMode=null;
 const p=()=>plates[active], num=id=>{const v=$(id).value.trim();return v===''?null:(Number.isFinite(+v)?+v:null)}, fmt=(v,d=1)=>v===null||!Number.isFinite(v)?'—':v.toFixed(d), valid=(v)=>v!==null&&Number.isFinite(v);let currentObjectURL=null;
 function syncH0(){const y=num('bore');$('H0').value=valid(y)&&y>=0?(2*y).toString():'';}
+function showCampaignGeometryInPaste(force=false){
+ const editor=$('campaignPaste');if(!editor)return;
+ if(!force&&document.activeElement===editor)return; // don't disturb active typing/caret
+ const value=id=>$(id)?.value?.trim()||'';
+ const six=[value('W'),value('X'),value('bore'),value('Z'),value('R0'),value('H0')];
+ const normalized='W0\tX0\tY0\tZ0\tR0\tH0\n'+six.join('\t');
+ if(editor.value!==normalized)editor.value=normalized;
+}
 function applyCampaignGeometryPaste(){
  const raw=$('campaignPaste').value.trim(),status=$('campaignPasteStatus');
  if(!raw){status.textContent='Paste the table first.';status.className='small warn';return;}
@@ -605,6 +632,7 @@ function applyCampaignGeometryPaste(){
  if(typeof window.__applyCampaignWideGeometry==='function')window.__applyCampaignWideGeometry(vals);
  status.textContent='Applied: '+assigned.join(', ')+(warnings.length?' • Check: '+warnings.join('; '):' • H0 = 2 × Y0');
  status.className='small '+(warnings.length?'warn':'good');
+ showCampaignGeometryInPaste(true);
 }
 
 // Pasting a complete Excel range triggers input once with all the data present.
@@ -629,6 +657,7 @@ $('campaignPaste').addEventListener('paste',()=>{
 });
 
 $('bore').addEventListener('input',syncH0);
+showCampaignGeometryInPaste();
 function mm(axis,pixel){const a=axis==='x'?'calX':'calY',s=axis==='x'?'sx':'sy';const q=p()[a];if(q&&q.points.length>=2){const arr=q.points;let i=0;while(i<arr.length-2&&pixel>arr[i+1])i++;const delta=arr[i+1]-arr[i];return Math.abs(delta)>1e-5?(pixel-arr[i])/delta*q.step+i*q.step:null}return valid(p()[s])?pixel/p()[s]:null}
 function dimensionValues(pl){if(!pl.image) return Object.fromEntries(keys.map(k=>[k,pl.sourceMode[k]==='manual'&&valid(pl.manual[k])?pl.manual[k]:null]));const w=pl.image.width,h=pl.image.height,a=pl.pos;
 const measure=(axis,u,v)=>{const scale=axis==='x'?pl.sx:pl.sy;return valid(scale)&&scale>0?Math.abs((v-u)*(axis==='x'?w:h))/scale:null};
@@ -771,6 +800,15 @@ function refreshLiveDimensions(){
 }
 function calculate(){const u=dimensionValues(plates.upper),l=dimensionValues(plates.lower),b=num('bore'),W=num('W'),X=num('X'),Z=num('Z'),runtime=num('runtime'),heats=num('heats');const Y=valid(b)?b:null;const T=(d)=>valid(d.F)&&valid(W)&&valid(X)&&valid(Y)?d.F-(W-X+Y):null;const tU=T(u),tL=T(l);const total=valid(tU)&&valid(tL)?tU+tL:null;const stroke=valid(Z)&&valid(total)&&valid(Y)?Z-total-2*Y:null;const r0=num('R0');const deltaR=valid(r0)&&valid(stroke)?r0-stroke:null;const tDiff=valid(tU)&&valid(tL)?Math.abs(tU-tL):null;const olt=null;const gridU=areaGrid(plates.upper),gridL=areaGrid(plates.lower),originalArea=valid(b)&&b>0?Math.PI*b*b:null;const areaU=gridU.bore,areaL=gridL.bore,gridNow=active==='upper'?gridU:gridL,areaNow=active==='upper'?areaU:areaL;return{u,l,tU,tL,total,stroke,deltaR,tDiff,olt,areaU,areaL,areaNow,gridU,gridL,gridNow,originalArea,areaPct:valid(areaNow)&&valid(originalArea)?100*areaNow/originalArea:null,eTime:valid(deltaR)&&runtime>0?deltaR/runtime:null,eHeat:valid(deltaR)&&heats>0?deltaR/heats:null,runtime,heats}}
 $('rulerReadout').textContent=(()=>{const pl=p();return ['X','Y'].map(axis=>{const c=pl['cal'+axis];return axis+': '+(c?.verifiedNumbers?`numbered ticks ${c.anchors[0].mm} / ${c.anchors[1].mm} mm`:valid(pl[axis==='X'?'sx':'sy'])?'estimated scale (check tick numbers)':'uncalibrated')}).join(' · ')})();
+function updateMeasurementBadges(){
+ const cls=(txt)=>window.RefraModules.measurementStatus.cssClass(txt);
+ const paint=(parent,text)=>{if(!parent)return;let badge=parent.querySelector('.measureSourceBadge');if(!badge){badge=document.createElement('span');badge.className='measureSourceBadge';parent.appendChild(badge);}badge.textContent=text;badge.className='measureSourceBadge '+cls(text);badge.title=text==='Auto'?'Automatically estimated; not independently accuracy-validated':text==='Manual'?'Inspector manually entered this value':text==='Verified'?'Alignment confirmed by the inspector; accuracy not independently established':'Not ready or alignment verification required';};
+ for(const side of ['upper','lower']){
+  const pl=plates[side],suffix=side==='upper'?'Upper':'Lower';
+  for(const key of keys){const el=$('override'+side+key);if(!el)continue;const hasNum=el.value!=='';paint(el.parentElement,!pl.image||!hasNum?'Review':pl.sourceMode[key]==='manual'?'Manual':'Auto');}
+  for(const id of ['usedBore','boreGain','borePct','edgeArea']){const el=$(id+suffix);if(!el)continue;paint(el.parentElement,!pl.image||el.textContent==='—'?'Review':pl.innerStatus&&/inspector-adjusted/i.test(pl.innerStatus)?'Manual':'Auto');}
+ }
+}
 function updateResults(){
  const heading=$('plPerformanceTitle');if(heading)heading.textContent='PL performance at '+($('cid').value.trim()||'CMP-XXX');const vals=refreshLiveDimensions(),c=calculate();$('innerDetectStatus').textContent=p().innerStatus;
 const areaStatus=$('areaCalcStatus');
@@ -793,6 +831,7 @@ const areaStatus=$('areaCalcStatus');
  }
  updateCrackRows();const counts=crackState[active].counts;$('cc').textContent=counts.every(valid)?String(counts.reduce((a,b)=>a+b,0)):'—';$('tUpper').textContent=fmt(c.tU);$('tLower').textContent=fmt(c.tL);$('erosion').textContent=fmt(c.total);$('tDiff').textContent=fmt(c.tDiff);$('deltaR').textContent=fmt(c.deltaR);$('stroke').textContent=fmt(c.stroke);$('eTime').textContent=fmt(c.eTime,3);$('eHeat').textContent=fmt(c.eHeat,2);const safe=num('safe');$('safety').textContent=valid(c.stroke)&&valid(safe)?(c.stroke>=safe?'Within limit':'Below limit'):'—';$('safety').className=valid(c.stroke)&&valid(safe)?(c.stroke>=safe?'good':'warn'):'';
 updateStats(); updateCalibrationUX();
+ updateMeasurementBadges();
 }
 function updateStats(){const avg=(key)=>{const a=records.map(x=>x[key]).filter(valid);return a.length?a.reduce((a,b)=>a+b,0)/a.length:null};$('pairsCount').textContent=records.length;$('avgTime').textContent=fmt(avg('eTime'),3);$('avgHeat').textContent=fmt(avg('eHeat'),2);$('avgStroke').textContent=fmt(avg('stroke'));$('belowCount').textContent=records.filter(r=>valid(r.stroke)&&valid(r.safe)&&r.stroke<r.safe).length||'0'}
 let photoPreviewToken=0;
@@ -806,7 +845,19 @@ const publishPreview=(blob)=>{
  $('photo').src=currentObjectURL;
 };
 if(canvas.toBlob){canvas.toBlob(publishPreview,'image/jpeg',.83)}
-else {publishPreview(dataUrlToBlob(canvas.toDataURL('image/jpeg',.8)))}$('empty').style.display='none';stage.style.display='block';refreshPhotoImportUI();$('photoTitle').textContent=active.toUpperCase()+' · '+pl.filename;ids.forEach((id,i)=>{const el=document.createElement('div');const hint=lineHintText(id);el.className='line '+(id[0]==='H'?'h':'v');el.style.setProperty('--lc',colors[i]);el.title=hint;el.setAttribute('aria-label','Drag '+hint);el.dataset.id=id;stage.appendChild(el);if(['H4','H5','H6'].includes(id)){const marker=document.createElement('span');marker.className='overlapLineMarker';marker.textContent=id;marker.title=hint;el.appendChild(marker);}let drag=false;el.addEventListener('mouseenter',()=>showLineHint(id));el.addEventListener('mouseleave',()=>hideLineHint());el.addEventListener('focus',()=>showLineHint(id));el.addEventListener('blur',()=>hideLineHint());el.addEventListener('pointerdown',e=>{if(pending||traceMode)return;hideLineHint();drag=true;lineDragging=true;el.setPointerCapture(e.pointerId);e.stopPropagation();e.preventDefault()});el.addEventListener('pointermove',e=>{if(!drag)return;const r=stage.getBoundingClientRect(),isH=id[0]==='H';let q=isH?(e.clientY-r.top)/r.height:(e.clientX-r.left)/r.width;q=Math.min(1,Math.max(0,q));const n=+id[1];if(isH){const prev=n>1?pl.pos['H'+(n-1)]+(n>=5?0:.002):0,next=n<6?pl.pos['H'+(n+1)]-(n>=4?0:.002):1;q=Math.max(prev,Math.min(next,q))}else{const other=id==='V1'?pl.pos.V2-.003:pl.pos.V1+.003;q=id==='V1'?Math.min(q,other):Math.max(q,other)}pl.pos[id]=q;v91Traces[active]=null;drawPositions();refreshLiveDimensions();updateResults()});el.addEventListener('pointerup',()=>{drag=false;lineDragging=false;updateResults()});el.addEventListener('pointercancel',()=>{drag=false;lineDragging=false;updateResults()})});setupInnerHandles(stage,pl);drawPositions()}
+else {publishPreview(dataUrlToBlob(canvas.toDataURL('image/jpeg',.8)))}$('empty').style.display='none';stage.style.display='block';refreshPhotoImportUI();$('photoTitle').textContent=active.toUpperCase()+' · '+pl.filename;ids.forEach((id,i)=>{const el=document.createElement('div');const hint=lineHintText(id);el.className='line '+(id[0]==='H'?'h':'v');el.style.setProperty('--lc',colors[i]);el.title=hint;el.setAttribute('aria-label','Drag '+hint);el.dataset.id=id;el.tabIndex=0;el.setAttribute('role','slider');el.setAttribute('aria-valuemin','0');el.setAttribute('aria-valuemax','100');el.addEventListener('pointerdown',()=>{el.focus({preventScroll:true});stage.querySelectorAll('.line').forEach(x=>x.classList.toggle('precisionSelected',x===el));});el.addEventListener('focus',()=>{stage.querySelectorAll('.line').forEach(x=>x.classList.toggle('precisionSelected',x===el));});el.addEventListener('keydown',e=>{
+ if(!['ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.key))return;
+ const isH=id.startsWith('H');if((isH&&!['ArrowUp','ArrowDown'].includes(e.key))||(!isH&&!['ArrowLeft','ArrowRight'].includes(e.key)))return;
+ e.preventDefault();e.stopPropagation();const photo=p(),pix=isH?photo.image?.height:photo.image?.width;if(!pix)return;
+ const n=Number(id.slice(1)),step=window.RefraModules.precision.pixelStep(photo.image,id[0],e.shiftKey),dir=['ArrowDown','ArrowRight'].includes(e.key)?1:-1;
+ let next=photo.pos[id]+step*dir;
+ if(isH){const low=n>1?photo.pos['H'+(n-1)]+(n>=5?0:.002):0;const high=n<6?photo.pos['H'+(n+1)]-(n>=4?0:.002):1;next=Math.max(low,Math.min(high,next));}
+ else next=id==='V1'?Math.max(0,Math.min(next,photo.pos.V2-.003)):Math.min(1,Math.max(next,photo.pos.V1+.003));
+ if(next===photo.pos[id])return;
+ photo.pos[id]=next;v91Traces[active]=null;invalidateVerification(active);drawPositions();refreshLiveDimensions();updateResults();
+ const scale=isH?photo.sy:photo.sx,mm=valid(scale)&&scale>0?(step*dir*pix/scale).toFixed(3)+' mm':'uncalibrated';
+ const info=$('precisionLineStatus');if(info)info.textContent=`${active} ${id} moved ${e.shiftKey?'10':'1'} px (${mm}). Re-verify alignment.`;
+ });stage.appendChild(el);if(['H4','H5','H6'].includes(id)){const marker=document.createElement('span');marker.className='overlapLineMarker';marker.textContent=id;marker.title=hint;el.appendChild(marker);}let drag=false;el.addEventListener('mouseenter',()=>showLineHint(id));el.addEventListener('mouseleave',()=>hideLineHint());el.addEventListener('focus',()=>showLineHint(id));el.addEventListener('blur',()=>hideLineHint());el.addEventListener('pointerdown',e=>{if(pending||traceMode)return;hideLineHint();drag=true;lineDragging=true;el.setPointerCapture(e.pointerId);e.stopPropagation();e.preventDefault()});el.addEventListener('pointermove',e=>{if(!drag)return;const r=stage.getBoundingClientRect(),isH=id[0]==='H';let q=isH?(e.clientY-r.top)/r.height:(e.clientX-r.left)/r.width;q=Math.min(1,Math.max(0,q));const n=+id[1];if(isH){const prev=n>1?pl.pos['H'+(n-1)]+(n>=5?0:.002):0,next=n<6?pl.pos['H'+(n+1)]-(n>=4?0:.002):1;q=Math.max(prev,Math.min(next,q))}else{const other=id==='V1'?pl.pos.V2-.003:pl.pos.V1+.003;q=id==='V1'?Math.min(q,other):Math.max(q,other)}pl.pos[id]=q;v91Traces[active]=null;drawPositions();refreshLiveDimensions();updateResults()});el.addEventListener('pointerup',()=>{drag=false;lineDragging=false;updateResults()});el.addEventListener('pointercancel',()=>{drag=false;lineDragging=false;updateResults()})});setupInnerHandles(stage,pl);drawPositions()}
 function dataUrlToBlob(url){const [meta,b64]=url.split(','),bytes=atob(b64),arr=new Uint8Array(bytes.length);for(let i=0;i<bytes.length;i++)arr[i]=bytes.charCodeAt(i);return new Blob([arr],{type:meta.match(/:(.*?);/)[1]})}
 
 function setupInnerHandles(stage,pl){
@@ -831,7 +882,7 @@ function setupInnerHandles(stage,pl){
   for(const ev of ['pointerup','pointercancel'])el.addEventListener(ev,()=>{lineDragging=false;updateResults()});
  });
 }
-function drawPositions(){const pl=p();if(!pl.image)return;document.querySelectorAll('#stage .line').forEach(el=>{const id=el.dataset.id;el.style[id[0]==='H'?'top':'left']=(pl.pos[id]*100)+'%'});
+function drawPositions(){const pl=p();if(!pl.image)return;document.querySelectorAll('#stage .line').forEach(el=>{const id=el.dataset.id;el.style[id[0]==='H'?'top':'left']=(pl.pos[id]*100)+'%';el.setAttribute('aria-valuenow',(pl.pos[id]*100).toFixed(3))});
  document.querySelectorAll('#stage .innerHandle').forEach(el=>{const g=ellipseGeometry(pl);el.style.left=((el.dataset.side==='left'?g.cx-g.rx:g.cx+g.rx)*100)+'%';el.style.top=(pl.pos.H3*100)+'%';el.style.height=((pl.pos.H4-pl.pos.H3)*100)+'%';});
  renderArrows()}
 let activeAreaFormula=null;
@@ -1872,7 +1923,10 @@ function copyVerifiedReport(returnText=false){
  const ted=d=>[d.B,d.C,d.D].every(valid)?d.B+d.C+d.D:null;
  const pct=g=>valid(g.bore)&&c.originalArea>0?100*g.bore/c.originalArea:null;
  const plid=$('plpair').value.trim();
- const rows=[['Mark','Upper PL','Lower PL'],['PL ID',upper&&plid?'U-'+plid:'',lower&&plid?'L-'+plid:''],['Image Name',upper?(plates.upper.filename||''):'',lower?(plates.lower.filename||''):''],one('CC',c.heats),one('DDD',c.runtime),['OLT','',''],both('CC',cc('upper'),cc('lower'))];
+ const today=window.RefraModules.reporting.reportDate();
+ const reportCal=side=>{const pl=plates[side];return valid(pl.sx)&&valid(pl.sy)?`X ${pl.sx.toFixed(3)}; Y ${pl.sy.toFixed(3)} px/mm`:'Not calibrated';};
+ const method=side=>plates[side].method||'Not specified';
+ const rows=[window.RefraModules.reporting.columns,['Campaign ID',$('cid').value.trim(),$('cid').value.trim()],['PL ID',upper&&plid?'U-'+plid:'',lower&&plid?'L-'+plid:''],['Report Date',today,today],['Image Name',upper?(plates.upper.filename||''):'',lower?(plates.lower.filename||''):''],['Alignment Status',upper?'Verified':'Unverified',lower?'Verified':'Unverified'],['Ruler Calibration',upper?reportCal('upper'):'',lower?reportCal('lower'):''],['Calibration Method',upper?method('upper'):'',lower?method('lower'):''],['A-F Source',upper?keys.map(k=>k+':'+(plates.upper.sourceMode[k]||'auto')).join('; '):'',lower?keys.map(k=>k+':'+(plates.lower.sourceMode[k]||'auto')).join('; '):''],one('CC',c.heats),one('DDD',c.runtime),['OLT','',''],both('CC',cc('upper'),cc('lower'))];
  for(const k of ['A','B','C','D','E','F'])rows.push(both(k,u[k],l[k]));
  rows.push(both('G',ted(u),ted(l)),['H','',''],['I','',''],both('J',gu.usedBore,gl.usedBore),both('K',gu.bore,gl.bore),both('L',gu.edge,gl.edge),both('M',pct(gu),pct(gl)),both('T',c.tU,c.tL));
  const pairOnce=(code,v)=>[code,pair?f(v):'',''];
@@ -1935,6 +1989,7 @@ syncAlignmentVerification();
   if(!geometry)return;
   for(const key of geometryFields)if(Object.prototype.hasOwnProperty.call(geometry,key))$(key).value=geometry[key];
   syncH0();
+  showCampaignGeometryInPaste();
  };
  const geometryFromFields=fields=>Object.fromEntries(geometryFields.filter(k=>fields?.[k]!==undefined).map(k=>[k,fields[k]]));
  const geometryFromForm=()=>Object.fromEntries(geometryFields.map(k=>[k,$(k).value]));
@@ -2000,6 +2055,7 @@ syncAlignmentVerification();
   }
   $('crackRows').dataset.active='';
   select(data.active||'upper');
+  showCampaignGeometryInPaste(true);
   syncAlignmentVerification();
   updateStats();
  }
@@ -2065,14 +2121,86 @@ syncAlignmentVerification();
     if(mark&&!seen.has(mark)){seen.add(mark);marks.push(mark);}
    }
   }
+  // Keep individual plate columns while documenting the meaning of each row.
+  // Row number is used as part of the key so the two distinct CC rows
+  // (Heats Used and Cracks Count) never overwrite each other.
+  const reportRowMetadata=[
+   ['Campaign ID','','Campaign ID','Campaign identifier shared by the saved PL set'],
+   ['PL ID','','PL ID','Individual Upper/Lower plate identifier'],
+   ['Report Date','','Report Date','Date on which this report was generated'],
+   ['Image Name','','Original Image Filename','Name of the photo used for measurement'],
+   ['Alignment Status','','Alignment Verification','Verify alignment before relying on exported dimensions'],
+   ['Ruler Calibration','','X/Y Ruler Calibration','Calibrated image scale in pixels per millimetre'],
+   ['Calibration Method','','Calibration Method','Method used to establish the image ruler scale'],
+   ['A-F Source','','A–F Measurement Source','Auto or manual source recorded for each dimension'],
+   ['CC','HU','Heats Used','Total heats shared by the Upper/Lower PL pair'],
+   ['DDD','TRT','Total Runtime','Total operating time of the PL pair, in minutes'],
+   ['OLT','OLT','Oxygen Lancing Time','Optional; leave blank if not recorded'],
+   ['CC','CC','Cracks Count','Sum of four inspector-confirmed crack categories'],
+   ['A','EB-T','Bore Diameter After Use — Transverse','Measured transverse to the sliding direction (mm)'],
+   ['B','EB-S','Bore Diameter After Use — Sliding','Measured along the sliding direction (mm)'],
+   ['C','SED','Short-end Edge Damage Length','Short-end edge damage length (mm)'],
+   ['D','LED','Long-end Edge Damage Length','Long-end edge damage length (mm)'],
+   ['E','LSD','Surface Damage Length','Damage depth ≥ 0.1 mm; length in mm'],
+   ['F','PSEtLSD','Short-end Edge to Surface-Damage Boundary','Exclude steel band; distance in mm'],
+   ['G','TED','Total Edge Damage Length','G = B + C + D (mm)'],
+   ['H','EB-NS','Enlarged Bore Diameter — Non-Sliding Face','Optional measurement; blank when unavailable (mm)'],
+   ['I','NT','Neck Thickness','Optional measurement; blank when unavailable (mm)'],
+   ['J','UBA','Used Bore Area','Image-estimated used bore ellipse area (mm²)'],
+   ['K','BEA','Bore Enlargement Area','K = J − π × Y0² (mm²)'],
+   ['L','BEDA','Bore Edge Damage Area','Outer damage area minus used bore area (mm²)'],
+   ['M','BAER','Bore Area Enlargement Ratio','M = K / (π × Y0²) × 100 (%)'],
+   ['T','LD','Long-end Damage Length','T = F − (W0 − X0 + Y0) (mm)'],
+   ['T_Diff','ΔT','Upper/Lower Long-end Damage Difference','Absolute difference between Upper and Lower T (mm)'],
+   ['R','RS','Remaining Stroke','R = Z0 − T_upper − T_lower − 2 × Y0 (mm)'],
+   ['△R','ΔR','Stroke Reduction','ΔR = R0 − R (mm)'],
+   ['RSR','RSR','Remaining Stroke Ratio','R / R0 × 100 (%)'],
+   ['EPH','EPH','Erosion per Heat','ΔR / heats used (mm/heat)'],
+   ['ER','ER','Erosion Rate','ΔR / total runtime (mm/min)']
+  ];
   const columns=reports.flatMap(({id})=>[id+' Upper PL',id+' Lower PL']);
-  const output=[['Mark',...columns]];
-  const byReport=reports.map(({rows})=>new Map(rows.slice(1).map(row=>[row[0],[row[1]||'',row[2]||'']])));
-  for(const mark of marks){
-   const row=[mark];
-   for(const values of byReport)row.push(...(values.get(mark)||['','']));
+  const output=[['Mark','Abbre.','Measurement / Item (English)','Remark (English)',...columns]];
+  const rowCount=Math.max(...reports.map(({rows})=>rows.length-1));
+  for(let index=0;index<rowCount;index++){
+   const meta=reportRowMetadata[index]||[];
+   const mark=meta[0]||reports.find(r=>r.rows[index+1]?.[0])?.rows[index+1]?.[0]||'';
+   const row=[mark,meta[1]||'',meta[2]||mark,meta[3]||''];
+   for(const {rows} of reports){
+    const entry=rows[index+1];
+    row.push(entry?.[1]||'',entry?.[2]||'');
+   }
    output.push(row);
   }
+  // Append the on-screen PL Performance summary to this same standardized
+  // TSV. The provenance column lists ONLY the saved PL sets contributing
+  // a valid input to each statistic, instead of implying all sets contributed.
+  const currentRecordById=new Map(records.map(r=>[r.id,r]));
+  const eligible=entries.map(([id])=>({id,record:currentRecordById.get(id)}))
+   .filter(entry=>entry.record);
+  const contributing=(predicate)=>eligible.filter(({record})=>predicate(record));
+  const sourceIds=(items)=>items.length?items.map(item=>item.id).join('; '):'None';
+  const average=(items,key,decimals)=>{
+   if(!items.length)return '';
+   const mean=items.reduce((total,{record})=>total+record[key],0)/items.length;
+   return Number(mean.toFixed(decimals));
+  };
+  const erosionTime=contributing(r=>Number.isFinite(r.eTime));
+  const erosionHeat=contributing(r=>Number.isFinite(r.eHeat));
+  const stroke=contributing(r=>Number.isFinite(r.stroke));
+  const below=contributing(r=>Number.isFinite(r.stroke)&&Number.isFinite(r.safe));
+  const belowCount=below.filter(({record})=>record.stroke<record.safe).length;
+  const summaryRows=[
+   ['Saved PL Sets','', 'Recorded PL Sets','Number of saved pairs in this campaign',entries.length,sourceIds(entries.map(([id])=>({id})))],
+   ['Below Safe Limit','', 'Sets Below Safe Limit','Count with valid R and safe limit, where R < safe limit',belowCount,sourceIds(below)],
+   ['Average ER','ER','Average Erosion Rate (mm/min)','Arithmetic mean of valid saved-pair ER values',average(erosionTime,'eTime',3),sourceIds(erosionTime)],
+   ['Average EPH','EPH','Average Erosion per Heat (mm/heat)','Arithmetic mean of valid saved-pair EPH values',average(erosionHeat,'eHeat',2),sourceIds(erosionHeat)],
+   ['Average R','RS','Average Remaining Stroke (mm)','Arithmetic mean of valid saved-pair R values',average(stroke,'stroke',1),sourceIds(stroke)]
+  ];
+  // Keep the summary within the same paste-ready table; its two rightmost
+  // headings describe values and source PL set IDs, not Upper/Lower readings.
+  output.push([]);
+  output.push(['PL PERFORMANCE SUMMARY','','','Value and traceable source PL sets', 'Campaign value','Source PL Sets']);
+  for(const row of summaryRows)output.push(row);
   const text=output.map(row=>row.map(clean).join('\t')).join('\n');
   // A synchronous clipboard write prevents a later single-pair copy overwriting
   // the campaign report if the browser schedules async Clipboard API calls.
@@ -2097,60 +2225,106 @@ syncAlignmentVerification();
    $('savedStatus').textContent='Clipboard unavailable. Please allow clipboard access and retry.';
   }
  },true);
- // Copy human-readable, tab-separated campaign data (one row for each plate).
- $('exportCampaign').addEventListener('click',()=>{
-  if(!saved.size){alert('No saved PL sets to copy. Save a PL set first.');return;}
-  if(selected&&saved.has(selected))saved.set(selected,snapshot());
-  const campaign=$('cid').value.trim()||'CMP';
-  const entries=[...saved].filter(([id,data])=>(data.fields.cid||'CMP')===campaign);
-  if(!entries.length){alert('No saved PL sets match campaign '+campaign+'.');return;}
-  const clean=v=>String(v??'').replace(/[\t\r\n]+/g,' ').trim();
-  const headers=['Campaign ID','PL Pair ID','Plate','Image Name','Photo Imported','Alignment Verified',
-   'W (mm)','X (mm)','Y (mm)','Z (mm)','R0 (mm)','Safe Limit (mm)',
-   'Runtime (min)','Heats','A (mm)','B (mm)','C (mm)','D (mm)','E (mm)','F (mm)',
-   'A Source','B Source','C Source','D Source','E Source','F Source',
-   'Scale X (px/mm)','Scale Y (px/mm)',
-   'Crack 1','Crack 2','Crack 3','Crack 4','Crack Status','Remark Tags','Remark Note',
-   'Remaining Stroke (mm)','Erosion (mm/min)','Erosion (mm/heat)','Saved Set Status'];
-  // Copy the five PL Performance figures above the detailed Excel table.
-  // These values match the currently displayed campaign-performance panel.
-  const summary=[
-   ['PL Performance Summary',''],
-   ['Campaign ID',campaign],
-   ['Recorded sets',$('pairsCount').textContent.trim()],
-   ['Sets below safe limit',$('belowCount').textContent.trim()],
-   ['Average erosion (mm/min)',$('avgTime').textContent.trim()],
-   ['Average erosion (mm/heat)',$('avgHeat').textContent.trim()],
-   ['Average remaining stroke (mm)',$('avgStroke').textContent.trim()],
-   [],
-   ['Saved PL Set Details'],
-  ];
-  const rows=[...summary,headers];
-  for(const [id,data] of entries){
-   const fields=data.fields||{},record=records.find(r=>r.id===id)||{};
-   const status=data.incomplete?'Incomplete':'Saved';
-   for(const side of ['upper','lower']){
-    const pl=data.plates[side],remarks=data.remarks[side]||{},cracks=data.cracks[side]||{};
-    const manual=pl.manual||{},mode=pl.sourceMode||{};
-    const values=dimensionValues(pl);
-    const dimension=k=>Number.isFinite(values[k])?Number(values[k].toFixed(2)):'';
-    rows.push([fields.cid||campaign,fields.plpair||id.split(' / ').pop(),side==='upper'?'Upper':'Lower',
-     pl.filename||'',pl.image?'Yes':'No',data.verification?.[side]?'Yes':'No',
-     fields.W,fields.X,fields.bore,fields.Z,fields.R0,fields.safe,fields.runtime,fields.heats,
-     ...['A','B','C','D','E','F'].map(dimension),
-     ...['A','B','C','D','E','F'].map(k=>mode[k]||''),
-     pl.sx,pl.sy,...[0,1,2,3].map(i=>cracks.counts?.[i]??''),cracks.status||'',
-     (remarks.tags||[]).join('; '),remarks.note||'',record.stroke,record.eTime,record.eHeat,status]);
-   }
-  }
-  copyText(rows.map(row=>row.map(clean).join('\t')).join('\n'));
-  $('savedStatus').textContent='Copied '+entries.length+' saved PL set(s) for '+campaign+' as an Excel-ready table.';
- });
  const clearOld=$('clearRecords').onclick;
  $('clearRecords').onclick=function(e){
   clearOld.call(this,e);
   if(!records.length){saved.clear();selected=null;refresh();syncAlignmentVerification();}
  };
+ // v10.2.5: explicit, user-controlled full-session backup. No background database writes.
+ const backupBar=document.createElement('span');
+ backupBar.className='inline campaignBackupActions';backupBar.style.cssText='gap:5px;display:inline-flex;align-items:center;flex-wrap:wrap';
+ const backupBtn=document.createElement('button');backupBtn.type='button';backupBtn.className='minibtn';backupBtn.textContent='Backup campaign';backupBtn.title='Download saved PL sets with original working photos and inspection state';
+ const restoreBtn=document.createElement('button');restoreBtn.type='button';restoreBtn.className='minibtn';restoreBtn.textContent='Restore backup';restoreBtn.title='Restore a RefraInspector v10.2.9 full backup (replaces current unsaved session)';
+ const backupFile=document.createElement('input');backupFile.type='file';backupFile.accept='.json,application/json';backupFile.hidden=true;backupFile.setAttribute('aria-label','RefraInspector backup file');
+ backupBar.append(backupBtn,restoreBtn,backupFile);document.querySelector('body>header>.inline').append(backupBar);
+ const photoToDataURL=image=>{
+  if(!image)return null;
+  const canvas=document.createElement('canvas');canvas.width=image.naturalWidth||image.width;canvas.height=image.naturalHeight||image.height;
+  if(!canvas.width||!canvas.height)throw Error('Photo has invalid dimensions');
+  canvas.getContext('2d').drawImage(image,0,0);
+  return canvas.toDataURL('image/png'); // lossless: preserves the actual in-session measurement source
+ };
+ const portablePlate=pl=>{
+  const obj={};
+  for(const [key,value] of Object.entries(pl)){
+   if(key==='image'||key==='source')continue;
+   if(value===null||typeof value!=='object'||Array.isArray(value)||Object.getPrototypeOf(value)===Object.prototype)obj[key]=clone(value);
+  }
+  obj.photoDataURL=photoToDataURL(pl.image);return obj;
+ };
+ const portableSnapshot=data=>({
+  fields:clone(data.fields),
+  plates:{upper:portablePlate(data.plates.upper),lower:portablePlate(data.plates.lower)},
+  remarks:clone(data.remarks),cracks:clone(data.cracks),verification:clone(data.verification),
+  alignBackup:null,traces:null,active:data.active
+ });
+ const restoreImage=url=>new Promise((resolve,reject)=>{
+  if(!url){resolve(null);return;}
+  if(typeof url!=='string'||!url.startsWith('data:image/')){reject(Error('Backup contains an invalid photo'));return;}
+  const image=new Image();image.onload=()=>resolve(image);image.onerror=()=>reject(Error('Backup photo could not be decoded'));image.src=url;
+ });
+ const unpackSnapshot=async obj=>{
+  if(!obj||!obj.fields||!obj.plates?.upper||!obj.plates?.lower)throw Error('Backup entry is incomplete');
+  const out={fields:clone(obj.fields),plates:{},remarks:clone(obj.remarks||{upper:{tags:[],note:''},lower:{tags:[],note:''}}),
+   cracks:clone(obj.cracks||{upper:{counts:[null,null,null,null],status:'Not assessed'},lower:{counts:[null,null,null,null],status:'Not assessed'}}),
+   verification:{upper:false,lower:false},alignBackup:{upper:null,lower:null},traces:{upper:null,lower:null},active:obj.active||'upper'};
+  for(const side of ['upper','lower']){
+   const original=obj.plates[side],image=await restoreImage(original.photoDataURL||null);
+   const plate=clone(Object.fromEntries(Object.entries(original).filter(([key])=>key!=='photoDataURL')));
+   // The workspace expects HTMLCanvasElement, not HTMLImageElement: resetDOMImage,
+   // area sampling and image export all depend on canvas APIs (toBlob/toDataURL/getContext).
+   let canvas=null;
+   if(image){
+    canvas=document.createElement('canvas');
+    canvas.width=image.naturalWidth;canvas.height=image.naturalHeight;
+    if(!canvas.width||!canvas.height)throw Error('Restored photo has invalid dimensions');
+    const ctx=canvas.getContext('2d');
+    if(!ctx)throw Error('Could not create a canvas for restored photo');
+    ctx.drawImage(image,0,0);
+   }
+   plate.image=canvas;plate.source=canvas;
+   out.plates[side]=plate;
+   // Require inspection confirmation after a recovered photo has been loaded.
+   out.verification[side]=false;
+  }
+  return out;
+ };
+ backupBtn.addEventListener('click',()=>{
+  try{
+   if(selected&&saved.has(selected))saved.set(selected,snapshot());
+   if(!saved.size){alert('No saved PL sets. Save the current PL set first.');return;}
+   const packageData={format:'RefraInspectorCampaignBackup',version:1,appVersion:'10.2.8',createdAt:new Date().toISOString(),
+    selected,campaignGeometry:[...campaignGeometry],records:clone(records),sets:[...saved].map(([id,data])=>[id,portableSnapshot(data)])};
+   const stamp=new Date();
+   const date=[stamp.getFullYear(),String(stamp.getMonth()+1).padStart(2,'0'),String(stamp.getDate()).padStart(2,'0')].join('-');
+   const safeId=value=>String(value||'').trim().replace(/[^a-zA-Z0-9_-]/g,'_').replace(/_+/g,'_').replace(/^_+|_+$/g,'');
+   const currentSet=selected&&saved.has(selected)?saved.get(selected):null;
+   const campaignId=safeId(currentSet?.fields?.cid||$('cid').value)||'CMP';
+   const plId=safeId(currentSet?.fields?.plpair||$('plpair').value)||'PL';
+   const name=`${campaignId}_${plId}_${date}.json`;
+   saveFile(name,JSON.stringify(packageData),'application/json');
+   $('savedStatus').textContent='Backup downloaded: '+saved.size+' saved PL sets. Store the JSON safely; it contains full-resolution photos.';
+  }catch(error){alert('Backup failed: '+error.message);}
+ });
+ restoreBtn.addEventListener('click',()=>backupFile.click());
+ backupFile.addEventListener('change',async()=>{
+  const file=backupFile.files?.[0];backupFile.value='';if(!file)return;
+  try{
+   const raw=JSON.parse(await file.text());
+   if(raw.format!=='RefraInspectorCampaignBackup'||raw.version!==1||!Array.isArray(raw.sets)||!Array.isArray(raw.campaignGeometry)||!Array.isArray(raw.records))throw Error('Unsupported or invalid backup format');
+   if(raw.sets.length>1000)throw Error('Backup exceeds 1,000 sets');
+   // Decode and validate ALL entries before replacing the current session.
+   const loaded=[];
+   for(const pair of raw.sets){if(!Array.isArray(pair)||typeof pair[0]!=='string')throw Error('Invalid saved set ID');loaded.push([pair[0],await unpackSnapshot(pair[1])]);}
+   if(!loaded.length)throw Error('Backup contains no saved sets');
+   if(!confirm('Restore '+loaded.length+' saved PL sets from backup? This replaces the current session data. Restored photos will need alignment re-verification.'))return;
+   saved.clear();for(const [id,data] of loaded)saved.set(id,data);
+   campaignGeometry.clear();for(const [id,geo] of raw.campaignGeometry)campaignGeometry.set(id,geo);
+   records=clone(raw.records);selected=saved.has(raw.selected)?raw.selected:loaded[0][0];
+   restore(saved.get(selected));markSaved();refresh();syncAlignmentVerification();updateStats();
+   $('savedStatus').textContent='Restored '+saved.size+' sets. Verify alignment for recovered photos before exporting.';
+  }catch(error){alert('Restore failed. Current saved sets were not intentionally replaced: '+error.message);}
+ });
  function nextPairId(){
   const current=$('plpair').value.trim(),m=/^(.*?)(\d+)$/.exec(current);
   if(!m)return current+'-001';
