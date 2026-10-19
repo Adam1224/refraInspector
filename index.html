@@ -2202,10 +2202,34 @@ syncAlignmentVerification();
  };
  const geometryFromFields=fields=>Object.fromEntries(geometryFields.filter(k=>fields?.[k]!==undefined).map(k=>[k,fields[k]]));
  const geometryFromForm=()=>Object.fromEntries(geometryFields.map(k=>[k,$(k).value]));
+ const recalculateSavedPerformance=(cid)=>{
+  for(const [id,data] of saved){
+   if((data.fields.cid||'CMP')!==cid)continue;
+   const row=records.find(item=>item.id===id);
+   if(!row)continue;
+   const g=data.fields;
+   const n=key=>g[key]===''||g[key]==null?null:Number(g[key]);
+   const W=n('W'),X=n('X'),Y=n('bore'),Z=n('Z'),R0=n('R0');
+   const thickness=side=>{
+    const F=dimensionValues(data.plates[side]).F;
+    return valid(F)&&valid(W)&&valid(X)&&valid(Y)?F-(W-X+Y):null;
+   };
+   const upper=thickness('upper'),lower=thickness('lower');
+   const stroke=valid(upper)&&valid(lower)&&valid(Y)&&valid(Z)?Z-upper-lower-2*Y:null;
+   const delta=valid(stroke)&&valid(R0)?R0-stroke:null;
+   const runtime=n('runtime'),heats=n('heats');
+   row.stroke=stroke;
+   row.eTime=valid(delta)&&runtime>0?delta/runtime:null;
+   row.eHeat=valid(delta)&&heats>0?delta/heats:null;
+   row.safe=valid(n('safe'))?n('safe'):null;
+  }
+  updateStats();
+ };
  const syncSavedGeometry=(cid,geometry)=>{
   for(const data of saved.values())if((data.fields.cid||'CMP')===cid){
    for(const key of geometryFields)if(Object.prototype.hasOwnProperty.call(geometry,key))data.fields[key]=geometry[key];
   }
+  recalculateSavedPerformance(cid);
  };
  const trackCampaignGeometry=(cid,geometry)=>{
   const next={...(geometryFor(cid)||{}),...geometry};
@@ -2220,14 +2244,15 @@ syncAlignmentVerification();
   const cid=campaignKey();
   const geometry=trackCampaignGeometry(cid,patch);
   applyGeometry(geometry);
+  updateResults();
   // All saved sets now carry the same values, including when reloaded later.
   markUnsaved();
   $('savedStatus').textContent='Campaign geometry synchronized to all saved PL sets in '+cid+'. Save the active set to preserve other edits.';
  };
  // Direct edits to geometry also update all saved sets for the current campaign.
- geometryFields.forEach(key=>$(key).addEventListener('change',()=>{
-  const cid=campaignKey(),geometry=trackCampaignGeometry(cid,{[key]:$(key).value});
-  syncSavedGeometry(cid,geometry);syncH0();updateResults();
+ geometryFields.forEach(key=>$(key).addEventListener('input',()=>{
+  trackCampaignGeometry(campaignKey(),{[key]:$(key).value});
+  syncH0();updateResults();
  }));
 
  const pairID=()=>($('cid').value.trim()||'CMP')+' / '+($('plpair').value.trim()||'PL');
