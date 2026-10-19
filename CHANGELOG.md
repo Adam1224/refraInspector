@@ -1,5 +1,14 @@
 # RN Plate Pair Inspector — Complete Version Update History
 
+## v10.2.14 — 2026-10-16 (JST)
+**Type:** PL inspection workflow / Excel reporting / UI enhancements
+- Added full Campaign backup and restore, with backup filenames including Campaign ID, PL ID and date; corrected canvas reconstruction during restoration.
+- Simplified campaign geometry to one recognized six-column input area and reorganized backup/restore controls.
+- Standardized Excel exports with plate metadata, English measurement names, abbreviations and remarks, individual PL columns, and Campaign Performance values with source PL sets identified.
+- Added fine keyboard adjustment of H/V measurement lines and measurement-source status for A–F and area calculations.
+- Improved modular structure of report and UI helpers; removed redundant campaign-copy and old pair JSON/image export buttons.
+- **Release date is a project label: 2026-10-16. Actual GitHub commit timestamps reflect the upload time.**
+
 ## v10.2.4 — 2026-10-15 (JST)
 **Type:** Patch / Measurement-line guidance
 - Shows contextual hover hints for H1–H6 and V1–V2 photo-workspace measuring lines, using the inspector-provided edge and damage definitions.
@@ -109,7 +118,7 @@
 **Limitations:** iPhone Safari behavior has not yet been confirmed on a physical device. Resizing a photo reduces pixel detail; ruler calibration is based on the resized working image. v8.0 remains available in Git history.
 
 
-**Current release:** v10.2.4  
+**Current release:** v10.2.14  
 **Release date:** 2026-10-15 (JST)  
 **Earliest documented source:** `rn_plate_annotation_tool(2).html` (original five-horizontal/two-vertical annotation tool).  
 **Source base:** `refra_inspector_v7_39_photo_import_ui.html` (v7.38 ruler algorithm + updated photo import UI).
@@ -213,7 +222,8 @@
 | 9.4.10 Beta | 2026-10-14 JST | Modified | A–F measurement legend shortcut | Add ⓘ in A–F Dimensions panel; retain editable side-by-side entries | Integrated |
 | v10.0 | 2026-10-15 JST | Major release / Modified | Restored Save Reminder control layout and campaign navigation | #0–#4 workspace controls, saved PL sets, campaign copying, save reminders and alignment verification | Superseded by v10.1 |
 | v10.1 | 2026-10-15 JST | Modified / Fix | Upper/Lower identification and photo-import workflow | Characteristic Lower PL closure-mark warning when two photos exist; manual U/L swap and repeat checking; calibration-independent import/replace; visible button label; embedded favicon | Historical / detection unvalidated |
-| v10.2.4 | 2026-10-15 JST | Patch | Measurement-line hover hints | H1–H6 and V1–V2 definitions visible on hover; retains prior saved-set Excel and campaign geometry improvements | Current |
+| v10.2.14 | 2026-10-16 JST | Modified / New | Campaign backup, line precision, standardized reporting | Merged campaign and per-PL Excel reporting with provenance and English abbreviations/remarks | Current |
+| v10.2.4 | 2026-10-15 JST | Patch | Measurement-line hover hints | H1–H6 and V1–V2 definitions visible on hover; retains prior saved-set Excel and campaign geometry improvements | Historical |
 
 ## Date and traceability notes
 
