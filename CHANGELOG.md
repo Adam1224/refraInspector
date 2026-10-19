@@ -1,5 +1,12 @@
 # RN Plate Pair Inspector — Complete Version Update History
 
+## v11.0.2 — 2026-10-19 (JST)
+**Type:** Campaign performance UI / Data integrity
+- Renamed the PL Performance at CMP-xxx panel to **Campaign Performance**.
+- Added a dynamic Campaign ID row above Recorded Sets.
+- Editing PL Set Usage Info removes that PL set from saved Campaign records until it is saved again, and animates changed Campaign Performance values (v11.0.1).
+- Preserves existing alignment verification requirements, performance summaries and saved-set status tracking.
+
 ## v11.0.0 — 2026-10-19 (JST)
 **Type:** Major release / Consolidated Campaign inspection workflow
 - Consolidates local improvements through v10.2.31 into the main application.
@@ -136,7 +143,7 @@
 **Limitations:** iPhone Safari behavior has not yet been confirmed on a physical device. Resizing a photo reduces pixel detail; ruler calibration is based on the resized working image. v8.0 remains available in Git history.
 
 
-**Current release:** v11.0.0  
+**Current release:** v11.0.2  
 **Release date:** 2026-10-15 (JST)  
 **Earliest documented source:** `rn_plate_annotation_tool(2).html` (original five-horizontal/two-vertical annotation tool).  
 **Source base:** `refra_inspector_v7_39_photo_import_ui.html` (v7.38 ruler algorithm + updated photo import UI).
@@ -240,7 +247,8 @@
 | 9.4.10 Beta | 2026-10-14 JST | Modified | A–F measurement legend shortcut | Add ⓘ in A–F Dimensions panel; retain editable side-by-side entries | Integrated |
 | v10.0 | 2026-10-15 JST | Major release / Modified | Restored Save Reminder control layout and campaign navigation | #0–#4 workspace controls, saved PL sets, campaign copying, save reminders and alignment verification | Superseded by v10.1 |
 | v10.1 | 2026-10-15 JST | Modified / Fix | Upper/Lower identification and photo-import workflow | Characteristic Lower PL closure-mark warning when two photos exist; manual U/L swap and repeat checking; calibration-independent import/replace; visible button label; embedded favicon | Historical / detection unvalidated |
-| v11.0.0 | 2026-10-19 JST | Major | Consolidated verified campaign workflow | New/replace photo controls, mandatory alignment verification, save status and performance animation | Current |
+| v11.0.2 | 2026-10-19 JST | Patch | Campaign Performance panel | Dynamic Campaign ID and removal/update animation after PL usage edits | Current |
+| v11.0.0 | 2026-10-19 JST | Major | Consolidated verified campaign workflow | New/replace photo controls, mandatory alignment verification, save status and performance animation | Historical |
 | v10.2.25 | 2026-10-19 JST | UI / Fix / Recovery | Upper–Lower slider and saved-set selector, timestamps, auto-recovery, reporting fixes | Improved in-browser inspection workflow | Historical |
 | v10.2.14 | 2026-10-16 JST | Modified / New | Campaign backup, line precision, standardized reporting | Merged campaign and per-PL Excel reporting with provenance and English abbreviations/remarks | Historical |
 | v10.2.4 | 2026-10-15 JST | Patch | Measurement-line hover hints | H1–H6 and V1–V2 definitions visible on hover; retains prior saved-set Excel and campaign geometry improvements | Historical |
