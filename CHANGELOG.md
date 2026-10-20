@@ -1,5 +1,9 @@
 # RN Plate Pair Inspector — Complete Version Update History
 
+## Repository filename update — 2026-10-20 (JST)
+- Renamed the v12.1.4 application source from `index.html` to `refraInspector_v12.1.4.html`.
+- Updated README launch instructions. Website hosts expecting `index.html` must explicitly configure an entry point.
+
 ## v12.1.4 — 2026-10-20 (JST)
 **Type:** Mobile precision / Touch interaction
 - Reduced visible measurement-line stroke widths on mobile: H1–H6 and V1–V2 approximately 1 px, selected line 1.5 px.
