@@ -1,6 +1,6 @@
 # RefraInspector
 
-**Version:** v11.0.28
+**Version:** v12.1.1
 
 **Development status:** Beta — automatic image recognition and measurement accuracy require further validation.
 
@@ -10,6 +10,12 @@ Web-based refractory sliding gate plate inspection application.
 Open `index.html` in a modern browser. Import Upper and Lower PL photographs, calibrate the image rulers, inspect dimensions A–F, and export the results.
 
 ## Features
+- **Two views:** PL Inspection and Campaign Report, switched via a compact header control.
+- **Campaign Report:** Campaign summary, saved PL-set A–F/usage/results table, RS versus Used Heats, and Upper/Lower T versus Used Heats charts.
+- **Panel exports:** Clipboard, CSV, Excel-compatible .xls, SVG/PNG chart images, and print/save PDF.
+- **Chart conventions (v12.1.1):** Used Heats X-axis shows integer ticks; both chart Y-axes start at zero.
+- **Detection (v12.1.0):** Gradient-direction-aware scoring improves candidate selection for bore and damage boundaries, retaining geometry checks and manual confirmation.
+- **Layout (v12.0.1–v12.0.2):** Independently scrollable tab sections and compact header navigation; redundant photo verification badge removed.
 - PL set selector with independent verification and Campaign membership labels (without repeated Campaign ID)
 - Automatic updates to previously saved Campaign records after eligible edits, with top-right toast notifications
 - Campaign Performance: median/max heats, average erosion per minute/heat and average remaining stroke
