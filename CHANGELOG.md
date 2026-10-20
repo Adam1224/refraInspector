@@ -1,5 +1,25 @@
 # RN Plate Pair Inspector — Complete Version Update History
 
+## v12.1.4 — 2026-10-20 (JST)
+**Type:** Mobile precision / Touch interaction
+- Reduced visible measurement-line stroke widths on mobile: H1–H6 and V1–V2 approximately 1 px, selected line 1.5 px.
+- Enlarged invisible drag hit regions for dimension lines to approximately 38 px, and inner-bore handles to approximately 38 px.
+- Preserved desktop layout, coordinate calculations, calibration and verification.
+- **Validation:** JavaScript syntax checks passed locally; physical iPhone Safari touch usability still requires testing.
+
+## v12.1.3 — 2026-10-20 (JST)
+**Type:** Compact mobile header
+- Replaced ? Help & Manual label with a small ? icon on narrow screens.
+- Hid Copy PLs details, Copy Campaign data, backup/restore controls and the auto-recovery status banner from the mobile header.
+- Kept the underlying backup and auto-recovery logic unchanged and desktop controls visible.
+
+## v12.1.2 — 2026-10-20 (JST)
+**Type:** Mobile scrolling
+- Removed the mobile height-limited panel scrolling that could block access to the photo workspace on iPhone.
+- Uses one continuous vertically scrollable page for PL Geometry, Photo Workspace and Results on narrow screens.
+- Preserves desktop three-column and independent-scrolling layout.
+
+
 ## v12.1.1 — 2026-10-20 (JST)
 **Type:** Campaign chart-axis refinement
 - Used Heats X-axis tick labels display integers only.
@@ -198,7 +218,7 @@
 **Limitations:** iPhone Safari behavior has not yet been confirmed on a physical device. Resizing a photo reduces pixel detail; ruler calibration is based on the resized working image. v8.0 remains available in Git history.
 
 
-**Current release:** v12.1.1  
+**Current release:** v12.1.4  
 **Release date:** 2026-10-15 (JST)  
 **Earliest documented source:** `rn_plate_annotation_tool(2).html` (original five-horizontal/two-vertical annotation tool).  
 **Source base:** `refra_inspector_v7_39_photo_import_ui.html` (v7.38 ruler algorithm + updated photo import UI).
