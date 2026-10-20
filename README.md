@@ -7,7 +7,7 @@
 Web-based refractory sliding gate plate inspection application.
 
 ## Usage
-Open `index.html` in a modern browser. Import Upper and Lower PL photographs, calibrate the image rulers, inspect dimensions A–F, and export the results.
+Open `refraInspector_v12.1.4.html` in a modern browser. Import Upper and Lower PL photographs, calibrate the image rulers, inspect dimensions A–F, and export the results.
 
 ## Features
 - **v12.1.2 — iPhone scrolling:** one continuous vertical scroll through Geometry, Photo Workspace and Results on narrow screens; desktop independent scrolling preserved.
@@ -36,3 +36,6 @@ xuh@shinagawa-ref.jp
 
 ## Data handling
 Do not commit confidential production photographs, customer data, credentials, or exported inspection records without authorization.
+
+## Application file naming
+The current standalone app is [`refraInspector_v12.1.4.html`](./refraInspector_v12.1.4.html). Future releases use the same filename pattern with their version number. If hosting as a root URL, configure the deployment to serve this file or add a separate `index.html` entry point.
