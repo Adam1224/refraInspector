@@ -1,6 +1,6 @@
 # RefraInspector
 
-**Version:** v12.1.1
+**Version:** v12.1.4
 
 **Development status:** Beta — automatic image recognition and measurement accuracy require further validation.
 
@@ -10,6 +10,9 @@ Web-based refractory sliding gate plate inspection application.
 Open `index.html` in a modern browser. Import Upper and Lower PL photographs, calibrate the image rulers, inspect dimensions A–F, and export the results.
 
 ## Features
+- **v12.1.2 — iPhone scrolling:** one continuous vertical scroll through Geometry, Photo Workspace and Results on narrow screens; desktop independent scrolling preserved.
+- **v12.1.3 — Compact mobile header:** ? Help icon and smaller header; mobile hides copy/backup/recovery status controls while the underlying recovery remains enabled.
+- **v12.1.4 — Mobile precision:** thinner visible H/V dimension lines and enlarged invisible touch/drag targets; desktop line styling and physical measurement calculations unchanged.
 - **Two views:** PL Inspection and Campaign Report, switched via a compact header control.
 - **Campaign Report:** Campaign summary, saved PL-set A–F/usage/results table, RS versus Used Heats, and Upper/Lower T versus Used Heats charts.
 - **Panel exports:** Clipboard, CSV, Excel-compatible .xls, SVG/PNG chart images, and print/save PDF.
