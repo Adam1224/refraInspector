@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en"><head><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2214%22%20fill%3D%22%23165b9c%22%2F%3E%3Cpath%20d%3D%22M12%2018%20Q12%2012%2018%2012%20H46%20Q52%2012%2052%2018%20V46%20Q52%2052%2046%2052%20H18%20Q12%2052%2012%2046%20Z%22%20fill%3D%22none%22%20stroke%3D%22%23ffffff%22%20stroke-width%3D%225%22%2F%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2212%22%20fill%3D%22%23ffffff%22%2F%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%226%22%20fill%3D%22%23165b9c%22%2F%3E%3Cpath%20d%3D%22M32%204v10M32%2050v10M4%2032h10M50%2032h10%22%20stroke%3D%22%238ed3ff%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22%2F%3E%3C%2Fsvg%3E"/><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>RefraInspector v11.0.2</title><style>
+<html lang="en"><head><link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2214%22%20fill%3D%22%23165b9c%22%2F%3E%3Cpath%20d%3D%22M12%2018%20Q12%2012%2018%2012%20H46%20Q52%2012%2052%2018%20V46%20Q52%2052%2046%2052%20H18%20Q12%2052%2012%2046%20Z%22%20fill%3D%22none%22%20stroke%3D%22%23ffffff%22%20stroke-width%3D%225%22%2F%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2212%22%20fill%3D%22%23ffffff%22%2F%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%226%22%20fill%3D%22%23165b9c%22%2F%3E%3Cpath%20d%3D%22M32%204v10M32%2050v10M4%2032h10M50%2032h10%22%20stroke%3D%22%238ed3ff%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22%2F%3E%3C%2Fsvg%3E"/><meta charset="utf-8"/><meta content="width=device-width,initial-scale=1" name="viewport"/><title>RefraInspector v11.0.17</title><style>
 :root{font:14px system-ui,-apple-system,Segoe UI,sans-serif;color:#202734;background:#f3f5f8}*{box-sizing:border-box}body{margin:0;padding:16px}button,input,select{font:inherit}button{background:white;color:#243447;border:1px solid #cbd4df;border-radius:7px;padding:8px 10px;cursor:pointer}button:hover{background:#edf3fa}button.primary{background:#195b99;color:white;border-color:#195b99}input{width:100%;padding:6px;border:1px solid #c9d2df;border-radius:6px;min-width:0}input[type=file]{display:none}header{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:12px}h1{font-size:21px;margin:0}h2{font-size:16px;margin:0 0 12px}h3{font-size:14px;margin:15px 0 8px}.small{color:#657487;font-size:12px;line-height:1.5}.three{display:grid;grid-template-columns:minmax(210px,260px) minmax(390px,1fr) minmax(410px,520px);gap:12px;align-items:start;max-width:2000px;margin:auto}.panel{background:white;border:1px solid #dfe5ed;border-radius:11px;padding:13px;min-width:0}.field{display:grid;grid-template-columns:1fr 94px;align-items:center;gap:8px;margin:8px 0}.field label{font-size:12px;color:#4d5c70}.stat{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid #eef1f6;align-items:center}.stat b{font-variant-numeric:tabular-nums;text-align:right}.stat .small{max-width:66%}.toolbar{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin-bottom:10px}.tab[aria-selected=true]{background:#175b9a;color:white;border-color:#175b9a}.photoheader{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;margin:8px 0}.photoarea{background:#222830;border-radius:8px;padding:7px;min-height:390px;display:flex;align-items:center;justify-content:center}.stage{position:relative;line-height:0;touch-action:none;user-select:none;max-width:100%;width:100%;display:none}.stage img{display:block;width:100%;height:auto}.stage .line{position:absolute;z-index:4;touch-action:none;cursor:grab}.stage .line.h{height:18px;left:0;right:0;transform:translateY(-9px)}.stage .line.v{width:18px;top:0;bottom:0;transform:translateX(-9px)}.line.h:before{content:'';position:absolute;left:0;right:0;top:8px;border-top:2px solid var(--lc);filter:drop-shadow(0 0 1px #000)}.line.v:before{content:'';position:absolute;top:0;bottom:0;left:8px;border-left:2px solid var(--lc);filter:drop-shadow(0 0 1px #000)}.stage svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3;overflow:visible}.stage.contour{cursor:crosshair}.stage.contour .line{pointer-events:none}.areaInfo{border:1px solid #dbe3ec;border-radius:8px;padding:9px;margin:8px 0;background:#f8fafc}.areaInfo button{font-size:12px;padding:6px 8px}.areaInfo .inline{margin-top:7px}.placeholder{color:#c4cbd6;text-align:center;padding:60px 10px}.ind{background:#f2f6fc;border-radius:7px;padding:7px 9px;font-size:12px;line-height:1.5;margin:8px 0}.dimtable{width:100%;border-collapse:collapse;font-size:13px}.dimtable th{text-align:left;background:#f0f4f8;font-size:12px;padding:8px 5px}.dimtable td{border-bottom:1px solid #e9edf2;padding:5px}.dimtable input{width:90px}.crackrow{display:flex;justify-content:space-between;align-items:center;gap:8px;border-bottom:1px solid #ecf0f5;padding:5px 0}.crackrow label{font-size:12px}.crackrow input{width:70px}.crackrow small{color:#657487}.dimtable td:last-child{text-align:right;font-variant-numeric:tabular-nums;font-weight:650}.results{display:grid;grid-template-columns:minmax(180px,1.05fr) minmax(170px,.95fr);gap:12px}.results>div{min-width:0}textarea{display:block;width:100%;min-height:175px;font:12px/1.5 ui-monospace,monospace;border:1px solid #cbd3df;border-radius:7px;padding:8px;resize:vertical}.pairdata{border:1px solid #d5deea;border-radius:8px;padding:9px;margin:12px 0}.warn{color:#a15b17}.good{color:#206b39}.inline{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.inline input[type=range]{width:150px}.mode{background:#e8f0fa;padding:6px;border-radius:6px;font-size:12px}.separator{border-top:1px solid #e6eaf0;margin:12px 0}.calBtns{display:flex;gap:6px;flex-wrap:wrap}.calstatus{font-size:12px;margin-top:7px}.hint{font-size:12px;background:#fffae9;color:#725716;padding:8px;border-radius:6px;margin:8px 0}.minibtn{padding:5px 7px;font-size:12px}@media(max-width:1300px){.three{grid-template-columns:230px minmax(330px,1fr)}.right{grid-column:1/-1}.results{grid-template-columns:1fr 1fr}}@media(max-width:720px){body{padding:8px}.three{display:block}.panel{margin-bottom:10px}.results{grid-template-columns:1fr 1fr}}@media(max-width:450px){.results{grid-template-columns:1fr}.dimtable input{width:73px}}
 .formulaInfo{display:inline-grid;place-items:center;vertical-align:middle;margin-left:4px;padding:0;border:0;background:transparent;color:#23639d;font-size:15px;font-weight:700;line-height:1;min-width:22px;min-height:22px;border-radius:50%;cursor:pointer}.formulaInfo:hover,.formulaInfo:focus-visible{background:#e7f1fc;outline:2px solid #a8c9e7;outline-offset:1px}.formulaPopover{position:fixed;z-index:1000;max-width:min(440px,calc(100vw - 24px));padding:12px 34px 12px 13px;border-radius:9px;border:1px solid #a7b8c9;background:#fff;color:#202734;box-shadow:0 6px 22px #0002;font-size:13px;line-height:1.55}.formulaPopover{max-height:calc(100vh - 24px);overflow:auto}.formulaPopover[hidden]{display:none}.formulaPopover strong{display:block;margin-bottom:5px}.formulaPopover .closeInfo{position:absolute;right:5px;top:5px;border:0;padding:3px 7px}.stat .small{max-width:none}details.bulkPaste{border:1px solid #cbd7e4;border-radius:9px;padding:10px;margin:0 0 14px;background:#f8fbff}details.bulkPaste summary{cursor:pointer;font-weight:650;color:#195b99}details.bulkPaste textarea{margin:9px 0;min-height:110px}#H0{background:#edf2f8;color:#42556a}</style><style id="v66styles">.formulaDep{background:#fff3b0!important;outline:2px solid #e19a16!important;outline-offset:2px;transition:background .12s}.formulaDepTitle{background:#fff3b0;border-radius:4px}.autoRulerValue{text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:2px;text-decoration-color:#1d72b8}.originalBore{padding:7px;background:#f0f7fe;border:1px solid #b6cde6;border-radius:8px}.measureSourceNote{color:#566475;font-size:11px;margin:5px 0} .focusPhotoArea{outline:3px solid #eab308;outline-offset:-3px} .areaFocusLegend{font-size:12px;color:#755600;font-weight:700}</style><style id="v73styles">
 .three{grid-template-columns:minmax(205px,245px) minmax(360px,1fr) minmax(610px,740px);max-width:2200px}
@@ -547,10 +547,10 @@ body>header .campaignBackupActions{display:inline-flex;align-items:center;gap:6p
 .performanceSavedChanged{animation:performanceSavePulse 1.5s ease-out both;border-radius:5px}
 .performanceSavedNotice{display:inline-block!important;margin:5px 0 8px;padding:5px 9px;border-radius:6px;border:1px solid #83caa1;background:#e7f7ed;color:#16653d;font-size:12px;font-weight:650;animation:performanceSavedNotice 2.9s ease-in-out both}
 @media(prefers-reduced-motion:reduce){.performanceSavedChanged,.performanceSavedNotice{animation:none!important}.performanceSavedNotice{opacity:1!important}}
-</style></head><body><header><div><h1>RN Plate Pair Inspector <span class="small">v11.0.2</span></h1><div class="small">Upper / Lower pair · ruler-referenced measurements · campaign performance</div></div><div class="inline"><button id="showUserManual" type="button" aria-haspopup="dialog">? Help &amp; Manual</button><button class="primary" id="exportAll" hidden aria-hidden="true" tabindex="-1">Export pair JSON + images</button><button id="copyAll">Copy PLs data</button></div></header><main class="three">
-<section class="panel"><details class="leftCollapsible" open><summary>PL Geometry</summary><div class="leftCollapseBody"><details class="bulkPaste" open><summary>Campaign geometry (Excel / TSV)</summary><p class="small">Paste or edit the six-column geometry table below (W0, X0, Y0, Z0, R0, H0). Values are recognized automatically; H0 = 2×Y0. Other Excel layouts are accepted on paste.</p><textarea aria-label="Campaign geometry paste" id="campaignPaste" placeholder="W0	X0	Y0	Z0	R0	H0
-200	5	45	270	180	90" style="min-height:78px"></textarea><div id="campaignPasteStatus" role="status" hidden></div></details><div class="field"><label for="cid">Campaign ID</label><input id="cid" value="CMP-001"/></div><div class="field"><label for="bore">Bore radius before use · Y (mm)</label><input id="bore" min="0" placeholder="Enter Y" step="0.1" type="number"/></div><div class="field"><label for="W">W: Center-to-edge incl. band (mm)</label><input id="W" min="0" placeholder="W" step="0.1" type="number"/></div><div class="field"><label for="X">X: Band thickness (mm)</label><input id="X" min="0" step="0.1" type="number" value="0"/></div><div class="field"><label for="Z">Z: Closed center distance (mm)</label><input id="Z" min="0" placeholder="Z" step="0.1" type="number"/></div><div class="field"><label for="R0">R0 / SD: Initial stroke (mm)</label><input id="R0" min="0" placeholder="R0" step="0.1" type="number"/></div><div class="field"><label for="H0">H0 / BDia: Bore diameter before use (mm)</label><input aria-label="Calculated original bore diameter" id="H0" placeholder="2 × Y0" readonly="" type="number"/></div><div class="field"><label for="safe">Remaining stroke safe limit (mm) *</label><input id="safe" required aria-required="true" min="0" step="0.1" type="number" value="10"/></div><p class="small">Y is entered as the unused bore radius. F is required for stroke calculations on each PL.</p></div></details><details class="leftCollapsible" open><summary id="plPerformanceTitle">Campaign Performance</summary><div class="leftCollapseBody"><div class="stat"><span class="small">Campaign ID</span><b id="performanceCampaignId">CMP-001</b></div><div class="stat"><span class="small">Recorded sets</span><b id="pairsCount">0</b></div>
-<div class="stat"><span class="small">Sets below safe limit <button aria-label="Formula: Sets below safe limit" class="formulaInfo" data-formula="belowCount" title="Count of saved sets where remaining stroke &lt; safe limit." type="button">ⓘ</button></span><b id="belowCount">—</b></div><div class="stat"><span class="small">Average erosion · mm/min <button aria-label="Formula: Average erosion per minute" class="formulaInfo" data-formula="avgTime" title="Mean of saved pair ER values: (R0 − R) / total runtime (min)." type="button">ⓘ</button></span><b id="avgTime">—</b></div><div class="stat"><span class="small">Average erosion · mm/heat <button aria-label="Formula: Average erosion per heat" class="formulaInfo" data-formula="avgHeat" title="Mean of saved pair EPH values: (R0 − R) / heats used." type="button">ⓘ</button></span><b id="avgHeat">—</b></div><div class="stat"><span class="small">Average remaining stroke (mm) <button aria-label="Formula: Average remaining stroke" class="formulaInfo" data-formula="avgStroke" title="Mean of valid saved pair remaining stroke values." type="button">ⓘ</button></span><b id="avgStroke">—</b></div><div class="savedStrokePanel"><div class="savedStrokeHeading">Saved PL sets · Remaining Stroke (R)</div><div class="small" id="savedStrokeLimit">Judgment uses the Campaign safe limit.</div><div class="savedStrokeTableWrap"><table class="savedStrokeTable"><thead><tr><th scope="col">PL Set</th><th scope="col">R (mm)</th><th scope="col">Judgment</th></tr></thead><tbody id="savedStrokeRows"><tr><td colspan="3" class="savedStrokeEmpty">No saved PL sets.</td></tr></tbody></table></div></div><div class="inline" style="margin-top:11px"><button id="clearRecords">Clear saved pairs</button></div><div class="small" id="savedStatus" style="margin-top:8px">Session-only records; use Copy PLs data to preserve a readable summary.</div><div class="separator"></div><div class="small">Performance aggregates use saved complete PL pairs. Runtime and heats are pair-level quantities, not duplicated for Upper and Lower.</div></div></details></section>
+</style><style id="v1107styles">.plSetDeleteBox{border:1px solid #d4dfe9;background:#fbfcfe;padding:9px;border-radius:8px;margin-top:12px}.plSetDeleteBox>strong{font-size:12px}.plSetDeleteList{display:grid;gap:4px;max-height:180px;overflow:auto;margin:8px 0}.plSetDeleteList label{display:flex;align-items:center;gap:7px;font-size:12px;padding:4px 6px;border-radius:5px}.plSetDeleteList label:hover{background:#eaf1fa}.plSetDeleteList input{width:auto;flex:none}.plSetDeleteBox button:disabled{opacity:.5;cursor:not-allowed}.usageLockNotice{font-size:11px;color:#19653a;background:#e5f7ee;border:1px solid #a4d7b8;border-radius:5px;padding:5px 7px;margin:5px 0}.usageBox input:disabled{background:#ecf1f5!important;color:#3a4a5d;opacity:1;cursor:not-allowed}</style></head><body><header><div><h1>RN Plate Pair Inspector <span class="small">v11.0.11</span></h1><div class="small">Upper / Lower pair · ruler-referenced measurements · campaign performance</div></div><div class="inline"><button id="showUserManual" type="button" aria-haspopup="dialog">? Help &amp; Manual</button><button class="primary" id="exportAll" hidden aria-hidden="true" tabindex="-1">Export pair JSON + images</button><button id="copyAll">Copy PLs data</button></div></header><main class="three">
+<section class="panel"><details class="leftCollapsible" open><summary>PL Geometry</summary><div class="leftCollapseBody"><details class="bulkPaste" open><summary>PL geometry (Excel / TSV)</summary><p class="small">Paste or edit the six-column geometry table below (W0, X0, Y0, Z0, R0, H0). Values are recognized automatically; H0 = 2×Y0. Other Excel layouts are accepted on paste.</p><textarea aria-label="PL geometry paste" id="campaignPaste" placeholder="W0	X0	Y0	Z0	R0	H0
+200	5	45	270	180	90" style="min-height:78px"></textarea><div id="campaignPasteStatus" role="status" hidden></div></details><div class="field"><label for="cid">Campaign ID</label><input id="cid" value="CMP-001"/></div><div class="field"><label for="bore">Bore radius before use · Y (mm)</label><input id="bore" min="0" placeholder="Enter Y" step="0.1" type="number"/></div><div class="field"><label for="W">W: Center-to-edge incl. band (mm)</label><input id="W" min="0" placeholder="W" step="0.1" type="number"/></div><div class="field"><label for="X">X: Band thickness (mm)</label><input id="X" min="0" step="0.1" type="number" value="0"/></div><div class="field"><label for="Z">Z: Closed center distance (mm)</label><input id="Z" min="0" placeholder="Z" step="0.1" type="number"/></div><div class="field"><label for="R0">R0 / SD: Initial stroke (mm)</label><input id="R0" min="0" placeholder="R0" step="0.1" type="number"/></div><div class="field"><label for="H0">H0 / BDia: Bore diameter before use (mm)</label><input aria-label="Calculated original bore diameter" id="H0" placeholder="2 × Y0" readonly="" type="number"/></div><div class="field"><label for="safe">Remaining stroke safe limit (mm) *</label><input id="safe" required aria-required="true" min="0" step="0.1" type="number" value="10"/></div><p class="small"></p></div></details><details class="leftCollapsible" open><summary id="plPerformanceTitle">Campaign Performance</summary><div class="leftCollapseBody"><div class="stat"><span class="small">Campaign ID</span><b id="performanceCampaignId">CMP-001</b></div><div class="stat"><span class="small">Recorded sets</span><b id="pairsCount">0</b></div>
+<div class="stat"><span class="small">Sets below safe limit <button aria-label="Formula: Sets below safe limit" class="formulaInfo" data-formula="belowCount" title="Count of saved sets where remaining stroke &lt; safe limit." type="button">ⓘ</button></span><b id="belowCount">—</b></div><div class="stat campaignContributorStat" style="align-items:flex-start"><span class="small">PL sets used in performance calculation</span><span id="performancePLSets" style="text-align:right;max-width:60%;overflow-wrap:anywhere;font-size:12px">None</span></div><div class="stat"><span class="small">Average erosion · mm/min <button aria-label="Formula: Average erosion per minute" class="formulaInfo" data-formula="avgTime" title="Mean of saved pair ER values: (R0 − R) / total runtime (min)." type="button">ⓘ</button></span><b id="avgTime">—</b></div><div class="stat"><span class="small">Average erosion · mm/heat <button aria-label="Formula: Average erosion per heat" class="formulaInfo" data-formula="avgHeat" title="Mean of saved pair EPH values: (R0 − R) / heats used." type="button">ⓘ</button></span><b id="avgHeat">—</b></div><div class="stat"><span class="small">Average remaining stroke (mm) <button aria-label="Formula: Average remaining stroke" class="formulaInfo" data-formula="avgStroke" title="Mean of valid saved pair remaining stroke values." type="button">ⓘ</button></span><b id="avgStroke">—</b></div><div class="savedStrokePanel"><div class="savedStrokeHeading">Saved PL sets · Remaining Stroke (R)</div><div class="small" id="savedStrokeLimit">Judgment uses the Campaign safe limit.</div><div class="savedStrokeTableWrap"><table class="savedStrokeTable"><thead><tr><th scope="col">PL Set</th><th scope="col">R (mm)</th><th scope="col">Judgment</th></tr></thead><tbody id="savedStrokeRows"><tr><td colspan="3" class="savedStrokeEmpty">No saved PL sets.</td></tr></tbody></table></div></div><div class="plSetDeleteBox" aria-label="PL set management"><strong>PL Sets · Select for deletion</strong><div class="small">Includes both working and Campaign-saved PL sets. Deletion permanently removes the selected sets from this session and Campaign Performance; export a backup first.</div><div id="plSetDeleteList" class="plSetDeleteList" role="group" aria-label="Select PL sets to delete"></div><button id="deleteSelectedPLSets" type="button" class="minibtn" disabled>Delete selected PL set(s)</button></div><button id="clearRecords" hidden disabled aria-hidden="true" tabindex="-1" style="display:none!important">Clear saved pairs (removed)</button><div class="small" id="savedStatus" style="margin-top:8px">Session-only records; use Copy PLs data to preserve a readable summary.</div><div class="separator"></div><div class="small">Performance aggregates use saved complete PL pairs. Runtime and heats are pair-level quantities, not duplicated for Upper and Lower.</div></div></details></section>
 <div class="workspaceDivider" id="leftWidthDivider" role="separator" aria-label="Resize PL Geometry panel" aria-orientation="vertical" tabindex="0" title="Drag to resize PL Geometry · arrow keys to adjust"></div><section class="panel"><div class="photoheader"><h2 style="margin:0">PL photo workspace</h2><div class="photoMetaStack"><strong class="small" id="photoTitle" title="Current PL photo filename">Upper · no photo</strong><span class="small" id="photoCaptureTime" aria-live="polite">Captured: Unavailable</span></div><div class="inline"><button aria-selected="true" class="tab" id="upperTab">Upper PL</button><button aria-selected="false" class="tab" id="lowerTab">Lower PL</button><button type="button" id="photoExchange" aria-label="Replace photos: 1 for selected PL, 2 for Upper then Lower" class="minibtn photoUploadIcon" title="Import photos: select 1 photo for the active PL, or 2 photos (first Upper, second Lower)"><svg aria-hidden="true" fill="none" height="21" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="21"><path d="M7 7h14l-4-4m4 4-4 4M17 17H3l4 4m-4-4 4-4"></path></svg></button></div></div><div id="plCardSelector" role="group" aria-label="Choose Upper or Lower plate"></div><div class="workspaceStepGroup"><div class="workspaceStepTitle">#1 Level</div><div class="toolbar"><button class="minibtn" id="autoLevel">Auto Level</button><button class="minibtn" id="manualLevel">Level with 2 Points</button></div></div>
 <div class="workspaceStepGroup"><details class="workspaceCal" open><summary>#2 Calibration · X / Y (px/mm)</summary><div class="workspaceCalBody"><h3>Ruler calibration</h3><div class="calBtns"><button id="autoCal">Auto 100mm Calibration</button><span id="autoScaleSummary" class="small" aria-live="polite" style="font-weight:650;white-space:nowrap">X: — · Y: — px/mm</span><span id="autoScaleMismatch" role="alert" hidden style="color:#991b1b;background:#fee2e2;border:2px solid #dc2626;border-radius:6px;padding:6px 9px;font-weight:750;font-size:12px;line-height:1.35"></span><button id="manualCalBoth" type="button">Start Manual Calibration</button><button type="button" id="manualRulerDone" hidden style="display:none!important" aria-hidden="true" tabindex="-1">Manual Ruler Calibration Done</button></div><div id="manualRulerControls" hidden style="display:none"><strong>Manual ruler calibration · 100 mm each direction</strong><p class="small">Set vertical guide spacing to X = 100 mm and horizontal guide spacing to Y = 100 mm.</p><span id="manualRulerSpan" class="small" role="status" style="display:block;margin-top:5px"></span></div><div id="rulerReadout" class="small" role="status">Auto detects X/Y ruler scales. If unsuccessful, adjust the four 100 mm guides.</div><div class="calibrationScalePair"><div class="field"><label for="sx">Horizontal (px/mm)</label><input id="sx" min="0.1" placeholder="—" step="0.001" type="number"/></div><div class="field"><label for="sy">Vertical (px/mm)</label><input id="sy" min="0.1" placeholder="—" step="0.001" type="number"/></div></div><div class="small">X/Y scales are independent. Verify against physical ruler marks.</div></div></details></div>
 <div class="workspaceStepGroup"><div class="workspaceStepTitle">#3 Alignment</div><div class="toolbar"><button class="minibtn" id="autoAlignAll">Auto Align</button><button class="minibtn" id="undoAutoAlign" disabled>Undo Alignment</button><button class="minibtn" id="resetLines">Reset Lines</button><button type="button" class="minibtn" id="verifyAlignment" aria-pressed="false" style="font-weight:750;border:2px solid #bd3434">Verify Alignment *</button><span id="alignmentVerifyState" role="status" style="font-size:11px;color:#a11b1b">Required</span></div><div id="autoAlignStatus" class="small" role="status" aria-live="polite" style="display:none;padding:5px 8px;margin:5px 0"></div></div><div class="workspaceStepGroup compactSaveStep"><div class="workspaceStepTitle">#4 Save Set</div><div class="toolbar"><button type="button" class="minibtn primary" id="savePair">Save set to campaign</button></div></div><div class="photoarea photoareaWrap"><input accept="image/*,.heic,.heif" aria-label="Select one or two PL photos" id="photoFile" multiple type="file"/><button aria-label="Show PL measurement legend" class="workspaceInfoFloating" id="workspaceHelpBtn" title="Show PL measurement legend" type="button">i</button><div class="placeholder" id="empty"><button type="button" id="photoImportPrompt" class="photoImportPrompt"><svg aria-hidden="true" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 16V3m0 0L7 8m5-5 5 5"></path><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"></path></svg><strong>Import PL photo</strong><span>Choose one image for the selected PL, or two images (Upper then Lower)</span></button></div><div id="photoLoadingOverlay" class="photoLoadingOverlay" hidden role="status" aria-live="polite"><span class="photoLoadingSpinner" aria-hidden="true"></span><strong id="photoLoadingMessage">Loading photos…</strong><span class="small">Decoding and preparing image</span></div><div class="stage" id="stage"><img alt="Selected plate photo" id="photo"/><svg id="arrows" preserveaspectratio="none" viewbox="0 0 1000 1000"></svg></div></div><div id="precisionLineStatus" role="status" aria-live="polite">Precision alignment: click a guide line, then use arrow keys (1 px); Shift + arrow (10 px). Re-verify afterward.</div><div class="hint" id="actionHint" style="display:none"></div><div class="ind" id="calStatus" hidden>No image. Each PL has independent ruler calibration and dimension lines.</div><div class="areaInfo" hidden><h3 style="margin:0 0 5px">Nested ellipse area model</h3><div class="small">Area model: the used bore is bounded by H3/H4 and its detected left/right edges; the edge-damage boundary is the outer ellipse. The unused bore remains a calculation reference but is not drawn.</div><div class="small" style="margin:8px 0 6px"><strong>Inner ellipse</strong>: H3/H4 tangency and photo-estimated bore left/right edges.<br/><strong>Outer ellipse</strong>: tangent to V1, V2, H2 and H5.</div><button class="minibtn" id="rescanBore" type="button">Detect bore left/right from photo</button><div aria-live="polite" class="small" id="innerDetectStatus">Not scanned</div><div class="small" id="contourStatus">Area model uses current dimension lines and a photo-edge estimate. Calibrate both rulers and enter Y for area values.</div></div></section>
@@ -732,6 +732,12 @@ function applyCampaignGeometryPaste(){
  if(valid(vals.H0)&&!valid(vals.bore))vals.bore=vals.H0/2;
  const y=valid(vals.bore)?vals.bore:num('bore'),z=valid(vals.Z)?vals.Z:num('Z');
  if(valid(vals.R0)&&valid(y)&&valid(z)&&Math.abs(vals.R0-(z-2*y))>0.1)warnings.push('R0 differs from Z0 − 2Y0');
+ // Changing PL geometry affects every approved PL set. Confirm before applying.
+ const pendingChanges=['W','X','bore','Z','R0'].filter(key=>valid(vals[key])&&Number($(key).value)!==vals[key]);
+ if(pendingChanges.length&&typeof window.__confirmPLGeometryUpdate==='function'&&!window.__confirmPLGeometryUpdate()){
+   status.textContent='PL geometry update cancelled. Saved Campaign records were retained.';
+   status.className='small warn';showCampaignGeometryInPaste(true);return;
+ }
  // Apply entered source fields, preserving other fields and allowing explicit R0 when supplied.
  const assigned=[];
  for(const key of ['W','X','bore','Z','R0'])if(valid(vals[key])){$(key).value=vals[key];assigned.push(key==='bore'?'Y0':key==='W'?'W0':key==='X'?'X0':key==='Z'?'Z0':'R0');}
@@ -962,7 +968,7 @@ function renderSavedStrokeList(){
   if(item.record?.incomplete)tr.title='Saved with incomplete inspection fields';
  }
 }
-function updateStats(){const avg=(key)=>{const a=records.map(x=>x[key]).filter(valid);return a.length?a.reduce((a,b)=>a+b,0)/a.length:null};$('pairsCount').textContent=records.length;$('avgTime').textContent=fmt(avg('eTime'),3);$('avgHeat').textContent=fmt(avg('eHeat'),2);$('avgStroke').textContent=fmt(avg('stroke'));$('belowCount').textContent=records.filter(r=>valid(r.stroke)&&valid(r.safe)&&r.stroke<r.safe).length||'0';renderSavedStrokeList()}
+function updateStats(){const avg=(key)=>{const a=records.map(x=>x[key]).filter(valid);return a.length?a.reduce((a,b)=>a+b,0)/a.length:null};$('pairsCount').textContent=records.length;$('avgTime').textContent=fmt(avg('eTime'),3);$('avgHeat').textContent=fmt(avg('eHeat'),2);$('avgStroke').textContent=fmt(avg('stroke'));$('belowCount').textContent=records.filter(r=>valid(r.stroke)&&valid(r.safe)&&r.stroke<r.safe).length||'0';const used=$('performancePLSets');if(used){const campaign=String($('cid')?.value||'').trim();const ids=records.filter(r=>!campaign||String(r.id).split(' / ')[0]===campaign).map(r=>String(r.id).split(' / ').slice(1).join(' / ')||r.id);used.textContent=ids.length?ids.join(', '):'None';used.title=ids.length?ids.join('\n'):'No saved PL sets included';}renderSavedStrokeList()}
 let photoPreviewToken=0;
 function resetDOMImage(){renderPlateSelector();const pl=p(),stage=$('stage');stage.querySelectorAll('.line,.innerHandle').forEach(e=>e.remove());if(currentObjectURL){URL.revokeObjectURL(currentObjectURL);currentObjectURL=null}++photoPreviewToken;if(!pl.image){stage.style.display='none';$('empty').style.display='block';$('photoTitle').textContent=`${active} · no photo`;renderArrows();refreshPhotoImportUI();return}const canvas=pl.image;// Safari: avoid a full-resolution JPEG data URI and synchronous base64 allocation.
 const shownPlate=active;
@@ -1243,15 +1249,11 @@ $('stage').addEventListener('pointerdown',e=>{if(!pending||e.target.classList.co
  pl.method=`Numbered ruler ticks confirmed: ${isX?'X':'Y'} ${n1} → ${n2} mm; ${(pixels/span).toFixed(3)} px/mm`;
  select(active);updateResults();return;
  }
- if(axis==='level'){const a=Math.atan2((points[1].y-points[0].y)*pl.image.height,(points[1].x-points[0].x)*pl.image.width)*180/Math.PI;const savedManual={sx:pl.manualScaleX?pl.sx:null,sy:pl.manualScaleY?pl.sy:null};
+ if(axis==='level'){
+  const a=Math.atan2((points[1].y-points[0].y)*pl.image.height,(points[1].x-points[0].x)*pl.image.width)*180/Math.PI;
+  // Rotation invalidates the old pixel anchors. Rescan BOTH rulers first.
   rotateCanvas(pl,pl.rotation-a);
-  // Keep verified 100 mm pixel scales; the two-point rotation changes the axes only slightly.
-  // Pixel tick anchors themselves are discarded because the coordinate origin changed.
-  if(valid(savedManual.sx)){pl.sx=savedManual.sx;pl.manualScaleX=true}
-  if(valid(savedManual.sy)){pl.sy=savedManual.sy;pl.manualScaleY=true}
-  // Re-scan rulers on the corrected image. Automatic guesses must not overwrite verified scales.
-  // Manual overrides stay untouched; Auto A–F uses the refreshed X/Y calibration.
-  pl.method='Two-point level complete; re-detecting ruler ticks';
+  pl.method='Two-point level complete; automatically recalibrating both X and Y rulers';
   select(active);
   autoCalibrate();
   detectInnerBore(pl);
@@ -1312,19 +1314,14 @@ function showLastAutoScale(pl=p()){
 }
 function autoCalibrate(){
  const pl=p();
- // Explicit retry always discards both manual X/Y calibrations, including pending guides.
+
  if(typeof exitManualRulerMode==='function')exitManualRulerMode(pl);
+ // Always independently auto-detect both axes after two-point leveling.
  pl.manualScaleX=false;pl.manualScaleY=false;
- pl.sx=null;pl.sy=null;pl.calX=null;pl.calY=null;
+ pl.sx=null;pl.sy=null;
+ pl.calX=null;pl.calY=null;
  pl.scaleSourceX=null;pl.scaleSourceY=null;
  $('sx').value='';$('sy').value='';
- // Every attempt is independent for this photograph and for each ruler axis.
- // Horizontal and vertical results must both be observed; similarity alone is not evidence.
- for(const axis of ['x','y'])if(!pl[axis==='x'?'manualScaleX':'manualScaleY']){
-   pl[axis==='x'?'sx':'sy']=null;
-   pl[axis==='x'?'calX':'calY']=null;
-   pl[axis==='x'?'scaleSourceX':'scaleSourceY']=null;
- }
  pl.calibrationFailed=false;
  if(!pl.image){pl.calibrationFailed=true;updateCalibrationUX();return}
  const source=pl.image;
@@ -1465,7 +1462,7 @@ function autoCalibrate(){
  const results={};
  const passInfo={};
  for(const axis of ['x','y']){
-   const strict=scan(axis);
+    const strict=scan(axis);
    if(valid(strict?.value)&&strict.value>0){results[axis]=strict;passInfo[axis]='strict';continue}
    const tolerant=scan(axis,null,true);
    if(valid(tolerant?.value)&&tolerant.value>0){results[axis]=tolerant;passInfo[axis]='adaptive fallback'}
@@ -1476,15 +1473,17 @@ function autoCalibrate(){
    const manualKey=axis==='x'?'manualScaleX':'manualScaleY';
    const prop=axis==='x'?'sx':'sy';
    const key=axis==='x'?'scaleSourceX':'scaleSourceY';
-   if(pl[manualKey]){notes.push(axis.toUpperCase()+': retained independently entered manual calibration');continue}
    const detected=results[axis];
    if(detected&&Number.isFinite(detected.value)&&detected.value>0&&!detected.ambiguous){
      pl[prop]=detected.value;
      pl[key]=`auto:${passInfo[axis]} independent 1/5/10mm ruler ticks`;
      notes.push(`${axis.toUpperCase()}: ${detected.value.toFixed(3)} px/mm (${passInfo[axis]}, ${detected.bands} agreeing bands, ruler at ${detected.region}; independently detected)`);
    }else{
+     // Two-point leveling changes image coordinates: do not reuse an old px/mm scale.
      pl[prop]=null;
-     notes.push(`${axis.toUpperCase()}: ${detected?.reason||'insufficient consistent tick evidence'} — use ${axis==='x'?'horizontal':'vertical'} 100 mm manual calibration`);
+     pl[key]='auto:failed — manual calibration required';
+     pl[manualKey]=false;
+     notes.push(`${axis.toUpperCase()}: auto calibration failed (${detected?.reason||'insufficient ruler evidence'}). Previous calibration cleared; manually mark a 100 mm span.`);
    }
  }
  if(valid(pl.sx)&&valid(pl.sy)){
@@ -1492,9 +1491,9 @@ function autoCalibrate(){
    if(diff>.12)notes.push(`⚠ X/Y differ by ${(diff*100).toFixed(1)}%; verify tilt and ruler plane; values were NOT copied`);
  }
  pl.calibrationFailed=!(valid(pl.sx)&&valid(pl.sy));
- if(!pl.calibrationFailed){pl.autoLastSX=pl.sx;pl.autoLastSY=pl.sy;}
- showLastAutoScale(pl);
  pl.calibrationProvisional=false;
+ if(!pl.calibrationFailed&&!pl.calibrationProvisional){pl.autoLastSX=pl.sx;pl.autoLastSY=pl.sy;}
+ showLastAutoScale(pl);
  pl.method='v9.3.3 independent iPhone-compatible ruler detection · '+notes.join('; ');
  select(active);
  $('calStatus').textContent=pl.method;
@@ -1587,10 +1586,12 @@ function swapPLAssignments(){
   [plates.upper,plates.lower]=[plates.lower,plates.upper];
   [remarks.upper,remarks.lower]=[remarks.lower,remarks.upper];
   [crackState.upper,crackState.lower]=[crackState.lower,crackState.upper];
-  // Existing alignment must be checked again after changing plate identities.
-  if(typeof alignBackup!=='undefined'){alignBackup.upper=null;alignBackup.lower=null}
+  // Swapping identities does not change the underlying measurements or their verification.
+  // Keep each side's supporting alignment and trace state with its corresponding photo.
+  if(typeof alignBackup!=='undefined') [alignBackup.upper,alignBackup.lower]=[alignBackup.lower,alignBackup.upper];
+  if(typeof v91Traces!=='undefined') [v91Traces.upper,v91Traces.lower]=[v91Traces.lower,v91Traces.upper];
   hidePLSideReview();select('upper');
-  $('savedStatus').textContent='Upper / Lower photo assignments swapped. Recheck alignment and save the corrected set.';
+  $('savedStatus').textContent='Upper / Lower PL assignments swapped; verification and Campaign status preserved.';
   document.dispatchEvent(new CustomEvent('refraInspectorPlateAssignmentsSwapped'));
   // A manual swap must re-evaluate the NEW Upper/Lower assignments every time.
   checkUpperLowerClosureMark();
@@ -2041,7 +2042,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape' && !$('workspaceHelp
 buildMeasurements();syncH0();select('upper');
 // v9.4.6: inspector verification is per PL and becomes invalid if measurement geometry is edited.
 const verification={upper:false,lower:false};
-document.addEventListener('refraInspectorPlateAssignmentsSwapped',()=>{verification.upper=false;verification.lower=false;syncAlignmentVerification()});
+document.addEventListener('refraInspectorPlateAssignmentsSwapped',()=>{[verification.upper,verification.lower]=[verification.lower,verification.upper];syncAlignmentVerification()});
 const verifyBtn=document.getElementById('verifyAlignment');
 const verifyState=document.getElementById('alignmentVerifyState');
 const exportButtons=['copyAll','exportAll'];
@@ -2103,7 +2104,9 @@ for(const id of ['autoLevel','manualLevel','autoCal','manualCalBoth','autoAlignA
 document.getElementById('stage')?.addEventListener('pointerdown',event=>{
  if(event.target.closest('.line,.innerGuide,.innerHandle,.manualRulerGuide'))invalidateVerification(active);
 },true);
-document.getElementById('photoFile')?.addEventListener('change',()=>{verification.upper=false;verification.lower=false;syncAlignmentVerification()},true);
+// Photo verification is invalidated only after the import guard accepts the files.
+// Resetting here (capture phase) corrupted the verified snapshot of an existing
+// saved PL set even when importing a separate new PL set or cancelling import.
 for(const id of ['sx','sy'])document.getElementById(id)?.addEventListener('input',()=>invalidateVerification(active),true);
 for(const id of ['upperTab','lowerTab'])document.getElementById(id)?.addEventListener('click',()=>queueMicrotask(syncAlignmentVerification));
 // Update verification filtering whenever calculations redraw the results panel.
@@ -2167,25 +2170,47 @@ syncAlignmentVerification();
 (()=>{
  const tabbar=$('lowerTab')?.parentElement;if(!tabbar)return;
  const picker=document.createElement('select');picker.id='savedPairSelector';
- picker.setAttribute('aria-label','Saved PL sets');
- picker.title='Switch saved PL sets (this browser session)';
+ picker.setAttribute('aria-label','All existing PL sets');
+ picker.title='Switch existing PL sets, including those not saved to Campaign';
  picker.style.cssText='width:auto;min-width:155px;max-width:240px;padding:6px;border-radius:7px;border:1px solid #cbd4df;background:white;font-size:12px';
  tabbar.insertBefore(picker,$('lowerTab').nextSibling);
  const saved=new Map();let selected=null;
+ // A U/L assignment swap is a non-destructive re-labeling of the same PL set.
+ // Update only its saved working snapshot, without touching Campaign records or dirty flags.
+ document.addEventListener('refraInspectorPlateAssignmentsSwapped',()=>{
+  const id=pairID();
+  if(saved.has(id))saved.set(id,snapshot());
+  refresh();
+ });
  window.__savedPlList=()=>[...saved.keys()].map(id=>({id,record:records.find(r=>r.id===id)||null}));
  let hasUnsavedChanges=true;
  const saveButton=$('savePair');
+ const invalidateApprovedSet=(reason)=>{
+  const id=selected;
+  if(!id||!records.some(item=>item.id===id))return false;
+  // Keep the active working set and its photos; remove ONLY campaign approval.
+  const before=typeof performanceSnapshot==='function'?performanceSnapshot():null;
+  records=records.filter(item=>item.id!==id);
+  saved.set(id,snapshot());
+  updateStats();
+  if(before&&typeof usageRemovalFeedback==='function')usageRemovalFeedback(before,performanceSnapshot());
+  $('savedStatus').textContent=id+' removed from CAMP after '+reason+'. Save again after verification.';
+  return true;
+ };
  const refreshSaveAttention=()=>saveButton.classList.toggle('saveSetNeedsAttention',hasUnsavedChanges);
  const markUnsaved=()=>{hasUnsavedChanges=true;refreshSaveAttention();if(typeof refresh==='function')refresh();};
  const markSaved=()=>{hasUnsavedChanges=false;refreshSaveAttention();if(typeof refresh==='function')refresh();};
  // Track edits to inspection inputs, including dragged measurement lines.
  document.addEventListener('input',event=>{
-  if(event.target.closest('#campaignPaste')||event.target.id==='savedPairSelector')return;
-  if(event.target.matches('input,textarea,select'))markUnsaved();
+  if(event.target.closest('#campaignPaste, #plSetDeleteList')||['savedPairSelector','photoFile','backupFile'].includes(event.target.id))return;
+  if(event.target.matches('input,textarea,select')){
+   if(event.target.id!=='savedPairSelector' && event.target.id!=='backupFile')invalidateApprovedSet('inspection data changed');
+   markUnsaved();
+  }
  },true);
- document.getElementById('stage')?.addEventListener('pointerup',markUnsaved,true);
- document.getElementById('stage')?.addEventListener('touchend',markUnsaved,true);
- document.querySelectorAll('#autoLevel,#manualLevel,#autoCal,#manualCalBoth,#autoAlignAll,#undoAutoAlign,#resetLines,#verifyAlignment,#detectCracks,#clearCracks').forEach(button=>button.addEventListener('click',markUnsaved));
+ document.getElementById('stage')?.addEventListener('pointerup',()=>{invalidateApprovedSet('photo alignment changed');markUnsaved();},true);
+ document.getElementById('stage')?.addEventListener('touchend',()=>{invalidateApprovedSet('photo alignment changed');markUnsaved();},true);
+ document.querySelectorAll('#autoLevel,#manualLevel,#autoCal,#manualCalBoth,#autoAlignAll,#undoAutoAlign,#resetLines,#verifyAlignment,#detectCracks,#clearCracks').forEach(button=>button.addEventListener('click',()=>{invalidateApprovedSet('inspection changed');markUnsaved();}));
  refreshSaveAttention();
  const fields=['cid','plpair','W','X','bore','Z','R0','safe','runtime','heats','olt'];
  // Geometry is a campaign property, not an individual plate-set property.
@@ -2202,26 +2227,29 @@ syncAlignmentVerification();
  };
  const geometryFromFields=fields=>Object.fromEntries(geometryFields.filter(k=>fields?.[k]!==undefined).map(k=>[k,fields[k]]));
  const geometryFromForm=()=>Object.fromEntries(geometryFields.map(k=>[k,$(k).value]));
+ // Recalculate saved Campaign Performance using each PL set's own F measurements
+ // and usage data. Keep saved membership, photos, and verification unchanged.
  const recalculateSavedPerformance=(cid)=>{
   for(const [id,data] of saved){
    if((data.fields.cid||'CMP')!==cid)continue;
    const row=records.find(item=>item.id===id);
    if(!row)continue;
-   const g=data.fields;
-   const n=key=>g[key]===''||g[key]==null?null:Number(g[key]);
-   const W=n('W'),X=n('X'),Y=n('bore'),Z=n('Z'),R0=n('R0');
+   const f=data.fields;
+   const numberFor=key=>f[key]===''||f[key]===null||f[key]===undefined?null:Number(f[key]);
+   const W=numberFor('W'),X=numberFor('X'),Y=numberFor('bore');
+   const Z=numberFor('Z'),R0=numberFor('R0');
    const thickness=side=>{
     const F=dimensionValues(data.plates[side]).F;
     return valid(F)&&valid(W)&&valid(X)&&valid(Y)?F-(W-X+Y):null;
    };
    const upper=thickness('upper'),lower=thickness('lower');
-   const stroke=valid(upper)&&valid(lower)&&valid(Y)&&valid(Z)?Z-upper-lower-2*Y:null;
-   const delta=valid(stroke)&&valid(R0)?R0-stroke:null;
-   const runtime=n('runtime'),heats=n('heats');
+   const stroke=valid(upper)&&valid(lower)&&valid(Z)&&valid(Y)?Z-upper-lower-2*Y:null;
+   const reduction=valid(R0)&&valid(stroke)?R0-stroke:null;
+   const runtime=numberFor('runtime'),heats=numberFor('heats');
    row.stroke=stroke;
-   row.eTime=valid(delta)&&runtime>0?delta/runtime:null;
-   row.eHeat=valid(delta)&&heats>0?delta/heats:null;
-   row.safe=valid(n('safe'))?n('safe'):null;
+   row.eTime=valid(reduction)&&runtime>0?reduction/runtime:null;
+   row.eHeat=valid(reduction)&&heats>0?reduction/heats:null;
+   row.safe=valid(numberFor('safe'))?numberFor('safe'):null;
   }
   updateStats();
  };
@@ -2243,16 +2271,30 @@ syncAlignmentVerification();
   if(!Object.keys(patch).length)return;
   const cid=campaignKey();
   const geometry=trackCampaignGeometry(cid,patch);
+  // Preserve existing CAMP membership after confirmed geometry edits.
+  updateStats();
   applyGeometry(geometry);
-  updateResults();
+  if(typeof acceptedPLGeometry!=='undefined')for(const key of geometryFields)acceptedPLGeometry[key]=$(key).value;
   // All saved sets now carry the same values, including when reloaded later.
-  markUnsaved();
-  $('savedStatus').textContent='Campaign geometry synchronized to all saved PL sets in '+cid+'. Save the active set to preserve other edits.';
+  $('savedStatus').textContent='PL geometry updated for '+cid+'. Existing CAMP membership preserved; check recalculated performance before export.';
+ };
+ // Track the last accepted geometry so cancellation can restore the previous input.
+ const acceptedPLGeometry=Object.fromEntries(geometryFields.map(key=>[key,$(key).value]));
+ window.__confirmPLGeometryUpdate=()=>{
+   const cid=campaignKey();
+   const count=records.filter(item=>item.id.startsWith(cid+' / ')).length;
+   return !count||confirm(`Changing PL geometry will affect all ${count} PL set(s) saved to Campaign ${cid}. Their CAMP saved status will be preserved. Continue?`);
  };
  // Direct edits to geometry also update all saved sets for the current campaign.
- geometryFields.forEach(key=>$(key).addEventListener('input',()=>{
-  trackCampaignGeometry(campaignKey(),{[key]:$(key).value});
-  syncH0();updateResults();
+ geometryFields.forEach(key=>$(key).addEventListener('change',()=>{
+  if($(key).value!==acceptedPLGeometry[key]&&!window.__confirmPLGeometryUpdate()){
+    $(key).value=acceptedPLGeometry[key];syncH0();showCampaignGeometryInPaste(true);return;
+  }
+  acceptedPLGeometry[key]=$(key).value;
+  const cid=campaignKey(),geometry=trackCampaignGeometry(cid,{[key]:$(key).value});
+  syncSavedGeometry(cid,geometry);
+  // CAMP-approved PL sets remain approved, even when shared geometry changes.
+  syncH0();updateResults();updateStats();refresh();
  }));
 
  const pairID=()=>($('cid').value.trim()||'CMP')+' / '+($('plpair').value.trim()||'PL');
@@ -2269,6 +2311,59 @@ syncAlignmentVerification();
   verification:{...verification},
   alignBackup:clone(alignBackup),traces:clone(v91Traces),active
  });
+ // Runtime and heats remain editable, including for Campaign-approved sets.
+ // Editing creates a working draft without changing the last committed record.
+ const usageFieldIds=['plpair','runtime','heats'];
+ function updateUsageLock(){
+  for(const key of usageFieldIds){const input=$(key);if(input){input.disabled=false;input.removeAttribute('readonly');input.title='Edit usage information; save to Campaign to commit changes.';}}
+ }
+ const deleteList=$('plSetDeleteList'),deleteButton=$('deleteSelectedPLSets');
+ const deleteSelections=new Set();
+ function renderPLDeleteList(){
+  if(!deleteList)return;
+  const activeId=pairID();
+  const ids=[...new Set([...saved.keys(),...(hasUnsavedChanges||plates.upper.image||plates.lower.image?[activeId]:[])])].sort();
+  deleteSelections.forEach(id=>{if(!ids.includes(id))deleteSelections.delete(id)});
+  deleteList.replaceChildren();
+  if(!ids.length){const empty=document.createElement('span');empty.className='small';empty.textContent='No PL sets in this working session.';deleteList.append(empty);}
+  for(const id of ids){
+   const label=document.createElement('label'),input=document.createElement('input');input.type='checkbox';input.value=id;input.checked=deleteSelections.has(id);input.setAttribute('aria-label','Select '+id+' for deletion');
+   input.addEventListener('change',()=>{
+    // Selection only: never invalidate approval or touch Campaign Performance.
+    if(input.checked)deleteSelections.add(id);else deleteSelections.delete(id);
+    deleteButton.disabled=!deleteSelections.size;
+   });
+   const text=document.createElement('span');text.textContent=id+(records.some(r=>r.id===id)?' · Saved to CAMP':' · Working set');
+   label.append(input,text);deleteList.append(label);
+  }
+  deleteButton.disabled=!deleteSelections.size;
+ }
+ deleteButton?.addEventListener('click',()=>{
+  const ids=[...deleteSelections];if(!ids.length)return;
+  if(!confirm('Permanently delete '+ids.length+' selected PL set(s) from this working session and Campaign?\n\n'+ids.join('\n')+'\n\nThis cannot be undone without an earlier backup.'))return;
+  const before=typeof performanceSnapshot==='function'?performanceSnapshot():null;
+  const currentId=pairID(),activeDeleted=ids.includes(currentId)||ids.includes(selected);
+  ids.forEach(id=>{saved.delete(id);committedUsage?.delete(id)});
+  records=records.filter(r=>!ids.includes(r.id));
+  deleteSelections.clear();
+  if(activeDeleted){
+   selected=null;
+   // Reset both visible plates before navigating to any remaining working set.
+   // Reuse the initial empty plate defaults rather than leaving the deleted images onscreen.
+   for(const side of ['upper','lower']){
+    Object.assign(plates[side],plate());
+    verification[side]=false;
+    remarks[side]={tags:[],note:''};
+    crackState[side]={counts:[null,null,null,null],status:'Not assessed'};
+   }
+   const next=[...saved.keys()].sort()[0];
+   if(next){selected=next;restore(saved.get(next));hasUnsavedChanges=!records.some(r=>r.id===next);}
+   else{$('plpair').value='PL-001';$('runtime').value='';$('heats').value='';select('upper');hasUnsavedChanges=true;}
+  }
+  updateStats();refresh();syncAlignmentVerification();
+  if(before&&typeof usageRemovalFeedback==='function'&&JSON.stringify(before)!==JSON.stringify(performanceSnapshot()))usageRemovalFeedback(before,performanceSnapshot());
+  $('savedStatus').textContent='Deleted '+ids.length+' PL set(s) from the working list and Campaign.';
+ });
  // Display BOTH alignment verification and whether the active working copy
  // has actually been committed to the Campaign. Never equate autosave with Save Set.
  function savedAlignmentLabel(data){
@@ -2282,23 +2377,25 @@ syncAlignmentVerification();
  }
  function refresh(){
   const draftId=pairID();
-  const draftUnsaved=hasUnsavedChanges && (!selected || draftId!==selected || saved.has(selected));
-  picker.replaceChildren(new Option('Saved PL sets…',''));
+  picker.replaceChildren(new Option('PL sets…',''));
+  const campaignRecords=new Set(records.map(record=>record.id));
   for(const [id,data] of saved){
-   const isCurrentDraft=hasUnsavedChanges && selected===id && draftId===id;
-   const state=isCurrentDraft?savedAlignmentLabel(snapshot()):'Saved to CAMP';
+   const currentDraft=selected===id && draftId===id && hasUnsavedChanges;
+   const isCommitted=campaignRecords.has(id);
+   const state=isCommitted?'Saved to CAMP':savedAlignmentLabel(currentDraft?snapshot():data);
    const option=new Option(`${id}  ·  ${state}`,id);
    option.title=`${id} — ${state}`;
    picker.add(option);
   }
-  // Also show a newly imported, not-yet-saved PL in the dropdown.
-  if(!saved.has(draftId) && (hasUnsavedChanges || plates.upper.image || plates.lower.image)){
-   const state=savedAlignmentLabel(snapshot());
-   picker.add(new Option(`${draftId}  ·  ${state}`, '__active_draft__'));
-  }
-  picker.value=selected && saved.has(selected)?selected:(!saved.has(draftId) && hasUnsavedChanges?'__active_draft__':'');
+  // Show the unsaved active working set even if it has never been saved to CAMP.
+  const activeDraft=!saved.has(draftId) && (hasUnsavedChanges || plates.upper.image || plates.lower.image);
+  if(activeDraft)picker.add(new Option(`${draftId}  ·  ${savedAlignmentLabel(snapshot())}`, '__active_draft__'));
+  picker.value=selected && saved.has(selected)?selected:(activeDraft?'__active_draft__':'');
   const chosen=picker.selectedOptions[0];
-  picker.title=chosen?.value?chosen.textContent:'Select a saved PL set';
+  picker.title=chosen?.value?chosen.textContent:'Select a PL set';
+  renderPLDeleteList();
+  updateUsageLock();
+  const reminder=$('usageResaveReminder');if(reminder)reminder.hidden=!(selected===draftId && records.some(row=>row.id===selected) && hasUnsavedChanges && ['runtime','heats','plpair'].some(key=>String($(key)?.value??'')!==String(saved.get(selected)?.fields?.[key]??'')));
  }
  function restore(data){
   const cid=data.fields.cid||'CMP';
@@ -2321,9 +2418,14 @@ syncAlignmentVerification();
  }
  picker.addEventListener('change',()=>{
   const target=picker.value;if(target==='__active_draft__'||!saved.has(target)){refresh();return;}
-  if(hasUnsavedChanges && !confirm('Current PL set contains changes not saved to CAMP. Switch and discard these changes?')){refresh();return;}
-  selected=target;restore(saved.get(target));markSaved();refresh();
-  $('savedStatus').textContent='Loaded '+target+' (session only).';
+  if(hasUnsavedChanges && (plates.upper.image || plates.lower.image)){
+   const activeId=pairID();
+   saved.set(activeId,snapshot()); // preserve draft locally; does NOT save it to CAMP
+  }
+  selected=target;restore(saved.get(target));
+  if(records.some(row=>row.id===target))markSaved();else markUnsaved();
+  refresh();
+  $('savedStatus').textContent='Loaded '+target+' (working PL set; CAMP status shown in selector).';
  });
  const saveOld=$('savePair').onclick;
  $('savePair').onclick=function(e){
@@ -2359,8 +2461,8 @@ syncAlignmentVerification();
    for(const target of targets){target.classList.remove('performanceSavedChanged');void target.offsetWidth;target.classList.add('performanceSavedChanged');}
   }
  };
- // Changes to PL Set Usage Info invalidate the committed record immediately.
- // A draft remains in the workspace and must be explicitly saved again.
+ // Editing usage fields creates an unsaved draft, not a deletion or immediate
+ // recalculation of the previously committed Campaign Performance row.
  const usageInputs=['plpair','runtime','heats'];
  const committedUsage=new Map();
  const rememberUsage=()=>{
@@ -2370,40 +2472,26 @@ syncAlignmentVerification();
  const priorSaveWithUsage=$('savePair').onclick;
  $('savePair').onclick=function(event){
   priorSaveWithUsage.call(this,event);
-  if(selected&&saved.has(selected)&&!hasUnsavedChanges)rememberUsage();
+  if(selected&&saved.has(selected)&&!hasUnsavedChanges){
+   rememberUsage();
+   const reminder=$('usageResaveReminder');if(reminder)reminder.hidden=true;
+  }
  };
- const usageRemovalFeedback=(before,after)=>{
-  const metrics=['pairsCount','belowCount','avgTime','avgHeat','avgStroke'];
-  const changed=metrics.filter(key=>before[key]!==after[key]);
-  if(before.savedRows!==after.savedRows)changed.push('savedStrokeRows');
-  const heading=$('plPerformanceTitle'),panel=heading?.closest('details');
-  let note=$('performanceSavedNotice');
-  if(!note&&panel){note=document.createElement('span');note.id='performanceSavedNotice';note.setAttribute('role','status');heading.insertAdjacentElement('afterend',note);}
-  if(note){note.textContent='↻ PL set removed from CAMP — save again to restore';note.classList.remove('performanceSavedNotice');void note.offsetWidth;note.classList.add('performanceSavedNotice');}
-  for(const key of changed){const el=$(key),target=el?.closest('.stat')||el;if(target){target.classList.remove('performanceSavedChanged');void target.offsetWidth;target.classList.add('performanceSavedChanged');}}
- };
- const performanceSnapshot=()=>{
-  const state=Object.fromEntries(['pairsCount','belowCount','avgTime','avgHeat','avgStroke'].map(k=>[k,$(k)?.textContent||'']));
-  state.savedRows=$('savedStrokeRows')?.textContent||'';return state;
- };
+ const usageReminder=document.createElement('div');
+ usageReminder.id='usageResaveReminder';usageReminder.className='hint';usageReminder.hidden=true;
+ usageReminder.setAttribute('role','status');
+ usageReminder.textContent='Usage information changed. Click Save PL Set to Campaign to apply the updated runtime and heats to Campaign Performance.';
+ document.querySelector('.usageBox .stackBody')?.prepend(usageReminder);
  for(const key of usageInputs){
   const field=$(key);if(!field)continue;
   field.addEventListener('input',()=>{
    const id=selected;
-   if(!id||!saved.has(id))return;
-   const previous=committedUsage.get(id);
-   // If an earlier saved snapshot predates this feature, derive its stored values.
-   const baseline=previous?.[key]??String(saved.get(id).fields?.[key]??'');
-   if(String(field.value)===baseline)return;
-   const before=performanceSnapshot();
-   saved.delete(id);
-   records=records.filter(row=>row.id!==id);
-   committedUsage.delete(id);
-   selected=null;
+   if(!id||!saved.has(id)||!records.some(row=>row.id===id))return;
+   const baseline=committedUsage.get(id)?.[key]??String(saved.get(id).fields?.[key]??'');
+   if(String(field.value)===baseline && !hasUnsavedChanges)return;
    markUnsaved();
-   updateStats();refresh();syncAlignmentVerification();
-   $('savedStatus').textContent=`${id} removed from CAMP because PL Set Usage Info changed. Verify and save again.`;
-   usageRemovalFeedback(before,performanceSnapshot());
+   usageReminder.hidden=false;
+   $('savedStatus').textContent='Usage changes are not yet committed to Campaign. Click Save PL Set to Campaign to update the saved record.';
   });
  }
  rememberUsage();
@@ -2417,8 +2505,8 @@ syncAlignmentVerification();
  syncAlignmentVerification=function(...args){
   const result=originalVerificationSync(...args);
   const campaign=$('cid').value.trim()||'CMP';
-  const savedAvailable=[...saved.values()].some(data=>(data.fields.cid||'CMP')===campaign);
-  pairReportButton.disabled=!savedAvailable&&!importedSides().some(verified);
+  // Campaign approval, not the existence of a working PL Set, controls export.
+  pairReportButton.disabled=!records.some(row=>saved.has(row.id)&&row.id.startsWith(campaign+' / '));
   return result;
  };
  // Override the older single-pair onclick path completely: this button has ONE copy owner.
@@ -2427,9 +2515,10 @@ syncAlignmentVerification();
   event.preventDefault();
   event.stopImmediatePropagation();
   const campaign=$('cid').value.trim()||'CMP';
-  const entries=[...saved].filter(([,data])=>(data.fields.cid||'CMP')===campaign);
+  const approvedIds=new Set(records.map(row=>row.id));
+  const entries=[...saved].filter(([id,data])=>(data.fields.cid||'CMP')===campaign && approvedIds.has(id));
   if(!entries.length){
-   copyVerifiedReport(); // Legacy single-pair behavior only when no saved set exists.
+   $('savedStatus').textContent='No PL sets saved to CAMP for this campaign. Verify and save a set before exporting.';
    return;
   }
   const current=snapshot();
@@ -2526,7 +2615,7 @@ syncAlignmentVerification();
   const below=contributing(r=>Number.isFinite(r.stroke)&&Number.isFinite(r.safe));
   const belowCount=below.filter(({record})=>record.stroke<record.safe).length;
   const summaryRows=[
-   ['Saved PL Sets','', 'Recorded PL Sets','Number of saved pairs in this campaign',entries.length,sourceIds(entries.map(([id])=>({id})))],
+   ['Saved PL Sets','', 'Recorded PL Sets','Number of CAMP-approved pairs in this campaign',eligible.length,sourceIds(eligible)],
    ['Below Safe Limit','', 'Sets Below Safe Limit','Count with valid R and safe limit, where R < safe limit',belowCount,sourceIds(below)],
    ['Average ER','ER','Average Erosion Rate (mm/min)','Arithmetic mean of valid saved-pair ER values',average(erosionTime,'eTime',3),sourceIds(erosionTime)],
    ['Average EPH','EPH','Average Erosion per Heat (mm/heat)','Arithmetic mean of valid saved-pair EPH values',average(erosionHeat,'eHeat',2),sourceIds(erosionHeat)],
@@ -2570,8 +2659,17 @@ syncAlignmentVerification();
  },true);
  const clearOld=$('clearRecords').onclick;
  $('clearRecords').onclick=function(e){
+  const hadRecords=records.length;
   clearOld.call(this,e);
-  if(!records.length){saved.clear();selected=null;refresh();syncAlignmentVerification();}
+  // Campaign Performance records are separate from locally available PL sets.
+  // Cancelled clears must not modify the selector, and confirmed clears must
+  // not destroy existing photos, dimensions, or working PL-set snapshots.
+  if(hadRecords && !records.length){
+   if(selected && saved.has(selected))saved.set(selected,snapshot());
+   markUnsaved();
+   refresh();syncAlignmentVerification();
+   $('savedStatus').textContent='Campaign performance records cleared. Existing PL sets remain available; save again to CAMP when ready.';
+  }
  };
  // v10.2.5: explicit, user-controlled full-session backup. No background database writes.
  const backupBar=document.createElement('span');
@@ -2627,14 +2725,14 @@ syncAlignmentVerification();
    }
    plate.image=canvas;plate.source=canvas;
    out.plates[side]=plate;
-   // Require inspection confirmation after a recovered photo has been loaded.
-   out.verification[side]=false;
+   // Restore precisely the last recorded verification, but never verify a missing photo.
+   out.verification[side]=!!canvas && obj.verification?.[side]===true;
   }
   return out;
  };
  backupBtn.addEventListener('click',()=>{
   try{
-   if(selected&&saved.has(selected))saved.set(selected,snapshot());
+   // Backup committed snapshots as committed; do not replace one with an unsaved draft.
    if(!saved.size){alert('No saved PL sets. Save the current PL set first.');return;}
    const packageData={format:'RefraInspectorCampaignBackup',version:1,appVersion:'10.2.8',createdAt:new Date().toISOString(),
     selected,campaignGeometry:[...campaignGeometry],records:clone(records),sets:[...saved].map(([id,data])=>[id,portableSnapshot(data)])};
@@ -2646,7 +2744,7 @@ syncAlignmentVerification();
    const plId=safeId(currentSet?.fields?.plpair||$('plpair').value)||'PL';
    const name=`${campaignId}_${plId}_${date}.json`;
    saveFile(name,JSON.stringify(packageData),'application/json');
-   $('savedStatus').textContent='Backup downloaded: '+saved.size+' saved PL sets. Store the JSON safely; it contains full-resolution photos.';
+   $('savedStatus').textContent='Backup downloaded: '+saved.size+' PL sets (including non-CAMP working sets). Store the JSON safely; it contains full-resolution photos.';
   }catch(error){alert('Backup failed: '+error.message);}
  });
  restoreBtn.addEventListener('click',()=>backupFile.click());
@@ -2660,12 +2758,16 @@ syncAlignmentVerification();
    const loaded=[];
    for(const pair of raw.sets){if(!Array.isArray(pair)||typeof pair[0]!=='string')throw Error('Invalid saved set ID');loaded.push([pair[0],await unpackSnapshot(pair[1])]);}
    if(!loaded.length)throw Error('Backup contains no saved sets');
-   if(!confirm('Restore '+loaded.length+' saved PL sets from backup? This replaces the current session data. Restored photos will need alignment re-verification.'))return;
+   if(!confirm('Restore '+loaded.length+' PL sets from backup? This replaces the current session, including its previous Campaign Performance and verification statuses.'))return;
    saved.clear();for(const [id,data] of loaded)saved.set(id,data);
    campaignGeometry.clear();for(const [id,geo] of raw.campaignGeometry)campaignGeometry.set(id,geo);
-   records=clone(raw.records);selected=saved.has(raw.selected)?raw.selected:loaded[0][0];
-   restore(saved.get(selected));markSaved();refresh();syncAlignmentVerification();updateStats();
-   $('savedStatus').textContent='Restored '+saved.size+' sets. Verify alignment for recovered photos before exporting.';
+   // The backup records are authoritative for CAMP membership. Working-only sets remain unapproved.
+   records=clone(raw.records).filter(row=>row&&saved.has(row.id));
+   selected=saved.has(raw.selected)?raw.selected:loaded[0][0];
+   restore(saved.get(selected));
+   if(records.some(row=>row.id===selected))markSaved();else markUnsaved();
+   refresh();syncAlignmentVerification();updateStats();
+   $('savedStatus').textContent='Restored '+saved.size+' PL sets with their saved alignment verification and CAMP approval statuses.';
   }catch(error){alert('Restore failed. Current saved sets were not intentionally replaced: '+error.message);}
  });
  function nextPairId(){
@@ -2707,17 +2809,22 @@ syncAlignmentVerification();
   // not count as an explicit saved PL set.
   if(hasUnsavedChanges&&currentPhotosPresent){
    const action=replacing?'Replacing photos in the current PL set':'Importing photos for a new PL set';
-   if(!confirm(action+' will discard unsaved changes in the currently active PL set.\n\nChoose Cancel to save it first, or OK to continue without saving.'))return false;
+   if(!confirm(action+(replacing?' will discard unsaved changes in the photos being replaced.\n\nChoose Cancel to save first, or OK to continue.':' will preserve the current PL set as a local working set, but it will not be saved to CAMP.\n\nChoose Cancel to save it to CAMP first, or OK to continue.')))return false;
   }
   if(replacing){
-   // Preserve current pair ID, untouched side, and campaign geometry.
-   // The processFile routine refreshes just the imported side(s).
+   // Replace only the affected side(s) of the current working set. Other
+   // saved sets and the opposite PL's alignment approval must remain intact.
+   const sides=files.length===2?['upper','lower']:[active];
+   for(const side of sides)verification[side]=false;
+   if(selected&&records.some(row=>row.id===selected))invalidateApprovedSet('photo replaced');
+   syncAlignmentVerification();
    markUnsaved();
    return true;
   }
-  // New import always starts a new PL set; never silently overwrite a saved
-  // set, even when the current unsaved draft has no photos yet.
+  // New import always starts a new PL set. Retain the previous working set
+  // independently of whether it was ever committed to CAMP.
   const next=(!saved.size&&!currentPhotosPresent&&!inSavedSet)?$('plpair').value.trim()||'PL-001':nextPairId();
+  if(currentPhotosPresent && (!saved.has(currentId) || hasUnsavedChanges))saved.set(currentId,snapshot());
   for(const side of ['upper','lower']){
    Object.assign(plates[side],plate());
    remarks[side]={tags:[],note:''};
@@ -2885,6 +2992,7 @@ syncAlignmentVerification();
      canvas=photoCache.get(photoId);
     }
     plateData.image=canvas;plateData.source=canvas;result.plates[side]=plateData;
+    result.verification[side]=!!canvas && entry.verification?.[side]===true;
    }
    return result;
   }
@@ -2893,12 +3001,14 @@ syncAlignmentVerification();
   const draft=await unpack(state.draft);
   saved.clear();for(const [id,data] of loaded)saved.set(id,data);
   campaignGeometry.clear();for(const [id,geo] of state.campaignGeometry||[])campaignGeometry.set(id,geo);
-  records=clone(state.records||[]);
+  // Restore CAMP approval only for IDs that were actually committed at checkpoint time.
+  records=clone(state.records||[]).filter(row=>row&&saved.has(row.id));
   selected=state.selected&&saved.has(state.selected)?state.selected:null;
   restore(draft);
-  if(state.dirty)markUnsaved();else markSaved();
+  // Dirty state belongs to the working copy, independently of CAMP membership.
+  if(state.dirty===true)markUnsaved();else if(selected&&records.some(row=>row.id===selected))markSaved();else markUnsaved();
   refresh();syncAlignmentVerification();updateStats();
-  $('savedStatus').textContent='Auto-recovered '+saved.size+' saved sets plus working changes. Re-verify photo alignment before export.';
+  $('savedStatus').textContent='Auto-recovered '+saved.size+' PL sets with their recorded verification, CAMP status and working draft.';
  }
  async function startRecovery(){
   try{
@@ -2964,7 +3074,7 @@ syncAlignmentVerification();
  <section id="manualCal"><h3>3. Ruler calibration (px/mm)</h3><ol><li>For <strong>each</strong> Upper/Lower photo, open <strong>Ruler calibration · X / Y (px/mm)</strong> and click <strong>Auto 100mm Calibration</strong>.</li><li>Inspect both <strong>Horizontal ruler (px/mm)</strong> and <strong>Vertical ruler (px/mm)</strong>, together with detection warnings. Two axes should generally be similar in an almost perpendicular photograph, but not necessarily identical.</li><li>If automatic detection fails or is questionable, click <strong>Start Manual Calibration</strong>, align the two vertical guides with a 100 mm interval along the horizontal ruler, and align the two horizontal guides with a 100 mm interval along the vertical ruler. Click <strong>Finish Manual Calibration</strong> to restore the normal dimension lines.</li><li>You can also enter independently verified px/mm values directly in the X/Y fields.</li></ol><p>Scale = pixel distance ÷ 100 mm. Upper and Lower are calibrated independently. A successful automated estimate must still be checked against visible ruler marks for quantitative work.</p></section>
  <section id="manualDimensions"><h3>4. A–F dimensions</h3><p><strong>Auto Align Features · v9.3 Beta:</strong> fits inner used-bore and outer damage ellipses, rejects outlier dots, and aligns their guide lines. Contour dots and fitted ellipse outlines remain hidden at all times. H1/H6 are detected separately; physical damage boundaries still require inspector confirmation. Use Undo Alignment to restore the prior guides. Confidence describes image geometry, not proven physical accuracy.</p><p>Drag the <strong>six horizontal (H1–H6)</strong> and <strong>two vertical (V1–V2)</strong> measurement guides over the current plate photo. Use the <strong>PL A–F Dimensions · Upper / Lower</strong> panel to view values side by side.</p><ul><li><strong>Auto</strong> reads the corresponding line-to-line distance using the photo's px/mm calibration.</li><li><strong>Manual</strong> lets you enter the dimension measured with physical tools. The manual entry field appears only when Manual is selected.</li><li>Selected values are emphasized and unused values are grey. Lines H4/H5/H6 may overlap; their individual handles remain movable.</li><li>Use <strong>Reset lines</strong> to restore the default positions for the selected image.</li></ul><p>Dimension definitions and placements are shown by the small <strong>i</strong> help icon in the photo workspace. Photo-derived A–F measurements are estimates until line placement and calibration are validated.</p></section>
  <section id="manualAreas"><h3>5. Bore enlargement and edge damage</h3><p>Under <strong>Nested ellipse area model</strong>, the used-bore inner ellipse is determined from H3/H4 and estimated left/right bore edges; the outer edge-damage ellipse is bounded by V1/V2/H2/H5. Click <strong>Detect bore left/right from photo</strong> to update the inner horizontal boundaries.</p><table><tr><th>Output</th><th>Meaning</th></tr><tr><td>Used bore area (mm²)</td><td>Full inner ellipse area, scaled from image to mm².</td></tr><tr><td>ΔBore area (mm²)</td><td>Used bore area − π × Y₀², where Y₀ is the unused bore radius.</td></tr><tr><td>ΔBore area (%)</td><td>100 × ΔBore area / (π × Y₀²).</td></tr><tr><td>Edge damage (mm²)</td><td>Estimated outer elliptical area excluding the used-bore inner area.</td></tr></table><div class="manualWarn">These are ellipse-based approximations, <strong>not validated automatic corrosion/damage segmentation</strong>. The original bore radius Y₀ and reliable X/Y scales are needed for meaningful numerical results.</div></section>
- <section id="manualPair"><h3>6. Campaign and PL pair information</h3><p>Use <strong>PL Geometry</strong> for campaign ID, W, X, Y₀, Z, R₀ and the remaining-stroke safety limit. The bulk-paste box accepts campaign geometry from Excel/TSV; H₀ = 2Y₀ is calculated. In <strong>PL Set Usage Info</strong>, enter Pair ID, total runtime and heats used (shared by Upper and Lower).</p><p><strong>Long-end damage:</strong> T = F − (W − X + Y₀) for each PL. <strong>Remaining stroke:</strong> R = Z − T<sub>upper</sub> − T<sub>lower</sub> − 2Y₀. <strong>Stroke reduction:</strong> ΔR = R₀ − R. Rate results depend on the runtime and heat-count inputs. Use <strong>PL Performance</strong> to review saved campaign-level pair statistics.</p><p><strong>Cracks</strong> candidate detection is experimental: review and correct counts manually. <strong>Remarks</strong> tags and free text are stored independently for Upper and Lower.</p></section>
+ <section id="manualPair"><h3>6. Campaign and PL pair information</h3><p>Use <strong>PL Geometry</strong> for campaign ID, W, X, Y₀, Z, R₀ and the remaining-stroke safety limit. The bulk-paste box accepts PL geometry from Excel/TSV; H₀ = 2Y₀ is calculated. In <strong>PL Set Usage Info</strong>, enter Pair ID, total runtime and heats used (shared by Upper and Lower).</p><p><strong>Long-end damage:</strong> T = F − (W − X + Y₀) for each PL. <strong>Remaining stroke:</strong> R = Z − T<sub>upper</sub> − T<sub>lower</sub> − 2Y₀. <strong>Stroke reduction:</strong> ΔR = R₀ − R. Rate results depend on the runtime and heat-count inputs. Use <strong>PL Performance</strong> to review saved campaign-level pair statistics.</p><p><strong>Cracks</strong> candidate detection is experimental: review and correct counts manually. <strong>Remarks</strong> tags and free text are stored independently for Upper and Lower.</p></section>
  <section id="manualExport"><h3>7. Saving and exporting</h3><ul><li><strong>Save set to campaign</strong> stores the current pair in this browser session for performance summaries. Export your data before closing the page.</li><li><strong>Copy PLs data</strong> copies Mark (or Abbreviation if Mark is blank) plus Upper and Lower PL values; numeric data uses one decimal place. Missing or unsupported values are blank; shared pair results appear in the Upper column.</li><li><strong>Export pair JSON + images</strong> downloads the pair data and annotated photos.</li></ul></section>
  <section id="manualTrouble"><h3>8. Troubleshooting and measurement limits</h3><table><tr><th>Symptom</th><th>What to do</th></tr><tr><td>Ruler detection fails</td><td>Ensure both rulers and several 10 mm ticks are visible; avoid severe tilt, glare and blur. Retry, then use manual 100 mm spans if necessary.</td></tr><tr><td>Vertical px/mm seems too low</td><td>Check the exact 100 mm span on the vertical ruler and calibrate Y manually; do not copy the horizontal value as proof.</td></tr><tr><td>Upper and Lower show the same px/mm</td><td>Re-run detection separately on each photo and compare against a known 100 mm ruler span. Similar numbers can occur, but identical values alone do not establish correctness.</td></tr><tr><td>Photo imports but warning appears</td><td>Check whether the image actually loaded. A post-import analysis warning may not be a photo decode failure.</td></tr><tr><td>A–F or area results greyed out</td><td>Complete and verify the required horizontal/vertical px/mm calibration, or select Manual for dimension entry.</td></tr></table><p><strong>Accuracy goal (future):</strong> ±2 mm versus manual A–F measurements, with onsite photography and increasingly automated post-processing. This is a development target, not a certified current accuracy specification.</p></section>
  <section id="manualContact"><h3>9. Developer &amp; Help Desk</h3><p><strong>Developer / Technical contact:</strong> <a href="mailto:xuh@shinagawa-ref.jp">xuh@shinagawa-ref.jp</a></p><p><strong>Help desk / Support:</strong> <a href="mailto:xuh@shinagawa-ref.jp?subject=RefraInspector%20v8.0%20Support">xuh@shinagawa-ref.jp</a></p><p>When reporting an issue, include your browser, app version, photo format, relevant steps, and any error message. Share PL photographs only when permitted under applicable company rules.</p></section>
