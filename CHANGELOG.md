@@ -1,5 +1,28 @@
 # RN Plate Pair Inspector — Complete Version Update History
 
+## v11.0.28 — 2026-10-20 (JST)
+**Type:** Consolidated updates / PL set workflow, Campaign Performance, usability
+- **v11.0.28:** PL set selector shows the PL ID without the repeated Campaign ID; verification and Saved/Not saved indicators remain.
+- **v11.0.27:** Removed the header subtitle and under-slider photo capture text; placed Horizontal and Vertical (px/mm) labels immediately before their fields.
+- **v11.0.26:** Campaign Performance uses a compact layout, replaces Sets below safe limit with median and maximum heats used, and reflects those fields in Copy Campaign data.
+- **v11.0.25:** Removed Manual/Auto badges from the bore enlargement/edge damage area panel; removed the PL sets dropdown placeholder; renamed Copy PLs data to Copy PLs details and added Copy Campaign data.
+- **v11.0.24 / v11.0.22:** Moved Campaign Performance updated and auto-save confirmations to transient top-right toast notifications.
+- **v11.0.23:** Removed the separate PL sets used in performance calculation row.
+- **v11.0.21:** Simplified dropdown to verification and Campaign membership statuses; eligible changes to already-saved PL sets update Campaign automatically rather than silently removing them.
+- **v11.0.20:** A–F edits no longer revoke alignment verification, while calculation results still refresh.
+- **v11.0.19:** Warn before Copy PLs details when uncommitted working edits exist.
+- **v11.0.18:** Introduced independent verification, Campaign, and edit indicators (the edit indicator was subsequently removed in v11.0.21). Initial saving requires verification of every imported PL.
+- **v11.0.17:** Swapping Upper/Lower retains associated verification and Campaign membership.
+- **v11.0.16:** Runtime/heats remain editable after saving, with Campaign Performance statistics and copy improvements.
+- **v11.0.15 / v11.0.14:** Importing another PL set is isolated from previously saved sets' verification and Campaign status.
+- **v11.0.13:** Session/database and backup restoration retain verification and Campaign membership.
+- **v11.0.12:** Deletion checkbox selection alone does not remove PL sets or change Campaign Performance.
+- **v11.0.11:** PL Geometry edits trigger recalculation of calculated results and impacted Campaign Performance metrics while preserving saved PL set records.
+- **v11.0.10 and earlier:** Underlying geometry, verification, and saved-set workflow features remain in the history below.
+
+**Validation:** JavaScript syntax checks were reported during local iterations; end-to-end browser/device and image-accuracy testing is still required.
+
+
 ## v11.0.2 — 2026-10-19 (JST)
 **Type:** Campaign performance UI / Data integrity
 - Renamed the PL Performance at CMP-xxx panel to **Campaign Performance**.
@@ -143,7 +166,7 @@
 **Limitations:** iPhone Safari behavior has not yet been confirmed on a physical device. Resizing a photo reduces pixel detail; ruler calibration is based on the resized working image. v8.0 remains available in Git history.
 
 
-**Current release:** v11.0.2  
+**Current release:** v11.0.28  
 **Release date:** 2026-10-15 (JST)  
 **Earliest documented source:** `rn_plate_annotation_tool(2).html` (original five-horizontal/two-vertical annotation tool).  
 **Source base:** `refra_inspector_v7_39_photo_import_ui.html` (v7.38 ruler algorithm + updated photo import UI).
