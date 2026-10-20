@@ -1,5 +1,37 @@
 # RN Plate Pair Inspector — Complete Version Update History
 
+## v12.1.1 — 2026-10-20 (JST)
+**Type:** Campaign chart-axis refinement
+- Used Heats X-axis tick labels display integers only.
+- RS and T chart Y-axes start at zero; Y maxima adjust to visible data.
+- Existing formulas, recorded points and chart exports remain unchanged.
+
+## v12.1.0 — 2026-10-20 (JST)
+**Type:** Image analysis / Gradient-direction scoring
+- Adds edge orientation evaluation to inner bore left/right detection instead of ranking by grayscale gradient magnitude alone.
+- Scores inner-bore and outer-damage contour candidates using the relationship between image gradient direction and expected ellipse-normal orientation.
+- Preserves manual guides, ellipse-fitting, outlier filtering and review requirements.
+- **Validation:** Accuracy improvement has not yet been verified with ground-truth annotations.
+
+## v12.0.2 — 2026-10-20 (JST)
+**Type:** Compact layout
+- Moves PL Inspection/Campaign Report switch to a compact slider at the upper right of the header.
+- Removes redundant alignment-verified badge below the PL slider; verification state is still available in the saved-set selector and verification controls.
+
+## v12.0.1 — 2026-10-20 (JST)
+**Type:** Independent scrolling / Export UX
+- Adds independently scrollable sections within inspection and Campaign Report.
+- Adds panel-level copy and export controls for Campaign summary, saved PL-set details and each chart.
+
+## v12.0.0 — 2026-10-20 (JST)
+**Type:** Major release / Campaign Report view
+- Introduces separate PL Inspection and Campaign Report views.
+- Reports committed Campaign-level statistics and saved Upper/Lower A–F measurements and derived results.
+- Adds Remaining Stroke (RS) vs Used Heats and Upper/Lower damage thickness (T) vs Used Heats charts.
+- Provides report-wide and panel-level export options, including spreadsheet-compatible formats and SVG/PNG.
+- Report uses committed Campaign records, not unsaved inspection drafts.
+
+
 ## v11.0.28 — 2026-10-20 (JST)
 **Type:** Consolidated updates / PL set workflow, Campaign Performance, usability
 - **v11.0.28:** PL set selector shows the PL ID without the repeated Campaign ID; verification and Saved/Not saved indicators remain.
@@ -166,7 +198,7 @@
 **Limitations:** iPhone Safari behavior has not yet been confirmed on a physical device. Resizing a photo reduces pixel detail; ruler calibration is based on the resized working image. v8.0 remains available in Git history.
 
 
-**Current release:** v11.0.28  
+**Current release:** v12.1.1  
 **Release date:** 2026-10-15 (JST)  
 **Earliest documented source:** `rn_plate_annotation_tool(2).html` (original five-horizontal/two-vertical annotation tool).  
 **Source base:** `refra_inspector_v7_39_photo_import_ui.html` (v7.38 ruler algorithm + updated photo import UI).
