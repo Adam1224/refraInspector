@@ -1,18 +1,19 @@
 # RefraInspector
 
-**Version:** v12.1.4
+**Version:** v12.1.7
 
 **Development status:** Beta — automatic image recognition and measurement accuracy require further validation.
 
 Web-based refractory sliding gate plate inspection application.
 
 ## Usage
-Open `refraInspector_v12.1.4.html` in a modern browser. Import Upper and Lower PL photographs, calibrate the image rulers, inspect dimensions A–F, and export the results.
+Open `refraInspector_v12.1.7.html` in a modern browser. Import Upper and Lower PL photographs, calibrate the image rulers, inspect dimensions A–F, and export the results.
 
 ## Features
+- **v12.1.5–v12.1.7 — Capture-time safety notice:** compare original EXIF timestamps of Upper and Lower PL photos; warn when the time gap exceeds 30 minutes; show a responsive full-width banner with × dismissal, resetting on photo replacement. Missing EXIF timestamps do not trigger a time-gap warning.
 - **v12.1.2 — iPhone scrolling:** one continuous vertical scroll through Geometry, Photo Workspace and Results on narrow screens; desktop independent scrolling preserved.
 - **v12.1.3 — Compact mobile header:** ? Help icon and smaller header; mobile hides copy/backup/recovery status controls while the underlying recovery remains enabled.
-- **v12.1.4 — Mobile precision:** thinner visible H/V dimension lines and enlarged invisible touch/drag targets; desktop line styling and physical measurement calculations unchanged.
+- **v12.1.7 — Mobile precision:** thinner visible H/V dimension lines and enlarged invisible touch/drag targets; desktop line styling and physical measurement calculations unchanged.
 - **Two views:** PL Inspection and Campaign Report, switched via a compact header control.
 - **Campaign Report:** Campaign summary, saved PL-set A–F/usage/results table, RS versus Used Heats, and Upper/Lower T versus Used Heats charts.
 - **Panel exports:** Clipboard, CSV, Excel-compatible .xls, SVG/PNG chart images, and print/save PDF.
@@ -38,4 +39,4 @@ xuh@shinagawa-ref.jp
 Do not commit confidential production photographs, customer data, credentials, or exported inspection records without authorization.
 
 ## Application file naming
-The current standalone app is [`refraInspector_v12.1.4.html`](./refraInspector_v12.1.4.html). Future releases use the same filename pattern with their version number. If hosting as a root URL, configure the deployment to serve this file or add a separate `index.html` entry point.
+The current standalone app is [`refraInspector_v12.1.7.html`](./refraInspector_v12.1.7.html). Future releases use the same filename pattern with their version number. If hosting as a root URL, configure the deployment to serve this file or add a separate `index.html` entry point.
