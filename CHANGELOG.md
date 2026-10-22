@@ -1,5 +1,13 @@
 # RN Plate Pair Inspector — Complete Version Update History
 
+## v12.1.7 — 2026-10-22 (JST)
+**Type:** Photo capture-time warning / UI correction
+- Compare original EXIF capture timestamps of Upper/Lower imported PL photographs; warn if the difference exceeds 30 minutes (v12.1.5).
+- Provide an × button to dismiss the warning for the current pair; importing or replacing either photo resets dismissal (v12.1.6).
+- Fix the warning collapsing to a yellow dot by moving it outside the photo header and displaying it as a full-width responsive banner (v12.1.7).
+- Missing EXIF capture time cannot be compared; import/file modification times are not substituted. Warning does not prevent measurements, verification, saving or export.
+- Browser verification on real images remains recommended.
+
 ## Repository filename update — 2026-10-20 (JST)
 - Renamed the v12.1.4 application source from `index.html` to `refraInspector_v12.1.4.html`.
 - Updated README launch instructions. Website hosts expecting `index.html` must explicitly configure an entry point.
