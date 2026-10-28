@@ -1,9 +1,15 @@
 # RefraInspector — Version History
 
-**Current version:** v12.1.7  
+**Current version:** v13.0  
 **Development status:** Beta
 
 This changelog groups related changes by feature rather than listing every intermediate implementation or corrective patch. See [Detailed development history](./CHANGELOG_ARCHIVE.md) for individual version records, experiments, rollbacks, and traceability.
+
+## v13.0 — 2026-10-28
+### Four-point planar Homography (Beta)
+- Added a perspective-correction button in calibration with four-point manual marker-centre selection on a 300 × 600 mm reference frame (ID 0 top left, ID 1 top right, ID 3 bottom right, ID 2 bottom left).
+- Rectifies the selected image to a 900 × 1800 px canvas with nominal 3 px/mm X/Y and invalidates alignment verification until the A–F guides are checked again.
+- **Limitations:** Automatic ArUco detection/ID decoding is not implemented. Not validated against a precision reference. Assumes coplanar markers and measured surface; no lens-distortion correction. Reimport to undo.
 
 ## v12.1.7 — 2026-10-22
 ### Photo Capture Time Validation
