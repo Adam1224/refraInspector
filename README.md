@@ -2,7 +2,7 @@
 
 **Refractory Sliding Gate Plate Inspection & Campaign Analysis**
 
-**Current version:** v12.1.7  
+**Current version:** v13.0  
 **Status:** Beta  
 **Platform:** Modern desktop and mobile web browsers
 
@@ -10,16 +10,23 @@ RefraInspector is a browser-based application for inspection and analysis of ref
 
 ## 1. Getting started
 
-1. Download [refraInspector_v12.1.7.html](./refraInspector_v12.1.7.html).
+1. Download [refraInspector_v13.0.html](./refraInspector_v13.0.html).
 2. Open the standalone HTML file in a modern browser.
 3. Select **PL Inspection**, enter geometry and usage information, and inspect the PL photographs.
 4. Save verified PL sets to the Campaign, then use **Campaign Report** for review and export.
 
 A desktop browser is recommended for precise line adjustments. The mobile layout supports touch controls and continuous scrolling.
 
+## v13.0 — Four-point perspective correction (Beta)
+
+The **Perspective correction · 4 points (300 × 600 mm)** button is placed beside ruler calibration. For each imported Upper/Lower photo, click the **centres** of four reference markers in this exact sequence: **top-left ID 0, top-right ID 1, bottom-right ID 3, bottom-left ID 2**. The resulting planar homography maps the reference rectangle into a 900 × 1800 px canvas (nominal 3 px/mm horizontally and vertically). Review and reposition A–F guides, then re-verify alignment; existing alignment approval is invalidated. To undo, reimport the original photograph. It does **not** currently detect or decode ArUco markers automatically. The full-res image resampling introduces interpolation, and results are not a validated metrological calibration.
+
+**Important:** Reference marker centres must be accurately placed 300 × 600 mm apart and coplanar with the measured PL surface. Lens distortion, recessed damage surfaces, marker placement uncertainty, and capture angle can still affect accuracy. Existing Auto Level / ruler calibration operations may replace the rectified state; apply perspective correction **after** leveling. Use physical known-length checks before production use.
+
 ## 2. Main features
 
 - **Photo inspection:** Import one or two photographs, switch between Upper/Lower PLs, automatically or manually level images, and verify alignment.
+- **Perspective correction (v13.0 beta):** Manual four-marker-centre selection, 300 × 600 mm reference-plane homography, calibrated rectification, and alignment re-verification.
 - **Ruler calibration:** Independent horizontal and vertical px/mm scales, automatic 100 mm calibration, and manual fallback.
 - **A–F dimensions:** Photo guide lines, automatic readings, and editable manual overrides for each PL.
 - **Damage assessment:** Used-bore and enlargement areas, edge-damage area estimates, long-end damage, crack counts, and inspection remarks.
@@ -163,7 +170,7 @@ Use the available panel controls to copy or export tables and charts. The report
 
 ## 7. Documentation and support
 
-- [Current application — refraInspector_v12.1.7.html](./refraInspector_v12.1.7.html)
+- [Current application — refraInspector_v13.0.html](./refraInspector_v13.0.html)
 - [Feature-level release history — CHANGELOG.md](./CHANGELOG.md)
 - [Detailed historical changes — CHANGELOG_ARCHIVE.md](./CHANGELOG_ARCHIVE.md)
 
