@@ -27,10 +27,51 @@ If no markers are present, the application falls back to the traditional **Auto 
 
 **Important limitations:** These specifications require the actual physical markers to be mounted with accurate 300 × 300 mm centre spacing and consistent orientation on the PL reference plane. An A4 printout of four markers at a different spacing is only an identification test, **not** a valid metric calibration frame. Printed marker dimensions, camera lens distortion, PL surface height differences, edge detection, and image resampling affect real-world accuracy. The displayed px/mm describes the output image grid, **not** a certified measurement resolution. 16-corner RMS/max residuals measure fit consistency rather than actual A–F errors. Validate against independent known-length references before production use; full browser/device regression testing is still required.
 
+## ArUco calibration target — printing and assembly
+
+**Printable target:** [Four A4 sheets · 300 × 300 mm · 1 mm rulers · ID 0 corner origin (PDF)](./docs/RefraInspector_ArUco_300x300_4A4_NoZeroLabel.pdf)
+
+### Print four A4 sheets (no cutting)
+
+1. Open the PDF and print **all four pages on A4 at Actual size / 100%**. Disable **Fit to page**, auto-scaling, poster/tile printing, and printer-driver enlargement/reduction. Print in the intended page orientation.
+2. Check the **100 mm print verification scale** with a reliable physical ruler on the printed sheet. If it is not 100 mm, correct the print settings and reprint.
+3. Lay the pages on a flat, rigid backing **without overlapping, trimming, or gaps**; align the actual paper edges and join in this order:
+
+   | | Left | Right |
+   |---|---|---|
+   | **Top** | Page 1 · ID 0 (top-left) | Page 2 · ID 1 (top-right) |
+   | **Bottom** | Page 3 · ID 2 (bottom-left) | Page 4 · ID 3 (bottom-right) |
+
+4. Fix the pages against slipping, wrinkling, curling, or stretching. Tape the **back of the sheets or the outer margins**; never cover a marker's black squares or surrounding white quiet zone. Keep all markers flat and unobstructed.
+5. Measure actual **marker-centre distances** horizontally (ID 0–1 and ID 2–3) and vertically (ID 0–2 and ID 1–3). The intended values are **300 mm in both directions**. Confirm the assembled marker corners also form an accurate rectangular/square geometry. Paper-edge alignment alone cannot guarantee those distances because printers have feed/registration tolerances.
+6. The left and top rulers use the **bottom-right corner of the black ID 0 marker** as their 0 mm coordinate origin (the numeric zero labels are intentionally omitted). **This ruler origin is different from the ArUco marker-centre coordinate references used by the Homography calculation.** Some tick marks near markers and interior paper seams are intentionally omitted to prevent interference; do not use these omissions as physical gaps in the distance scale.
+
+For metrology, mount the printed target on a stable rigid jig once its dimensions have been checked. Ordinary printed paper is a prototype/reference target, not by itself a precision-certified calibration standard. Do not use an assembled set with wrong centre spacing as a valid 300 × 300 mm reference.
+
+### Position the frame relative to the PL
+
+- Place the target around the **short-end / bore and surrounding damage measurement area** of the spindle-shaped PL; the less relevant long-end tail can extend beyond the target, provided everything you need to inspect remains visible.
+- The **four marker faces must be coplanar with the PL's intended flat, unworn measurement reference surface**. Support the PL and jig independently if needed; **placing both on the same floor/table is insufficient when their heights differ**.
+- Keep all four markers fully visible, with adequate white quiet zones, and avoid glare, shadows, perspective extremes and motion blur. A near-perpendicular camera position is recommended even though Homography can correct planar perspective.
+- Homography assumes a single plane: recessed erosion, raised edges, camera lens distortion and fixture flex can still introduce errors. Use known dimensions at multiple positions for independent precision checks.
+
+### Two supported inspection workflows
+
+| Step | **With ArUco (new workflow)** | **Without ArUco (legacy workflow)** |
+|---|---|---|
+| **#0 Import** | Import Upper/Lower PL photographs showing all four markers | Import photographs showing traditional horizontal/vertical reference rulers |
+| **Automatic attempt** | On import, attempt automatic ArUco detection (DICT_4X4_50; IDs 0–3) | If no ArUco is found, use the traditional calibration route |
+| **#1 Level / Perspective** | Automatic 16-corner least-squares Homography for the 300 × 300 mm physical reference | Auto Level or Level with 2 Points |
+| **#2 Calibration** | Physical reference is supplied by ArUco; inspect the displayed rectified-image X/Y px/mm, **do not recalibrate with a 100 mm ruler unnecessarily** | Auto 100mm Calibration for X/Y; use Start Manual Calibration if automatic detection fails, and check both axes |
+| **#3 Alignment** | Check the A–F guides, then **Verify Alignment*** for each imported PL | Check the A–F guides, then **Verify Alignment*** for each imported PL |
+| **#4 Save Set** | Review measurements and save verified PL set to Campaign | Same |
+
+The ArUco workflow should be **automatic**, not require the user to click each marker. If detection or geometry validation fails, inspect the marker ID/position, print dimensions, orientation and image clarity. A missing marker does **not** justify pretending that a failed Homography has succeeded; use the legacy ruler workflow only if the photograph includes suitable ruler references. Manual A–F review and alignment verification remain mandatory in both paths.
+
 ## 2. Main features
 
 - **Photo inspection:** Import one or two photographs, switch between Upper/Lower PLs, automatically or manually level images, and verify alignment.
-- **Perspective correction (v13.0 beta):** Manual four-marker-centre selection, 300 × 600 mm reference-plane homography, calibrated rectification, and alignment re-verification.
+- **Perspective correction (v13.0 beta):** Automatic detection of four 30 mm ArUco markers, 300 × 300 mm centre-spacing reference, 16-corner least-squares Homography, adaptive rectification resolution, and alignment re-verification.
 - **Ruler calibration:** Independent horizontal and vertical px/mm scales, automatic 100 mm calibration, and manual fallback.
 - **A–F dimensions:** Photo guide lines, automatic readings, and editable manual overrides for each PL.
 - **Damage assessment:** Used-bore and enlargement areas, edge-damage area estimates, long-end damage, crack counts, and inspection remarks.
@@ -64,16 +105,19 @@ Changing shared geometry can affect calculated results for Campaign-saved PL set
 3. Confirm Upper/Lower assignment and use the plate selector to switch views.
 4. Check any capture-time mismatch notice; dismiss it with **×** after reviewing the pairing.
 
-Use clear photographs showing the plate and reference rulers. Avoid shadows, obstructions, and severe perspective distortion.
+For the ArUco workflow, show all four correctly positioned markers; for the legacy workflow, show both reference rulers. Avoid shadows, obstructions, and severe perspective distortion.
 
-### Step 3 — Level the photograph
+### Step 3 — Select perspective correction or traditional leveling
 
-1. Under **#1 Level**, use **Auto Level**.
-2. Confirm the plate's reference edges are aligned.
-3. If needed, select **Level with 2 Points** and identify two points on the horizontal reference.
-4. After manual leveling, repeat automatic ruler calibration; rotation can alter the effective image scale.
+1. **With ArUco:** Import initiates automatic detection and Homography. Confirm that the frame is physically valid and that perspective correction succeeded; do not apply Auto Level afterward unless intentionally switching workflows.
+2. **Without ArUco:** Under **#1 Level & Perspective Correction**, use **Auto Level**; confirm the plate reference, or select **Level with 2 Points**.
+3. For manually leveled legacy photos, repeat X/Y ruler calibration, because rotation can alter effective image scale.
 
-### Step 4 — Calibrate the rulers
+### Step 4 — Confirm ArUco scale or calibrate legacy rulers
+
+**If ArUco Homography succeeded:** #2 displays the corrected-image X/Y px/mm. These figures describe output sampling rather than certified accuracy. No separate ruler calibration is necessary.
+
+**For legacy photographs without ArUco:**
 
 1. Under **#2 Calibration · X / Y (px/mm)**, select **Auto 100mm Calibration**.
 2. Review the independent X and Y pixel-per-millimeter values against ruler markings.
@@ -150,7 +194,7 @@ Use the available panel controls to copy or export tables and charts. The report
 
 ## 5. Measurement guidance
 
-- Position the plate and rulers on stable, level supports wherever practical.
+- Position the plate and either the ArUco target or traditional rulers on stable supports; keep the relevant reference surfaces at the PL measurement-plane height.
 - Ensure ruler marks and plate damage boundaries are visible.
 - Check independent X/Y scale validity before using photo-derived dimensions.
 - Manually review suggested alignment lines and contours.
@@ -164,8 +208,9 @@ Use the available panel controls to copy or export tables and charts. The report
 | Issue | Action |
 |---|---|
 | Photo import fails | Check image format and browser support |
-| Image is tilted | Repeat Auto Level or Level with 2 Points |
-| Auto calibration fails | Use manual 100 mm calibration and verify both axes |
+| Image is tilted | For ArUco photos, inspect the four-marker Homography; for legacy photos, repeat Auto Level or Level with 2 Points |
+| ArUco cannot be detected | Confirm IDs 0–3, white margins, visibility, lighting, printing and correct physical spacing; use legacy rulers only when suitable ruler references exist |
+| Auto ruler calibration fails | Use manual 100 mm calibration and verify both axes |
 | A–F readings look incorrect | Review ruler scales, line positions and manual overrides |
 | Results unavailable | Check required input values and alignment verification |
 | Cannot save a PL set | Verify each imported PL's alignment |
@@ -175,6 +220,7 @@ Use the available panel controls to copy or export tables and charts. The report
 ## 7. Documentation and support
 
 - [Current application — refraInspector_v13.0.html](./refraInspector_v13.0.html)
+- [Printable four-sheet ArUco target — 300 × 300 mm](./docs/RefraInspector_ArUco_300x300_4A4_NoZeroLabel.pdf)
 - [Feature-level release history — CHANGELOG.md](./CHANGELOG.md)
 - [Detailed historical changes — CHANGELOG_ARCHIVE.md](./CHANGELOG_ARCHIVE.md)
 
