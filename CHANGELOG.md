@@ -1,60 +1,42 @@
-# RefraInspector — Version History
+# RefraInspector — Change History and SW/HW Traceability
 
-**Current version:** v13.0  
-**Development status:** Beta
+**Current software:** `SW-13.0` / RefraInspector v13.0 (Beta)  
+**Hardware reference:** `HW-02` printable ArUco target; `HW-03` rigid fixture is a proposal, **not a released product**.
 
-This changelog groups related changes by feature rather than listing every intermediate implementation or corrective patch. See [Detailed development history](./CHANGELOG_ARCHIVE.md) for individual version records, experiments, rollbacks, and traceability.
+Changes are maintained in two independently numbered registers:
 
-## v13.0 — 2026-10-28
-### Automatic ArUco Homography and Adaptive Resolution (Beta)
-- Added automatic on-import detection of four ArUco `DICT_4X4_50` markers (IDs 0–3), with 300 × 300 mm marker-centre geometry and 30 mm square markers.
-- Added 16-corner least-squares planar Homography fitting, geometry quality checks, perspective rectification, and automatic alignment-verification invalidation.
-- Replaced the fixed 900 × 900 px output with source-density-based adaptive output resolution and displayed corrected-image X/Y px/mm, subject to a memory-protection dimension limit.
-- Fixed the obsolete red/manual X/Y calibration state after successful ArUco rectification; normal success is quiet. Partial/invalid marker detection retains targeted diagnostics, while photos with no markers can use the traditional Auto Level + X/Y ruler calibration path.
-- Kept manual 4-point control out of the primary interface; updated layout guidance to focus the marker square on the bore/damage measurement region.
-- **Validation:** Marker decoding and syntax checks have been carried out during development, but actual measurement accuracy and complete browser regression remain unverified. Pixel density is not measurement accuracy; homography cannot correct non-planar PL wear or uncalibrated lens distortion.
+- [Software changes — `CHANGELOG_SOFTWARE.md`](./CHANGELOG_SOFTWARE.md): application functions, measurement/calibration logic, UI, Campaign and exports.
+- [Hardware changes — `CHANGELOG_HARDWARE.md`](./CHANGELOG_HARDWARE.md): physical rulers, printable markers, calibration fixtures and test plans.
+- [Detailed archived software history — `CHANGELOG_ARCHIVE.md`](./CHANGELOG_ARCHIVE.md): previous patch-by-patch records, left intact.
 
-## v12.1.7 — 2026-10-22
-### Photo Capture Time Validation
-- Added an EXIF-based warning when Upper and Lower PL photos were captured more than 30 minutes apart. The responsive warning can be dismissed, resets when either photo is replaced, and does not restrict inspection, saving, or export. Missing capture timestamps are not replaced with file modification or import times.
+## Numbering convention
 
-## v12.1.4 — 2026-10-20
-### Mobile Browser Optimization
-- Improved iPhone compatibility with continuous vertical scrolling, a compact mobile header, and thinner visible measurement lines with enlarged touch targets.
-- Preserved desktop layout and measurement calculations.
+| Domain | Format | Example | Scope |
+|---|---|---|---|
+| Software | `SW-<version>` | `SW-13.0` | HTML application release, linked to `refraInspector_v13.0.html` |
+| Hardware | `HW-XX` | `HW-02` | Printable target, physical setup or proposed jig; **not** tied 1:1 to a software version |
+| Mapping | `SW ⇄ HW` | `SW-13.0 ⇄ HW-02` | Compatibility or intended use, **not** proof of tested integration |
 
-## v12.1.1 — 2026-10-20
-### Campaign Chart and Image Analysis Refinements
-- Improved chart readability with integer Used Heats axis labels and Y-axes starting at zero.
-- Refined automatic bore and edge-damage boundary detection using image-gradient orientation; accuracy remains subject to physical validation.
+## Correspondence between software and hardware
 
-## v12.0.0 — 2026-10-20
-### Campaign Report
-- Introduced separate PL Inspection and Campaign Report views with campaign statistics, saved measurement tables, Remaining Stroke and damage-thickness charts, and spreadsheet/image export formats.
-- Subsequent refinements improved navigation, scrolling, and panel-level exports.
+| Software ID / feature | Hardware ID | Relationship | Verification status |
+|---|---|---|---|
+| `SW-08` / baseline photo measurements and A–F | `HW-01` | Two perpendicular scales support image measurement | Needs independent precision assessment |
+| `SW-9.0` / X/Y ruler calibration, Auto/Manual Level | `HW-01` | Two independent 100 mm references | Implemented software; physical validation incomplete |
+| `SW-10.0` / photo import, Upper/Lower and export workflow | `HW-01` | Standardized ruler-based photo setup | Workflow available |
+| `SW-11.0` / verification and Campaign data integrity | `HW-01`, `HW-02` | Photo/geometry verification regardless of chosen reference | Application-state checks, not physical accuracy |
+| `SW-12.0.0`–`SW-12.1.7` / reports and mobile UI | `HW-01`, `HW-02` | Hardware-independent reporting and inspection data preservation | Released as software features |
+| **`SW-13.0` / 4-marker 16-corner Homography** | **`HW-02`** | Exact IDs 0–3 and 300 × 300 mm marker-centre geometry, 30 mm square markers | Implemented; complete device/accuracy validation outstanding |
+| `SW-13.0` / dynamic rectification and X/Y px/mm display | `HW-02` | Image transformation based on 16 detected marker corners | Adaptive image output is not actual camera resolution |
+| `SW-13.0` / legacy fallback when no markers | `HW-01` | Preserve Level + X/Y ruler calibration workflow | Supported compatibility path |
+| **`SW-13.0` / coplanar calibration requirement** | **`HW-03`** | Planned jig keeps the marker surfaces and PL reference surface in one plane | Design proposal; not mechanically validated |
+| `SW-9.0` + `SW-13.0` / measure accuracy comparison | `HW-04` | Controlled A–F validation across both workflows | Test plan, not validated specifications |
 
-## v11.0 — 2026-10-19–20
-### PL Set Management and Campaign Data Integrity
-- Improved PL set selection, saving, alignment verification, deletion, recovery, and Campaign Performance calculations.
-- Added automatic updates to eligible saved Campaign data, with notifications and improved report copying.
-- Preserved independent Upper/Lower verification states and saved-set membership through supported workflows.
+## Interface and release rules
 
-## v10.0 — 2026-10-15–19
-### Inspection Workflow and Data Management
-- Consolidated numbered photo inspection controls, Upper/Lower photo management, Campaign backup and recovery, and standardized Excel-compatible reporting.
-- Improved PL identification safeguards, EXIF capture timestamp extraction, and saved-set navigation.
+1. **Do not silently change geometry:** If `HW-02` marker spacing or size changes, update `SW-13.0` physical-coordinate assumptions and revalidate. A hardware revision is not automatically backward-compatible.
+2. **Do not equate fit RMS with A–F accuracy:** Homography corner residuals, output px/mm and actual PL measurement error are separate quantities.
+3. **Use the correct plane:** Both workflows need reference geometry close to the PL surface; marker installation height errors can dominate the 16-corner fit benefit.
+4. **A software release does not certify a jig:** Concept drawings, printable PDFs, trial photos and measured device capability must have distinct statuses.
 
-## v9.0 — 2026-10-13–14
-### Photo Measurement and Calibration
-- Added feature-specific automatic alignment, improved independent X/Y ruler calibration with manual fallback, and mandatory per-photo alignment verification.
-- Refined editable A–F measurements, responsive workspace controls, and verification-dependent exports.
-
-## v8.0 and Earlier — Through 2026-10-13
-### Initial Inspection Platform
-- Developed the original plate photo annotation tool into Upper/Lower PL inspection with ruler calibration, A–F measurements, cracks and remarks, area estimates, and remaining-stroke calculations.
-- Earlier experimental iterations and superseded approaches are recorded in the [detailed history](./CHANGELOG_ARCHIVE.md).
-
-## Development and Traceability Notes
-- RefraInspector is beta software. Automatic image recognition and derived measurement accuracy still require testing against physical references.
-- Intermediate development versions and bug fixes are consolidated above rather than presented as separate features. Individual descriptions, experimental iterations, and rollbacks are preserved in the [archive](./CHANGELOG_ARCHIVE.md) and Git history.
-- Release dates reflect recorded project history, not independent certification or production validation.
+See the [README](./README.md) for printing, joining and measurement workflows.
