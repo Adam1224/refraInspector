@@ -688,7 +688,21 @@ body>header>.inline{display:flex;flex-wrap:wrap;align-items:center;justify-conte
 #v13AutoHomography{background:#145e9e;color:white;border:1px solid #145e9e;font-weight:700;min-height:36px}
 #v13AutoHomography:disabled{opacity:.48;cursor:not-allowed;background:#aab4bf;border-color:#aab4bf;color:#263442}
 </style>
-</head><body><header><div><h1>RN Plate Pair Inspector <span class="small">v13.0</span></h1></div><div class="inline"><button id="showUserManual" type="button" aria-haspopup="dialog" aria-label="Help and User Manual" title="Help and User Manual">? Help &amp; Manual</button><button class="primary" id="exportAll" hidden aria-hidden="true" tabindex="-1">Export pair JSON + images</button><button id="copyAll">Copy PLs details</button><button id="copyCampaign" type="button">Copy Campaign data</button><nav id="mainTabs" class="mainTabs" aria-label="RefraInspector tabs"><button class="mainTab selected" type="button" data-view="inspection" aria-selected="true">PL Inspection</button><button class="mainTab" type="button" data-view="report" aria-selected="false">Campaign Report</button></nav></div></header><div id="inspectionView"><main class="three">
+
+<style id="v13ReviewAndCropFix">
+/* The review state is indicated on the individual A-F inputs, not by fading readings. */
+.three>.right.alignUnverified .results{opacity:1!important;filter:none!important;pointer-events:auto!important;user-select:auto!important}
+.three>.right.unverifiedUpper .dimtable tbody td:nth-child(2),
+.three>.right.unverifiedLower .dimtable tbody td:nth-child(3){opacity:1!important;filter:none!important;pointer-events:auto!important}
+.three>.right.unverifiedUpper .dimtable tbody td:nth-child(2) input.afValueInput,
+.three>.right.unverifiedLower .dimtable tbody td:nth-child(3) input.afValueInput{
+  border:2px solid #dfa51c!important;background:#fff9de!important;color:#243447!important;
+  box-shadow:0 0 0 1px #e8b44833!important;
+}
+.three>.right.unverifiedUpper .dimtable tbody td:nth-child(2) .measureSourceBadge,
+.three>.right.unverifiedLower .dimtable tbody td:nth-child(3) .measureSourceBadge{opacity:1!important;filter:none!important}
+</style>
+<style id="h6HoverStabilityPatch">/* Hover hints must not change the scrollable workspace height or move lines under the pointer. Manual calibration hints retain their normal in-flow layout. */#actionHint.lineHoverHintFixed{position:fixed!important;left:50%;bottom:12px;transform:translateX(-50%);width:max-content;max-width:min(560px,calc(100vw - 32px));margin:0!important;z-index:9999;box-shadow:0 2px 12px rgba(0,0,0,.16);pointer-events:none;box-sizing:border-box}</style></head><body><header><div><h1>RN Plate Pair Inspector <span class="small">v13.0</span></h1></div><div class="inline"><button id="showUserManual" type="button" aria-haspopup="dialog" aria-label="Help and User Manual" title="Help and User Manual">? Help &amp; Manual</button><button class="primary" id="exportAll" hidden aria-hidden="true" tabindex="-1">Export pair JSON + images</button><button id="copyAll">Copy PLs details</button><button id="copyCampaign" type="button">Copy Campaign data</button><nav id="mainTabs" class="mainTabs" aria-label="RefraInspector tabs"><button class="mainTab selected" type="button" data-view="inspection" aria-selected="true">PL Inspection</button><button class="mainTab" type="button" data-view="report" aria-selected="false">Campaign Report</button></nav></div></header><div id="inspectionView"><main class="three">
 <section class="panel"><details class="leftCollapsible" open><summary>PL Geometry</summary><div class="leftCollapseBody"><details class="bulkPaste" open><summary>PL geometry (Excel / TSV)</summary><p class="small">Paste or edit the six-column geometry table below (W0, X0, Y0, Z0, R0, H0). Values are recognized automatically; H0 = 2×Y0. Other Excel layouts are accepted on paste.</p><textarea aria-label="PL geometry paste" id="campaignPaste" placeholder="W0	X0	Y0	Z0	R0	H0
 200	5	45	270	180	90" style="min-height:78px"></textarea><div id="campaignPasteStatus" role="status" hidden></div></details><div class="field"><label for="cid">Campaign ID</label><input id="cid" value="CMP-001"/></div><div class="field"><label for="bore">Bore radius before use · Y (mm)</label><input id="bore" min="0" placeholder="Enter Y" step="0.1" type="number"/></div><div class="field"><label for="W">W: Center-to-edge incl. band (mm)</label><input id="W" min="0" placeholder="W" step="0.1" type="number"/></div><div class="field"><label for="X">X: Band thickness (mm)</label><input id="X" min="0" step="0.1" type="number" value="0"/></div><div class="field"><label for="Z">Z: Closed center distance (mm)</label><input id="Z" min="0" placeholder="Z" step="0.1" type="number"/></div><div class="field"><label for="R0">R0 / SD: Initial stroke (mm)</label><input id="R0" min="0" placeholder="R0" step="0.1" type="number"/></div><div class="field"><label for="H0">H0 / BDia: Bore diameter before use (mm)</label><input aria-label="Calculated original bore diameter" id="H0" placeholder="2 × Y0" readonly="" type="number"/></div><div class="field"><label for="safe">Remaining stroke safe limit (mm) *</label><input id="safe" required aria-required="true" min="0" step="0.1" type="number" value="10"/></div><p class="small"></p></div></details><details class="leftCollapsible" open><summary id="plPerformanceTitle">Campaign Performance</summary><div class="leftCollapseBody"><div class="stat"><span class="small">Campaign ID</span><b id="performanceCampaignId">CMP-001</b></div><div class="stat"><span class="small">Recorded sets</span><b id="pairsCount">0</b></div>
 <div class="stat"><span class="small">Median heats used <button aria-label="Formula: Median heats used" class="formulaInfo" data-formula="medianHeats" title="Median of heats used by saved Campaign PL sets." type="button">ⓘ</button></span><b id="medianHeats">—</b></div><div class="stat"><span class="small">Max heats used <button aria-label="Formula: Maximum heats used" class="formulaInfo" data-formula="maxHeats" title="Maximum heats used by a saved Campaign PL set." type="button">ⓘ</button></span><b id="maxHeats">—</b></div><div class="stat"><span class="small">Average erosion · mm/min <button aria-label="Formula: Average erosion per minute" class="formulaInfo" data-formula="avgTime" title="Mean of saved pair ER values: (R0 − R) / total runtime (min)." type="button">ⓘ</button></span><b id="avgTime">—</b></div><div class="stat"><span class="small">Average erosion · mm/heat <button aria-label="Formula: Average erosion per heat" class="formulaInfo" data-formula="avgHeat" title="Mean of saved pair EPH values: (R0 − R) / heats used." type="button">ⓘ</button></span><b id="avgHeat">—</b></div><div class="stat"><span class="small">Average remaining stroke (mm) <button aria-label="Formula: Average remaining stroke" class="formulaInfo" data-formula="avgStroke" title="Mean of valid saved pair remaining stroke values." type="button">ⓘ</button></span><b id="avgStroke">—</b></div><div class="savedStrokePanel"><div class="savedStrokeHeading">Saved PL sets · Remaining Stroke (R)</div><div class="small" id="savedStrokeLimit">Judgment uses the Campaign safe limit.</div><div class="savedStrokeTableWrap"><table class="savedStrokeTable"><thead><tr><th scope="col">PL Set</th><th scope="col">R (mm)</th><th scope="col">Judgment</th></tr></thead><tbody id="savedStrokeRows"><tr><td colspan="3" class="savedStrokeEmpty">No saved PL sets.</td></tr></tbody></table></div></div><div class="plSetDeleteBox" aria-label="PL set management"><strong>PL Sets · Select for deletion</strong><div class="small">Includes both working and Campaign-saved PL sets. Deletion permanently removes the selected sets from this session and Campaign Performance; export a backup first.</div><div id="plSetDeleteList" class="plSetDeleteList" role="group" aria-label="Select PL sets to delete"></div><button id="deleteSelectedPLSets" type="button" class="minibtn" disabled>Delete selected PL set(s)</button></div><button id="clearRecords" hidden disabled aria-hidden="true" tabindex="-1" style="display:none!important">Clear saved pairs (removed)</button><div class="small" id="savedStatus" style="margin-top:8px">Session-only records; use Copy PLs details or Copy Campaign data to preserve a readable summary.</div><div class="separator"></div><div class="small">Performance aggregates use saved complete PL pairs. Runtime and heats are pair-level quantities, not duplicated for Upper and Lower.</div></div></details></section>
@@ -733,8 +747,7 @@ const $=id=>document.getElementById(id),keys=['A','B','C','D','E','F'],ids=['H1'
 const lineHints={H1:'H1: Short-end PL edge (steel band excluded)',H2:'H2: Used bore damage edge',H3:'H3: Used bore enlargement edge',H4:'H4: Used bore enlargement edge',H5:'H5: Used bore edge damage edge',H6:'H6: Used bore surface damage edge',V1:'V1: Used bore damage edge (left)',V2:'V2: Used bore damage edge (right)'};
 const defaults=()=>({H1:.075,H2:.28,H3:.315,H4:.46,H5:.485,H6:.51,V1:.38,V2:.60});
 function lineHintText(id){return lineHints[id]||`${id}: Dimension reference line`;}
-function showLineHint(id){if(pending||traceMode)return;const el=$('actionHint');if(!el)return;el.textContent=lineHintText(id);el.dataset.hoverHint='1';el.style.display='block';}
-function hideLineHint(){const el=$('actionHint');if(!el||!el.dataset.hoverHint)return;delete el.dataset.hoverHint;el.style.display='none';el.textContent='';}
+function showLineHint(id){if(pending||traceMode)return;const el=$('actionHint');if(!el)return;el.textContent=lineHintText(id);el.dataset.hoverHint='1';el.classList.add('lineHoverHintFixed');el.style.display='block';} function hideLineHint(){const el=$('actionHint');if(!el||!el.dataset.hoverHint)return;delete el.dataset.hoverHint;el.classList.remove('lineHoverHintFixed');el.style.display='none';el.textContent='';}
 const plate=()=>({filename:'',captureTime:null,source:null,image:null,rotation:0,pos:defaults(),sx:null,sy:null,calX:null,calY:null,manual:{},sourceMode:Object.fromEntries(keys.map(k=>[k,'auto'])),innerBounds:null,innerStatus:'Not scanned',boreContour:[],edgeContour:[],method:'Uncalibrated'});
 const plates={upper:plate(),lower:plate()};
 
@@ -984,8 +997,7 @@ function detectInnerBore(pl){
 // Convert an offset measured in mm to pixels along the ruler; interpolate between calibrated ticks.
 function pixelAfterMm(pl,pix,offset,axis){
  const cal=axis==='y'?pl.calY:pl.calX,scale=axis==='y'?pl.sy:pl.sx;
- if(cal&&cal.points&&cal.points.length>=2&&valid(cal.step)&&cal.step>0){
-  const pts=cal.points,measured=(x)=>{
+ if(cal&&cal.points&&cal.points.length>=2&&valid(cal.step)&&cal.step>0){  const pts=cal.points,measured=(x)=>{
    let i=0;while(i<pts.length-2&&x>pts[i+1])i++;
    return ((x-pts[i])/(pts[i+1]-pts[i])+i)*cal.step;
   };
@@ -997,7 +1009,8 @@ function pixelAfterMm(pl,pix,offset,axis){
 }
 function ellipseGeometry(pl){
  const a=pl.pos,w=pl.image?.width||1,h=pl.image?.height||1;
- const bd=pl.innerBounds||{left:a.V1+.02,right:a.V2-.02}; const cx=(bd.left+bd.right)/2,rx=Math.max(0,(bd.right-bd.left)/2),cy=(a.H3+a.H4)/2,ry=(a.H4-a.H3)/2;
+ const bd=pl.innerBounds||{left:a.V1+.02,right:a.V2-.02};
+ const cx=(bd.left+bd.right)/2,rx=Math.max(0,(bd.right-bd.left)/2),cy=(a.H3+a.H4)/2,ry=(a.H4-a.H3)/2;
  const ocx=(a.V1+a.V2)/2,ocy=(a.H2+a.H5)/2,orx=(a.V2-a.V1)/2,ory=(a.H5-a.H2)/2;
  // W is the physical short-end-to-original-bore-center distance, including steel band.
  // H1 is used as the short-end reference; lateral center follows the PL axis V1/V2.
@@ -1372,21 +1385,21 @@ function v13Resolution(markerMap,source){
  const nativeDensity=(samples[7]+samples[8])/2;
  // Browser-canvas memory and full-image processing can otherwise become excessive.
  // Never upscale a low-resolution photo; 2600 px/axis is a conservative memory cap.
- const density=Math.min(nativeDensity,2600/300);
+ const density=Math.min(nativeDensity,3000/350);
  if(density<=0)throw Error('Invalid original image sampling density.');
- const size=Math.max(2,Math.round(300*density)+1);
- return {width:size,height:size,sx:(size-1)/300,sy:(size-1)/300,nativeDensity,capped:nativeDensity>2600/300};
+ const size=Math.max(2,Math.round(350*density)+1);
+ return {width:size,height:size,sx:(size-1)/350,sy:(size-1)/350,nativeDensity,capped:nativeDensity>3000/350};
 }
 function v13Rectify(src,points,homography=null,resolution=null){
  const W=resolution?.width||900,H=resolution?.height||900;
- const sx=(W-1)/300,sy=(H-1)/300;
+ const sx=(W-1)/350,sy=(H-1)/350;
  const inv=homography?v13InverseHomography(homography):v13LinearHomography([[0,0],[W-1,0],[W-1,H-1],[0,H-1]],points);
  const iw=src.width,ih=src.height;
  const pixels=src.getContext('2d',{willReadFrequently:true}).getImageData(0,0,iw,ih).data;
  const out=document.createElement('canvas');out.width=W;out.height=H;
  const ctx=out.getContext('2d'),img=ctx.createImageData(W,H),data=img.data;
  for(let y=0;y<H;y++)for(let x=0;x<W;x++){
-  const [xx,yy]=homography?v13Transform(inv,x/sx,y/sy):v13Transform(inv,x,y),o=(y*W+x)*4;
+  const [xx,yy]=homography?v13Transform(inv,x/sx-25,y/sy-25):v13Transform(inv,x,y),o=(y*W+x)*4;
   if(xx<0||yy<0||xx>=iw-1||yy>=ih-1){data[o+3]=255;continue;}
   const xi=Math.floor(xx),yi=Math.floor(yy),fx=xx-xi,fy=yy-yi;
   const tl=(yi*iw+xi)*4,tr=tl+4,bl=tl+iw*4,br=bl+4;
@@ -1398,7 +1411,7 @@ function v13Rectify(src,points,homography=null,resolution=null){
 const v13Style=document.createElement('style');v13Style.textContent='.workspaceCal.calHomography{border-color:#b9d2ea!important;background:#f1f7fc!important}.workspaceCal.calHomography>summary{background:#e8f2fc!important;color:#174d81!important}.workspaceCal.calHomography .calBtns button{opacity:.85}';document.head.appendChild(v13Style);
 function v13Install(){
  const ref=document.getElementById('manualLevel');if(!ref||document.getElementById('v13AutoHomography'))return;
- const b=document.createElement('button');b.type='button';b.id='v13AutoHomography';b.className='minibtn';b.textContent='Auto ArUco + Homography (300 × 300 mm)';
+ const b=document.createElement('button');b.type='button';b.id='v13AutoHomography';b.className='minibtn';b.textContent='Auto ArUco';
  const hover=document.createElement('span');hover.id='v13ArUcoHover';hover.style.cssText='display:inline-flex;vertical-align:middle;cursor:help';hover.appendChild(b);
  ref.parentElement.insertBefore(hover,ref.nextSibling);
  const availability={upper:null,lower:null};
@@ -1412,7 +1425,7 @@ function v13Install(){
  document.addEventListener('click',()=>setTimeout(()=>updateAvailability(active),0),true);
  const msg=document.createElement('div');msg.className='small';msg.id='v13AutoStatus';msg.style.cssText='padding:6px;color:#235b8e';msg.textContent='';msg.hidden=true;ref.closest('.workspaceStepGroup').appendChild(msg);
  function useCorrected(side,img,points,automatic,quality=null,resolution=null){
-  const pl=plates[side];pl.image=img;pl.sx=(img.width-1)/300;pl.sy=(img.height-1)/300;pl.calX=null;pl.calY=null;
+  const pl=plates[side];pl.image=img;pl.sx=(img.width-1)/350;pl.sy=(img.height-1)/350;pl.calX=null;pl.calY=null;
   pl.calibrationFailed=false;pl.calibrationProvisional=false;
   pl.manualScaleX=false;pl.manualScaleY=false;
   pl.scaleSourceX='ArUco 16-corner Homography';pl.scaleSourceY='ArUco 16-corner Homography';
@@ -1423,7 +1436,7 @@ function v13Install(){
   invalidateVerification(side);
   if(active===side){
    $('sx').value=pl.sx.toFixed(3);$('sy').value=pl.sy.toFixed(3);
-   const summary=$('autoScaleSummary');if(summary){summary.textContent='Rectified X: '+pl.sx.toFixed(3)+' · Y: '+pl.sy.toFixed(3)+' px/mm';summary.title='Homography output grid: '+img.width+' × '+img.height+' px across 300 × 300 mm; not a measurement uncertainty.';}
+   const summary=$('autoScaleSummary');if(summary){summary.textContent='Rectified X: '+pl.sx.toFixed(3)+' · Y: '+pl.sy.toFixed(3)+' px/mm';summary.title='Homography output grid: '+img.width+' × '+img.height+' px across a 350 × 350 mm view (300 × 300 mm marker centres); not a measurement uncertainty.';}
    const readout=$('rulerReadout');if(readout)readout.textContent='ArUco calibrated · '+img.width+' × '+img.height+' px · X '+pl.sx.toFixed(3)+' / Y '+pl.sy.toFixed(3)+' px/mm';
    resetDOMImage();updateResults();syncAlignmentVerification();
    if(typeof updateCalibrationUX==='function')updateCalibrationUX();
@@ -1461,7 +1474,16 @@ function v13Install(){
   if(Math.min(d(points[0],points[1]),d(points[1],points[2]),d(points[2],points[3]),d(points[3],points[0]))<60)throw Error('Reference frame too small in image.');
  }
  async function v13RunAuto(side=active){
-  const img=plates[side].image;if(!img){return false;}
+  const plate=plates[side];
+  // Never scan the rectified/cropped working image. Build a fresh unrotated
+  // full-resolution canvas from the imported source, for EVERY auto attempt.
+  if(!plate?.source)return false;
+  const original=plate.source;
+  const img=document.createElement('canvas');
+  img.width=original.naturalWidth||original.width;
+  img.height=original.naturalHeight||original.height;
+  if(!img.width||!img.height)return false;
+  img.getContext('2d').drawImage(original,0,0,img.width,img.height);
   availability[side]=null;b.disabled=true;hover.title='';msg.hidden=true;msg.textContent='';
   let detectedCount=0;
   try{
@@ -1485,6 +1507,9 @@ function v13Install(){
     detectedCount<4?'Only '+detectedCount+'/4 ArUco markers detected. All IDs 0–3 must be visible.':
     'ArUco markers detected, but reference geometry is invalid. Check the 300 × 300 mm marker layout.';
    availability[side]={available:false,reason};
+   // No/partial ArUco markers: release any leftover manual-ruler UI lock.
+   // Do not auto-start manual calibration; traditional Auto Level / two-point leveling remain available.
+   if(typeof exitManualRulerMode==='function')exitManualRulerMode(plate);
    msg.hidden=true;msg.textContent='';
    console.warn('v13 ArUco calibration not applied:',err);
    return false;
@@ -1971,9 +1996,9 @@ function autoCalibrate(){
  select(active);
  $('calStatus').textContent=pl.method;
  if($('rulerReadout'))$('rulerReadout').textContent=pl.method;
- updateCalibrationUX();
- if(pl.calibrationFailed)enterManualRulerMode(pl);
- else exitManualRulerMode(pl);
+ updateCalibrationUX(); // Failed automatic ruler detection must NOT enter manual ruler mode automatically.
+ // Keep legacy Level and Calibration controls enabled; user can start manual calibration explicitly.
+ exitManualRulerMode(pl);
 }
 function serialize(){const c=calculate();return{format:'RNPlatePair-v6',campaign:{id:$('cid').value,pair_id:$('plpair').value,bore_radius_before_mm:num('bore'),bore_before_mm:valid(num('bore'))?2*num('bore'):null,W:num('W'),X:num('X'),Z:num('Z'),R0:num('R0'),safe_limit_mm:num('safe')},usage:{runtime_min:c.runtime,heats:c.heats,oxygen_lancing_time_min:c.olt},plates:Object.fromEntries(['upper','lower'].map(k=>[k,{filename:plates[k].filename,rotation_deg:plates[k].rotation,lines:plates[k].pos,manual_dimensions:plates[k].manual,dimension_sources:plates[k].sourceMode,remarks:{tags:[...remarks[k].tags],note:remarks[k].note},cracks:{categories:crackTypes,counts:crackState[k].counts,status:crackState[k].status},calibration:{x_px_per_mm:plates[k].sx,y_px_per_mm:plates[k].sy,x_ruler:plates[k].calX,y_ruler:plates[k].calY,method:plates[k].method},dimensions_mm:dimensionValues(plates[k]),ellipse_model:{inner_boundaries:['H3','H4','image_detected_left','image_detected_right'],outer_boundaries:['V1','V2','H2','H5'],inner_photo_edges:plates[k].innerBounds,inner_detection_status:plates[k].innerStatus,original_bore_center_reference:'H1 + W (vertical); midpoint V1/V2 (horizontal)',mode:'outer_from_dimension_lines_inner_from_image'},area_grid_mm2:areaGrid(plates[k])}])),results:{upper_edge_damage_mm2:c.gridU.edge,lower_edge_damage_mm2:c.gridL.edge,area_method:'bore_gain=grid_counted_full_inner_ellipse_area_minus_pi_Y_squared;edge=outer_minus_inner_grid_cells',upper_bore_area_change_mm2:c.areaU,lower_bore_area_change_mm2:c.areaL,upper_bore_area_change_pct:valid(c.areaU)&&num('bore')>0?100*c.areaU/(Math.PI*num('bore')**2):null,lower_bore_area_change_pct:valid(c.areaL)&&num('bore')>0?100*c.areaL/(Math.PI*num('bore')**2):null,upper_T_mm:c.tU,lower_T_mm:c.tL,absolute_T_difference_mm:c.tDiff,total_recession_mm:c.total,remaining_stroke_mm:c.stroke,stroke_reduction_mm:c.deltaR,crack_count_upper:inspectedCrackTotal('upper'),crack_count_lower:inspectedCrackTotal('lower'),erosion_mm_per_min:c.eTime,erosion_mm_per_heat:c.eHeat},saved_pairs:records}}
 function saveFile(name,data,mime){const b=data instanceof Blob?data:new Blob([data],{type:mime});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),3000)}
@@ -1996,7 +2021,8 @@ $('copyCampaign').addEventListener('click',async()=>{
  if(!scoped.length){
   $('savedStatus').textContent='No saved Campaign Performance data available to copy for '+campaign+'.';
   return;
- } const avg=(key)=>{const nums=scoped.map(row=>row[key]).filter(valid);return nums.length?nums.reduce((a,b)=>a+b,0)/nums.length:null;};
+ }
+ const avg=(key)=>{const nums=scoped.map(row=>row[key]).filter(valid);return nums.length?nums.reduce((a,b)=>a+b,0)/nums.length:null;};
  const shown=value=>valid(value)?String(Number(value.toFixed(4))):'';
  const limit=num('safe');
  const heats=scoped.map(heatsFromSavedRecord).filter(v=>v!==null).sort((a,b)=>a-b);
@@ -2969,8 +2995,7 @@ syncAlignmentVerification();
    v91Traces[side]=clone(data.traces[side]);
   }
   $('crackRows').dataset.active='';
-  select(data.active||'upper');
-  showCampaignGeometryInPaste(true);
+  select(data.active||'upper');  showCampaignGeometryInPaste(true);
   syncAlignmentVerification();
   updateStats();
  }
@@ -2995,7 +3020,8 @@ syncAlignmentVerification();
     'Cannot save to CAMP: verify Alignment for '+missing.map(side=>side==='upper'?'Upper PL':'Lower PL').join(' and ')+'.';
    $('savedStatus').textContent=message;
    alert(message);
-   return;  }
+   return;
+  }
   const id=pairID();
   // Capture the visible performance values before committing this PL set.
   const performanceIds=['pairsCount','medianHeats','maxHeats','avgTime','avgHeat','avgStroke'];
