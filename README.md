@@ -221,7 +221,9 @@ Use the available panel controls to copy or export tables and charts. The report
 
 - [Current application — refraInspector_v13.0.html](./refraInspector_v13.0.html)
 - [Printable four-sheet ArUco target — 300 × 300 mm](./docs/RefraInspector_ArUco_300x300_4A4_NoZeroLabel.pdf)
-- [Feature-level release history — CHANGELOG.md](./CHANGELOG.md)
+- [SW/HW version mapping — CHANGELOG.md](./CHANGELOG.md)
+- [Software releases (SW codes) — CHANGELOG_SOFTWARE.md](./CHANGELOG_SOFTWARE.md)
+- [Hardware and ArUco target (HW codes) — CHANGELOG_HARDWARE.md](./CHANGELOG_HARDWARE.md)
 - [Detailed historical changes — CHANGELOG_ARCHIVE.md](./CHANGELOG_ARCHIVE.md)
 
 Only the latest versioned HTML application file is retained on the current repository branch; older versions remain recoverable from Git history.
