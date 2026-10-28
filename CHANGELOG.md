@@ -6,10 +6,13 @@
 This changelog groups related changes by feature rather than listing every intermediate implementation or corrective patch. See [Detailed development history](./CHANGELOG_ARCHIVE.md) for individual version records, experiments, rollbacks, and traceability.
 
 ## v13.0 — 2026-10-28
-### Four-point planar Homography (Beta)
-- Added a perspective-correction button in calibration with four-point manual marker-centre selection on a 300 × 600 mm reference frame (ID 0 top left, ID 1 top right, ID 3 bottom right, ID 2 bottom left).
-- Rectifies the selected image to a 900 × 1800 px canvas with nominal 3 px/mm X/Y and invalidates alignment verification until the A–F guides are checked again.
-- **Limitations:** Automatic ArUco detection/ID decoding is not implemented. Not validated against a precision reference. Assumes coplanar markers and measured surface; no lens-distortion correction. Reimport to undo.
+### Automatic ArUco Homography and Adaptive Resolution (Beta)
+- Added automatic on-import detection of four ArUco `DICT_4X4_50` markers (IDs 0–3), with 300 × 300 mm marker-centre geometry and 30 mm square markers.
+- Added 16-corner least-squares planar Homography fitting, geometry quality checks, perspective rectification, and automatic alignment-verification invalidation.
+- Replaced the fixed 900 × 900 px output with source-density-based adaptive output resolution and displayed corrected-image X/Y px/mm, subject to a memory-protection dimension limit.
+- Fixed the obsolete red/manual X/Y calibration state after successful ArUco rectification; normal success is quiet. Partial/invalid marker detection retains targeted diagnostics, while photos with no markers can use the traditional Auto Level + X/Y ruler calibration path.
+- Kept manual 4-point control out of the primary interface; updated layout guidance to focus the marker square on the bore/damage measurement region.
+- **Validation:** Marker decoding and syntax checks have been carried out during development, but actual measurement accuracy and complete browser regression remain unverified. Pixel density is not measurement accuracy; homography cannot correct non-planar PL wear or uncalibrated lens distortion.
 
 ## v12.1.7 — 2026-10-22
 ### Photo Capture Time Validation
