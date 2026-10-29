@@ -8,6 +8,30 @@
 
 RefraInspector is a browser-based application for inspection and analysis of refractory sliding gate plates (PLs) used in steelmaking. It supports Upper/Lower PL photographic inspection, dimensional measurement, damage assessment, remaining-stroke calculations, and Campaign performance analysis.
 
+## Contents
+
+- [1. Quick start — one inspection](#1-quick-start--complete-one-pl-inspection)
+- [2. Warnings and errors](#2-warnings-and-errors--cause-and-solution)
+  - [Diagnostic code index](#diagnostic-code-index-v132)
+- [3. Detailed operation — states and transitions](#3-detailed-operation--states-permitted-actions-and-transitions)
+  - [3.1 State flow](#31-at-a-glance-the-state-flow)
+  - [3.2 S0 — No photo](#32-state-s0--no-photo-imported)
+  - [3.3 S1 — Photo imported](#33-state-s1--photo-imported-automatic-setup-being-evaluated)
+  - [3.4 S2 — Legacy calibration](#34-state-s2--traditional-leveling-and-xy-ruler-calibration)
+  - [3.5 S3 — Alignment in progress](#35-state-s3--calibrated-photo-alignment-not-yet-verified)
+  - [3.6 S4 — Verified photo](#36-state-s4--photo-alignment-verified)
+  - [3.7 S5 — Ready to save](#37-state-s5--working-pl-set-ready-for-campaign-saving)
+  - [3.8 S6 — Campaign saved](#38-state-s6--pl-set-saved-to-campaign)
+  - [3.9 Actions that reset or alter state](#39-operations-that-can-change-the-state-unexpectedly)
+  - [3.10 Troubleshooting by state](#310-state-transition-troubleshooting-shortcuts)
+- [4. Features](#4-features-at-a-glance)
+- [5. Calibration principles](#5-how-image-calibration-works-technical)
+- [6. ArUco printing and installation](#6-aruco-target--printing-and-physical-setup)
+- [7. Ellipse detection and constraints](#7-innerouter-ellipse-recognition-and-constraints-technical)
+- [8. Data export and preservation](#8-export-and-data-preservation)
+- [9. Measurement limitations](#9-measurement-guidance-and-limitations)
+- [10. Documents and support](#10-documentation-and-support)
+
 ## 1. Quick start — complete one PL inspection
 
 **You do not need to understand Homography or ellipse fitting to use RefraInspector.** Follow these steps in order:
@@ -89,108 +113,156 @@ Each listed code is displayed in the matching application warning, error or conf
 
 **No-code notices:** Some ordinary status messages (for example, successful completion, automatic guide positioning summaries or disabled controls) are not errors and may not carry a diagnostic code. If an unfamiliar warning appears without a code, report its full text and a screenshot; new codes can be added without renumbering existing ones.
 
-## 3. Step-by-step instructions (detailed)
+## 3. Detailed operation — states, permitted actions and transitions
 
-### Step 1 — Enter PL Geometry
+This section describes **what you can do in each state** and **what changes the state**. A PL set is a working pair of **Upper** and **Lower** photographs; each imported photograph has its **own** calibration, measurement guides and alignment verification. The two photographs do not have to reach the same state simultaneously.
 
-In **PL Geometry**, enter the Campaign ID, six-column geometry input, and the required Remaining Stroke safe limit.
+### 3.1 At a glance: the state flow
 
-| Parameter | Description |
+```text
+Open PL Inspection
+    ↓
+Enter / review PL Geometry and set identification
+    ↓
+No photo ── Import Upper, Lower or both ──→ Photo imported / unverified
+                                              │
+                      ┌───────────────────────┴───────────────────────┐
+                      ↓                                               ↓
+              ArUco detected? YES                              ArUco unavailable
+                      ↓                                               ↓
+              Homography passes?                                 Legacy Auto Level
+                  │       │                                    / 2-point leveling
+                 YES      NO                                          ↓
+                  ↓       └── Check markers / retake           Calibrate X and Y
+       Corrected image + valid scales                         (auto or manual)
+                  │                                               │
+                  └───────────────────────┬───────────────────────┘
+                                          ↓
+                                Scales valid on both axes
+                                          ↓
+                            Auto Align / manually adjust lines
+                                          ↓
+                              Review A–F and damage values
+                                          ↓
+                               Verify Alignment (per PL)
+                                          ↓
+                         Verified photo (may be only one side)
+                                          ↓
+               Review set usage / required fields / calculations
+                                          ↓
+                      Save set to Campaign (if requirements met)
+                                          ↓
+                Saved set → Campaign Performance / Report / export
+```
+
+**Two independent dimensions of status:** (1) each photo is absent, imported, calibrated, or verified; (2) the working PL set is unsaved or saved to Campaign. **Auto Align does not equal Verify Alignment.**
+
+### 3.2 State S0 — no photo imported
+
+**You can:** enter or paste **PL Geometry**; enter identifiers and operating information; import one photo or exactly two (Upper first, Lower second); open existing saved PL sets / Campaign views; access available data backups and restoration controls.
+
+**You cannot complete:** photo-derived A–F measurements, photo alignment verification or a new Campaign save requiring a verified image.
+
+**Transition:** import a readable photo → **S1** for that PL. Unsupported photo, too many selected files or failed decoding → remain **S0**, with `RI-IMP-001`–`RI-IMP-004` as applicable.
+
+### 3.3 State S1 — photo imported, automatic setup being evaluated
+
+**The application attempts ArUco automatically.** Check the current photo's assignment, timestamp and displayed setup status; swap Upper/Lower only after inspecting both photos.
+
+| Condition | What you can do | Next state |
+|---|---|---|
+| Four markers recognized and geometry passes | Inspect corrected photo and X/Y px/mm; proceed to measurement-line review | **S3: scaled image** |
+| No markers recognized | Use **Auto Level** or **Level with 2 Points**, then independent X/Y ruler calibration, provided both ruler references are visible | **S2: legacy leveling/calibration** |
+| Some markers recognized or geometry invalid | Examine all IDs and quiet zones, verify 300 × 300 mm marker centres and same-plane mounting; retake/reimport, or use valid ruler references when available | **S1**, or **S2** if the legacy workflow is usable |
+| Image import or processing problem | Check `RI-IMP-…` / `RI-ARU-…`; retry with a clear supported photo | **S0/S1** depending on whether a decoded photo was retained |
+
+**Other permitted actions:** switch Upper/Lower views, replace imported photos after checking any unsaved-change prompt, examine time-gap warnings (`RI-PHO-001`) and possible assignment warnings (`RI-PHO-002`).
+
+**Important:** ArUco failure does **not** make up a reliable px/mm scale. A greyed-out ArUco retry control has an explanatory hover on desktop; it is not proof that an image is calibrated.
+
+### 3.4 State S2 — traditional leveling and X/Y ruler calibration
+
+This state applies to photographs **without a successful ArUco Homography** and with suitable visible rulers.
+
+1. Use **Auto Level** or **Level with 2 Points**. Review orientation; after a new rotation/leveling operation, check calibration again.
+2. Select **Auto 100mm Calibration**; inspect **X and Y separately**.
+3. If either axis fails (`RI-CAL-003`), choose **Start Manual Calibration** and mark the known 100 mm span for that axis. The failed axis must not silently retain an old valid scale.
+4. Check the displayed values and photo references. Only when **both X and Y are valid** proceed to **S3**.
+
+**Allowed while calibrating:** set/retry the ruler points, switch/replace photos (subject to any unsaved-edits warning), revisit geometry, and inspect the calibration status. When a *manual calibration interaction is actively collecting points*, other workspace controls can be temporarily disabled until that interaction is completed or cancelled.
+
+**Blocked / unsuccessful transition:** **Verify Alignment** requires both scales. `RI-CAL-001` means invalid tick inputs; `RI-CAL-002` means points are too close; `RI-CAL-004` means an axis is missing when verification is attempted.
+
+### 3.5 State S3 — calibrated photo, alignment not yet verified
+
+**You can:** click **Auto Align**, inspect or drag guides, use **Undo Alignment** or **Reset Lines**, adjust the pink inner-bore bounds where available, inspect A–F estimates, choose manual A–F inputs, enter crack counts and remarks, and check calculated areas. A manual A–F value is a measurement override; it does **not** reposition the corresponding image guides.
+
+**Auto Align does the following:** estimates the inner opening → proposes **H3/H4** and inner left/right bounds; independently searches the outer worn region → proposes **H2/H5/V1/V2** tangents. It does not require the two ellipses to be concentric.
+
+**Hard geometric constraints:** `H1 < H2 < H3 < H4 < H5 < H6`; V1 stays left of the inner opening and V2 stays right of it. A candidate outer ellipse must encompass the **whole inner ellipse**; candidates crossing the inner arc are rejected and a more outward search may be attempted. These guards prevent invalid geometry but **do not guarantee that the visually chosen wear boundary is correct**.
+
+**What can fail without blocking manual review:** low-confidence inner bore (`RI-ALN-001`), unavailable inner opening (`RI-ALN-002`), intersecting arcs (`RI-ALN-003`) and outer contour reaching the image edge (`RI-ALN-004`). In these cases inspect the photograph and manually adjust the permitted guides; a rejected outer candidate should not be treated as successfully detected.
+
+**Transition:** visually review actual damage edges and press **Verify Alignment*** → **S4**, provided the image exists and both scales are valid. An uncalibrated photo cannot pass (`RI-CAL-004`).
+
+### 3.6 State S4 — photo alignment verified
+
+The current Upper **or** Lower photo is marked verified. **Verification is per photo**, not automatically shared with its partner.
+
+**You can:** review/copy eligible data for that verified photo, work on the other photo, inspect results, enter usage and remarks, and proceed to saving when the PL set meets save requirements. A single-photo PL set can be verified and saved without inventing a second photo.
+
+**Transition back to S3:** edits affecting the photo, image positioning, ruler scales or measurement-guide alignment may invalidate that photo's verification. After such a change, inspect it again and click **Verify Alignment*** once more. **Auto Align and manual movement do not automatically re-verify** the image.
+
+**If both photos are imported:** verifying Upper alone does **not** verify Lower. Before saving a pair, complete the missing side as well; otherwise `RI-VER-002` identifies the side that still needs verification.
+
+### 3.7 State S5 — working PL set ready for Campaign saving
+
+**Check before saving:**
+
+- Correct Campaign and PL pair identifiers, PL Geometry and shared safe-stroke data.
+- Every **imported** PL photo has valid scales and a verified alignment. An absent partner is not implicitly required.
+- A–F numbers and damage-area estimates are physically plausible; correct guides or enter manual A–F values as necessary and re-verify where required.
+- PL Set Usage Info (runtime, used heats, etc.), cracks and remarks are accurate. **Usage values are pair-level information.**
+
+**You can:** save the set using **Save set to campaign**, change allowable unsaved fields, or return to S3/S4 for corrections.
+
+**Transitions:** successful save → **S6**. Missing photo/verification → appropriate S0/S3/S4 with `RI-VER-002`. Missing or invalid other required fields may trigger `RI-SAV-001` and a confirmation about an incomplete/session-only record; avoid treating such a record as an approved production measurement.
+
+### 3.8 State S6 — PL set saved to Campaign
+
+**You can:** select and review saved PL sets, inspect **Campaign Performance** and **Campaign Report**, copy/export supported tables and charts, back up/restore Campaign records, and select PL sets for deletion (with confirmation).
+
+**Data-integrity rules:**
+
+- The saved PL set remains a member of its Campaign unless the supported delete workflow removes it.
+- **PL Set Usage Info is locked after a PL set has been saved.** Check heats and runtime before saving.
+- Editing **shared PL Geometry** prompts a warning (`RI-SAV-002`) because it can affect calculations across existing saved sets; Campaign membership is preserved, but affected results must be reviewed.
+- Some supported changes to a saved PL set may update its Campaign data; distinguish saved values from unsaved working edits. Copying saved records may warn that unsaved changes are excluded (`RI-DAT-003`).
+- Deletion (`RI-DAT-001`) and restoration (`RI-DAT-004`) have different consequences from switching/selecting a set. Make a backup first.
+
+**Transition:** choose/import another working PL set → relevant S0–S5 states for that set. Deleting a selected saved set removes its saved record; it does not restore a deleted record automatically.
+
+### 3.9 Operations that can change the state unexpectedly
+
+| User action | What to expect / what to do next |
 |---|---|
-| W0 | Center-to-edge distance including band |
-| X0 | Band thickness |
-| Y0 | Original bore radius |
-| Z0 | Closed center distance |
-| R0 | Initial stroke |
-| H0 | Original bore diameter (2 × Y0) |
+| Replace Upper or Lower photo | Re-run the photo's import/ArUco or ruler workflow and review guides; its former verification should not be reused. |
+| Rotate or level a ruler photo | Recheck **both X/Y** scales and re-verify alignment if invalidated. |
+| Move H/V lines, Auto Align, Undo Alignment, Reset Lines | Review A–F and re-verify when verification is invalidated; never assume an automatic line placement was reviewed. |
+| Change a manual A–F value | Review dependent calculations; check whether the current edit triggers verification invalidation before saving/export. |
+| Swap Upper and Lower | Confirm identities and recheck any plate-specific interpretation; the swap carries the photo's supporting measurement/verification data with that photo. |
+| Modify shared PL Geometry | Treat as a Campaign-wide calculation change; read the warning and inspect affected saved sets. |
+| Import/restore backup | May replace current session and saved state; preserve a separate backup before accepting. |
+| Clear browser storage | May destroy local recovery data; export/backup records externally first. |
 
-Changing shared geometry can affect calculated results for Campaign-saved PL sets; review the impacted measurements and performance.
+### 3.10 State-transition troubleshooting shortcuts
 
-### Step 2 — Import Upper and Lower PL photographs
+- **Stuck before perspective/calibration?** Check `RI-ARU-001`–`004` or `RI-CAL-001`–`004`, then return to S1/S2.
+- **Scales exist but the ellipses are wrong?** Stay at S3, manually inspect and correct lines; check `RI-ALN-001`–`004`.
+- **Verify button does not complete?** Check that a photo exists (`RI-VER-001`) and both scales exist (`RI-CAL-004`).
+- **Cannot save?** Check all **imported** photos' verification (`RI-VER-002`) and the required operating fields (`RI-SAV-001`).
+- **Campaign results seem changed or missing?** Check the active Campaign, saved-vs-unsaved data, shared geometry updates (`RI-SAV-002`) and backup history.
 
-1. In **PL Photo Workspace**, select **Import PL photo**.
-2. Import one image for the selected PL, or two images for an Upper/Lower pair.
-3. Confirm Upper/Lower assignment and use the plate selector to switch views.
-4. Check any capture-time mismatch notice; dismiss it with **×** after reviewing the pairing.
-
-For the ArUco workflow, show all four correctly positioned markers; for the legacy workflow, show both reference rulers. Avoid shadows, obstructions, and severe perspective distortion.
-
-### Step 3 — Select perspective correction or traditional leveling
-
-1. **With ArUco:** Import initiates automatic detection and Homography. Confirm that the frame is physically valid and that perspective correction succeeded; do not apply Auto Level afterward unless intentionally switching workflows.
-2. **Without ArUco:** Under **#1 Level & Perspective Correction**, use **Auto Level**; confirm the plate reference, or select **Level with 2 Points**.
-3. For manually leveled legacy photos, repeat X/Y ruler calibration, because rotation can alter effective image scale.
-
-### Step 4 — Confirm ArUco scale or calibrate legacy rulers
-
-**If ArUco Homography succeeded:** #2 displays the corrected-image X/Y px/mm. These figures describe output sampling rather than certified accuracy. No separate ruler calibration is necessary.
-
-**For legacy photographs without ArUco:**
-
-1. Under **#2 Calibration · X / Y (px/mm)**, select **Auto 100mm Calibration**.
-2. Review the independent X and Y pixel-per-millimeter values against ruler markings.
-3. When an axis cannot be calibrated reliably, select **Start Manual Calibration** and align the guides to known 100 mm spans.
-4. Complete manual calibration and verify both scales before measuring.
-
-Do not treat an invalid or uncertain automatic calibration as a reliable distance reference.
-
-### Step 5 — Align and verify measurement guides
-
-1. Under **#3 Alignment**, select **Auto Align**. The program first proposes the inner opening (H3/H4 and inner left/right), then independently searches for an enclosing outer wear ellipse and uses its tangents for H2/H5/V1/V2.
-2. Check **inner** and **outer** boundaries separately: the outer wear ellipse may be offset from the inner opening. Ensure the outer guides follow the intended damage boundary, not merely any strong image edge.
-3. Respect the enforced order **H1 < H2 < H3 < H4 < H5 < H6**, with **V1** to the left and **V2** to the right of the inner-bore bounds. Outer-ellipse candidates intersecting the inner ellipse are rejected and searched again farther outward. Failed detection leaves prior outer guides in place; it does **not** establish a verified contour.
-4. Drag any inaccurate guides within their permitted ranges. **Undo Alignment** and **Reset Lines** are available when needed.
-5. Select **Verify Alignment*** only after visually confirming the guide positions.
-
-Each imported PL requires its own alignment verification. Changes to photo positioning, calibration, or measurement lines may invalidate verification.
-
-### Step 6 — Review A–F measurements
-
-In **PL A–F Dimensions · Upper / Lower**:
-
-1. Review auto-calculated values for both PLs.
-2. Correct the photo reference guides as required.
-3. Enter manual values where appropriate.
-4. Review bore-area and edge-damage estimates.
-
-Use the panel's **i** icon to display the measurement reference legend. Automatic detection requires operator confirmation.
-
-### Step 7 — Record operating conditions and observations
-
-In **PL Set Usage Info**, enter PL pair ID, total runtime in minutes, and heats used. These are **pair-level** quantities, not separate Upper/Lower totals.
-
-Use **Cracks** to record counts and **Remarks** for tags and observations.
-
-### Step 8 — Review calculated results
-
-| Indicator | Meaning |
-|---|---|
-| T_upper / T_lower | Long-end damage for each PL |
-| R | Remaining Stroke |
-| ΔR | Stroke Reduction |
-| ER | Erosion Rate (mm/min) |
-| EPH | Erosion per Heat (mm/heat) |
-| J | Used Bore Area |
-| K | Bore Enlargement Area |
-| M | Bore Area Enlargement Ratio |
-| L | Estimated Bore Edge Damage Area |
-
-Check that required inputs are present and values are physically reasonable. Area results are model estimates, not validated segmentation measurements.
-
-### Step 9 — Save the PL set to Campaign
-
-1. Confirm all imported PL photographs have been verified.
-2. Review geometry, A–F values, usage and calculated results.
-3. Under **#4 Save Set**, choose **Save set to campaign**.
-4. Confirm the saved record appears in the selector and Campaign Performance.
-
-Previously saved sets can be reopened. Eligible edits update corresponding Campaign records automatically where supported.
-
-### Step 10 — Review Campaign Report
-
-Open **Campaign Report** to examine summary statistics, saved inspection records, Remaining Stroke versus Used Heats, and Upper/Lower long-end damage versus Used Heats.
-
-Use the available panel controls to copy or export tables and charts. The report uses **saved Campaign records**, not unsaved working drafts.
 
 ## 4. Features at a glance
 
