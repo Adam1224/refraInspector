@@ -53,6 +53,42 @@ These are common on-screen warnings, restrictions or symptoms. The wording may d
 
 For detailed operation, see **Section 3**. Technical reasons behind image and geometry constraints appear later in this README.
 
+### Diagnostic code index (v13.2)
+
+Each listed code is displayed in the matching application warning, error or confirmation message. **Find a code:** open this README and use **Ctrl+F** (Windows) or **⌘+F** (Mac), then enter the full code (for example, `RI-ALN-003`). The code identifies the condition; it does not by itself indicate the severity. Older screenshots without codes refer to earlier application builds.
+
+| Code | When you see it / likely cause | How to resolve |
+|---|---|---|
+| `RI-IMP-001` | The selected photo cannot be decoded (unsupported/damaged file). | Convert to JPEG/PNG, check the file and re-import. |
+| `RI-IMP-002` | Both HEIC decoding methods failed. | Export the original HEIC to JPEG and import that copy. |
+| `RI-IMP-003` | More than two photos selected. | Import one photo or an Upper/Lower pair only. |
+| `RI-IMP-004` | Unexpected import workflow failure. | Re-import a supported photo; refresh the browser if necessary after saving/backing up data. |
+| `RI-PHO-001` | Upper and Lower EXIF capture times differ by over 30 minutes. | Verify that both photos belong to the same PL set; dismiss once checked. |
+| `RI-PHO-002` | A possible Upper/Lower label mix-up is inferred from a closure mark. | Inspect the plates; swap assignments only if incorrect. |
+| `RI-ARU-001` | No ArUco markers were found. | Make all four IDs clearly visible; with ruler-only photos, use the legacy route. |
+| `RI-ARU-002` | Only part of the four-marker set was detected. | Check IDs **0–3**, white quiet zones, focus, lighting and occlusions. |
+| `RI-ARU-003` | Marker geometry is unsuitable for Homography. | Recheck marker order, physical **300 × 300 mm** centre distances and flatness; retake photo. |
+| `RI-ARU-004` | ArUco detector/library could not load from the internet. | Check network access, browser policies and CDN reachability; try again. |
+| `RI-CAL-001` | Invalid ruler tick numbers or reference points. | Re-enter valid tick labels and choose correctly separated tick locations. |
+| `RI-CAL-002` | Manual calibration reference points are too close. | Choose two endpoints at least 100 mm apart on the physical ruler. |
+| `RI-CAL-003` | One/both automatic X/Y ruler scales could not be verified. | Calibrate each failed axis manually against a known 100 mm span. |
+| `RI-CAL-004` | Verify Alignment was requested before valid X/Y calibration. | Complete valid calibration on **both axes**, then verify. |
+| `RI-ALN-001` | Detected inner bore boundary has low confidence. | Drag the pink inner-opening guides to the actual bore edge. |
+| `RI-ALN-002` | Inner opening was not found; outer guides were not updated. | Improve photo contrast/focus, position inner guides, and retry or set outer guides manually. |
+| `RI-ALN-003` | Fitted outer ellipse intersects/approaches inner ellipse; outward search failed. | Inspect the true outer wear ring and set H2/H5/V1/V2 manually. |
+| `RI-ALN-004` | Proposed outer contour extends beyond the image boundary. | Retake the photo with more margin around the wear zone. |
+| `RI-VER-001` | Verify Alignment was requested before importing a photo. | Import a PL photo first. |
+| `RI-VER-002` | Saving is blocked until imported PLs pass verification. | Verify Alignment separately for every imported Upper/Lower photo. |
+| `RI-SAV-001` | Required PL set fields are missing or invalid. | Correct the indicated fields; do not save an incomplete production record. |
+| `RI-SAV-002` | A PL Geometry change will affect existing saved Campaign sets. | Confirm the new geometry and review recalculated saved results. |
+| `RI-DAT-001` | Permanent deletion of selected PL sets requested. | Review the selected IDs; cancel if unsure and back up first. |
+| `RI-DAT-002` | Backup file has no saved PL sets. | Select a valid Campaign backup containing saved records. |
+| `RI-DAT-003` | Unsaved working edits will not be included in copied saved data. | Save verified changes before exporting, or cancel the copy. |
+| `RI-DAT-004` | Backup restoration will replace current session records. | Back up current data, then confirm only if replacement is intended. |
+| `RI-DAT-005` | Browser found a local recovery snapshot. | Inspect the time and contents before restoring; keep a separate Campaign backup. |
+
+**No-code notices:** Some ordinary status messages (for example, successful completion, automatic guide positioning summaries or disabled controls) are not errors and may not carry a diagnostic code. If an unfamiliar warning appears without a code, report its full text and a screenshot; new codes can be added without renumbering existing ones.
+
 ## 3. Step-by-step instructions (detailed)
 
 ### Step 1 — Enter PL Geometry
