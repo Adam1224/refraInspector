@@ -1,8 +1,16 @@
 # RefraInspector — Software Change History (SW)
 
-**Current software:** v13.0 (Beta) · **ID scheme:** `SW-<release>` (e.g. `SW-13.0`). Software version numbers reflect the executable HTML, not the physical fixture's revision.
+**Current software:** v13.2 (Beta) · **ID scheme:** `SW-<release>` (e.g. `SW-13.0`). Software version numbers reflect the executable HTML, not the physical fixture's revision.
 
 See [hardware changes](./CHANGELOG_HARDWARE.md), [software-to-hardware mapping](./CHANGELOG.md), and [original detailed history](./CHANGELOG_ARCHIVE.md).
+
+## SW-13.2 · v13.2 — 2026-10-29 (Beta)
+
+- Published `refraInspector_v13.2.html` from the tested-development line (v13.0.6), retaining the v13.0 release separately.
+- Inner-bore region detection establishes H3/H4 and inner left/right bounds; independent outer wear-ring search generates tangent guides H2/H5/V1/V2.
+- Enforces V1 to the left of the inner opening and V2 to the right during guide manipulation. Maintains H1–H6 top-to-bottom ordering.
+- Validates that the entire fitted inner ellipse remains enclosed by the outer ellipse (sampling 720 perimeter points with margin); retries farther outward for intersecting candidates, and declines invalid updates.
+- **Status:** experimental image algorithm; actual-photo browser accuracy and interaction regression still require verification.
 
 ## SW-13.0 · v13.0 — 2026-10-28
 
