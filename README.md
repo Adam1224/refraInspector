@@ -2,7 +2,7 @@
 
 **Refractory Sliding Gate Plate Inspection & Campaign Analysis**
 
-**Current version:** v13.0  
+**Current version:** v13.2  
 **Status:** Beta  
 **Platform:** Modern desktop and mobile web browsers
 
@@ -10,22 +10,35 @@ RefraInspector is a browser-based application for inspection and analysis of ref
 
 ## 1. Getting started
 
-1. Download [refraInspector_v13.0.html](./refraInspector_v13.0.html).
+1. Download [refraInspector_v13.2.html](./refraInspector_v13.2.html).
 2. Open the standalone HTML file in a modern browser.
 3. Select **PL Inspection**, enter geometry and usage information, and inspect the PL photographs.
 4. Save verified PL sets to the Campaign, then use **Campaign Report** for review and export.
 
 A desktop browser is recommended for precise line adjustments. The mobile layout supports touch controls and continuous scrolling.
 
-## v13.0 — Automatic ArUco + planar Homography (Beta)
+## v13.2 — Automatic ArUco, Homography and constrained bore alignment (Beta)
 
-The current v13.0 application automatically attempts ArUco detection after importing each Upper/Lower photo. It uses **DICT_4X4_50, IDs 0–3**, mounted as four **30 × 30 mm markers with 300 × 300 mm marker-centre spacing**: ID 0 top-left, ID 1 top-right, ID 2 bottom-left and ID 3 bottom-right. The intended calibration region is around the PL bore and surrounding damage rather than the distant long-end tail.
+The current v13.2 application automatically attempts ArUco detection after importing each Upper/Lower photo. It uses **DICT_4X4_50, IDs 0–3**, mounted as four **30 × 30 mm markers with 300 × 300 mm marker-centre spacing**: ID 0 top-left, ID 1 top-right, ID 2 bottom-left and ID 3 bottom-right. The intended calibration region is around the PL bore and surrounding damage rather than the distant long-end tail.
 
 When four markers are detected, the system estimates a planar Homography by **least-squares fitting all 16 marker corners** to their known physical positions, checks geometric residuals, and rectifies the image. The output size and displayed X/Y px/mm are selected from estimated original image sampling density rather than the former fixed 900 × 900 px output (with a maximum output dimension to protect browser memory). Homography success supersedes traditional ruler calibration for that photo, clears the obsolete manual-calibration/red warning state, and requires checking A–F guide positions and re-verifying alignment before saving.
 
 If no markers are present, the application falls back to the traditional **Auto Level / Level with 2 Points → independent X/Y 100 mm auto/manual ruler calibration → Alignment** workflow. Failures involving detected but incomplete markers or bad geometry are distinguished from photos with no markers. The Auto ArUco button can be unavailable with a hover explanation. No manual four-point fallback button is offered in the standard interface.
 
 **Important limitations:** These specifications require the actual physical markers to be mounted with accurate 300 × 300 mm centre spacing and consistent orientation on the PL reference plane. An A4 printout of four markers at a different spacing is only an identification test, **not** a valid metric calibration frame. Printed marker dimensions, camera lens distortion, PL surface height differences, edge detection, and image resampling affect real-world accuracy. The displayed px/mm describes the output image grid, **not** a certified measurement resolution. 16-corner RMS/max residuals measure fit consistency rather than actual A–F errors. Validate against independent known-length references before production use; full browser/device regression testing is still required.
+
+## v13.2 — Inner/outer bore alignment and line constraints (Beta)
+
+**Auto Align now treats the inner opening and outer wear boundary as distinct features.** The image-based inner-bore region detector proposes the inner opening's top/bottom guides (**H3/H4**) and left/right bounds. The outer wear-ring detector independently searches farther outside the inner opening and proposes an **outer ellipse**; its top, bottom, left and right tangents determine **H2/H5/V1/V2**. The two ellipses **may be eccentric**—their centres are not forced to coincide.
+
+**Geometric safeguards:**
+
+- Horizontal guide positions must remain ordered from the short end to the long end: **H1 < H2 < H3 < H4 < H5 < H6**. The constraint applies to auto placement and manual guide movement.
+- **V1** must stay to the *left* of the detected inner-bore left boundary, and **V2** to its *right*; manual movement cannot drag these outside their permitted ranges.
+- **The full fitted inner ellipse must lie strictly inside the fitted outer ellipse**. The outer-candidate check samples the inner perimeter at 720 points with a safety margin, not just the four tangent locations. If a candidate intersects or encroaches on the inner ellipse, the algorithm retries its search farther outward (up to three search passes). When no acceptable candidate is found, it retains the previous outer-guide positions and requires manual review.
+- These are **software geometric constraints**, not a guarantee that a detected edge corresponds to the physically correct wear boundary. Strong shadows, slag, oxidation, poor focus, and non-elliptical damage can still mislead the algorithm. A geometrically valid ellipse can still be the wrong feature.
+
+**Recommended operator check after Auto Align:** Confirm H3/H4 on the actual inner opening, confirm H2/H5/V1/V2 are tangential to the *outer wear boundary* rather than the plate perimeter or another contrast edge, check asymmetric wear, then use **Verify Alignment**. The inner-hole detector has shown promising results on a sample PL photo, but outer-boundary accuracy and complete browser regression remain **unverified**.
 
 ## ArUco calibration target — printing and assembly
 
@@ -71,9 +84,9 @@ The ArUco workflow should be **automatic**, not require the user to click each m
 ## 2. Main features
 
 - **Photo inspection:** Import one or two photographs, switch between Upper/Lower PLs, automatically or manually level images, and verify alignment.
-- **Perspective correction (v13.0 beta):** Automatic detection of four 30 mm ArUco markers, 300 × 300 mm centre-spacing reference, 16-corner least-squares Homography, adaptive rectification resolution, and alignment re-verification.
+- **Perspective correction (v13.2 beta):** Automatic detection of four 30 mm ArUco markers, 300 × 300 mm centre-spacing reference, 16-corner least-squares Homography, adaptive rectification resolution, and alignment re-verification.
 - **Ruler calibration:** Independent horizontal and vertical px/mm scales, automatic 100 mm calibration, and manual fallback.
-- **A–F dimensions:** Photo guide lines, automatic readings, and editable manual overrides for each PL.
+- **A–F dimensions and Auto Align (v13.2 beta):** Inner-opening detection proposes H3/H4 and bore sides; independent outer-wear ellipse detection proposes tangent guides H2/H5/V1/V2. H1–H6 ordering, V1/V2 inner-bore exclusion, and whole-arc inner/outer containment checks protect against invalid guide geometries. Automatic readings and editable manual overrides remain available.
 - **Damage assessment:** Used-bore and enlargement areas, edge-damage area estimates, long-end damage, crack counts, and inspection remarks.
 - **PL Set and Campaign management:** ID and usage records, saved-set selector, independent photo verification, selective deletion, Campaign Performance statistics, browser-local recovery and backups.
 - **Performance calculations:** Remaining Stroke (R), Stroke Reduction (ΔR), Erosion Rate (ER), Erosion per Heat (EPH), and comparison with a safe-stroke limit.
@@ -128,10 +141,11 @@ Do not treat an invalid or uncertain automatic calibration as a reliable distanc
 
 ### Step 5 — Align and verify measurement guides
 
-1. Under **#3 Alignment**, select **Auto Align**.
-2. Check the proposed A–F guide positions against actual PL boundaries.
-3. Drag any inaccurate lines. **Undo Alignment** and **Reset Lines** are available when needed.
-4. Select **Verify Alignment*** after confirming the guide positions.
+1. Under **#3 Alignment**, select **Auto Align**. The program first proposes the inner opening (H3/H4 and inner left/right), then independently searches for an enclosing outer wear ellipse and uses its tangents for H2/H5/V1/V2.
+2. Check **inner** and **outer** boundaries separately: the outer wear ellipse may be offset from the inner opening. Ensure the outer guides follow the intended damage boundary, not merely any strong image edge.
+3. Respect the enforced order **H1 < H2 < H3 < H4 < H5 < H6**, with **V1** to the left and **V2** to the right of the inner-bore bounds. Outer-ellipse candidates intersecting the inner ellipse are rejected and searched again farther outward. Failed detection leaves prior outer guides in place; it does **not** establish a verified contour.
+4. Drag any inaccurate guides within their permitted ranges. **Undo Alignment** and **Reset Lines** are available when needed.
+5. Select **Verify Alignment*** only after visually confirming the guide positions.
 
 Each imported PL requires its own alignment verification. Changes to photo positioning, calibration, or measurement lines may invalidate verification.
 
@@ -212,6 +226,9 @@ Use the available panel controls to copy or export tables and charts. The report
 | ArUco cannot be detected | Confirm IDs 0–3, white margins, visibility, lighting, printing and correct physical spacing; use legacy rulers only when suitable ruler references exist |
 | Auto ruler calibration fails | Use manual 100 mm calibration and verify both axes |
 | A–F readings look incorrect | Review ruler scales, line positions and manual overrides |
+| Outer ellipse misses the actual damage boundary | Inspect the inner H3/H4 guides, manually adjust H2/H5/V1/V2 within the constraints, and verify the real wear edge rather than relying only on automatic fitting |
+| An outer ellipse is rejected or is not updated | Its arc may cross/approach the inner ellipse or fail recognition quality checks; retry on a clearer photo or adjust the lines manually before Verify Alignment |
+| Cannot drag H or V guides across another boundary | Expected safety behavior: H guides remain ordered; V1/V2 remain outside the inner bore |
 | Results unavailable | Check required input values and alignment verification |
 | Cannot save a PL set | Verify each imported PL's alignment |
 | Capture-time warning appears | Confirm both photos belong to the same PL set |
@@ -219,13 +236,13 @@ Use the available panel controls to copy or export tables and charts. The report
 
 ## 7. Documentation and support
 
-- [Current application — refraInspector_v13.0.html](./refraInspector_v13.0.html)
+- [Current application — refraInspector_v13.2.html](./refraInspector_v13.2.html)
 - [Printable four-sheet ArUco target — 300 × 300 mm](./docs/RefraInspector_ArUco_300x300_4A4_NoZeroLabel.pdf)
 - [SW/HW version mapping — CHANGELOG.md](./CHANGELOG.md)
 - [Software releases (SW codes) — CHANGELOG_SOFTWARE.md](./CHANGELOG_SOFTWARE.md)
 - [Hardware and ArUco target (HW codes) — CHANGELOG_HARDWARE.md](./CHANGELOG_HARDWARE.md)
 - [Detailed historical changes — CHANGELOG_ARCHIVE.md](./CHANGELOG_ARCHIVE.md)
 
-Only the latest versioned HTML application file is retained on the current repository branch; older versions remain recoverable from Git history.
+The current executable is **refraInspector_v13.2.html**. Obsolete **v13.0** and **v12.1.7** HTML files were removed from the current branch; their prior contents remain recoverable through Git history. Historical versions may still be mentioned in the software change log.
 
 **Developer / Help Desk:** xuh@shinagawa-ref.jp
