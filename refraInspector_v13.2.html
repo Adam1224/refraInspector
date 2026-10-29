@@ -989,7 +989,7 @@ function detectInnerBore(pl){
   if(!best||score>best.score)best={left:lx/cw,right:rx/cw,ls,rs,contrast,score};
  }
  if(!best||Math.min(best.ls,best.rs)<6||best.contrast<4){
-   pl.innerBounds=null;pl.innerStatus='Low-confidence bore boundary: drag the two pink dashed guides to visible opening edges.';return;
+   pl.innerBounds=null;pl.innerStatus='[RI-ALN-001] Low-confidence bore boundary: drag the two pink dashed guides to visible opening edges.';return;
  }
  pl.innerBounds={left:best.left,right:best.right};
  pl.innerStatus='Photo-estimated visible bore-background edges (unverified); adjust pink dashed guides if needed.';
@@ -1298,10 +1298,10 @@ function v13LoadArUco(){
  v13DetectorPromise=(async()=>{
   for(const url of urls){await new Promise((resolve,reject)=>{
    const script=document.createElement('script');script.src=url;script.onload=resolve;
-   script.onerror=()=>reject(Error('Could not load ArUco library from CDN. Internet access is required in this build.'));
+   script.onerror=()=>reject(Error('[RI-ARU-004] Could not load ArUco library from CDN. Internet access is required in this build.'));
    document.head.appendChild(script);
   });}
-  if(!window.AR?.Detector)throw Error('ArUco detector unavailable. Check CDN access.');
+  if(!window.AR?.Detector)throw Error('[RI-ARU-004] ArUco detector unavailable. Check CDN access.');
   // OpenCV generated marker cells: white=1. Earlier V13_CODES encoded black=1, preventing all matches.
   // Invert the 16-bit codewords before passing them to js-aruco2's white=1 decoder.
   window.AR.DICTIONARIES.Refra4x4_50={nBits:16,tau:1,codeList:V13_CODES.map(code => (0xffff ^ parseInt(code,16)))};
@@ -1540,9 +1540,9 @@ function v13Install(){
   }catch(err){
    // Missing markers: quiet legacy fallback and disabled Auto ArUco with hover explanation.
    // Geometric mismatch with visible ArUco: still no long notification; reason appears on hover.
-   const reason=detectedCount===0?'No ArUco markers detected in this photo. Use Level and X/Y Calibration.':
-    detectedCount<4?'Only '+detectedCount+'/4 ArUco markers detected. All IDs 0–3 must be visible.':
-    'ArUco markers detected, but reference geometry is invalid. Check the 300 × 300 mm marker layout.';
+   const reason=detectedCount===0?'[RI-ARU-001] No ArUco markers detected in this photo. Use Level and X/Y Calibration.':
+    detectedCount<4?'Only '+detectedCount+'/4 ArUco markers detected. [RI-ARU-002] All IDs 0–3 must be visible.':
+    '[RI-ARU-003] ArUco markers detected, but reference geometry is invalid. Check the 300 × 300 mm marker layout.';
    availability[side]={available:false,reason};
    // No/partial ArUco markers: release any leftover manual-ruler UI lock.
    // Do not auto-start manual calibration; traditional Auto Level / two-point leveling remain available.
@@ -1604,7 +1604,7 @@ async function decodeUploadedPhoto(file){
   const converted=await window.heic2any({blob:file,toType:'image/jpeg',quality:.96});
   return await loadPhotoBlob(Array.isArray(converted)?converted[0]:converted);
  }catch(e){failures.push('heic2any: '+(e?.message||String(e)))}
- throw Error('Both HEIC decoders failed. '+failures.join(' | ')+'. Try exporting the original image as JPEG from Photos, or enable Most Compatible for future iPhone photos.');
+ throw Error('[RI-IMP-002] Both HEIC decoders failed. '+failures.join(' | ')+'. Try exporting the original image as JPEG from Photos, or enable Most Compatible for future iPhone photos.');
 }
 function isMobileSafariLike(){return /iPhone|iPad|iPod/i.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1)}
 async function optimizeDecodedPhoto(im){
@@ -1703,7 +1703,7 @@ function updatePhotoCaptureGapWarning(){
  }
  const duration=minutes>=60?Math.floor(minutes/60)+'h '+(minutes%60)+'m':minutes+'m';
  const message=document.getElementById('photoCaptureGapMessage');
- if(message)message.textContent='⚠ Upper and Lower photo capture times differ by '+duration+
+ if(message)message.textContent='[RI-PHO-001] ⚠ Upper and Lower photo capture times differ by '+duration+
   ' (over 30 minutes). Check that both photos belong to the same PL set.';
  el.hidden=false;
 }
@@ -1723,7 +1723,7 @@ async function processFile(f,which=active,onDone=()=>{}){
  try{
   im=await optimizeDecodedPhoto(await decodeUploadedPhoto(f));
  }catch(err){
-  const msg='Unable to decode '+f.name+': '+(err?.message||'unsupported photo format');
+  const msg='[RI-IMP-001] Unable to decode '+f.name+': '+(err?.message||'unsupported photo format');
   status.textContent=msg;alert(msg);return;
  }
  // A decoded photo must never be reported as a failed import just because
@@ -1773,7 +1773,7 @@ $('stage').addEventListener('pointerdown',e=>{if(!pending||e.target.classList.co
  const n2raw=prompt(`Enter the printed number (mm) at SECOND ${isX?'horizontal':'vertical'} ruler tick:`);
  if(n2raw===null)return;
  const n1=Number(n1raw),n2=Number(n2raw),span=Math.abs(n2-n1),pixels=Math.abs(t2-t1);
- if(!n1raw.trim()||!n2raw.trim()||!Number.isFinite(n1)||!Number.isFinite(n2)||span<1||pixels<5){alert('Invalid tick numbers or positions. Try again.');return}
+ if(!n1raw.trim()||!n2raw.trim()||!Number.isFinite(n1)||!Number.isFinite(n2)||span<1||pixels<5){alert('[RI-CAL-001] Invalid tick numbers or positions. Try again.');return}
  // Calibration coordinates are ordered in image space; convert to actual mm using anchor readings.
  const pairs=[{pix:t1,mm:n1},{pix:t2,mm:n2}].sort((a,b)=>a.pix-b.pix);
  const cal={points:pairs.map(q=>q.pix),step:pairs[1].mm-pairs[0].mm,originMm:pairs[0].mm,verifiedNumbers:true,anchors:pairs};
@@ -1796,7 +1796,7 @@ $('stage').addEventListener('pointerdown',e=>{if(!pending||e.target.classList.co
   $('calStatus').textContent=xOK&&yOK
     ?pl.method+' · A–F recalculated from leveled photo.'
     :pl.method+' · Auto A–F unavailable until both ruler axes are calibrated. Use Set horizontal/vertical 100 mm span.';
-  return}const start=axis==='x'?points[0].x*pl.image.width:points[0].y*pl.image.height,end=axis==='x'?points[1].x*pl.image.width:points[1].y*pl.image.height;const dist=Math.abs(end-start);if(dist<5){alert('Calibration points too close');return}const scale=dist/100;pl[axis==='x'?'sx':'sy']=scale;pl[axis==='x'?'manualScaleX':'manualScaleY']=true;pl[axis==='x'?'calX':'calY']={points:[Math.min(start,end),Math.max(start,end)],step:100};pl.method=`Manual 100 mm ${axis.toUpperCase()} reference; other axis ${valid(pl[axis==='x'?'sy':'sx'])?'retained':'requires calibration'}`;if(valid(pl.sx)&&valid(pl.sy))pl.calibrationFailed=false;select(active)});
+  return}const start=axis==='x'?points[0].x*pl.image.width:points[0].y*pl.image.height,end=axis==='x'?points[1].x*pl.image.width:points[1].y*pl.image.height;const dist=Math.abs(end-start);if(dist<5){alert('[RI-CAL-002] Calibration points too close');return}const scale=dist/100;pl[axis==='x'?'sx':'sy']=scale;pl[axis==='x'?'manualScaleX':'manualScaleY']=true;pl[axis==='x'?'calX':'calY']={points:[Math.min(start,end),Math.max(start,end)],step:100};pl.method=`Manual 100 mm ${axis.toUpperCase()} reference; other axis ${valid(pl[axis==='x'?'sy':'sx'])?'retained':'requires calibration'}`;if(valid(pl.sx)&&valid(pl.sy))pl.calibrationFailed=false;select(active)});
 // Fully automatic ruler tick counting: identify regularly spaced, high-salience
 // centimeter ticks on the two physical rulers. No OCR or user-entered tick values.
 // Reject uncertain pitch instead of treating unrelated photo texture as a ruler.
@@ -1818,7 +1818,7 @@ function updateCalibrationUX(){
  if(details){details.classList.toggle('calFailed',failed);details.classList.toggle('calHomography',perspectiveOK);}
  const readout=$('rulerReadout'),status=$('calStatus');
  if(readout){readout.classList.toggle('calError',failed);
-  if(failed)readout.textContent='⚠ Ruler auto-detection failed or could not independently verify both axes. Calibrate missing/uncertain axes using the 100 mm reference. Auto A–F results are not reliable.';
+  if(failed)readout.textContent='[RI-CAL-003] ⚠ Ruler auto-detection failed or could not independently verify both axes. Calibrate missing/uncertain axes using the 100 mm reference. Auto A–F results are not reliable.';
   else if(perspectiveOK)readout.textContent='ArUco calibrated · '+pl.image.width+' × '+pl.image.height+' px · X '+pl.sx.toFixed(3)+' / Y '+pl.sy.toFixed(3)+' px/mm';
  }
  if(status)status.classList.toggle('calError',failed);
@@ -2017,7 +2017,7 @@ function autoCalibrate(){
      pl[prop]=null;
      pl[key]='auto:failed — manual calibration required';
      pl[manualKey]=false;
-     notes.push(`${axis.toUpperCase()}: auto calibration failed (${detected?.reason||'insufficient ruler evidence'}). Previous calibration cleared; manually mark a 100 mm span.`);
+     notes.push(`${axis.toUpperCase()}: [RI-CAL-003] auto calibration failed (${detected?.reason||'insufficient ruler evidence'}). Previous calibration cleared; manually mark a 100 mm span.`);
    }
  }
  if(valid(pl.sx)&&valid(pl.sy)){
@@ -2159,7 +2159,7 @@ function checkUpperLowerClosureMark(){
  // This evidence is a hint only: superficial discoloration, glare and slag can mislead.
  if(!upper?.likely || (lower?.likely && upper.score<lower.score+9))return;
  const msg=document.createElement('div');
- msg.textContent='⚠ Possible Upper / Lower PL mix-up: a roughly circular long-end closure mark, normally associated with the LOWER PL, appears on the photo assigned to UPPER PL. Please inspect both photos and confirm their assignments.';
+ msg.textContent='[RI-PHO-002] ⚠ Possible Upper / Lower PL mix-up: a roughly circular long-end closure mark, normally associated with the LOWER PL, appears on the photo assigned to UPPER PL. Please inspect both photos and confirm their assignments.';
  const actions=document.createElement('div');actions.style.cssText='display:flex;gap:7px;flex-wrap:wrap;margin-top:7px';
  const swap=document.createElement('button');swap.type='button';swap.className='minibtn';swap.textContent='Swap Upper / Lower photos';
  const keep=document.createElement('button');keep.type='button';keep.className='minibtn';keep.textContent='Keep current assignments';
@@ -2171,7 +2171,7 @@ function checkUpperLowerClosureMark(){
 $('photoFile').addEventListener('change',async e=>{
  const files=Array.from(e.target.files);e.target.value='';
  if(!files.length||photoImportBusy)return;
- if(files.length>2){alert('Select one image or exactly two images (Upper first, Lower second).');return;}
+ if(files.length>2){alert('[RI-IMP-003] Select one image or exactly two images (Upper first, Lower second).');return;}
  const importMode=photoImportMode;photoImportMode='new';
  if(window.__savedPairImportGuard&&!window.__savedPairImportGuard(files,importMode))return;
  setPhotoLoading(true,files.length===2?'Loading Upper photo (1 of 2)…':'Loading '+files[0].name+'…');
@@ -2185,7 +2185,7 @@ $('photoFile').addEventListener('change',async e=>{
    select('upper');
   }
    checkUpperLowerClosureMark();
- }catch(err){console.error('Unexpected photo import error:',err);$('calStatus').textContent='Import workflow error: '+(err?.message||String(err));}
+ }catch(err){console.error('Unexpected photo import error:',err);$('calStatus').textContent='[RI-IMP-004] Import workflow error: '+(err?.message||String(err));}
  finally{setPhotoLoading(false);refreshPhotoImportUI();}
 });$('upperTab').onclick=()=>select('upper');$('lowerTab').onclick=()=>select('lower');
 // RefraInspector v9.1 BETA — physical-feature-specific auto alignment.
@@ -2380,7 +2380,7 @@ function v9AutoAlignAll(){
  // Sample rays from the opening only to locate edge evidence, then fit an independent,
  // potentially eccentric outer ellipse and place its four axis-aligned tangents.
  function detectOuterWearBoundary(inner,attempt=0){
-  if(!inner)return {reason:'Inner opening not located; outer lines unchanged'};
+  if(!inner)return {reason:'[RI-ALN-002] Inner opening not located; outer lines unchanged'};
   const ix=(inner.left+inner.right)*cw*.5,iy=(inner.top+inner.bottom)*ch*.5;
   const irx=(inner.right-inner.left)*cw*.5,iry=(inner.bottom-inner.top)*ch*.5;
   if(irx<10||iry<10)return {reason:'Inner bore extent too small'};
@@ -2467,12 +2467,12 @@ function v9AutoAlignAll(){
    if(attempt<2){
     const further=detectOuterWearBoundary(inner,attempt+1);
     if(further.box)return further;
-    return {reason:`Outer ellipse intersects inner arc; searched farther outward (${attempt+2} passes). ${further.reason}`};
+    return {reason:`[RI-ALN-003] Outer ellipse intersects inner arc; searched farther outward (${attempt+2} passes). ${further.reason}`};
    }
-   return {reason:`Outer ellipse intersects inner arc (max inner-arc ellipse equation ${worst.toFixed(2)}); outer lines unchanged`};
+   return {reason:`[RI-ALN-003] Outer ellipse intersects inner arc (max inner-arc ellipse equation ${worst.toFixed(2)}); outer lines unchanged`};
   }
   if(box.top<.005||box.bottom>.995||box.left<.005||box.right>.995)
-   return {reason:'Outer contour reaches image boundary'};
+   return {reason:'[RI-ALN-004] Outer contour reaches image boundary'};
   const ratio=(box.right-box.left)/(box.bottom-box.top);
   if(ratio<.38||ratio>3.2)return {reason:'Outer ellipse aspect ratio implausible'};
   if((fit.residual??1)>.38)return {reason:'Outer ellipse fit inconsistent'};
@@ -2646,8 +2646,8 @@ $('savePair').onclick=()=>{
  const present=['upper','lower'].filter(side=>!!plates[side].image);
  const missing=present.filter(side=>verification[side]!==true);
  if(!present.length||missing.length){
-  const message=!present.length?'Import and verify at least one PL photo before saving to CAMP.':
-   'Cannot save to CAMP: verify Alignment for '+missing.map(side=>side==='upper'?'Upper PL':'Lower PL').join(' and ')+'.';
+  const message=!present.length?'[RI-VER-002] Import and verify at least one PL photo before saving to CAMP.':
+   '[RI-VER-002] Cannot save to CAMP: verify Alignment for '+missing.map(side=>side==='upper'?'Upper PL':'Lower PL').join(' and ')+'.';
   $('savedStatus').textContent=message;
   alert(message);
   return;
@@ -2660,7 +2660,7 @@ $('savePair').onclick=()=>{
  if(!valid(c.stroke)||!valid(c.deltaR))issues.push('F for both PLs and/or W, X, Y, Z, R0');
  if(!valid(c.runtime)||c.runtime<=0)issues.push('Total runtime');
  if(!valid(c.heats)||c.heats<=0)issues.push('Heats used');
- if(issues.length&&!confirm('Some required fields are missing or invalid:\n• '+issues.join('\n• ')+'\n\nSave this incomplete PL set anyway?')){
+ if(issues.length&&!confirm('[RI-SAV-001] Some required fields are missing or invalid:\n• '+issues.join('\n• ')+'\n\nSave this incomplete PL set anyway?')){
   $('savedStatus').textContent='Save cancelled; incomplete fields have not been saved.';return;
  }
  const id=(campaignName||'CMP')+' / '+(pairName||'PL');
@@ -2847,9 +2847,9 @@ function invalidateVerification(side){
  document.dispatchEvent(new CustomEvent('refraInspectorVerificationChanged',{detail:{side}}));
 }
 verifyBtn.addEventListener('click',()=>{
- if(!plates[active].image){alert('Import a photo before verifying alignment.');return}
+ if(!plates[active].image){alert('[RI-VER-001] Import a photo before verifying alignment.');return}
  if(!(valid(plates[active].sx)&&plates[active].sx>0&&valid(plates[active].sy)&&plates[active].sy>0)){
-  alert('Calibrate both ruler axes before verifying alignment.');return;
+  alert('[RI-CAL-004] Calibrate both ruler axes before verifying alignment.');return;
  }
  verification[active]=true;
  syncAlignmentVerification();
@@ -3085,7 +3085,7 @@ syncAlignmentVerification();
  window.__confirmPLGeometryUpdate=()=>{
    const cid=campaignKey();
    const count=records.filter(item=>item.id.startsWith(cid+' / ')).length;
-   return !count||confirm(`Changing PL geometry will affect all ${count} PL set(s) saved to Campaign ${cid}. Their CAMP saved status will be preserved. Continue?`);
+   return !count||confirm(`[RI-SAV-002] Changing PL geometry will affect all ${count} PL set(s) saved to Campaign ${cid}. Their CAMP saved status will be preserved. Continue?`);
  };
  // Direct edits to geometry also update all saved sets for the current campaign.
  geometryFields.forEach(key=>$(key).addEventListener('change',()=>{
@@ -3142,7 +3142,7 @@ syncAlignmentVerification();
  }
  deleteButton?.addEventListener('click',()=>{
   const ids=[...deleteSelections];if(!ids.length)return;
-  if(!confirm('Permanently delete '+ids.length+' selected PL set(s) from this working session and Campaign?\n\n'+ids.join('\n')+'\n\nThis cannot be undone without an earlier backup.'))return;
+  if(!confirm('[RI-DAT-001] Permanently delete '+ids.length+' selected PL set(s) from this working session and Campaign?\n\n'+ids.join('\n')+'\n\nThis cannot be undone without an earlier backup.'))return;
   const before=typeof performanceSnapshot==='function'?performanceSnapshot():null;
   const currentId=pairID(),activeDeleted=ids.includes(currentId)||ids.includes(selected);
   ids.forEach(id=>{saved.delete(id);committedUsage?.delete(id)});
@@ -3242,8 +3242,8 @@ syncAlignmentVerification();
   const imported=importedSides();
   if(!imported.length||imported.some(side=>!verified(side))){
    const missing=imported.filter(side=>!verified(side));
-   const message=!imported.length?'Import and verify at least one PL photo before saving to CAMP.':
-    'Cannot save to CAMP: verify Alignment for '+missing.map(side=>side==='upper'?'Upper PL':'Lower PL').join(' and ')+'.';
+   const message=!imported.length?'[RI-VER-002] Import and verify at least one PL photo before saving to CAMP.':
+    '[RI-VER-002] Cannot save to CAMP: verify Alignment for '+missing.map(side=>side==='upper'?'Upper PL':'Lower PL').join(' and ')+'.';
    $('savedStatus').textContent=message;
    alert(message);
    return;
@@ -3323,7 +3323,7 @@ syncAlignmentVerification();
   event.preventDefault();
   event.stopImmediatePropagation();
   if(hasUnsavedChanges){
-   const proceed=confirm('Unsaved edits detected in the current PL set.\n\nCopy PLs details uses ONLY the last saved Campaign records; your unsaved edits will NOT be included.\n\nClick OK to copy saved Campaign data, or Cancel to return and save your edits first.');
+   const proceed=confirm('[RI-DAT-003] Unsaved edits detected in the current PL set.\n\nCopy PLs details uses ONLY the last saved Campaign records; your unsaved edits will NOT be included.\n\nClick OK to copy saved Campaign data, or Cancel to return and save your edits first.');
    if(!proceed){
     $('savedStatus').textContent='Copy cancelled: save the current PL set to Campaign to include unsaved edits.';
     return;
@@ -3572,8 +3572,8 @@ syncAlignmentVerification();
    // Decode and validate ALL entries before replacing the current session.
    const loaded=[];
    for(const pair of raw.sets){if(!Array.isArray(pair)||typeof pair[0]!=='string')throw Error('Invalid saved set ID');loaded.push([pair[0],await unpackSnapshot(pair[1])]);}
-   if(!loaded.length)throw Error('Backup contains no saved sets');
-   if(!confirm('Restore '+loaded.length+' PL sets from backup? This replaces the current session, including its previous Campaign Performance and verification statuses.'))return;
+   if(!loaded.length)throw Error('[RI-DAT-002] Backup contains no saved sets');
+   if(!confirm('[RI-DAT-004] Restore '+loaded.length+' PL sets from backup? This replaces the current session, including its previous Campaign Performance and verification statuses.'))return;
    saved.clear();for(const [id,data] of loaded)saved.set(id,data);
    campaignGeometry.clear();for(const [id,geo] of raw.campaignGeometry)campaignGeometry.set(id,geo);
    // The backup records are authoritative for CAMP membership. Working-only sets remain unapproved.
@@ -3834,7 +3834,7 @@ syncAlignmentVerification();
     const recent=all[0];
     const date=new Date(recent.savedAt).toLocaleString();
     // A real choice, not an automatic destructive replacement of the working session.
-    if(confirm('RefraInspector found '+all.length+' local auto-recovery snapshot(s).\nLatest: '+date+'\nSaved PL sets: '+recent.state.sets.length+'\n\nRestore the latest session?\nCancel keeps the current blank session; earlier snapshots remain stored.')){
+    if(confirm('[RI-DAT-005] RefraInspector found '+all.length+' local auto-recovery snapshot(s).\nLatest: '+date+'\nSaved PL sets: '+recent.state.sets.length+'\n\nRestore the latest session?\nCancel keeps the current blank session; earlier snapshots remain stored.')){
      let restored=false;
      for(const item of all){
       try{await restoreRecoveryState(item.state);restored=true;break;}
