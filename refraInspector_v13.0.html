@@ -1160,12 +1160,12 @@ else {publishPreview(dataUrlToBlob(canvas.toDataURL('image/jpeg',.8)))}$('empty'
  const n=Number(id.slice(1)),step=window.RefraModules.precision.pixelStep(photo.image,id[0],e.shiftKey),dir=['ArrowDown','ArrowRight'].includes(e.key)?1:-1;
  let next=photo.pos[id]+step*dir;
  if(isH)next=constrainedHPosition(photo.pos,id,next);
- else next=id==='V1'?Math.max(0,Math.min(next,photo.pos.V2-.003)):Math.min(1,Math.max(next,photo.pos.V1+.003));
+ else next=constrainedVPosition(photo,id,next);
  if(next===photo.pos[id])return;
  photo.pos[id]=next;v91Traces[active]=null;invalidateVerification(active);drawPositions();refreshLiveDimensions();updateResults();
  const scale=isH?photo.sy:photo.sx,mm=valid(scale)&&scale>0?(step*dir*pix/scale).toFixed(3)+' mm':'uncalibrated';
  const info=$('precisionLineStatus');if(info)info.textContent=`${active} ${id} moved ${e.shiftKey?'10':'1'} px (${mm}). Re-verify alignment.`;
- });stage.appendChild(el);if(['H4','H5','H6'].includes(id)){const marker=document.createElement('span');marker.className='overlapLineMarker';marker.textContent=id;marker.title=hint;el.appendChild(marker);}let drag=false;el.addEventListener('mouseenter',()=>showLineHint(id));el.addEventListener('mouseleave',()=>hideLineHint());el.addEventListener('focus',()=>showLineHint(id));el.addEventListener('blur',()=>hideLineHint());el.addEventListener('pointerdown',e=>{if(pending||traceMode)return;hideLineHint();drag=true;lineDragging=true;el.setPointerCapture(e.pointerId);e.stopPropagation();e.preventDefault()});el.addEventListener('pointermove',e=>{if(!drag)return;const r=stage.getBoundingClientRect(),isH=id[0]==='H';let q=isH?(e.clientY-r.top)/r.height:(e.clientX-r.left)/r.width;q=Math.min(1,Math.max(0,q));const n=+id[1];if(isH)q=constrainedHPosition(pl.pos,id,q);else{const other=id==='V1'?pl.pos.V2-.003:pl.pos.V1+.003;q=id==='V1'?Math.min(q,other):Math.max(q,other)}pl.pos[id]=q;v91Traces[active]=null;drawPositions();refreshLiveDimensions();updateResults()});el.addEventListener('pointerup',()=>{drag=false;lineDragging=false;updateResults()});el.addEventListener('pointercancel',()=>{drag=false;lineDragging=false;updateResults()})});setupInnerHandles(stage,pl);drawPositions()}
+ });stage.appendChild(el);if(['H4','H5','H6'].includes(id)){const marker=document.createElement('span');marker.className='overlapLineMarker';marker.textContent=id;marker.title=hint;el.appendChild(marker);}let drag=false;el.addEventListener('mouseenter',()=>showLineHint(id));el.addEventListener('mouseleave',()=>hideLineHint());el.addEventListener('focus',()=>showLineHint(id));el.addEventListener('blur',()=>hideLineHint());el.addEventListener('pointerdown',e=>{if(pending||traceMode)return;hideLineHint();drag=true;lineDragging=true;el.setPointerCapture(e.pointerId);e.stopPropagation();e.preventDefault()});el.addEventListener('pointermove',e=>{if(!drag)return;const r=stage.getBoundingClientRect(),isH=id[0]==='H';let q=isH?(e.clientY-r.top)/r.height:(e.clientX-r.left)/r.width;q=Math.min(1,Math.max(0,q));const n=+id[1];if(isH)q=constrainedHPosition(pl.pos,id,q);else q=constrainedVPosition(pl,id,q);pl.pos[id]=q;v91Traces[active]=null;drawPositions();refreshLiveDimensions();updateResults()});el.addEventListener('pointerup',()=>{drag=false;lineDragging=false;updateResults()});el.addEventListener('pointercancel',()=>{drag=false;lineDragging=false;updateResults()})});setupInnerHandles(stage,pl);drawPositions()}
 function dataUrlToBlob(url){const [meta,b64]=url.split(','),bytes=atob(b64),arr=new Uint8Array(bytes.length);for(let i=0;i<bytes.length;i++)arr[i]=bytes.charCodeAt(i);return new Blob([arr],{type:meta.match(/:(.*?);/)[1]})}
 
 function setupInnerHandles(stage,pl){
@@ -1181,7 +1181,7 @@ function setupInnerHandles(stage,pl){
     if(!el.hasPointerCapture(e.pointerId))return;
     const r=stage.getBoundingClientRect(),x=Math.min(1,Math.max(0,(e.clientX-r.left)/r.width));
     const b=pl.innerBounds;if(!b)return;
-    if(side==='left')b.left=Math.min(x,b.right-.005);else b.right=Math.max(x,b.left+.005);
+    if(side==='left')b.left=Math.max(pl.pos.V1+.0005,Math.min(x,b.right-.005));else b.right=Math.min(pl.pos.V2-.0005,Math.max(x,b.left+.005));
     v91Traces[active]=null;
     pl.innerStatus='Inspector-adjusted inner ellipse bounds';
     $('innerDetectStatus').textContent=pl.innerStatus;
@@ -1190,10 +1190,26 @@ function setupInnerHandles(stage,pl){
   for(const ev of ['pointerup','pointercancel'])el.addEventListener(ev,()=>{lineDragging=false;updateResults()});
  });
 }
-// v13.0: enforce the physical ordering of horizontal measurement guides.
+// v13.2: enforce the physical ordering of horizontal measurement guides.
 // Image y increases downwards. Never allow a larger H index above a smaller one.
 const H_ORDER=['H1','H2','H3','H4','H5','H6'];
 const H_GAP=0.00025; // small separation prevents inversion while permitting near-coincident edges
+// Outer vertical tangents must remain outside the measured inner opening.
+// Keep an image-pixel-sized gap, and apply the same constraint to drag / keyboard / Auto Align.
+function constrainedVPosition(pl,id,proposed){
+ const bounds=pl.innerBounds;
+ const gap=Math.max(.0005,1/(pl.image?.width||1000));
+ const leftLimit=bounds&&Number.isFinite(bounds.left)?bounds.left-gap:pl.pos.V2-.003;
+ const rightLimit=bounds&&Number.isFinite(bounds.right)?bounds.right+gap:pl.pos.V1+.003;
+ if(id==='V1')return Math.max(0,Math.min(proposed,pl.pos.V2-.003,leftLimit));
+ if(id==='V2')return Math.min(1,Math.max(proposed,pl.pos.V1+.003,rightLimit));
+ return proposed;
+}
+function normalizeVOuter(pl){
+ if(!pl.innerBounds)return;
+ pl.pos.V1=constrainedVPosition(pl,'V1',pl.pos.V1);
+ pl.pos.V2=constrainedVPosition(pl,'V2',pl.pos.V2);
+}
 function constrainedHPosition(pos,id,proposed){
  const i=H_ORDER.indexOf(id);if(i<0)return proposed;
  const lower=i?pos[H_ORDER[i-1]]+H_GAP:0;
@@ -1211,7 +1227,7 @@ function normalizeHOrder(pos){
   pos[id]=Math.min(bound,Math.max(previous,Number.isFinite(value)?value:previous));
  }
 }
-function drawPositions(){const pl=p();if(!pl.image)return;normalizeHOrder(pl.pos);document.querySelectorAll('#stage .line').forEach(el=>{const id=el.dataset.id;el.style[id[0]==='H'?'top':'left']=(pl.pos[id]*100)+'%';el.setAttribute('aria-valuenow',(pl.pos[id]*100).toFixed(3))});
+function drawPositions(){const pl=p();if(!pl.image)return;normalizeHOrder(pl.pos);normalizeVOuter(pl);document.querySelectorAll('#stage .line').forEach(el=>{const id=el.dataset.id;el.style[id[0]==='H'?'top':'left']=(pl.pos[id]*100)+'%';el.setAttribute('aria-valuenow',(pl.pos[id]*100).toFixed(3))});
  document.querySelectorAll('#stage .innerHandle').forEach(el=>{const g=ellipseGeometry(pl);el.style.left=((el.dataset.side==='left'?g.cx-g.rx:g.cx+g.rx)*100)+'%';el.style.top=(pl.pos.H3*100)+'%';el.style.height=((pl.pos.H4-pl.pos.H3)*100)+'%';});
  renderArrows()}
 let activeAreaFormula=null;
@@ -1980,8 +1996,7 @@ function autoCalibrate(){
  // A tolerant pass is never allowed to reuse a guessed pitch from the other axis.
  const results={};
  const passInfo={};
- for(const axis of ['x','y']){
-    const strict=scan(axis);
+ for(const axis of ['x','y']){    const strict=scan(axis);
    if(valid(strict?.value)&&strict.value>0){results[axis]=strict;passInfo[axis]='strict';continue}
    const tolerant=scan(axis,null,true);
    if(valid(tolerant?.value)&&tolerant.value>0){results[axis]=tolerant;passInfo[axis]='adaptive fallback'}
@@ -1996,7 +2011,8 @@ function autoCalibrate(){
    if(detected&&Number.isFinite(detected.value)&&detected.value>0&&!detected.ambiguous){
      pl[prop]=detected.value;
      pl[key]=`auto:${passInfo[axis]} independent 1/5/10mm ruler ticks`;
-     notes.push(`${axis.toUpperCase()}: ${detected.value.toFixed(3)} px/mm (${passInfo[axis]}, ${detected.bands} agreeing bands, ruler at ${detected.region}; independently detected)`);   }else{
+     notes.push(`${axis.toUpperCase()}: ${detected.value.toFixed(3)} px/mm (${passInfo[axis]}, ${detected.bands} agreeing bands, ruler at ${detected.region}; independently detected)`);
+   }else{
      // Two-point leveling changes image coordinates: do not reuse an old px/mm scale.
      pl[prop]=null;
      pl[key]='auto:failed — manual calibration required';
@@ -2270,7 +2286,7 @@ function v9AutoAlignAll(){
   } else {fit.centerShift=0; fit.scaleShift=0;}
   return fit;
  }
- // v13.0: first locate the actual bore opening independently of old H3/H4.
+ // v13.2: first locate the actual bore opening independently of old H3/H4.
  // The outer erosion boundary is a distinct physical feature and MAY be eccentric.
  // Only H3/H4 and the inner opening's horizontal guides are changed by this trial.
  function detectBoreOpening(){
@@ -2354,29 +2370,33 @@ function v9AutoAlignAll(){
  if(opening&&opening.top<opening.bottom&&opening.left<opening.right&&opening.bottom-opening.top>.045){
   // Do not require the OLD (often badly located) outer ellipse to enclose it.
   pl.pos.H3=opening.top;pl.pos.H4=opening.bottom;
-  pl.innerBounds={left:opening.left,right:opening.right};
+  pl.innerBounds={left:opening.left,right:opening.right};normalizeVOuter(pl);
   pl.innerStatus='Experimental closed-opening segmentation; review both inner-bore limits';
   moved.push('H3/H4','inner bore guides');
   boreStatus='Candidate';boreReason=`closed-opening segmentation (threshold ${opening.threshold}, fill ${opening.fill.toFixed(2)})`;
  }
- // v13.0: find the *outer* wear-ring boundary as a separate closed contour.
+ // v13.2: find the *outer* wear-ring boundary as a separate closed contour.
  // The detected opening supplies an exclusion region, NOT a shared ellipse centre.
  // Sample rays from the opening only to locate edge evidence, then fit an independent,
  // potentially eccentric outer ellipse and place its four axis-aligned tangents.
- function detectOuterWearBoundary(inner){
+ function detectOuterWearBoundary(inner,attempt=0){
   if(!inner)return {reason:'Inner opening not located; outer lines unchanged'};
   const ix=(inner.left+inner.right)*cw*.5,iy=(inner.top+inner.bottom)*ch*.5;
   const irx=(inner.right-inner.left)*cw*.5,iry=(inner.bottom-inner.top)*ch*.5;
   if(irx<10||iry<10)return {reason:'Inner bore extent too small'};
-  const nRay=180,searchMax=Math.min(cw,ch)*.115;
+  // Retry passes search progressively farther from the inner hole, rather than
+  // accepting an ellipse whose arc cuts through the inner ellipse.
+  const nRay=180,searchMax=Math.min(Math.min(cw,ch)*.15,Math.max(irx,iry)*(attempt===0?.66:1.08));
+  const minExtra=Math.max(3,Math.min(irx,iry)*(.035+attempt*.13));
   const rays=[];
   const inBounds=(x,y)=>x>=6&&x<cw-6&&y>=6&&y<ch-6;
   // Blur-resistant intensity difference measured across a locally radial edge.
   for(let k=0;k<nRay;k++){
    const t=k*2*Math.PI/nRay,ux=Math.cos(t),uy=Math.sin(t);
-   const ir=1/Math.hypot(ux/irx,uy/iry),r0=ir+Math.max(5,ir*.055);
+   const ir=1/Math.hypot(ux/irx,uy/iry),r0=ir+minExtra;
+   const localMax=Math.min(searchMax,Math.max(12,ir*(attempt===0?.54:1.0)));
    let candidates=[];
-   for(let d=0;d<=searchMax;d+=2){
+   for(let d=0;d<=localMax;d+=2){
     const r=r0+d,x=ix+ux*r,y=iy+uy*r;
     if(!inBounds(x,y))break;
     const g2=Math.abs(sample(x+ux*3,y+uy*3)-sample(x-ux*3,y-uy*3));
@@ -2385,12 +2405,14 @@ function v9AutoAlignAll(){
     const gm=Math.hypot(gx,gy),dir=gm?Math.abs((gx*ux+gy*uy)/gm):0;
     // Prefer an edge where the dark annulus becomes lighter plate material.
     const signed=sample(x+ux*5,y+uy*5)-sample(x-ux*5,y-uy*5);
-    const score=(.5*g2+.5*g5)*(.35+.65*dir*dir)*(signed>3?1.2:.65);
+    const radiusFactor=(r-ir)/Math.max(ir,1);
+    const radialPrior=Math.exp(-.5*Math.pow((radiusFactor-(.24+attempt*.11))/.26,2));
+    const score=(.35*g2+.65*g5)*(.35+.65*dir*dir)*(signed>4?1.65:signed>0?.78:.14)*(.40+.60*radialPrior);
     if(score>9)candidates.push({x,y,r,score});
    }
    // Do not pick a distant plate/scratch boundary over the local erosion edge.
    candidates.sort((a,b)=>b.score-a.score);
-   rays.push(candidates.slice(0,5));
+   rays.push(candidates.slice(0,8));
   }
   // Continuity-constrained shortest path over ray candidates; this avoids isolated
   // high-gradient scratches. Work from several start candidates and retain best.
@@ -2401,7 +2423,7 @@ function v9AutoAlignAll(){
     const options=rays[k];if(!options.length){pts.push(null);continue}
     let best=null,bestScore=-Infinity;
     for(const q of options){const jump=Math.abs(q.r-prev.r);
-     const score=q.score-2.5*jump-((jump>Math.max(9,irx*.18))?45:0);
+     const score=q.score-3.8*jump-((jump>Math.max(8,irx*.14))?55:0);
      if(score>bestScore){bestScore=score;best=q}}
     if(bestScore<-22){pts.push(null);continue}
     pts.push(best);sum+=Math.max(0,bestScore);prev=best;
@@ -2416,14 +2438,38 @@ function v9AutoAlignAll(){
   if(coverage<.66)return {reason:`Insufficient outer edge coverage (${Math.round(coverage*100)}%)`};
   // Remove contour spikes without forcing the candidate to be concentric.
   const validR=pts.map(q=>q.r),rMed=median(validR);
-  pts=pts.filter(q=>Math.abs(q.r-rMed)<Math.max(16,searchMax*.75));
+  pts=pts.filter(q=>Math.abs(q.r-rMed)<Math.max(13,searchMax*.55));
   if(pts.length/nRay<.60)return {reason:'Outer edge candidates inconsistent'};
   const fit=robustAxisEllipse(pts,null,null);
   if(!fit)return {reason:'Outer contour could not be fitted'};
   const box={left:fit.left/cw,right:fit.right/cw,top:fit.top/ch,bottom:fit.bottom/ch};
   const mx=Math.max(.006,4/cw),my=Math.max(.006,4/ch);
-  if(!(box.left<inner.left-mx&&box.right>inner.right+mx&&box.top<inner.top-my&&box.bottom>inner.bottom+my)){
-   return {reason:'Outer ellipse does not completely enclose inner opening'};
+  // Axis-extrema alone are NOT sufficient: eccentric ellipses can overlap even
+  // when their axis-aligned bounding boxes are properly nested.
+  // Numerically check the entire inner ellipse (720 samples). A strictly
+  // enclosing outer ellipse has its implicit equation < 1 everywhere on the
+  // inner arc, with a small safety clearance against near-tangency.
+  const icx=(inner.left+inner.right)/2,icy=(inner.top+inner.bottom)/2;
+  const irxn=(inner.right-inner.left)/2,iryn=(inner.bottom-inner.top)/2;
+  const ocx=(box.left+box.right)/2,ocy=(box.top+box.bottom)/2;
+  const orx=(box.right-box.left)/2,ory=(box.bottom-box.top)/2;
+  const clearance=Math.max(0.006,Math.min(3/cw,3/ch));
+  let worst=-Infinity;
+  for(let k=0;k<720;k++){
+   const t=2*Math.PI*k/720;
+   const x=icx+(irxn+clearance)*Math.cos(t);
+   const y=icy+(iryn+clearance)*Math.sin(t);
+   const implicit=((x-ocx)/orx)**2+((y-ocy)/ory)**2;
+   worst=Math.max(worst,implicit);
+  }
+  const bboxValid=box.left<inner.left-mx&&box.right>inner.right+mx&&box.top<inner.top-my&&box.bottom>inner.bottom+my;
+  if(!bboxValid||worst>=1){
+   if(attempt<2){
+    const further=detectOuterWearBoundary(inner,attempt+1);
+    if(further.box)return further;
+    return {reason:`Outer ellipse intersects inner arc; searched farther outward (${attempt+2} passes). ${further.reason}`};
+   }
+   return {reason:`Outer ellipse intersects inner arc (max inner-arc ellipse equation ${worst.toFixed(2)}); outer lines unchanged`};
   }
   if(box.top<.005||box.bottom>.995||box.left<.005||box.right>.995)
    return {reason:'Outer contour reaches image boundary'};
@@ -2437,7 +2483,7 @@ function v9AutoAlignAll(){
  if(outer.box){
   // These are the bounding-axis tangents of the independently detected outer ellipse.
   pl.pos.H2=outer.box.top;pl.pos.H5=outer.box.bottom;
-  pl.pos.V1=outer.box.left;pl.pos.V2=outer.box.right;
+  pl.pos.V1=outer.box.left;pl.pos.V2=outer.box.right;normalizeVOuter(pl);
   moved.push('H2/H5','V1/V2');
   outerStatus='Candidate';outerReason=outer.reason;
  }else outerReason=outer.reason;
@@ -2463,7 +2509,7 @@ function v9AutoAlignAll(){
  const plate1=referenceEdge('H1'),plate6=referenceEdge('H6');
  v91Traces[side]=null;
  drawPositions();renderArrows();refreshLiveDimensions();updateResults();
- status.style.display='block';status.textContent=`v13.0 ordered H-lines beta · ${side.toUpperCase()} — Inner: ${boreStatus} (${boreReason}). Outer: ${outerStatus} (${outerReason}). Plate refs: H1 ${plate1}, H6 ${plate6}. Applied: ${moved.length?[...new Set(moved)].join(', '):'none'}. REVIEW REQUIRED: C/D/E/F-related boundaries and all suggested positions. Outer guide tangents are updated only when a surrounding outer contour passes geometric checks. Review H2/H5/V1/V2 and H3/H4 manually.`;
+ status.style.display='block';status.textContent=`v13.2 outer ring + constrained V guides beta · ${side.toUpperCase()} — Inner: ${boreStatus} (${boreReason}). Outer: ${outerStatus} (${outerReason}). Plate refs: H1 ${plate1}, H6 ${plate6}. Applied: ${moved.length?[...new Set(moved)].join(', '):'none'}. REVIEW REQUIRED: C/D/E/F-related boundaries and all suggested positions. Outer guide tangents are updated only when a surrounding outer contour passes geometric checks. Review H2/H5/V1/V2 and H3/H4 manually.`;
 }
 function v9UndoAlign(){const back=alignBackup[active];if(!back)return;const pl=p();pl.pos={...back.pos};pl.innerBounds=back.innerBounds?{...back.innerBounds}:null;pl.innerStatus=back.innerStatus;v91Traces[active]=back.trace;alignBackup[active]=null;$('undoAutoAlign').disabled=true;drawPositions();renderArrows();refreshLiveDimensions();updateResults();$('autoAlignStatus').style.display='block';$('autoAlignStatus').textContent='Previous line positions restored.'}
 // Append a transparent image-coordinate contour overlay to the existing arrow SVG.
@@ -2949,7 +2995,6 @@ syncAlignmentVerification();
    }finally{autoSaving=false;}
   },650);
  };
-
  const refreshSaveAttention=()=>saveButton.classList.toggle('saveSetNeedsAttention',hasUnsavedChanges);
  const markUnsaved=()=>{hasUnsavedChanges=true;refreshSaveAttention();if(typeof refresh==='function')refresh();};
  const markSaved=()=>{hasUnsavedChanges=false;refreshSaveAttention();if(typeof refresh==='function')refresh();};
@@ -2995,7 +3040,8 @@ syncAlignmentVerification();
    const W=numberFor('W'),X=numberFor('X'),Y=numberFor('bore');
    const Z=numberFor('Z'),R0=numberFor('R0');
    const thickness=side=>{
-    const F=dimensionValues(data.plates[side]).F;    return valid(F)&&valid(W)&&valid(X)&&valid(Y)?F-(W-X+Y):null;
+    const F=dimensionValues(data.plates[side]).F;
+    return valid(F)&&valid(W)&&valid(X)&&valid(Y)?F-(W-X+Y):null;
    };
    const upper=thickness('upper'),lower=thickness('lower');
    const stroke=valid(upper)&&valid(lower)&&valid(Z)&&valid(Y)?Z-upper-lower-2*Y:null;
@@ -3948,8 +3994,7 @@ syncAlignmentVerification();
    const label=document.createElement('label');
    label.htmlFor='savedPairSelector';
    label.textContent='Saved PL set';
-   setControl.appendChild(label);
-   picker.removeAttribute('style');
+   setControl.appendChild(label);   picker.removeAttribute('style');
    setControl.appendChild(picker);
   }
   selectorRow.appendChild(sideControl);
@@ -3994,7 +4039,8 @@ function collect(){
  }).sort((a,b)=>a.id.localeCompare(b.id,undefined,{numeric:true}));
  const values=k=>rows.map(r=>r[k]).filter(good);
  const average=k=>{let v=values(k);return v.length?v.reduce((a,b)=>a+b,0)/v.length:null};
- const heats=values('heats').sort((a,b)=>a-b); const median=heats.length?(heats.length%2?heats[(heats.length-1)/2]:(heats[heats.length/2-1]+heats[heats.length/2])/2):null;
+ const heats=values('heats').sort((a,b)=>a-b);
+ const median=heats.length?(heats.length%2?heats[(heats.length-1)/2]:(heats[heats.length/2-1]+heats[heats.length/2])/2):null;
  const geometry=[['Campaign ID',campaign],['W · Center to edge incl. band (mm)',number($('W')?.value)],['X · Band thickness (mm)',number($('X')?.value)],['Y · Unused bore radius (mm)',number($('bore')?.value)],['Z · Closed center distance (mm)',number($('Z')?.value)],['R0 · Initial stroke (mm)',number($('R0')?.value)],['H0 · Original bore diameter (mm)',number($('bore')?.value)!==null?2*number($('bore')?.value):null],['Remaining stroke safe limit (mm)',number($('safe')?.value)]];
  const stats=[['Saved PL sets',rows.length],['Total heats across saved sets',heats.reduce((a,b)=>a+b,0)],['Median heats used',median],['Max heats used',heats.length?heats.at(-1):null],['Average remaining stroke (mm)',average('stroke')],['Average erosion (mm/min)',average('er')],['Average erosion (mm/heat)',average('eph')]];
  current={campaign,geometry,rows,stats};return current;
