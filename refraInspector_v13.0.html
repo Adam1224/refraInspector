@@ -1159,13 +1159,13 @@ else {publishPreview(dataUrlToBlob(canvas.toDataURL('image/jpeg',.8)))}$('empty'
  e.preventDefault();e.stopPropagation();const photo=p(),pix=isH?photo.image?.height:photo.image?.width;if(!pix)return;
  const n=Number(id.slice(1)),step=window.RefraModules.precision.pixelStep(photo.image,id[0],e.shiftKey),dir=['ArrowDown','ArrowRight'].includes(e.key)?1:-1;
  let next=photo.pos[id]+step*dir;
- if(isH){const low=n>1?photo.pos['H'+(n-1)]+(n>=5?0:.002):0;const high=n<6?photo.pos['H'+(n+1)]-(n>=4?0:.002):1;next=Math.max(low,Math.min(high,next));}
+ if(isH)next=constrainedHPosition(photo.pos,id,next);
  else next=id==='V1'?Math.max(0,Math.min(next,photo.pos.V2-.003)):Math.min(1,Math.max(next,photo.pos.V1+.003));
  if(next===photo.pos[id])return;
  photo.pos[id]=next;v91Traces[active]=null;invalidateVerification(active);drawPositions();refreshLiveDimensions();updateResults();
  const scale=isH?photo.sy:photo.sx,mm=valid(scale)&&scale>0?(step*dir*pix/scale).toFixed(3)+' mm':'uncalibrated';
  const info=$('precisionLineStatus');if(info)info.textContent=`${active} ${id} moved ${e.shiftKey?'10':'1'} px (${mm}). Re-verify alignment.`;
- });stage.appendChild(el);if(['H4','H5','H6'].includes(id)){const marker=document.createElement('span');marker.className='overlapLineMarker';marker.textContent=id;marker.title=hint;el.appendChild(marker);}let drag=false;el.addEventListener('mouseenter',()=>showLineHint(id));el.addEventListener('mouseleave',()=>hideLineHint());el.addEventListener('focus',()=>showLineHint(id));el.addEventListener('blur',()=>hideLineHint());el.addEventListener('pointerdown',e=>{if(pending||traceMode)return;hideLineHint();drag=true;lineDragging=true;el.setPointerCapture(e.pointerId);e.stopPropagation();e.preventDefault()});el.addEventListener('pointermove',e=>{if(!drag)return;const r=stage.getBoundingClientRect(),isH=id[0]==='H';let q=isH?(e.clientY-r.top)/r.height:(e.clientX-r.left)/r.width;q=Math.min(1,Math.max(0,q));const n=+id[1];if(isH){const prev=n>1?pl.pos['H'+(n-1)]+(n>=5?0:.002):0,next=n<6?pl.pos['H'+(n+1)]-(n>=4?0:.002):1;q=Math.max(prev,Math.min(next,q))}else{const other=id==='V1'?pl.pos.V2-.003:pl.pos.V1+.003;q=id==='V1'?Math.min(q,other):Math.max(q,other)}pl.pos[id]=q;v91Traces[active]=null;drawPositions();refreshLiveDimensions();updateResults()});el.addEventListener('pointerup',()=>{drag=false;lineDragging=false;updateResults()});el.addEventListener('pointercancel',()=>{drag=false;lineDragging=false;updateResults()})});setupInnerHandles(stage,pl);drawPositions()}
+ });stage.appendChild(el);if(['H4','H5','H6'].includes(id)){const marker=document.createElement('span');marker.className='overlapLineMarker';marker.textContent=id;marker.title=hint;el.appendChild(marker);}let drag=false;el.addEventListener('mouseenter',()=>showLineHint(id));el.addEventListener('mouseleave',()=>hideLineHint());el.addEventListener('focus',()=>showLineHint(id));el.addEventListener('blur',()=>hideLineHint());el.addEventListener('pointerdown',e=>{if(pending||traceMode)return;hideLineHint();drag=true;lineDragging=true;el.setPointerCapture(e.pointerId);e.stopPropagation();e.preventDefault()});el.addEventListener('pointermove',e=>{if(!drag)return;const r=stage.getBoundingClientRect(),isH=id[0]==='H';let q=isH?(e.clientY-r.top)/r.height:(e.clientX-r.left)/r.width;q=Math.min(1,Math.max(0,q));const n=+id[1];if(isH)q=constrainedHPosition(pl.pos,id,q);else{const other=id==='V1'?pl.pos.V2-.003:pl.pos.V1+.003;q=id==='V1'?Math.min(q,other):Math.max(q,other)}pl.pos[id]=q;v91Traces[active]=null;drawPositions();refreshLiveDimensions();updateResults()});el.addEventListener('pointerup',()=>{drag=false;lineDragging=false;updateResults()});el.addEventListener('pointercancel',()=>{drag=false;lineDragging=false;updateResults()})});setupInnerHandles(stage,pl);drawPositions()}
 function dataUrlToBlob(url){const [meta,b64]=url.split(','),bytes=atob(b64),arr=new Uint8Array(bytes.length);for(let i=0;i<bytes.length;i++)arr[i]=bytes.charCodeAt(i);return new Blob([arr],{type:meta.match(/:(.*?);/)[1]})}
 
 function setupInnerHandles(stage,pl){
@@ -1190,7 +1190,28 @@ function setupInnerHandles(stage,pl){
   for(const ev of ['pointerup','pointercancel'])el.addEventListener(ev,()=>{lineDragging=false;updateResults()});
  });
 }
-function drawPositions(){const pl=p();if(!pl.image)return;document.querySelectorAll('#stage .line').forEach(el=>{const id=el.dataset.id;el.style[id[0]==='H'?'top':'left']=(pl.pos[id]*100)+'%';el.setAttribute('aria-valuenow',(pl.pos[id]*100).toFixed(3))});
+// v13.0: enforce the physical ordering of horizontal measurement guides.
+// Image y increases downwards. Never allow a larger H index above a smaller one.
+const H_ORDER=['H1','H2','H3','H4','H5','H6'];
+const H_GAP=0.00025; // small separation prevents inversion while permitting near-coincident edges
+function constrainedHPosition(pos,id,proposed){
+ const i=H_ORDER.indexOf(id);if(i<0)return proposed;
+ const lower=i?pos[H_ORDER[i-1]]+H_GAP:0;
+ const upper=i<H_ORDER.length-1?pos[H_ORDER[i+1]]-H_GAP:1;
+ return Math.min(Math.max(proposed,lower),Math.max(lower,upper));
+}
+function normalizeHOrder(pos){
+ // Resolve invalid positions after automatic alignment, reset, undo or restored data.
+ // Forward clamp keeps each named guide in its semantic order; no label-swapping.
+ for(let i=0;i<H_ORDER.length;i++){
+  const id=H_ORDER[i],previous=i?pos[H_ORDER[i-1]]+H_GAP:0;
+  const remaining=(H_ORDER.length-1-i)*H_GAP;
+  const bound=1-remaining;
+  const value=Number(pos[id]);
+  pos[id]=Math.min(bound,Math.max(previous,Number.isFinite(value)?value:previous));
+ }
+}
+function drawPositions(){const pl=p();if(!pl.image)return;normalizeHOrder(pl.pos);document.querySelectorAll('#stage .line').forEach(el=>{const id=el.dataset.id;el.style[id[0]==='H'?'top':'left']=(pl.pos[id]*100)+'%';el.setAttribute('aria-valuenow',(pl.pos[id]*100).toFixed(3))});
  document.querySelectorAll('#stage .innerHandle').forEach(el=>{const g=ellipseGeometry(pl);el.style.left=((el.dataset.side==='left'?g.cx-g.rx:g.cx+g.rx)*100)+'%';el.style.top=(pl.pos.H3*100)+'%';el.style.height=((pl.pos.H4-pl.pos.H3)*100)+'%';});
  renderArrows()}
 let activeAreaFormula=null;
@@ -1975,8 +1996,7 @@ function autoCalibrate(){
    if(detected&&Number.isFinite(detected.value)&&detected.value>0&&!detected.ambiguous){
      pl[prop]=detected.value;
      pl[key]=`auto:${passInfo[axis]} independent 1/5/10mm ruler ticks`;
-     notes.push(`${axis.toUpperCase()}: ${detected.value.toFixed(3)} px/mm (${passInfo[axis]}, ${detected.bands} agreeing bands, ruler at ${detected.region}; independently detected)`);
-   }else{
+     notes.push(`${axis.toUpperCase()}: ${detected.value.toFixed(3)} px/mm (${passInfo[axis]}, ${detected.bands} agreeing bands, ruler at ${detected.region}; independently detected)`);   }else{
      // Two-point leveling changes image coordinates: do not reuse an old px/mm scale.
      pl[prop]=null;
      pl[key]='auto:failed — manual calibration required';
@@ -1996,7 +2016,8 @@ function autoCalibrate(){
  select(active);
  $('calStatus').textContent=pl.method;
  if($('rulerReadout'))$('rulerReadout').textContent=pl.method;
- updateCalibrationUX(); // Failed automatic ruler detection must NOT enter manual ruler mode automatically.
+ updateCalibrationUX();
+ // Failed automatic ruler detection must NOT enter manual ruler mode automatically.
  // Keep legacy Level and Calibration controls enabled; user can start manual calibration explicitly.
  exitManualRulerMode(pl);
 }
@@ -2158,7 +2179,7 @@ const v91Traces={upper:null,lower:null};
 function v9AutoAlignAll(){
  const pl=p(),side=active,status=$('autoAlignStatus');
  if(!pl.image){status.textContent='Import a PL photo first.';return}
- const img=pl.image,w=img.width,h=img.height,scale=Math.min(1,1100/Math.max(w,h));
+ const img=pl.image,w=img.width,h=img.height,scale=Math.min(1,1800/Math.max(w,h));
  const cw=Math.max(80,Math.round(w*scale)),ch=Math.max(80,Math.round(h*scale));
  const cv=document.createElement('canvas');cv.width=cw;cv.height=ch;
  const ctx=cv.getContext('2d',{willReadFrequently:true});ctx.drawImage(img,0,0,cw,ch);
@@ -2173,34 +2194,53 @@ function v9AutoAlignAll(){
  const median=a=>{const b=[...a].sort((x,y)=>x-y);return b.length?b[Math.floor(b.length/2)]:null};
  const percentile=(a,q)=>{const v=[...a].sort((x,y)=>x-y);return v.length?v[Math.max(0,Math.min(v.length-1,Math.floor((v.length-1)*q)))]:null};
  function sampleEllipseBoundary(seed,opt={}){
-  const {nRay=120,lo=.7,hi=1.35,step=.012,sigma=.28,scoreThreshold=10}=opt;
-  const pts=[];
+  // v13.0.1 beta: multiscale directional edge search + angular continuity.
+  // The candidate remains a suggestion; ambiguous rings do NOT move guides.
+  const {nRay=160,lo=.7,hi=1.35,step=.012,sigma=.28,scoreThreshold=10}=opt;
+  const rays=[];
   for(let i=0;i<nRay;i++){
    const t=2*Math.PI*i/nRay,ct=Math.cos(t),st=Math.sin(t);
-   const limit=Math.min(ct>0?(cw-4-seed.xc)/ct:ct<0?(seed.xc-4)/(-ct):Infinity, st>0?(ch-4-seed.yc)/st:st<0?(seed.yc-4)/(-st):Infinity);
+   const limit=Math.min(ct>0?(cw-5-seed.xc)/ct:ct<0?(seed.xc-5)/(-ct):Infinity,st>0?(ch-5-seed.yc)/st:st<0?(seed.yc-5)/(-st):Infinity);
    const base=Math.hypot(seed.rx*ct,seed.ry*st),localHi=Math.min(hi,Math.max(lo+.06,limit/base));
-   if(localHi-lo<.08)continue;
-   let best={score:0,f:0,g:0};
+   if(localHi-lo<.08){rays.push(null);continue}
+   let best=null,second=null;
    for(let f=lo;f<=localHi;f+=step){
     const x=seed.xc+seed.rx*ct*f,y=seed.yc+seed.ry*st*f;
-    // Compare Sobel-like local gradient with the expected ellipse normal.
-    // Radial direction is not generally the normal on a noncircular ellipse.
-    const gx=sample(x+2,y)-sample(x-2,y);
-    const gy=sample(x,y+2)-sample(x,y-2);
+    const nx=ct/Math.max(1,seed.rx),ny=st/Math.max(1,seed.ry),nn=Math.hypot(nx,ny);
+    const dx=nx/Math.max(nn,1e-7),dy=ny/Math.max(nn,1e-7);
+    // Multi-width changes reduce sensitivity to single-pixel scratches / noise.
+    const dr1=sample(x+dx*2,y+dy*2)-sample(x-dx*2,y-dy*2);
+    const dr2=sample(x+dx*5,y+dy*5)-sample(x-dx*5,y-dy*5);
+    const gx=sample(x+2,y)-sample(x-2,y),gy=sample(x,y+2)-sample(x,y-2);
     const magnitude=Math.hypot(gx,gy);
-    const nx=ct/Math.max(1,seed.rx),ny=st/Math.max(1,seed.ry);
-    const normalLength=Math.hypot(nx,ny);
-    const directional=normalLength&&magnitude?Math.abs((gx*nx+gy*ny)/(normalLength*magnitude)):0;
-    // Use a soft direction preference: allow imperfect/eroded boundaries,
-    // but suppress transverse cracks and unrelated high-contrast edges.
-    const coherence=.25+.75*directional*directional;
-    const g=magnitude*directional;
-    const score=magnitude*coherence*Math.exp(-.5*((f-1)/sigma)**2);
-    if(score>best.score)best={score,f,g,directional};
+    const direction=magnitude?Math.abs((gx*dx+gy*dy)/magnitude):0;
+    const signal=.62*Math.abs(dr1)+.38*Math.abs(dr2);
+    const score=signal*(.28+.72*direction*direction)*Math.exp(-.5*((f-1)/sigma)**2);
+    const candidate={x,y,t,f,score,polarity:Math.sign(dr2)};
+    if(!best||score>best.score){second=best;best=candidate}
+    else if(!second||score>second.score)second=candidate;
    }
-   if(best.score>=scoreThreshold){pts.push({x:seed.xc+seed.rx*ct*best.f,y:seed.yc+seed.ry*st*best.f,t,score:best.score,f:best.f})}
+   rays.push(best&&best.score>=scoreThreshold?best:null);
   }
-  return pts;
+  const accepted=rays.filter(Boolean);
+  if(accepted.length<Math.max(36,nRay*.46))return [];
+  // Circular median filter detects spurious edge jumps. Preserve plausible
+  // asymmetric wear with a relatively generous tolerance.
+  const neighborMedian=(index)=>{
+   const values=[];
+   for(let j=-5;j<=5;j++){
+    const q=rays[(index+j+nRay)%nRay];if(q)values.push(q.f);
+   }
+   return values.length>=5?median(values):null;
+  };
+  const pts=[];
+  for(let i=0;i<nRay;i++){
+   const q=rays[i];if(!q)continue;
+   const expected=neighborMedian(i);
+   if(expected===null||Math.abs(q.f-expected)>Math.max(.14,step*12))continue;
+   pts.push(q);
+  }
+  return pts.length>=Math.max(36,nRay*.42)?pts:[];
  }
  function robustAxisEllipse(points,seed,box){
   if(!points||points.length<28)return null;
@@ -2230,35 +2270,178 @@ function v9AutoAlignAll(){
   } else {fit.centerShift=0; fit.scaleShift=0;}
   return fit;
  }
+ // v13.0: first locate the actual bore opening independently of old H3/H4.
+ // The outer erosion boundary is a distinct physical feature and MAY be eccentric.
+ // Only H3/H4 and the inner opening's horizontal guides are changed by this trial.
+ function detectBoreOpening(){
+  // Work on a bounded resolution. A closed, bright region is expected inside the
+  // used bore for the current white-backed photography setup; refuse uncertain cases.
+  const factor=Math.min(1,950/Math.max(cw,ch)),bw=Math.round(cw*factor),bh=Math.round(ch*factor);
+  const tmp=document.createElement('canvas');tmp.width=bw;tmp.height=bh;
+  const tctx=tmp.getContext('2d',{willReadFrequently:true});tctx.drawImage(img,0,0,bw,bh);
+  const rgba=tctx.getImageData(0,0,bw,bh).data;
+  const n=bw*bh,lumin=new Uint8Array(n),sat=new Uint8Array(n);
+  for(let k=0;k<n;k++){let j=k*4,r=rgba[j],g=rgba[j+1],b=rgba[j+2];lumin[k]=Math.round(.299*r+.587*g+.114*b);sat[k]=Math.max(r,g,b)-Math.min(r,g,b)}
+  const xlo=Math.floor(bw*.17),xhi=Math.ceil(bw*.83),ylo=Math.floor(bh*.17),yhi=Math.ceil(bh*.82);
+  const midX=(old.V1+old.V2)*.5*bw;
+  const expectedY=(old.H3+old.H4)*.5*bh;
+  let best=null;
+  // Scan alternative white thresholds: avoid one hard-coded lighting threshold.
+  for(const threshold of [145,165,185,205,225]){
+   const seen=new Uint8Array(n),queue=new Int32Array(n);
+   for(let y=ylo;y<yhi;y+=2)for(let x=xlo;x<xhi;x+=2){
+    const start=y*bw+x;
+    if(seen[start]||lumin[start]<threshold||sat[start]>75)continue;
+    let head=0,tail=1;queue[0]=start;seen[start]=1;
+    let count=0,sx=0,sy=0,minX=bw,maxX=0,minY=bh,maxY=0,touches=false;
+    while(head<tail){
+     const index=queue[head++],px=index%bw,py=(index/bw)|0;
+     count++;sx+=px;sy+=py;
+     if(px<minX)minX=px;if(px>maxX)maxX=px;if(py<minY)minY=py;if(py>maxY)maxY=py;
+     if(px<=xlo+1||px>=xhi-2||py<=ylo+1||py>=yhi-2)touches=true;
+     // Limit extremely large components and avoid more costly flood fill.
+     if(count>n*.13){touches=true;break}
+     for(const q of [index-1,index+1,index-bw,index+bw]){
+      if(q<0||q>=n||seen[q])continue;
+      const qx=q%bw,qy=(q/bw)|0;
+      if(qx<=xlo||qx>=xhi||qy<=ylo||qy>=yhi)continue;
+      if(lumin[q]>=threshold&&sat[q]<=75){seen[q]=1;queue[tail++]=q}
+     }
+    }
+    const ww=maxX-minX+1,hh=maxY-minY+1,fill=count/Math.max(1,ww*hh);
+    if(touches||count<n*.004||count>n*.09||ww<bw*.07||ww>bw*.43||hh<bh*.06||hh>bh*.42)continue;
+    const ratio=ww/hh;
+    if(ratio<.55||ratio>1.7||fill<.43||fill>.92)continue;
+    const cx=sx/count,cy=sy/count,dx=Math.abs(cx-midX)/bw,dy=Math.abs(cy-expectedY)/bh;
+    if(dx>.25||dy>.31)continue;
+    const radiusPenalty=Math.abs(Math.log(ratio));
+    // A coherent, roughly circular bright region near the bore axis wins.
+    const score=fill*2-radiusPenalty*.65-dx*2.1-dy*.65;
+    const candidate={minX,maxX,minY,maxY,cx,cy,score,fill,count,threshold,ww,hh};
+    if(!best||candidate.score>best.score)best=candidate;
+   }
+  }
+  if(!best||best.score<.25)return null;
+  // Segmentation only locates the opening interior. White pixels can stop just
+  // inside its true edge; do a small radial outward gradient refinement.
+  const xc=best.cx/factor,yc=best.cy/factor;
+  const estimate={left:best.minX/factor,right:best.maxX/factor,top:best.minY/factor,bottom:best.maxY/factor};
+  const refine=(direction)=>{
+   const vertical=(direction==='top'||direction==='bottom');
+   const center=vertical?yc:xc;
+   const raw=vertical?(direction==='top'?estimate.top:estimate.bottom):(direction==='left'?estimate.left:estimate.right);
+   let highest=-Infinity,location=raw;
+   const reach=Math.max(4,Math.min(cw,ch)*.014);
+   for(let q=Math.max(5,Math.floor(raw-reach));q<=Math.min((vertical?ch:cw)-6,Math.ceil(raw+reach));q++){
+    let strength=0,weight=0;
+    const r=vertical?(best.ww/factor):(best.hh/factor);
+    for(let d=-.45;d<=.45;d+=.15){
+     const u=(vertical?xc:yc)+r*d;
+     let edge=vertical?Math.abs(sample(u,q+3)-sample(u,q-3)):Math.abs(sample(q+3,u)-sample(q-3,u));
+     strength+=edge;weight++;
+    }
+    const score=strength/weight-.65*Math.abs(q-raw);
+    if(score>highest){highest=score;location=q}
+   }
+   return highest>13?location:raw;
+  };
+  const top=refine('top'),bottom=refine('bottom'),left=refine('left'),right=refine('right');
+  return {top:top/ch,bottom:bottom/ch,left:left/cw,right:right/cw,score:best.score,threshold:best.threshold,fill:best.fill};
+ }
  let moved=[];
- // INNER ELLIPSE = used bore area
- const innerSeed={xc:(old.V1+old.V2)*.5*cw,yc:(old.H3+old.H4)*.5*ch,rx:Math.max(12,Math.min(cw*.28,(old.V2-old.V1)*cw*.37)),ry:Math.max(12,(old.H4-old.H3)*ch*.5)};
- const innerBox={left:old.V1*cw-cw*.10,right:old.V2*cw+cw*.10,top:old.H2*ch-ch*.10,bottom:old.H5*ch+ch*.10};
- const innerRaw=sampleEllipseBoundary(innerSeed,{nRay:128,lo:.62,hi:1.48,step:.014,sigma:.32,scoreThreshold:11});
- const innerFit=robustAxisEllipse(innerRaw,innerSeed,innerBox);
- let boreStatus='review',boreReason='No sufficiently complete inner-bore contour';
- if(innerFit&&innerFit.within&&innerFit.centerShift<.14&&innerFit.scaleShift<.15){
-  const top=innerFit.top/ch,bottom=innerFit.bottom/ch,left=innerFit.left/cw,right=innerFit.right/cw;
-  if(top>old.H2+.006&&bottom<old.H5-.006){pl.pos.H3=top;pl.pos.H4=bottom;moved.push('H3/H4')}
-  if(left<right){pl.innerBounds={left,right};pl.innerStatus='v9.2 beta: robust inner-ellipse estimate with outlier rejection; review visible bore boundary';moved.push('inner bore guides')}
-  boreStatus=(innerFit.residual??1)<.18&&innerFit.filteredCount>=72?'High (fitted inner ellipse)':(innerFit.residual??1)<.32?'Medium (fitted inner ellipse)':'Review';
-  boreReason=`${innerFit.filteredCount}/${innerRaw.length} inner dots kept after ellipse-fit outlier rejection; residual ${(innerFit.residual??0).toFixed(2)}`;
+ const opening=detectBoreOpening();
+ let boreStatus='Review',boreReason='No reliable closed opening found; lines unchanged';
+ if(opening&&opening.top<opening.bottom&&opening.left<opening.right&&opening.bottom-opening.top>.045){
+  // Do not require the OLD (often badly located) outer ellipse to enclose it.
+  pl.pos.H3=opening.top;pl.pos.H4=opening.bottom;
+  pl.innerBounds={left:opening.left,right:opening.right};
+  pl.innerStatus='Experimental closed-opening segmentation; review both inner-bore limits';
+  moved.push('H3/H4','inner bore guides');
+  boreStatus='Candidate';boreReason=`closed-opening segmentation (threshold ${opening.threshold}, fill ${opening.fill.toFixed(2)})`;
  }
- // OUTER ELLIPSE = bore-edge-damage boundary model
- const outerSeed={xc:(old.V1+old.V2)*.5*cw,yc:(old.H2+old.H5)*.5*ch,rx:Math.max(18,(old.V2-old.V1)*cw*.5),ry:Math.max(18,(old.H5-old.H2)*ch*.5)};
- const outerBox={left:Math.max(4,old.V1*cw-cw*.12),right:Math.min(cw-4,old.V2*cw+cw*.12),top:Math.max(4,old.H2*ch-ch*.12),bottom:Math.min(ch-4,old.H5*ch+ch*.12)};
- const outerRaw=sampleEllipseBoundary(outerSeed,{nRay:128,lo:.78,hi:1.25,step:.014,sigma:.24,scoreThreshold:10});
- const outerFit=robustAxisEllipse(outerRaw,outerSeed,outerBox);
- let outerStatus='review',outerReason='No sufficiently complete outer damage ellipse';
- if(outerFit&&outerFit.within&&outerFit.centerShift<.12&&outerFit.scaleShift<.16){
-  const enclosesInner=!innerFit || (outerFit.left<innerFit.left&&outerFit.right>innerFit.right&&outerFit.top<innerFit.top&&outerFit.bottom>innerFit.bottom);
-  if(enclosesInner){
-   const h2=outerFit.top/ch,h5=outerFit.bottom/ch,v1=outerFit.left/cw,v2=outerFit.right/cw;
-   if(h2<pl.pos.H3-.004&&h5>pl.pos.H4+.004&&v1<v2){pl.pos.H2=h2;pl.pos.H5=h5;pl.pos.V1=v1;pl.pos.V2=v2;moved.push('H2/H5','V1/V2')}
-   outerStatus=(outerFit.residual??1)<.20&&outerFit.filteredCount>=72?'High (fitted outer ellipse)':(outerFit.residual??1)<.34?'Medium (fitted outer ellipse)':'Review';
-   outerReason=`${outerFit.filteredCount}/${outerRaw.length} outer dots kept after ellipse-fit outlier rejection; residual ${(outerFit.residual??0).toFixed(2)}`;
-  }else outerReason='Outer ellipse does not plausibly enclose the used-bore ellipse';
+ // v13.0: find the *outer* wear-ring boundary as a separate closed contour.
+ // The detected opening supplies an exclusion region, NOT a shared ellipse centre.
+ // Sample rays from the opening only to locate edge evidence, then fit an independent,
+ // potentially eccentric outer ellipse and place its four axis-aligned tangents.
+ function detectOuterWearBoundary(inner){
+  if(!inner)return {reason:'Inner opening not located; outer lines unchanged'};
+  const ix=(inner.left+inner.right)*cw*.5,iy=(inner.top+inner.bottom)*ch*.5;
+  const irx=(inner.right-inner.left)*cw*.5,iry=(inner.bottom-inner.top)*ch*.5;
+  if(irx<10||iry<10)return {reason:'Inner bore extent too small'};
+  const nRay=180,searchMax=Math.min(cw,ch)*.115;
+  const rays=[];
+  const inBounds=(x,y)=>x>=6&&x<cw-6&&y>=6&&y<ch-6;
+  // Blur-resistant intensity difference measured across a locally radial edge.
+  for(let k=0;k<nRay;k++){
+   const t=k*2*Math.PI/nRay,ux=Math.cos(t),uy=Math.sin(t);
+   const ir=1/Math.hypot(ux/irx,uy/iry),r0=ir+Math.max(5,ir*.055);
+   let candidates=[];
+   for(let d=0;d<=searchMax;d+=2){
+    const r=r0+d,x=ix+ux*r,y=iy+uy*r;
+    if(!inBounds(x,y))break;
+    const g2=Math.abs(sample(x+ux*3,y+uy*3)-sample(x-ux*3,y-uy*3));
+    const g5=Math.abs(sample(x+ux*6,y+uy*6)-sample(x-ux*6,y-uy*6));
+    const gx=sample(x+2,y)-sample(x-2,y),gy=sample(x,y+2)-sample(x,y-2);
+    const gm=Math.hypot(gx,gy),dir=gm?Math.abs((gx*ux+gy*uy)/gm):0;
+    // Prefer an edge where the dark annulus becomes lighter plate material.
+    const signed=sample(x+ux*5,y+uy*5)-sample(x-ux*5,y-uy*5);
+    const score=(.5*g2+.5*g5)*(.35+.65*dir*dir)*(signed>3?1.2:.65);
+    if(score>9)candidates.push({x,y,r,score});
+   }
+   // Do not pick a distant plate/scratch boundary over the local erosion edge.
+   candidates.sort((a,b)=>b.score-a.score);
+   rays.push(candidates.slice(0,5));
+  }
+  // Continuity-constrained shortest path over ray candidates; this avoids isolated
+  // high-gradient scratches. Work from several start candidates and retain best.
+  const run=(startIndex)=>{
+   let prev=rays[0][startIndex];if(!prev)return null;
+   const pts=[prev];let sum=prev.score;
+   for(let k=1;k<nRay;k++){
+    const options=rays[k];if(!options.length){pts.push(null);continue}
+    let best=null,bestScore=-Infinity;
+    for(const q of options){const jump=Math.abs(q.r-prev.r);
+     const score=q.score-2.5*jump-((jump>Math.max(9,irx*.18))?45:0);
+     if(score>bestScore){bestScore=score;best=q}}
+    if(bestScore<-22){pts.push(null);continue}
+    pts.push(best);sum+=Math.max(0,bestScore);prev=best;
+   }
+   return {pts,sum};
+  };
+  const starts=rays[0];if(!starts?.length)return {reason:'No outer-ring edge candidates'};
+  const runs=starts.map((_,i)=>run(i)).filter(Boolean).sort((a,b)=>b.sum-a.sum);
+  if(!runs.length)return {reason:'No coherent outer-ring contour'};
+  let pts=runs[0].pts.filter(Boolean);
+  const coverage=pts.length/nRay;
+  if(coverage<.66)return {reason:`Insufficient outer edge coverage (${Math.round(coverage*100)}%)`};
+  // Remove contour spikes without forcing the candidate to be concentric.
+  const validR=pts.map(q=>q.r),rMed=median(validR);
+  pts=pts.filter(q=>Math.abs(q.r-rMed)<Math.max(16,searchMax*.75));
+  if(pts.length/nRay<.60)return {reason:'Outer edge candidates inconsistent'};
+  const fit=robustAxisEllipse(pts,null,null);
+  if(!fit)return {reason:'Outer contour could not be fitted'};
+  const box={left:fit.left/cw,right:fit.right/cw,top:fit.top/ch,bottom:fit.bottom/ch};
+  const mx=Math.max(.006,4/cw),my=Math.max(.006,4/ch);
+  if(!(box.left<inner.left-mx&&box.right>inner.right+mx&&box.top<inner.top-my&&box.bottom>inner.bottom+my)){
+   return {reason:'Outer ellipse does not completely enclose inner opening'};
+  }
+  if(box.top<.005||box.bottom>.995||box.left<.005||box.right>.995)
+   return {reason:'Outer contour reaches image boundary'};
+  const ratio=(box.right-box.left)/(box.bottom-box.top);
+  if(ratio<.38||ratio>3.2)return {reason:'Outer ellipse aspect ratio implausible'};
+  if((fit.residual??1)>.38)return {reason:'Outer ellipse fit inconsistent'};
+  return {box,coverage,fit,reason:`${pts.length}/${nRay} contour points, residual ${(fit.residual??0).toFixed(2)}`};
  }
+ let outerStatus='Review',outerReason='Inner bore unavailable; outer lines preserved';
+ const outer=detectOuterWearBoundary(opening);
+ if(outer.box){
+  // These are the bounding-axis tangents of the independently detected outer ellipse.
+  pl.pos.H2=outer.box.top;pl.pos.H5=outer.box.bottom;
+  pl.pos.V1=outer.box.left;pl.pos.V2=outer.box.right;
+  moved.push('H2/H5','V1/V2');
+  outerStatus='Candidate';outerReason=outer.reason;
+ }else outerReason=outer.reason;
+
  // Dedicated plate reference: strong coherent, wide horizontal edges near H1/H6.
  function referenceEdge(id){
   const pos=old[id],at=pos*ch,span=ch*.055,from=Math.max(4,Math.round(at-span)),to=Math.min(ch-5,Math.round(at+span));
@@ -2278,12 +2461,9 @@ function v9AutoAlignAll(){
   return 'review';
  }
  const plate1=referenceEdge('H1'),plate6=referenceEdge('H6');
- v91Traces[side]=(!innerFit&&!outerFit)?null:{
-  inner:innerFit?{cx:innerFit.cx,cy:innerFit.cy,rx:innerFit.rx,ry:innerFit.ry,points:innerFit.points.filter((_,i)=>i%2===0).map(q=>[q.x/cw,q.y/ch])}:null,
-  outer:outerFit?{cx:outerFit.cx,cy:outerFit.cy,rx:outerFit.rx,ry:outerFit.ry,points:outerFit.points.filter((_,i)=>i%2===0).map(q=>[q.x/cw,q.y/ch])}:null
- };
+ v91Traces[side]=null;
  drawPositions();renderArrows();refreshLiveDimensions();updateResults();
- status.style.display='block';status.textContent=`v9.2 dual-ellipse beta · ${side.toUpperCase()} — Inner: ${boreStatus} (${boreReason}). Outer: ${outerStatus} (${outerReason}). Plate refs: H1 ${plate1}, H6 ${plate6}. Applied: ${moved.length?[...new Set(moved)].join(', '):'none'}. REVIEW REQUIRED: C/D/E/F-related boundaries and all suggested positions. Inner and outer ellipse contours are fitted internally with outlier rejection; all dots and ellipse outlines remain hidden.`;
+ status.style.display='block';status.textContent=`v13.0 ordered H-lines beta · ${side.toUpperCase()} — Inner: ${boreStatus} (${boreReason}). Outer: ${outerStatus} (${outerReason}). Plate refs: H1 ${plate1}, H6 ${plate6}. Applied: ${moved.length?[...new Set(moved)].join(', '):'none'}. REVIEW REQUIRED: C/D/E/F-related boundaries and all suggested positions. Outer guide tangents are updated only when a surrounding outer contour passes geometric checks. Review H2/H5/V1/V2 and H3/H4 manually.`;
 }
 function v9UndoAlign(){const back=alignBackup[active];if(!back)return;const pl=p();pl.pos={...back.pos};pl.innerBounds=back.innerBounds?{...back.innerBounds}:null;pl.innerStatus=back.innerStatus;v91Traces[active]=back.trace;alignBackup[active]=null;$('undoAutoAlign').disabled=true;drawPositions();renderArrows();refreshLiveDimensions();updateResults();$('autoAlignStatus').style.display='block';$('autoAlignStatus').textContent='Previous line positions restored.'}
 // Append a transparent image-coordinate contour overlay to the existing arrow SVG.
@@ -2815,8 +2995,7 @@ syncAlignmentVerification();
    const W=numberFor('W'),X=numberFor('X'),Y=numberFor('bore');
    const Z=numberFor('Z'),R0=numberFor('R0');
    const thickness=side=>{
-    const F=dimensionValues(data.plates[side]).F;
-    return valid(F)&&valid(W)&&valid(X)&&valid(Y)?F-(W-X+Y):null;
+    const F=dimensionValues(data.plates[side]).F;    return valid(F)&&valid(W)&&valid(X)&&valid(Y)?F-(W-X+Y):null;
    };
    const upper=thickness('upper'),lower=thickness('lower');
    const stroke=valid(upper)&&valid(lower)&&valid(Z)&&valid(Y)?Z-upper-lower-2*Y:null;
@@ -2995,7 +3174,8 @@ syncAlignmentVerification();
    v91Traces[side]=clone(data.traces[side]);
   }
   $('crackRows').dataset.active='';
-  select(data.active||'upper');  showCampaignGeometryInPaste(true);
+  select(data.active||'upper');
+  showCampaignGeometryInPaste(true);
   syncAlignmentVerification();
   updateStats();
  }
@@ -3814,8 +3994,7 @@ function collect(){
  }).sort((a,b)=>a.id.localeCompare(b.id,undefined,{numeric:true}));
  const values=k=>rows.map(r=>r[k]).filter(good);
  const average=k=>{let v=values(k);return v.length?v.reduce((a,b)=>a+b,0)/v.length:null};
- const heats=values('heats').sort((a,b)=>a-b);
- const median=heats.length?(heats.length%2?heats[(heats.length-1)/2]:(heats[heats.length/2-1]+heats[heats.length/2])/2):null;
+ const heats=values('heats').sort((a,b)=>a-b); const median=heats.length?(heats.length%2?heats[(heats.length-1)/2]:(heats[heats.length/2-1]+heats[heats.length/2])/2):null;
  const geometry=[['Campaign ID',campaign],['W · Center to edge incl. band (mm)',number($('W')?.value)],['X · Band thickness (mm)',number($('X')?.value)],['Y · Unused bore radius (mm)',number($('bore')?.value)],['Z · Closed center distance (mm)',number($('Z')?.value)],['R0 · Initial stroke (mm)',number($('R0')?.value)],['H0 · Original bore diameter (mm)',number($('bore')?.value)!==null?2*number($('bore')?.value):null],['Remaining stroke safe limit (mm)',number($('safe')?.value)]];
  const stats=[['Saved PL sets',rows.length],['Total heats across saved sets',heats.reduce((a,b)=>a+b,0)],['Median heats used',median],['Max heats used',heats.length?heats.at(-1):null],['Average remaining stroke (mm)',average('stroke')],['Average erosion (mm/min)',average('er')],['Average erosion (mm/heat)',average('eph')]];
  current={campaign,geometry,rows,stats};return current;
