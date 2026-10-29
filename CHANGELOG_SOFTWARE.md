@@ -5,6 +5,8 @@
 See [hardware changes](./CHANGELOG_HARDWARE.md), [software-to-hardware mapping](./CHANGELOG.md), and [original detailed history](./CHANGELOG_ARCHIVE.md).
 
 ## SW-13.0 · v13.0 — 2026-10-28
+
+- **Auto Align revision (2026-10-29):** Improved inner-bore region detection and H3/H4 positioning; introduced an independent outer-wear contour candidate to position H2/H5/V1/V2 as tangents, without assuming concentricity. Added H1 < H2 < H3 < H4 < H5 < H6 ordering constraints during automated and manual positioning. Requires image-based regression and accuracy verification; these are provisional algorithmic improvements, not certified recognition rates.
 - **Workspace usability fix (2026-10-28):** Prevented H1–H6/V1–V2 hover hints (notably H6 at the bottom of the scrollable photo workspace) from changing scroll height by showing line hints in a non-interactive fixed overlay. Preserves line dragging and manual calibration guidance. JavaScript syntax checked; browser regression pending.
 ### Automatic ArUco Homography and Adaptive Resolution (Beta)
 - Added automatic on-import detection of four ArUco `DICT_4X4_50` markers (IDs 0–3), with 300 × 300 mm marker-centre geometry and 30 mm square markers.
