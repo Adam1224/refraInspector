@@ -6,6 +6,8 @@ See [hardware changes](./CHANGELOG_HARDWARE.md), [software-to-hardware mapping](
 
 ## SW-13.2 · v13.2 — 2026-10-29 (Beta)
 
+- Added searchable `RI-XXX-NNN` identifiers to major application warnings/errors (photo import, photo pairing, ArUco, calibration, alignment, verification, save and data operations). README now provides a 27-code cause/action lookup. This is a documentation/diagnostics change; image algorithms were not intentionally altered.
+
 - Published `refraInspector_v13.2.html` from the tested-development line (v13.0.6), retaining the v13.0 release separately.
 - Inner-bore region detection establishes H3/H4 and inner left/right bounds; independent outer wear-ring search generates tangent guides H2/H5/V1/V2.
 - Enforces V1 to the left of the inner opening and V2 to the right during guide manipulation. Maintains H1–H6 top-to-bottom ordering.
