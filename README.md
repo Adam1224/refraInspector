@@ -61,20 +61,17 @@ Choose **one** of the two supported photo-reference methods before opening Refra
 
 ### Legacy hardware: quick setup
 
-1. Prepare **two independent metric rulers**, each showing at least a full 100 mm reference length. A metal ruler is convenient but not mandatory; accurate graduations and rigidity matter more than brand.
-2. Place one horizontally and one vertically near the PL, ideally along two adjacent edges. Use a square or straightedge to avoid a skewed X/Y reference.
-3. Secure the rulers against movement. The graduation planes should lie as close as practical to the intended **unworn PL reference surface**; a ruler lying far below the plate surface introduces parallax/scale error.
-4. Take a photograph that shows the inspection area **and both reference spans**. In RefraInspector use the **legacy leveling and X/Y ruler calibration** workflow. Check both axes; do not treat one calibrated axis as proof that the other is calibrated.
+1. Prepare **two metric rulers**, each with at least **100 mm** of visible graduations.
+2. Place one horizontally and the other vertically beside the PL, and keep them fixed.
+3. Take a photo showing the PL and both ruler scales. In RefraInspector, use **Level → X/Y Calibration**.
 
-### ArUco hardware: printing or obtaining the jig
+### ArUco hardware: marker setup
 
-1. **Obtain the marker PDF:** [RefraInspector ArUco 300×300 · four A4 pages](./docs/RefraInspector_ArUco_300x300_4A4_NoZeroLabel.pdf). Print on four A4 sheets at **100%** without Fit-to-page, enlargement or reduction. Check the printed **100 mm** test length before assembly.
-2. **Choose the mounting method:** assemble the four printed sheets on a rigid, flat backing for a first trial, **or** arrange manufacture of the [HW-03 v2.8.4 one-piece 3D-print jig design](./hardware/HW03_v2.8.4_QR_adjacent_label_rotated.scad) using a sufficiently large printer (nominal frame approximately **360 × 360 mm**, plus build clearance). **The jig is a design prototype, not an already validated ready-to-print production part.** Its STL connectivity, tolerances and physical fit still need verification; do not silently alter the approved SCAD geometry to make it printable.
-3. **Install and verify:** the markers must be real ArUco patterns, **not** the solid preview squares displayed in CAD. Set IDs **0 top-left, 1 top-right, 2 bottom-left, 3 bottom-right**; measure actual centre-to-centre distances in X and Y (**300 mm** intended). Ensure all marker faces are **coplanar with the PL's unworn measurement reference surface**; the PL and jig being on the same table does not by itself ensure coplanarity.
-4. **If using HW-03:** orient the U-frame with its **opening down**, allowing the PL tail to extend outside. Its right-side M6 holes are *future clamping provisions*, not a finished clamp: use safe independent positioning until a proper pad/fastener and clamping-load verification are available.
-5. Photograph the complete inspection region with **all four marker patterns and their white quiet zones** visible, in focus and without glare. RefraInspector attempts ArUco detection automatically. See [Section 6](#6-aruco-target--printing-and-physical-setup) for full printing/layout and troubleshooting requirements.
+1. Download the [ArUco marker PDF](./docs/RefraInspector_ArUco_300x300_4A4_NoZeroLabel.pdf) and print at **100%**, or prepare the [HW-03 3D-print Jig](./hardware/HW03_v2.8.4_QR_adjacent_label_rotated.scad).
+2. Attach the four **ArUco markers** to the four corners in order: **ID 0 top-left, ID 1 top-right, ID 2 bottom-left, ID 3 bottom-right**. Keep their black squares and white borders visible, and ensure the marker faces are level with the PL measurement surface.
+3. Take a photo showing the PL and all four markers. RefraInspector will attempt **automatic ArUco detection and perspective correction**.
 
-**Before Step 1:** confirm which reference is in the photograph. If the four ArUco markers are missing or invalid, only use the legacy workflow when valid X/Y ruler references are also visible; do not assume an uncalibrated image has a valid scale.
+For detailed printing and positioning instructions, see [Section 6](#6-aruco-target--printing-and-physical-setup).
 
 ## 1. Quick start — complete one PL inspection
 
