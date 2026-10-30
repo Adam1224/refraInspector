@@ -4,7 +4,11 @@
 
 See [hardware changes](./CHANGELOG_HARDWARE.md), [software-to-hardware mapping](./CHANGELOG.md), and [original detailed history](./CHANGELOG_ARCHIVE.md).
 
-## SW-13.2 · v13.2 — 2026-10-29 (Beta)
+## SW-13.2 · v13.2 — 2026-10-30 (Beta)
+
+- **Workspace UI:** Published the locally reviewed compact-control layout based on v13.0.6. Arranged the existing numbered import, correction, calibration, alignment, and save controls in a two-column grid with less padding and smaller button spacing; ruler calibration is collapsed by default, and repeated inline workflow guidance is removed. ArUco, measurement, validation and Campaign logic were not intentionally modified.
+- **Release/rollback:** Current application is [`refraInspector_v13.2.html`](./refraInspector_v13.2.html); previous [`v13.0.6`](./refraInspector_v13.0.6.html) is kept for rollback. Browser regression still needed.
+
 
 - Added searchable `RI-XXX-NNN` identifiers to major application warnings/errors (photo import, photo pairing, ArUco, calibration, alignment, verification, save and data operations). README now provides a 27-code cause/action lookup. This is a documentation/diagnostics change; image algorithms were not intentionally altered.
 
