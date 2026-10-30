@@ -1,8 +1,17 @@
 # RefraInspector — Software Change History (SW)
 
-**Current software:** v13.2 (Beta) · **ID scheme:** `SW-<release>` (e.g. `SW-13.0`). Software version numbers reflect the executable HTML, not the physical fixture's revision.
+**Current software:** v13.2.7 (Beta) · **ID scheme:** `SW-<release>` (e.g. `SW-13.0`). Software version numbers reflect the executable HTML, not the physical fixture's revision.
 
 See [hardware changes](./CHANGELOG_HARDWARE.md), [software-to-hardware mapping](./CHANGELOG.md), and [original detailed history](./CHANGELOG_ARCHIVE.md).
+
+## SW-13.2.7 · v13.2.7 — 2026-10-30 (Beta)
+
+- Released [`refraInspector_v13.2.7.html`](./refraInspector_v13.2.7.html) incorporating v13.2.1–v13.2.7 local changes.
+- Unified Campaign export into one entry with dataset selection and preview; output supports actual `.xlsx` (default), CSV, and copyable TSV. The prior HTML-disguised-as-`.xls` approach was replaced.
+- Full saved PL set details retain saved pairs even when Heats Used or Total Runtime is missing. Dimensions display one decimal, absent values `N/A`, with Upper/Lower shown alongside one another; shared pair-level fields are merged in Excel.
+- Campaign Summary / PL Geometry splits user-entered reference values and calculated Campaign results.
+- Renamed the chart to **Upper / Lower Long-End Damage Length (T) vs Heats Used**.
+- **Validation:** JS syntax checked during local development; complete browser and Excel open/save testing remains outstanding.
 
 ## SW-13.2 · v13.2 — 2026-10-30 (Beta)
 
