@@ -33,7 +33,7 @@ See [software changes](./CHANGELOG_SOFTWARE.md) and [traceability mapping](./CHA
 ### HW-03 v2.5 — Lightweight 3D-printed iteration of the aluminum extrusion concept (2026-10-30)
 **State:** Parametric OpenSCAD prototype uploaded; not physically validated. The earlier aluminum extrusion design is retained as the original concept.
 
-- **Source:** [HW03_v2.5_lightweight_3d_print_jig.scad](./hardware/HW03_v2.5_lightweight_3d_print_jig.scad).
+- **Historical design:** HW-03 v2.5 introduced the lightweight printed-frame concept. Its standalone SCAD file has been superseded by the latest v2.8.4 model below.
 - Three-sided U frame, **opening down** to let the PL long end extend beyond the fixture. The corner mounting blocks are clipped so no protrusions intrude into the PL placement opening.
 - Four 30 × 30 mm ArUco mounting regions, IDs 0–3 with 300 × 300 mm marker-centre spacing. Preview black squares are placeholders and **not machine-readable ArUco codes**; apply real printed markers.
 - 1 mm engraved scales on the top/left/right bars with numbers every 10 mm; top numbers rotated 90° to avoid overlap. Reference origin follows the HW-02 ID0 black-corner convention.
