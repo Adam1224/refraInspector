@@ -30,6 +30,18 @@ See [software changes](./CHANGELOG_SOFTWARE.md) and [traceability mapping](./CHA
 - Main risks: marker-plane offset (parallax), fixture flex, mounting tolerances, occluded bore/edge features, optical distortion and target wear.
 - **Interfaces:** `SW-13.0` (as designed), future camera/lens calibration and independent physical measurement verification (not yet released).
 
+### HW-03 v2.5 — Lightweight 3D-printed iteration of the aluminum extrusion concept (2026-10-30)
+**State:** Parametric OpenSCAD prototype uploaded; not physically validated. The earlier aluminum extrusion design is retained as the original concept.
+
+- **Source:** [HW03_v2.5_lightweight_3d_print_jig.scad](./hardware/HW03_v2.5_lightweight_3d_print_jig.scad).
+- Three-sided U frame, **opening down** to let the PL long end extend beyond the fixture. The corner mounting blocks are clipped so no protrusions intrude into the PL placement opening.
+- Four 30 × 30 mm ArUco mounting regions, IDs 0–3 with 300 × 300 mm marker-centre spacing. Preview black squares are placeholders and **not machine-readable ArUco codes**; apply real printed markers.
+- 1 mm engraved scales on the top/left/right bars with numbers every 10 mm; top numbers rotated 90° to avoid overlap. Reference origin follows the HW-02 ID0 black-corner convention.
+- Three PL-contact side bars have nominal **34 mm width** and **32 mm height** (adjustable to actual PL model). Two right-side transverse **Ø6.6 mm M6 clearance bores** at nominal positions 90 / 210 mm for future horizontal clamping with protective pads.
+- Modular 120 mm rail segments for smaller printers; underside material-relief pockets 34 × 20 × 22 mm, retaining nominal 7 mm side walls and 10 mm roof. Structural strength and assembled rigidity **have not been verified**.
+- **Required before measurement use:** verify PL fit and support contact, M6 load path and printed-bore sizing, the complete physical 300 mm marker geometry, coplanarity of marker faces and unworn PL reference surface, assembly deformation, engraving visibility, and physical measurement repeatability. The drawing is not a fabrication tolerance certificate.
+- **Interfaces:** existing SW-13.2 automatic ArUco/Homography workflow. Hardware update does not require or imply software algorithm changes.
+
 ## HW-04 — Measurement accuracy verification protocol (planned)
 **State:** Proposed test plan; no validated tolerance claim.
 
