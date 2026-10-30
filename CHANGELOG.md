@@ -9,6 +9,16 @@ Changes are maintained in two independently numbered registers:
 - [Hardware changes — `CHANGELOG_HARDWARE.md`](./CHANGELOG_HARDWARE.md): physical rulers, printable markers, calibration fixtures and test plans.
 - [Detailed archived software history — `CHANGELOG_ARCHIVE.md`](./CHANGELOG_ARCHIVE.md): previous patch-by-patch records, left intact.
 
+## Version-specific change notes
+
+Jump directly to an individual release or hardware iteration. The linked descriptions are the authoritative change records; hardware versions below are **design iterations**, not independently validated production parts.
+
+**Software releases** (newest first): [SW-13.2](./CHANGELOG_SOFTWARE.md#sw-132--v132--2026-10-30-beta) · [SW-13.0](./CHANGELOG_SOFTWARE.md#sw-130--v130--2026-10-28) · [SW-12.1.7](./CHANGELOG_SOFTWARE.md#sw-1217--v1217--2026-10-22) · [SW-12.1.4](./CHANGELOG_SOFTWARE.md#sw-1214--v1214--2026-10-20) · [SW-12.1.1](./CHANGELOG_SOFTWARE.md#sw-1211--v1211--2026-10-20) · [SW-12.0.0](./CHANGELOG_SOFTWARE.md#sw-1200--v1200--2026-10-20) · [SW-11.0](./CHANGELOG_SOFTWARE.md#sw-110--v110--2026-10-1920) · [SW-10.0](./CHANGELOG_SOFTWARE.md#sw-100--v100--2026-10-1519) · [SW-9.0](./CHANGELOG_SOFTWARE.md#sw-90--v90--2026-10-1314) · [SW-08 and earlier](./CHANGELOG_SOFTWARE.md#sw-08--v80-and-earlier--through-2026-10-13).
+
+**HW-03 jig iterations** (newest first): [v2.8.4](./CHANGELOG_HARDWARE.md#current-design--hw-03-v284--2026-10-30) · [v2.8.3](./CHANGELOG_HARDWARE.md#hw03-v2-8-3) · [v2.8.2](./CHANGELOG_HARDWARE.md#hw03-v2-8-2) · [v2.8.1](./CHANGELOG_HARDWARE.md#hw03-v2-8-1) · [v2.8](./CHANGELOG_HARDWARE.md#hw03-v2-8) · [v2.7](./CHANGELOG_HARDWARE.md#hw03-v2-7) · [v2.6](./CHANGELOG_HARDWARE.md#hw03-v2-6) · [v2.5](./CHANGELOG_HARDWARE.md#hw03-v2-5) · [v2.4](./CHANGELOG_HARDWARE.md#hw03-v2-4) · [v2.3](./CHANGELOG_HARDWARE.md#hw03-v2-3) · [v2.2](./CHANGELOG_HARDWARE.md#hw03-v2-2) · [v2.1](./CHANGELOG_HARDWARE.md#hw03-v2-1) · [v2](./CHANGELOG_HARDWARE.md#hw03-v2).
+
+**Other hardware records:** [HW-02 ArUco calibration target](./CHANGELOG_HARDWARE.md#hw-02--aruco-calibration-target-four-a4-sheets) · [HW-01 legacy rulers](./CHANGELOG_HARDWARE.md#hw-01--two-ruler-photographic-reference-legacy) · [HW-04 accuracy validation plan](./CHANGELOG_HARDWARE.md#hw-04--measurement-accuracy-verification-protocol-planned).
+
 ## Numbering convention
 
 | Domain | Format | Example | Scope |
