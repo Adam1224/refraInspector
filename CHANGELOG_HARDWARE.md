@@ -23,19 +23,19 @@ Hardware revision history is maintained independently of software releases. **La
 
 | Revision | Main change relative to previous iteration | Status |
 |---|---|---|
-| **v2.8.4** | Rotated `SCAN FOR MANUAL` 180° and moved it closer to the QR; updated version engraving | **Current SCAD design baseline** |
-| v2.8.3 | Corrected the side-label left-to-right reading direction | Historical |
-| v2.8.2 | Rotated the QR and adjacent side text 180° to correct upside-down display | Historical |
-| v2.8.1 | Corrected top-face project name and version lettering after global model mirroring | Historical |
-| v2.8 | Added `SCAN FOR MANUAL` instruction and engraved project name/version | Historical |
-| v2.7 | Verified the embedded QR URL against the RefraInspector repository link; clarified that earlier displayed example QR was incorrect | Historical |
-| v2.6 | Added recessed QR to the outer face of the top bar for access to project instructions | Historical |
-| **v2.5** | Rotated the top ruler numbers by 90° and adjusted text size to avoid overlap | Historical |
-| v2.4 | Added underside lightening pockets while retaining load-bearing regions around the M6 holes | Historical; strength unverified |
-| v2.3 | Corrected the displayed frame orientation so the open side faces down | Historical |
-| v2.2 | Added 10 mm numeric labels to the 1 mm scales and two transverse M6 clearance holes in the right bar | Historical |
-| v2.1 | Trimmed inward-projecting corner-pad features to preserve PL clearance | Historical |
-| v2 | Added top/left/right engraved ruler concepts and thicker PL-contact side bars | Historical |
+| **v2.8.4** <a id="hw03-v2-8-4"></a> | Rotated `SCAN FOR MANUAL` 180° and moved it closer to the QR; updated version engraving | **Current SCAD design baseline** |
+| v2.8.3 <a id="hw03-v2-8-3"></a> | Corrected the side-label left-to-right reading direction | Historical |
+| v2.8.2 <a id="hw03-v2-8-2"></a> | Rotated the QR and adjacent side text 180° to correct upside-down display | Historical |
+| v2.8.1 <a id="hw03-v2-8-1"></a> | Corrected top-face project name and version lettering after global model mirroring | Historical |
+| v2.8 <a id="hw03-v2-8"></a> | Added `SCAN FOR MANUAL` instruction and engraved project name/version | Historical |
+| v2.7 <a id="hw03-v2-7"></a> | Verified the embedded QR URL against the RefraInspector repository link; clarified that earlier displayed example QR was incorrect | Historical |
+| v2.6 <a id="hw03-v2-6"></a> | Added recessed QR to the outer face of the top bar for access to project instructions | Historical |
+| **v2.5** <a id="hw03-v2-5"></a> | Rotated the top ruler numbers by 90° and adjusted text size to avoid overlap | Historical |
+| v2.4 <a id="hw03-v2-4"></a> | Added underside lightening pockets while retaining load-bearing regions around the M6 holes | Historical; strength unverified |
+| v2.3 <a id="hw03-v2-3"></a> | Corrected the displayed frame orientation so the open side faces down | Historical |
+| v2.2 <a id="hw03-v2-2"></a> | Added 10 mm numeric labels to the 1 mm scales and two transverse M6 clearance holes in the right bar | Historical |
+| v2.1 <a id="hw03-v2-1"></a> | Trimmed inward-projecting corner-pad features to preserve PL clearance | Historical |
+| v2 <a id="hw03-v2"></a> | Added top/left/right engraved ruler concepts and thicker PL-contact side bars | Historical |
 | Initial HW-03 concept | Aluminum extrusion, orthogonal reference rulers / ArUco mounting and a U-shaped PL positioning fixture | **Superseded concept**, retained for traceability |
 
 **Versioning note:** These are hardware design iterations, not separately certified prints. Historical SCAD files have intentionally been removed from the repository's `hardware/` directory so it holds only the latest design source.
