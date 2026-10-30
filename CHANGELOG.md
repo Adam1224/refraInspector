@@ -1,6 +1,6 @@
 # RefraInspector — Change History and SW/HW Traceability
 
-**Current software:** `SW-13.0` / RefraInspector v13.0 (Beta)  
+**Current software:** `SW-13.2` / RefraInspector v13.2 (Beta)  
 **Hardware reference:** `HW-02` printable ArUco target; `HW-03` rigid fixture is a proposal, **not a released product**.
 
 Changes are maintained in two independently numbered registers:
@@ -13,9 +13,13 @@ Changes are maintained in two independently numbered registers:
 
 | Domain | Format | Example | Scope |
 |---|---|---|---|
-| Software | `SW-<version>` | `SW-13.0` | HTML application release, linked to `refraInspector_v13.0.html` |
+| Software | `SW-<version>` | `SW-13.0` | HTML application release, linked to `refraInspector_v13.2.html` |
 | Hardware | `HW-XX` | `HW-02` | Printable target, physical setup or proposed jig; **not** tied 1:1 to a software version |
 | Mapping | `SW ⇄ HW` | `SW-13.0 ⇄ HW-02` | Compatibility or intended use, **not** proof of tested integration |
+
+## Release note (2026-10-30)
+
+`SW-13.2` updates the photo-workspace UI layout only, using the same ArUco target (`HW-02`) and existing measurement workflow. The last working application, [`v13.0.6`](./refraInspector_v13.0.6.html), is retained for rollback.
 
 ## Correspondence between software and hardware
 
