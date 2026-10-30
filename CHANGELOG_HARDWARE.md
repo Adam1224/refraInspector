@@ -21,33 +21,28 @@ See [software changes](./CHANGELOG_SOFTWARE.md) and [traceability mapping](./CHA
 - Repository artifact: [Printable four-page ArUco calibration PDF](./docs/RefraInspector_ArUco_300x300_4A4_NoZeroLabel.pdf).
 - **Interfaces:** `SW-13.0` automatic ArUco detection, 16-corner Homography, quality checking, dynamic-resolution rectification.
 
-## HW-03 — Rigid ArUco-supported PL inspection jig (design proposal)
-**State:** Concept/design-stage only; not released as tested hardware.
+## HW-03 — PL inspection jig: aluminum extrusion → one-piece 3D printing
+**Current baseline:** [HW-03 v2.8.4 OpenSCAD](./hardware/HW03_v2.8.4_QR_adjacent_label_rotated.scad) (2026-10-30). **Status:** design prototype; no approved, physically validated one-piece STL or manufacturing tolerance certification.
 
-- Proposed rigid frame or open-sided/U-shaped mounting arrangement supporting markers around the **short end / bore / damaged region** while allowing the long tail of spindle-shaped PLs to extend beyond the calibrated opening.
-- Mount four marker **faces coplanar with the PL's reference measurement surface**, not just on the same floor. Use adjustable PL supports, leveling, anti-slip fixation and reproducible camera positioning.
-- Proposed 300 × 300 mm marker-centre geometry is a calibrated **reference layout**, not necessarily the inner clear opening of the jig; mechanical clearances and PL-model fit must be measured.
-- Main risks: marker-plane offset (parallax), fixture flex, mounting tolerances, occluded bore/edge features, optical distortion and target wear.
-- **Interfaces:** `SW-13.0` (as designed), future camera/lens calibration and independent physical measurement verification (not yet released).
+### Design history and changes
 
-### HW-03 v2.5 — Lightweight 3D-printed iteration of the aluminum extrusion concept (2026-10-30)
-**State:** Parametric OpenSCAD prototype uploaded; not physically validated. The earlier aluminum extrusion design is retained as the original concept.
+- **Original concept:** rigid aluminum extrusion, an open-sided U-frame with separate ruler/marker installation and PL side positioning. Retained as historical design context, not the current intended build.
+- **v2.1:** removed inward-protruding corner-pod material from PL positioning area.
+- **v2.2–v2.3:** three engraved mm ruler sides, two nominal Ø6.6 mm transverse M6 clearance bores on the right; displayed U-shaped opening at the **bottom** to let the PL tail extend.
+- **v2.4–v2.5:** underside weight-relief pockets and top ruler numbers rotated to avoid collisions; historical source file superseded.
+- **v2.6–v2.8.4:** QR code linking to the RefraInspector repository instructions, adjacent `SCAN FOR MANUAL`, and `RefraInspector Jig` and hardware-version engraving, with revisions to text/QR orientation and placement.
+- **Authoritative geometry:** user's latest supplied v2.8.4 design is the baseline; no unapproved stretching of connecting rails, removal of marker recesses, repositioning of fiducials, or editing of QR/lettering to make STL conversion easier. The GitHub SCAD file is the documented repository version; compare any regenerated outputs to the supplied source before release.
 
-- **Historical design:** HW-03 v2.5 introduced the lightweight printed-frame concept. Its standalone SCAD file has been superseded by the latest v2.8.4 model below.
-- Three-sided U frame, **opening down** to let the PL long end extend beyond the fixture. The corner mounting blocks are clipped so no protrusions intrude into the PL placement opening.
-- Four 30 × 30 mm ArUco mounting regions, IDs 0–3 with 300 × 300 mm marker-centre spacing. Preview black squares are placeholders and **not machine-readable ArUco codes**; apply real printed markers.
-- 1 mm engraved scales on the top/left/right bars with numbers every 10 mm; top numbers rotated 90° to avoid overlap. Reference origin follows the HW-02 ID0 black-corner convention.
-- Three PL-contact side bars have nominal **34 mm width** and **32 mm height** (adjustable to actual PL model). Two right-side transverse **Ø6.6 mm M6 clearance bores** at nominal positions 90 / 210 mm for future horizontal clamping with protective pads.
-- Modular 120 mm rail segments for smaller printers; underside material-relief pockets 34 × 20 × 22 mm, retaining nominal 7 mm side walls and 10 mm roof. Structural strength and assembled rigidity **have not been verified**.
-- **Required before measurement use:** verify PL fit and support contact, M6 load path and printed-bore sizing, the complete physical 300 mm marker geometry, coplanarity of marker faces and unworn PL reference surface, assembly deformation, engraving visibility, and physical measurement repeatability. The drawing is not a fabrication tolerance certificate.
-- **Interfaces:** existing SW-13.2 automatic ArUco/Homography workflow. Hardware update does not require or imply software algorithm changes.
+### Intended construction and use
 
-### HW-03 v2.8.4 — QR manual & engraved identification (2026-10-30)
-**State:** OpenSCAD prototype revision; not yet physically printed or validated.
-
-- [SCAD model](./hardware/HW03_v2.8.4_QR_adjacent_label_rotated.scad) builds on v2.5: outer-side recessed QR linked to repository instructions, adjacent `SCAN FOR MANUAL` label, top-surface `RefraInspector Jig` and `HW-03 v2.8.4` engraving.
-- Keeps bottom-open frame, numbered scales, right-side M6 clearance holes and underside weight-reduction pockets.
-- The QR's printed scan performance, side-label orientation and physical part stiffness remain to be validated; marker images are not embedded ArUco codes.
+- **Construction:** intended as a **single integrated printed U-frame**, **not** a production kit of modular parts. A single STL can encode an entire assembly, but is not proof of one continuous printable solid; verify watertightness and connected-component count before fabrication. Approximate build envelope in plan: 360 × 360 mm plus printer clearance.
+- **Fiducials:** four ArUco marker sites (IDs 0/1/2/3, black-square size 30 × 30 mm), nominal **300 × 300 mm marker-centre geometry**. Attach the actual printed ArUco codes from [HW-02 PDF](./docs/RefraInspector_ArUco_300x300_4A4_NoZeroLabel.pdf), not generic placeholder squares.
+- **Measurement:** top/left/right 1 mm rulers with numeric major marks, usable PL contact faces, and plane-height adjustment specific to the PL model. Marker upper faces must be coplanar with the PL's unworn reference measurement face.
+- **Clamping:** two transverse M6 clearance bores on the right are provisions for a future clamp. A protective pressure pad and adequate locking/insert method remain to be designed and verified; clearance holes alone do not form a functional clamp.
+- **Weight and materials:** underside recessed pockets reduce the solid-CAD material volume, but actual printed mass depends on slicer walls/infill, supports and material; no verified lightweight strength or dimensional accuracy claim.
+- **Instructions:** QR/manual text and project/version marking are embedded in SCAD geometry; QR scan success after printing is **not verified**.
+- **Validation required:** check geometry connectivity/watertightness, 3D-printer capacity, post-print 300 mm marker spacing, marker/PL coplanarity, jig deflection under M6 loading, joint/edge stability, readable scales and QR, photo framing and A–F measurement repeatability.
+- **Compatibility:** existing software v13.2 Homography and legacy ruler workflows; **software algorithms are unchanged**.
 
 ## HW-04 — Measurement accuracy verification protocol (planned)
 **State:** Proposed test plan; no validated tolerance claim.
