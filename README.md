@@ -32,6 +32,10 @@ RefraInspector is a browser-based application for inspection and analysis of ref
 - [9. Measurement limitations](#9-measurement-guidance-and-limitations)
 - [10. Documents and support](#10-documentation-and-support)
 
+## Hardware prototype — HW-03 v2.5 (2026-10-30)
+
+The original aluminum-extrusion PL measurement jig concept has been iterated into a modular, lightweight 3D-printable U-frame. Download the [parametric HW-03 v2.5 OpenSCAD model](./hardware/HW03_v2.5_lightweight_3d_print_jig.scad). It includes three numbered 1 mm scales, a downward opening, trimmed inner corners, two transverse M6 clearance holes on the right bar and underside lightening pockets. It is a **prototype**, not a validated fixture: actual PL fit, ArUco/PL coplanarity, 300 mm marker spacing and clamp-induced deflection must be tested. The printed black squares are placement previews, not actual ArUco images.
+
 ## v13.2 workspace update (2026-10-30)
 
 The photo-workspace controls use a compact two-column arrangement with reduced spacing. Legacy X/Y ruler calibration starts collapsed and can be expanded when needed; ArUco detection remains accessible. Redundant inline workflow guidance was removed, with the verification and Campaign-saving controls retained. **Previous version:** [v13.0.6](./refraInspector_v13.0.6.html). Browser interaction and measurement accuracy have not been independently revalidated for this UI update.
