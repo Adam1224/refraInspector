@@ -10,6 +10,7 @@ RefraInspector is a browser-based application for inspection and analysis of ref
 
 ## Contents
 
+- [Hardware preparation — before Step 1](#hardware-preparation--before-step-1)
 - [1. Quick start — one inspection](#1-quick-start--complete-one-pl-inspection)
 - [2. Warnings and errors](#2-warnings-and-errors--cause-and-solution)
   - [Diagnostic code index](#diagnostic-code-index-v132)
@@ -45,6 +46,35 @@ The design incorporates three PL-positioning sides (top, left, right), numbered 
 ## v13.2 workspace update (2026-10-30)
 
 The photo-workspace controls use a compact two-column arrangement with reduced spacing. Legacy X/Y ruler calibration starts collapsed and can be expanded when needed; ArUco detection remains accessible. Redundant inline workflow guidance was removed, with the verification and Campaign-saving controls retained. **Previous version:** [v13.0.6](./refraInspector_v13.0.6.html). Browser interaction and measurement accuracy have not been independently revalidated for this UI update.
+
+## Hardware preparation — before Step 1
+
+Choose **one** of the two supported photo-reference methods before opening RefraInspector. Both require a camera/phone, the PL to be measured, stable lighting and a flat, stable working area. The **ArUco method is preferred** for perspective correction; the **legacy two-ruler method** remains available when ArUco hardware cannot be prepared.
+
+| | Legacy: two perpendicular rulers | ArUco: four-marker calibration |
+|---|---|---|
+| **Required reference hardware** | Two clearly readable, straight metric rulers placed at right angles; each must provide a measurable **100 mm** span | Four printable **DICT_4X4_50** marker patterns (IDs **0, 1, 2, 3**), black square **30 × 30 mm**, with **300 × 300 mm marker-centre spacing** |
+| **How to obtain** | Use existing shop-floor metric rulers or purchase two rigid rulers with clear 1 mm graduations; add a square/straightedge to check perpendicularity | Download the [official four-page A4 marker PDF](./docs/RefraInspector_ArUco_300x300_4A4_NoZeroLabel.pdf); print at **Actual Size / 100%** and assemble as instructed in [Section 6](#6-aruco-target--printing-and-physical-setup) |
+| **How to mount** | Fix one ruler along the horizontal X direction and the other along vertical Y. Prevent slippage and position readable graduations as near as possible to the PL's unworn measurement surface | **Option A (immediate trial):** affix the verified 4-A4 print to a flat, rigid backing. **Option B (jig prototype):** use the [HW-03 v2.8.4 3D-print design](./hardware/HW03_v2.8.4_QR_adjacent_label_rotated.scad), apply the real marker patterns at its four designated positions, and verify physical geometry |
+| **Software calibration** | Auto Level / 2-Point Level → Auto 100mm X/Y Calibration or manual calibration if necessary | Automatic four-marker detection → 16-corner Homography/perspective correction |
+| **Important checks** | Both 100 mm spans visible in the photo; rulers straight, orthogonal, in focus and at a suitable height relative to the PL | All four codes and their white margins clearly visible; correct IDs/layout; measured 300 mm centre spacings; marker faces coplanar with unworn PL surface |
+
+### Legacy hardware: quick setup
+
+1. Prepare **two independent metric rulers**, each showing at least a full 100 mm reference length. A metal ruler is convenient but not mandatory; accurate graduations and rigidity matter more than brand.
+2. Place one horizontally and one vertically near the PL, ideally along two adjacent edges. Use a square or straightedge to avoid a skewed X/Y reference.
+3. Secure the rulers against movement. The graduation planes should lie as close as practical to the intended **unworn PL reference surface**; a ruler lying far below the plate surface introduces parallax/scale error.
+4. Take a photograph that shows the inspection area **and both reference spans**. In RefraInspector use the **legacy leveling and X/Y ruler calibration** workflow. Check both axes; do not treat one calibrated axis as proof that the other is calibrated.
+
+### ArUco hardware: printing or obtaining the jig
+
+1. **Obtain the marker PDF:** [RefraInspector ArUco 300×300 · four A4 pages](./docs/RefraInspector_ArUco_300x300_4A4_NoZeroLabel.pdf). Print on four A4 sheets at **100%** without Fit-to-page, enlargement or reduction. Check the printed **100 mm** test length before assembly.
+2. **Choose the mounting method:** assemble the four printed sheets on a rigid, flat backing for a first trial, **or** arrange manufacture of the [HW-03 v2.8.4 one-piece 3D-print jig design](./hardware/HW03_v2.8.4_QR_adjacent_label_rotated.scad) using a sufficiently large printer (nominal frame approximately **360 × 360 mm**, plus build clearance). **The jig is a design prototype, not an already validated ready-to-print production part.** Its STL connectivity, tolerances and physical fit still need verification; do not silently alter the approved SCAD geometry to make it printable.
+3. **Install and verify:** the markers must be real ArUco patterns, **not** the solid preview squares displayed in CAD. Set IDs **0 top-left, 1 top-right, 2 bottom-left, 3 bottom-right**; measure actual centre-to-centre distances in X and Y (**300 mm** intended). Ensure all marker faces are **coplanar with the PL's unworn measurement reference surface**; the PL and jig being on the same table does not by itself ensure coplanarity.
+4. **If using HW-03:** orient the U-frame with its **opening down**, allowing the PL tail to extend outside. Its right-side M6 holes are *future clamping provisions*, not a finished clamp: use safe independent positioning until a proper pad/fastener and clamping-load verification are available.
+5. Photograph the complete inspection region with **all four marker patterns and their white quiet zones** visible, in focus and without glare. RefraInspector attempts ArUco detection automatically. See [Section 6](#6-aruco-target--printing-and-physical-setup) for full printing/layout and troubleshooting requirements.
+
+**Before Step 1:** confirm which reference is in the photograph. If the four ArUco markers are missing or invalid, only use the legacy workflow when valid X/Y ruler references are also visible; do not assume an uncalibrated image has a valid scale.
 
 ## 1. Quick start — complete one PL inspection
 
