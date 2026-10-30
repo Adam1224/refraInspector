@@ -1,7 +1,7 @@
 # RefraInspector — Change History and SW/HW Traceability
 
 **Current software:** `SW-13.2` / RefraInspector v13.2 (Beta)  
-**Hardware reference:** `HW-02` printable ArUco target; `HW-03 v2.5` lightweight 3D-print prototype (not a validated production jig).
+**Hardware reference:** `HW-02` printable ArUco target; `HW-03 v2.8.4` integrated 3D-print design baseline (not a validated production jig).
 
 Changes are maintained in two independently numbered registers:
 
@@ -33,12 +33,16 @@ Changes are maintained in two independently numbered registers:
 | **`SW-13.0` / 4-marker 16-corner Homography** | **`HW-02`** | Exact IDs 0–3 and 300 × 300 mm marker-centre geometry, 30 mm square markers | Implemented; complete device/accuracy validation outstanding |
 | `SW-13.0` / dynamic rectification and X/Y px/mm display | `HW-02` | Image transformation based on 16 detected marker corners | Adaptive image output is not actual camera resolution |
 | `SW-13.0` / legacy fallback when no markers | `HW-01` | Preserve Level + X/Y ruler calibration workflow | Supported compatibility path |
-| **`SW-13.0` / coplanar calibration requirement** | **`HW-03`** | Planned jig keeps the marker surfaces and PL reference surface in one plane | Design proposal; not mechanically validated |
+| **`SW-13.2` / coplanar calibration requirement** | **`HW-03 v2.8.4`** | One-piece 3D-print jig concept aims to keep marker faces and unworn PL reference surface coplanar | SCAD prototype; physical accuracy and structure not validated |
 | `SW-9.0` + `SW-13.0` / measure accuracy comparison | `HW-04` | Controlled A–F validation across both workflows | Test plan, not validated specifications |
 
-## HW-03 design iteration (2026-10-30)
+## HW-03 hardware baseline (2026-10-30)
 
-The original aluminum extrusion U-jig concept is retained as HW-03's baseline. [HW-03 v2.8.4 lightweight 3D-print model](./hardware/HW03_v2.8.4_QR_adjacent_label_rotated.scad) is its successor prototype: bottom opening; three engraved numbered bars; four coplanar ArUco targets at 300 mm centre spacing; clearance-cut corner pods; two right-bar M6 cross holes; and underside relief pockets. Strength, clamping deformation, coplanarity and real measurement accuracy remain unverified. Software v13.2 is unchanged.
+- **Historical concept:** aluminum-extrusion jig with PL reference-plane alignment.
+- **Current design baseline:** [HW-03 v2.8.4 OpenSCAD](./hardware/HW03_v2.8.4_QR_adjacent_label_rotated.scad), conceived as a **one-piece 3D-printed**, bottom-open U-frame rather than a kit of separately printed rails and corner pods.
+- **Incorporated features:** three-positioning-side geometry and numbered ruler marks; four 30 mm ArUco target locations with 300 × 300 mm nominal centres; two right-bar M6 transverse clearance holes; underside weight-relief pockets; outward-facing QR/manual label and engraved name/version.
+- **Unchanged interface:** software v13.2 continues to use the four-marker Homography workflow; marker print is [HW-02 PDF](./docs/RefraInspector_ArUco_300x300_4A4_NoZeroLabel.pdf). Changing fabrication method does not change the SW marker geometry.
+- **Verification gate:** no approved continuous/watertight STL, printer fit, jig stiffness, clamping-force deflection, QR readability, marker-to-PL coplanarity or dimensional accuracy claim is established. Do not modify the authoritative v2.8.4 SCAD merely to get a one-piece STL; discrepancies must be reported and separately approved.
 
 ## Interface and release rules
 
