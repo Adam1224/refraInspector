@@ -38,7 +38,7 @@ Changes are maintained in two independently numbered registers:
 
 ## HW-03 design iteration (2026-10-30)
 
-The original aluminum extrusion U-jig concept is retained as HW-03's baseline. [HW-03 v2.5 lightweight 3D-print model](./hardware/HW03_v2.5_lightweight_3d_print_jig.scad) is its successor prototype: bottom opening; three engraved numbered bars; four coplanar ArUco targets at 300 mm centre spacing; clearance-cut corner pods; two right-bar M6 cross holes; and underside relief pockets. Strength, clamping deformation, coplanarity and real measurement accuracy remain unverified. Software v13.2 is unchanged.
+The original aluminum extrusion U-jig concept is retained as HW-03's baseline. [HW-03 v2.8.4 lightweight 3D-print model](./hardware/HW03_v2.8.4_QR_adjacent_label_rotated.scad) is its successor prototype: bottom opening; three engraved numbered bars; four coplanar ArUco targets at 300 mm centre spacing; clearance-cut corner pods; two right-bar M6 cross holes; and underside relief pockets. Strength, clamping deformation, coplanarity and real measurement accuracy remain unverified. Software v13.2 is unchanged.
 
 ## Interface and release rules
 
