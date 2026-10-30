@@ -2,7 +2,7 @@
 
 **Refractory Sliding Gate Plate Inspection & Campaign Analysis**
 
-**Current version:** v13.2  
+**Current version:** v13.2.7  
 **Status:** Beta  
 **Platform:** Modern desktop and mobile web browsers
 
@@ -43,6 +43,14 @@ The design incorporates three PL-positioning sides (top, left, right), numbered 
 
 **Marker printing:** use the original [4 × A4 ArUco calibration PDF](./docs/RefraInspector_ArUco_300x300_4A4_NoZeroLabel.pdf), printed at 100% and physically checked before installation. [Hardware revisions and validation status](./CHANGELOG_HARDWARE.md) remain distinct from [software releases](./CHANGELOG_SOFTWARE.md).
 
+## v13.2.7 export and chart updates (2026-10-30)
+
+- Consolidated Campaign export into one **Export Campaign Info** entry, with previews and selection between Campaign Summary / PL Geometry and all saved PL Set details.
+- Excel **.xlsx** is the default output; CSV and copyable TSV are alternatives. Saved PL sets without Heats Used / Total Runtime remain included; missing entries display `N/A`, dimensions are formatted to one decimal place, and shared Upper/Lower fields are merged in the Excel detail table.
+- Campaign Summary separates user-entered PL reference geometry from calculated Campaign performance data.
+- Chart caption updated to **Upper / Lower Long-End Damage Length (T) vs Heats Used**.
+- **Previous release:** [v13.2](./refraInspector_v13.2.html). Actual Excel/browser regression validation remains pending.
+
 ## v13.2 workspace update (2026-10-30)
 
 The photo-workspace controls use a compact two-column arrangement with reduced spacing. Legacy X/Y ruler calibration starts collapsed and can be expanded when needed; ArUco detection remains accessible. Redundant inline workflow guidance was removed, with the verification and Campaign-saving controls retained. **Previous version:** [v13.0.6](./refraInspector_v13.0.6.html). Browser interaction and measurement accuracy have not been independently revalidated for this UI update.
@@ -79,7 +87,7 @@ For detailed printing and positioning instructions, see [Section 6](#6-aruco-tar
 
 | Step | What to do | What to check |
 |---|---|---|
-| **1. Open** | Download [RefraInspector v13.2](./refraInspector_v13.2.html) and open it in a current browser. Select **PL Inspection**. | Use a desktop browser when precise guide dragging is required. |
+| **1. Open** | Download [RefraInspector v13.2](./refraInspector_v13.2.7.html) and open it in a current browser. Select **PL Inspection**. | Use a desktop browser when precise guide dragging is required. |
 | **2. Prepare the photo** | Place each PL beside the **four ArUco markers** (preferred) or the **two reference rulers** (fallback). Photograph the entire measurement area with the reference visible. | With ArUco, all four markers must be visible and their faces at the same height as the unworn PL reference face. |
 | **3. Enter PL Geometry** | Enter the required W0, X0, Y0, Z0 and R0 values, plus the safe-stroke limit where applicable. | Check units and the correct PL model. Changing shared geometry can affect saved Campaign data. |
 | **4. Import** | Import the Upper photo, the Lower photo, or both. Confirm the **Upper/Lower** labels. | A photo-time difference warning means: check that the pair belongs together. |
@@ -404,7 +412,7 @@ The ArUco workflow should be **automatic**, not require the user to click each m
 
 ## 10. Documentation and support
 
-- [Current application — refraInspector_v13.2.html](./refraInspector_v13.2.html)
+- [Current application — refraInspector_v13.2.html](./refraInspector_v13.2.7.html)
 - [Printable four-sheet ArUco target — 300 × 300 mm](./docs/RefraInspector_ArUco_300x300_4A4_NoZeroLabel.pdf)
 - [SW/HW version mapping — CHANGELOG.md](./CHANGELOG.md)
 - [Software releases (SW codes) — CHANGELOG_SOFTWARE.md](./CHANGELOG_SOFTWARE.md)
