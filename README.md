@@ -32,9 +32,15 @@ RefraInspector is a browser-based application for inspection and analysis of ref
 - [9. Measurement limitations](#9-measurement-guidance-and-limitations)
 - [10. Documents and support](#10-documentation-and-support)
 
-## Hardware prototype — HW-03 v2.8.4 (2026-10-30)
+## Hardware design baseline — HW-03 v2.8.4 (2026-10-30)
 
-The original aluminum-extrusion PL measurement jig concept has been iterated into a modular, lightweight 3D-printable U-frame. Download the [parametric latest HW-03 v2.8.4 OpenSCAD model](./hardware/HW03_v2.8.4_QR_adjacent_label_rotated.scad). It includes three numbered 1 mm scales, a downward opening, trimmed inner corners, two transverse M6 clearance holes on the right bar and underside lightening pockets. It is a **prototype**, not a validated fixture: actual PL fit, ArUco/PL coplanarity, 300 mm marker spacing and clamp-induced deflection must be tested. The printed black squares are placement previews, not actual ArUco images.
+**Current hardware concept: an integrated, bottom-open U-shaped jig intended for one-piece 3D printing**, evolved from the historical aluminum-extrusion proposal. The only authoritative design source for fabrication review is the [HW-03 v2.8.4 OpenSCAD file](./hardware/HW03_v2.8.4_QR_adjacent_label_rotated.scad). **Do not substitute the separately modified v2.8.5 design.**
+
+The design incorporates three PL-positioning sides (top, left, right), numbered 1 mm rulers, four ArUco mounting areas (30 mm marker squares, nominal marker-centre spacing 300 × 300 mm), two right-side transverse M6 clearance holes for a future clamp, underside lightening pockets, a QR guide link, `SCAN FOR MANUAL` and `RefraInspector Jig`/version engraving. The lower side remains open for the PL long end. Apply physically printed **actual ArUco marker patterns**; CAD placeholder squares are not encoded markers.
+
+**Prototype status:** The SCAD is a design reference, **not a verified one-piece watertight STL or a qualified manufactured part**. Do not change its dimensions, scale markings, QR matrix, lettering, ArUco positions, or geometry simply to force STL continuity. Record and review any disconnected geometry, print-envelope constraint, QR scan issue, M6 clamping deflection, or fit problem before proposing a separate revision. A single-piece build requires a printer with a suitable build envelope, approximately 360 × 360 mm in plan, plus margins. Measure the actual marker centre spacing and marker/PL coplanarity after fabrication.
+
+**Marker printing:** use the original [4 × A4 ArUco calibration PDF](./docs/RefraInspector_ArUco_300x300_4A4_NoZeroLabel.pdf), printed at 100% and physically checked before installation. [Hardware revisions and validation status](./CHANGELOG_HARDWARE.md) remain distinct from [software releases](./CHANGELOG_SOFTWARE.md).
 
 ## v13.2 workspace update (2026-10-30)
 
