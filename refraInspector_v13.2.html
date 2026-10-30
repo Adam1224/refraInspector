@@ -4095,7 +4095,92 @@ $('mainTabs').addEventListener('click',e=>{const btn=e.target.closest('button[da
 $('reportRefresh').onclick=render;
 $('reportCopy').onclick=()=>{render();const data=[['Campaign summary','Value'],...current.geometry,...current.stats,[],...grid()].map(row=>row.join('\t')).join('\n');const promise=navigator.clipboard?.writeText(data);if(promise)promise.then(()=>alert('Campaign report copied.')).catch(()=>{const area=document.createElement('textarea');area.value=data;document.body.append(area);area.select();document.execCommand('copy');area.remove()});else{const area=document.createElement('textarea');area.value=data;document.body.append(area);area.select();document.execCommand('copy');area.remove();alert('Campaign report copied.')}};
 $('reportCsv').onclick=()=>{render();let data=[['Campaign summary','Value'],...current.geometry,...current.stats,[],...grid()].map(csvRow).join('\r\n');file(filename()+'_Campaign_Report.csv','\ufeff'+data,'text/csv;charset=utf-8')};
-$('reportXls').onclick=()=>{render();const summary='<h2>Campaign summary</h2><table border="1">'+[...current.geometry,...current.stats].map(row=>'<tr>'+row.map(v=>'<td>'+escapeHTML(v??'')+'</td>').join('')+'</tr>').join('')+'</table>';const rows=grid();const detail='<h2>PL set details</h2><table border="1">'+rows.map((row,i)=>'<tr>'+row.map(v=>i?'<td>'+escapeHTML(v)+'</td>':'<th>'+escapeHTML(v)+'</th>').join('')+'</tr>').join('')+'</table>';file(filename()+'_Campaign_Report.xls','<html><head><meta charset="utf-8"></head><body>'+summary+detail+'</body></html>','application/vnd.ms-excel')};
+$('reportXls').onclick=()=>{render();const summary='<h2>Campaign summary</h2><table border="1">'+[...current.geometry,...current.stats].map(row=>'<tr>'+row.map(v=>'<td>'+escapeHTML(v??'')+'</td>').join('')+'</tr>').join('')+'</table>';const rows=grid();const detail='<h2>PL set details</h2><table border="1">'+rows.map((row,i)=>'<tr>'+row.map(v=>i?'<td>'+escapeHTML(v)+'</td>':'<th>'+escapeHTML(v)+'</th>').join('')+'</tr>').join('')+'</table>';file(filename()+'_Campaign_Report.xls','<html><head><meta charset="utf-8"></head><body>'+summary+detail+'
+<style id="v132CompactWorkspace20261030">
+/* Desktop-only compact workspace controls; preserve mobile/touch layout. */
+@media(min-width:960px){
+ .photoControlGrid.v132Compact{display:grid!important;grid-template-columns:minmax(0,1.12fr) minmax(0,.96fr) minmax(0,1.30fr) minmax(115px,.56fr)!important;gap:5px!important;margin:3px 0 3px!important;align-items:stretch}
+ .photoControlGrid.v132Compact>.workspaceStepGroup,.photoControlGrid.v132Compact>.alignmentSaveRow>.workspaceStepGroup{padding:5px 6px!important;margin:0!important;min-width:0}
+ .photoControlGrid.v132Compact>.alignmentSaveRow{display:contents!important}
+ .photoControlGrid.v132Compact>.alignmentSaveRow>.workspaceStepGroup{border:1px solid #e0e7f0;border-radius:7px}
+ .photoControlGrid.v132Compact .workspaceStepTitle{font-size:10.5px!important;margin:0 0 3px!important}
+ .photoControlGrid.v132Compact button{font-size:10.5px!important;min-height:27px!important;padding:3px 6px!important;line-height:1.2!important}
+ .photoControlGrid.v132Compact #v13AutoHomography{min-height:27px!important}
+ .photoControlGrid.v132Compact .importActionButtons,.photoControlGrid.v132Compact .toolbar{gap:3px!important}
+ .photoControlGrid.v132Compact .alignmentSaveRow>.compactSaveStep{display:flex!important;flex-direction:column!important;gap:3px!important}
+ .photoControlGrid.v132Compact .alignmentSaveRow #savePair{width:100%;white-space:normal!important}
+ .photoControlGrid.v132Compact #alignmentVerifyState{font-size:10px!important;line-height:1.1!important}
+ .v132CalibrationStrip{margin:2px 0 4px!important;border:1px solid #d9e4f0;border-radius:7px;padding:3px 7px!important}
+ .v132CalibrationStrip .workspaceCal{border:0!important;background:transparent!important}
+ .v132CalibrationStrip .workspaceCal>summary{font-size:11px!important;padding:2px 0!important;display:list-item!important;cursor:pointer}
+ .v132CalibrationStrip .workspaceCalBody{padding:2px 0!important}
+ .v132CalibrationStrip .workspaceCalBody>h3,.v132CalibrationStrip .workspaceCalBody>.small:last-child{display:none!important}
+ .v132CalibrationStrip .calBtns{display:flex!important;align-items:center!important;gap:6px!important;flex-wrap:wrap!important}
+ .v132CalibrationStrip #autoScaleSummary{font-size:11px!important;white-space:nowrap!important}
+ .v132CalibrationStrip .calibrationScalePair{display:flex!important;gap:9px!important;align-items:center!important;margin-top:3px!important}
+ .v132CalibrationStrip .calibrationScalePair .field{display:flex!important;gap:5px!important;align-items:center!important;margin:0!important}
+ .v132CalibrationStrip .calibrationScalePair label{font-size:10px!important}
+ .v132CalibrationStrip .calibrationScalePair input{width:68px!important;min-height:27px!important;padding:3px 5px!important}
+ .v132CalibrationStrip button{min-height:27px!important;padding:3px 7px!important;font-size:10.5px!important}
+ .v132CalibrationStrip #rulerReadout:not(.calError){display:none!important}
+ .v132CalibrationStrip #rulerReadout.calError,.v132CalibrationStrip #autoScaleMismatch:not([hidden]){display:block!important;font-size:11px!important;margin:3px 0!important}
+ .plSelectorToolbar{margin-bottom:3px!important;gap:7px!important}
+ .photoheader:has(#photoTitle){margin:2px 0 3px!important}
+ .photoheader>h2{font-size:14px!important}
+ .photoheader .photoMetaStack{gap:0!important}
+ .photoheader #photoCaptureTime{font-size:10px!important}
+ .v132WorkflowHelp{border:0;background:none;color:#416887;cursor:pointer;font-size:11px;padding:1px 3px;margin:0 0 3px}
+ .v132WorkflowHelp[open]{background:#f5f9fe;border-radius:5px;padding:5px}
+ .v132WorkflowHelp summary{cursor:pointer;list-style:none}
+ .v132WorkflowHelp summary::-webkit-details-marker{display:none}
+ .v132WorkflowHelp .small{margin-top:4px}
+}
+@media(max-width:959px){.v132WorkflowHelp{margin:3px 0;font-size:11px}.v132WorkflowHelp summary{cursor:pointer}}
+</style>
+<script id="v132CompactWorkspaceInstaller">
+(()=>{
+ const apply=()=>{
+  const grid=document.querySelector('.photoControlGrid');
+  const cal=document.getElementById('autoCal')?.closest('.workspaceStepGroup');
+  if(!grid||!cal||grid.classList.contains('v132Compact'))return;
+  grid.classList.add('v132Compact');
+  grid.insertAdjacentElement('afterend',cal);
+  cal.classList.add('v132CalibrationStrip');
+  // Keep workflow explanation available without permanently occupying space.
+  const notes=[...document.querySelectorAll('.workspaceStepGroup')].find(el=>el.textContent.includes('With ArUco:')&&el.textContent.includes('Without ArUco:'));
+  if(notes&&!notes.classList.contains('v132Converted')){
+    notes.classList.add('v132Converted');
+    const help=document.createElement('details');help.className='v132WorkflowHelp';
+    const label=document.createElement('summary');label.textContent='ⓘ Workflow / calibration help';
+    help.append(label);
+    while(notes.firstChild)help.append(notes.firstChild);
+    notes.append(help);
+    notes.style.cssText='margin:0!important;padding:0!important;border:0!important;background:none!important';
+  }
+  // Auto-hide unused ruler controls with successful ArUco, without disabling them.
+  const details=cal.querySelector('details.workspaceCal');
+  const sync=()=>{
+   if(!details)return;
+   const active=document.querySelector('#upperTab[aria-selected="true"]')?'upper':'lower';
+   const photo=document.getElementById('photoTitle')?.textContent||'';
+   const auto=document.getElementById('v13AutoHomography');
+   const status=document.getElementById('autoScaleSummary')?.textContent||'';
+   const isAruco= /ArUco/i.test(status)&&!(/failed|not detected/i.test(status));
+   if(isAruco&&!details.dataset.v132UserToggled){details.open=false}
+   else if(!isAruco&&!details.dataset.v132UserToggled){details.open=true}
+  };
+  details?.addEventListener('toggle',ev=>{if(ev.isTrusted)details.dataset.v132UserToggled='yes'});
+  // Observe status changes only; no measurement state is modified.
+  const status=document.getElementById('autoScaleSummary');
+  if(status){new MutationObserver(sync).observe(status,{childList:true,characterData:true,subtree:true})}
+  document.getElementById('upperTab')?.addEventListener('click',()=>{if(details)delete details.dataset.v132UserToggled;setTimeout(sync,20)});
+  document.getElementById('lowerTab')?.addEventListener('click',()=>{if(details)delete details.dataset.v132UserToggled;setTimeout(sync,20)});
+  sync();
+ };
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',apply,{once:true});else apply();
+})();
+</script>
+</body></html>','application/vnd.ms-excel')};
 $('reportPrint').onclick=()=>{render();window.print()};
 $('reportContent').addEventListener('click',e=>{
  const actionButton=e.target.closest('button[data-panel-action],button[data-chart-copy],button[data-chart-csv]');
