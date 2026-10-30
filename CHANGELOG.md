@@ -1,7 +1,7 @@
 # RefraInspector — Change History and SW/HW Traceability
 
 **Current software:** `SW-13.2` / RefraInspector v13.2 (Beta)  
-**Hardware reference:** `HW-02` printable ArUco target; `HW-03` rigid fixture is a proposal, **not a released product**.
+**Hardware reference:** `HW-02` printable ArUco target; `HW-03 v2.5` lightweight 3D-print prototype (not a validated production jig).
 
 Changes are maintained in two independently numbered registers:
 
@@ -35,6 +35,10 @@ Changes are maintained in two independently numbered registers:
 | `SW-13.0` / legacy fallback when no markers | `HW-01` | Preserve Level + X/Y ruler calibration workflow | Supported compatibility path |
 | **`SW-13.0` / coplanar calibration requirement** | **`HW-03`** | Planned jig keeps the marker surfaces and PL reference surface in one plane | Design proposal; not mechanically validated |
 | `SW-9.0` + `SW-13.0` / measure accuracy comparison | `HW-04` | Controlled A–F validation across both workflows | Test plan, not validated specifications |
+
+## HW-03 design iteration (2026-10-30)
+
+The original aluminum extrusion U-jig concept is retained as HW-03's baseline. [HW-03 v2.5 lightweight 3D-print model](./hardware/HW03_v2.5_lightweight_3d_print_jig.scad) is its successor prototype: bottom opening; three engraved numbered bars; four coplanar ArUco targets at 300 mm centre spacing; clearance-cut corner pods; two right-bar M6 cross holes; and underside relief pockets. Strength, clamping deformation, coplanarity and real measurement accuracy remain unverified. Software v13.2 is unchanged.
 
 ## Interface and release rules
 
