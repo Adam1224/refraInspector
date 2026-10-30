@@ -42,6 +42,13 @@ See [software changes](./CHANGELOG_SOFTWARE.md) and [traceability mapping](./CHA
 - **Required before measurement use:** verify PL fit and support contact, M6 load path and printed-bore sizing, the complete physical 300 mm marker geometry, coplanarity of marker faces and unworn PL reference surface, assembly deformation, engraving visibility, and physical measurement repeatability. The drawing is not a fabrication tolerance certificate.
 - **Interfaces:** existing SW-13.2 automatic ArUco/Homography workflow. Hardware update does not require or imply software algorithm changes.
 
+### HW-03 v2.8.4 — QR manual & engraved identification (2026-10-30)
+**State:** OpenSCAD prototype revision; not yet physically printed or validated.
+
+- [SCAD model](./hardware/HW03_v2.8.4_QR_adjacent_label_rotated.scad) builds on v2.5: outer-side recessed QR linked to repository instructions, adjacent `SCAN FOR MANUAL` label, top-surface `RefraInspector Jig` and `HW-03 v2.8.4` engraving.
+- Keeps bottom-open frame, numbered scales, right-side M6 clearance holes and underside weight-reduction pockets.
+- The QR's printed scan performance, side-label orientation and physical part stiffness remain to be validated; marker images are not embedded ArUco codes.
+
 ## HW-04 — Measurement accuracy verification protocol (planned)
 **State:** Proposed test plan; no validated tolerance claim.
 
