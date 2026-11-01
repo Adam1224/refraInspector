@@ -29,7 +29,7 @@ Jump directly to an individual release or hardware iteration. The linked descrip
 
 ## Release note (2026-10-30)
 
-`SW-13.2.7` is the current software release, adding unified Campaign export, true XLSX output, paired PL details, separated Campaign reference/results and corrected chart terminology. Earlier `SW-13.2` introduced a compact workspace layout, using the same ArUco target (`HW-02`) and existing measurement workflow. The last working application, [`v13.0.6`](./refraInspector_v13.0.6.html), is retained for rollback.
+`SW-13.2.7` is the current software release, adding unified Campaign export, true XLSX output, paired PL details, separated Campaign reference/results and corrected chart terminology. Earlier `SW-13.2` introduced a compact workspace layout, using the same ArUco target (`HW-02`) and existing measurement workflow. The last working application, `v13.0.6` (Git history only), is retained for rollback.
 
 ## Correspondence between software and hardware
 
