@@ -43,18 +43,6 @@ The design incorporates three PL-positioning sides (top, left, right), numbered 
 
 **Marker printing:** use the original [4 × A4 ArUco calibration PDF](./docs/RefraInspector_ArUco_300x300_4A4_NoZeroLabel.pdf), printed at 100% and physically checked before installation. [Hardware revisions and validation status](./CHANGELOG_HARDWARE.md) remain distinct from [software releases](./CHANGELOG_SOFTWARE.md).
 
-## v13.2.7 export and chart updates (2026-10-30)
-
-- Consolidated Campaign export into one **Export Campaign Info** entry, with previews and selection between Campaign Summary / PL Geometry and all saved PL Set details.
-- Excel **.xlsx** is the default output; CSV and copyable TSV are alternatives. Saved PL sets without Heats Used / Total Runtime remain included; missing entries display `N/A`, dimensions are formatted to one decimal place, and shared Upper/Lower fields are merged in the Excel detail table.
-- Campaign Summary separates user-entered PL reference geometry from calculated Campaign performance data.
-- Chart caption updated to **Upper / Lower Long-End Damage Length (T) vs Heats Used**.
-- **Previous release:** v13.2 (historical release; source available in Git history). Actual Excel/browser regression validation remains pending.
-
-## v13.2 workspace update (2026-10-30)
-
-The photo-workspace controls use a compact two-column arrangement with reduced spacing. Legacy X/Y ruler calibration starts collapsed and can be expanded when needed; ArUco detection remains accessible. Redundant inline workflow guidance was removed, with the verification and Campaign-saving controls retained. **Previous version:** v13.0.6 (historical release; source available in Git history). Browser interaction and measurement accuracy have not been independently revalidated for this UI update.
-
 ## Hardware preparation — before Step 1
 
 Choose **one** of the two supported photo-reference methods before opening RefraInspector. Both require a camera/phone, the PL to be measured, stable lighting and a flat, stable working area. The **ArUco method is preferred** for perspective correction; the **legacy two-ruler method** remains available when ArUco hardware cannot be prepared.
