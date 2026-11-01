@@ -49,11 +49,11 @@ The design incorporates three PL-positioning sides (top, left, right), numbered 
 - Excel **.xlsx** is the default output; CSV and copyable TSV are alternatives. Saved PL sets without Heats Used / Total Runtime remain included; missing entries display `N/A`, dimensions are formatted to one decimal place, and shared Upper/Lower fields are merged in the Excel detail table.
 - Campaign Summary separates user-entered PL reference geometry from calculated Campaign performance data.
 - Chart caption updated to **Upper / Lower Long-End Damage Length (T) vs Heats Used**.
-- **Previous release:** [v13.2](./refraInspector_v13.2.html). Actual Excel/browser regression validation remains pending.
+- **Previous release:** v13.2 (historical release; source available in Git history). Actual Excel/browser regression validation remains pending.
 
 ## v13.2 workspace update (2026-10-30)
 
-The photo-workspace controls use a compact two-column arrangement with reduced spacing. Legacy X/Y ruler calibration starts collapsed and can be expanded when needed; ArUco detection remains accessible. Redundant inline workflow guidance was removed, with the verification and Campaign-saving controls retained. **Previous version:** [v13.0.6](./refraInspector_v13.0.6.html). Browser interaction and measurement accuracy have not been independently revalidated for this UI update.
+The photo-workspace controls use a compact two-column arrangement with reduced spacing. Legacy X/Y ruler calibration starts collapsed and can be expanded when needed; ArUco detection remains accessible. Redundant inline workflow guidance was removed, with the verification and Campaign-saving controls retained. **Previous version:** v13.0.6 (historical release; source available in Git history). Browser interaction and measurement accuracy have not been independently revalidated for this UI update.
 
 ## Hardware preparation — before Step 1
 
@@ -412,13 +412,13 @@ The ArUco workflow should be **automatic**, not require the user to click each m
 
 ## 10. Documentation and support
 
-- [Current application — refraInspector_v13.2.html](./refraInspector_v13.2.7.html)
+- [Current application — refraInspector_v13.2.7.html](./refraInspector_v13.2.7.html)
 - [Printable four-sheet ArUco target — 300 × 300 mm](./docs/RefraInspector_ArUco_300x300_4A4_NoZeroLabel.pdf)
 - [SW/HW version mapping — CHANGELOG.md](./CHANGELOG.md)
 - [Software releases (SW codes) — CHANGELOG_SOFTWARE.md](./CHANGELOG_SOFTWARE.md)
 - [Hardware and ArUco target (HW codes) — CHANGELOG_HARDWARE.md](./CHANGELOG_HARDWARE.md)
 - [Detailed historical changes — CHANGELOG_ARCHIVE.md](./CHANGELOG_ARCHIVE.md)
 
-The current executable is **refraInspector_v13.2.html**. Obsolete **v13.0** and **v12.1.7** HTML files were removed from the current branch; their prior contents remain recoverable through Git history. Historical versions may still be mentioned in the software change log.
+The current executable is **refraInspector_v13.2.7.html**. Only this HTML release is retained on the current branch. Obsolete **v13.0** and **v12.1.7** HTML files were removed from the current branch; their prior contents remain recoverable through Git history. Historical versions may still be mentioned in the software change log.
 
 **Developer / Help Desk:** xuh@shinagawa-ref.jp
