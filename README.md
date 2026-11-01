@@ -10,7 +10,7 @@ RefraInspector is a browser-based application for inspection and analysis of ref
 
 ## Contents
 
-- [Hardware preparation — before Step 1](#hardware-preparation--before-step-1)
+- [Hardware preparation — before Step 1](#before-you-start--use-an-existing-photo-or-take-a-new-one)
 - [1. Quick start — one inspection](#1-quick-start--complete-one-pl-inspection)
 - [2. Warnings and errors](#2-warnings-and-errors--cause-and-solution)
   - [Diagnostic code index](#diagnostic-code-index-v132)
@@ -33,39 +33,26 @@ RefraInspector is a browser-based application for inspection and analysis of ref
 - [9. Measurement limitations](#9-measurement-guidance-and-limitations)
 - [10. Documents and support](#10-documentation-and-support)
 
-## Hardware preparation — before Step 1
+## Before you start — use an existing photo or take a new one
 
-Choose **one** of the two supported photo-reference methods before opening RefraInspector. Both require a camera/phone, the PL to be measured, stable lighting and a flat, stable working area. The **ArUco method is preferred** for perspective correction; the **legacy two-ruler method** remains available when ArUco hardware cannot be prepared.
+**Already have PL photos?** Open [RefraInspector](./refraInspector_v13.2.7.html) and import the Upper and/or Lower images. No physical jig is needed to *open* a photo. For calibrated measurements, however, the photo must include usable references: **all four ArUco markers** or **two visible perpendicular metric rulers**. If neither is present, accurate dimensional calibration cannot be established from the photo alone. [See calibration options](#5-how-image-calibration-works-technical).
 
-| | Legacy: two perpendicular rulers | ArUco: four-marker calibration |
+**Taking new photos?** Choose one reference method before shooting:
+
+| Reference method | What to prepare | In the app |
 |---|---|---|
-| **Required reference hardware** | Two clearly readable, straight metric rulers placed at right angles; each must provide a measurable **100 mm** span | Four printable **DICT_4X4_50** marker patterns (IDs **0, 1, 2, 3**), black square **30 × 30 mm**, with **300 × 300 mm marker-centre spacing** |
-| **How to obtain** | Use existing shop-floor metric rulers or purchase two rigid rulers with clear 1 mm graduations; add a square/straightedge to check perpendicularity | Download the [official four-page A4 marker PDF](./docs/RefraInspector_ArUco_300x300_4A4_NoZeroLabel.pdf); print at **Actual Size / 100%** and assemble as instructed in [Section 6](#6-aruco-target--printing-and-physical-setup) |
-| **How to mount** | Fix one ruler along the horizontal X direction and the other along vertical Y. Prevent slippage and position readable graduations as near as possible to the PL's unworn measurement surface | **Option A (immediate trial):** affix the verified 4-A4 print to a flat, rigid backing. **Option B (jig prototype):** use the [HW-03 v2.8.4 3D-print design](./hardware/HW03_v2.8.4_QR_adjacent_label_rotated.scad), apply the real marker patterns at its four designated positions, and verify physical geometry |
-| **Software calibration** | Auto Level / 2-Point Level → Auto 100mm X/Y Calibration or manual calibration if necessary | Automatic four-marker detection → 16-corner Homography/perspective correction |
-| **Important checks** | Both 100 mm spans visible in the photo; rulers straight, orthogonal, in focus and at a suitable height relative to the PL | All four codes and their white margins clearly visible; correct IDs/layout; measured 300 mm centre spacings; marker faces coplanar with unworn PL surface |
+| **ArUco (recommended)** | Four markers (IDs 0–3), correctly positioned **300 × 300 mm centre-to-centre**; keep all markers visible and coplanar with the PL reference face. [Print / set up markers](#6-aruco-target--printing-and-physical-setup) · [Marker PDF](./docs/RefraInspector_ArUco_300x300_4A4_NoZeroLabel.pdf) | Automatic detection and perspective correction |
+| **Two rulers (fallback)** | Two perpendicular metric rulers, each with at least **100 mm** visible beside the PL. [See ruler calibration](#34-state-s2--traditional-leveling-and-xy-ruler-calibration) | Level the photo, then calibrate X and Y |
 
-### Legacy hardware: quick setup
-
-1. Prepare **two metric rulers**, each with at least **100 mm** of visible graduations.
-2. Place one horizontally and the other vertically beside the PL, and keep them fixed.
-3. Take a photo showing the PL and both ruler scales. In RefraInspector, use **Level → X/Y Calibration**.
-
-### ArUco hardware: marker setup
-
-1. Download the [ArUco marker PDF](./docs/RefraInspector_ArUco_300x300_4A4_NoZeroLabel.pdf) and print at **100%**, or prepare the [HW-03 3D-print Jig](./hardware/HW03_v2.8.4_QR_adjacent_label_rotated.scad).
-2. Attach the four **ArUco markers** to the four corners in order: **ID 0 top-left, ID 1 top-right, ID 2 bottom-left, ID 3 bottom-right**. Keep their black squares and white borders visible, and ensure the marker faces are level with the PL measurement surface.
-3. Take a photo showing the PL and all four markers. RefraInspector will attempt **automatic ArUco detection and perspective correction**.
-
-For detailed printing and positioning instructions, see [Section 6](#6-aruco-target--printing-and-physical-setup).
+**For either method:** photograph the full PL and reference targets in focus, with steady lighting. Check that the reference lies close to the PL's unworn measurement plane. A [3D-printable jig design](./hardware/HW03_v2.8.4_QR_adjacent_label_rotated.scad) is available but **not required** to use the application.
 
 ## 1. Quick start — complete one PL inspection
 
-**Workflow:** Prepare → Import → Calibrate & align → Verify → Save → Export. For first-time setup, choose [ArUco or two rulers](#hardware-preparation--before-step-1).
+**Workflow:** Prepare → Import → Calibrate & align → Verify → Save → Export. For first-time setup, choose [ArUco or two rulers](#before-you-start--use-an-existing-photo-or-take-a-new-one).
 
 | Step | Action | More details |
 |---|---|---|
-| **1 · Prepare** | Open [RefraInspector v13.2.7](./refraInspector_v13.2.7.html); enter the PL Geometry reference dimensions and prepare the PL and calibration target. | [Hardware setup](#hardware-preparation--before-step-1) · [PL Geometry / initial state](#32-state-s0--no-photo-imported) |
+| **1 · Prepare** | Open [RefraInspector v13.2.7](./refraInspector_v13.2.7.html); enter the PL Geometry reference dimensions and prepare the PL and calibration target. | [Hardware setup](#before-you-start--use-an-existing-photo-or-take-a-new-one) · [PL Geometry / initial state](#32-state-s0--no-photo-imported) |
 | **2 · Import** | Upload the **Upper** and/or **Lower** PL photo. Confirm that the photos are correctly assigned. | [Photo import](#33-state-s1--photo-imported-automatic-setup-being-evaluated) · [Warnings](#2-warnings-and-errors--cause-and-solution) |
 | **3 · Calibrate & align** | Let **Auto ArUco** correct the image; without ArUco, level and calibrate the two rulers. Check and adjust the H/V measurement guides. | [Ruler calibration](#34-state-s2--traditional-leveling-and-xy-ruler-calibration) · [Alignment](#35-state-s3--calibrated-photo-alignment-not-yet-verified) |
 | **4 · Verify** | Review A–F and damage boundaries; click **Verify Alignment** for each imported PL. | [Verification](#36-state-s4--photo-alignment-verified) · [Measurement limitations](#9-measurement-guidance-and-limitations) |
