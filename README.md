@@ -71,22 +71,18 @@ For detailed printing and positioning instructions, see [Section 6](#6-aruco-tar
 
 ## 1. Quick start — complete one PL inspection
 
-**You do not need to understand Homography or ellipse fitting to use RefraInspector.** Follow these steps in order:
+**Workflow:** Prepare → Import → Calibrate & align → Verify → Save → Export. For first-time setup, choose [ArUco or two rulers](#hardware-preparation--before-step-1).
 
-| Step | What to do | What to check |
+| Step | Action | More details |
 |---|---|---|
-| **1. Open** | Download [RefraInspector v13.2](./refraInspector_v13.2.7.html) and open it in a current browser. Select **PL Inspection**. | Use a desktop browser when precise guide dragging is required. |
-| **2. Prepare the photo** | Place each PL beside the **four ArUco markers** (preferred) or the **two reference rulers** (fallback). Photograph the entire measurement area with the reference visible. | With ArUco, all four markers must be visible and their faces at the same height as the unworn PL reference face. |
-| **3. Enter PL Geometry** | Enter the required W0, X0, Y0, Z0 and R0 values, plus the safe-stroke limit where applicable. | Check units and the correct PL model. Changing shared geometry can affect saved Campaign data. |
-| **4. Import** | Import the Upper photo, the Lower photo, or both. Confirm the **Upper/Lower** labels. | A photo-time difference warning means: check that the pair belongs together. |
-| **5. Correct the image** | **ArUco:** detection and perspective correction run automatically. **No ArUco:** use **Auto Level** or **Level with 2 Points**, then calibrate **X and Y** rulers separately. | Do not continue with an uncalibrated axis in the ruler workflow. |
-| **6. Align the lines** | Click **Auto Align**, then inspect every H/V guide. H3/H4 should touch the inner opening; H2/H5/V1/V2 should touch the **outer worn boundary**; check H1/H6 too. Drag guides to correct errors. | Outer-wear recognition is experimental: a plausible automatic line may still be wrong. |
-| **7. Verify** | Click **Verify Alignment*** for each imported PL. | If you change a photo, calibration or guide afterwards, repeat verification when requested. |
-| **8. Review measurements** | Check A–F values, bore/damage estimates and remarks. Add manual values when needed. Enter **PL Set Usage Info** (heats, runtime, ID). | Inspect the values, not only the image overlays. |
-| **9. Save** | Use **Save set to campaign**, confirm that the PL set appears in the saved list. | Only verified, valid records should be saved; saved usage information may be locked. |
-| **10. Report / export** | Open **Campaign Report** to view saved data, graphs and export tools. Back up important Campaign records. | Unsaved working drafts do not appear in Campaign reports. |
+| **1 · Prepare** | Open [RefraInspector v13.2.7](./refraInspector_v13.2.7.html); enter the PL Geometry reference dimensions and prepare the PL and calibration target. | [Hardware setup](#hardware-preparation--before-step-1) · [PL Geometry / initial state](#32-state-s0--no-photo-imported) |
+| **2 · Import** | Upload the **Upper** and/or **Lower** PL photo. Confirm that the photos are correctly assigned. | [Photo import](#33-state-s1--photo-imported-automatic-setup-being-evaluated) · [Warnings](#2-warnings-and-errors--cause-and-solution) |
+| **3 · Calibrate & align** | Let **Auto ArUco** correct the image; without ArUco, level and calibrate the two rulers. Check and adjust the H/V measurement guides. | [Ruler calibration](#34-state-s2--traditional-leveling-and-xy-ruler-calibration) · [Alignment](#35-state-s3--calibrated-photo-alignment-not-yet-verified) |
+| **4 · Verify** | Review A–F and damage boundaries; click **Verify Alignment** for each imported PL. | [Verification](#36-state-s4--photo-alignment-verified) · [Measurement limitations](#9-measurement-guidance-and-limitations) |
+| **5 · Save** | Enter available usage information (e.g. heats/runtime), then **Save set to campaign**. | [Ready to save](#37-state-s5--working-pl-set-ready-for-campaign-saving) · [Saved records](#38-state-s6--pl-set-saved-to-campaign) |
+| **6 · Export** | Open **Export Campaign Info**, preview **Campaign Summary** or **Saved PL Set Details**, then export (Excel is the default). | [Export and backup](#8-export-and-data-preservation) |
 
-**Important:** An automatic result is a *suggestion*, never a substitute for visually checking actual damage boundaries. In this Beta release, **Verify Alignment is a human confirmation step**.
+**Before saving:** Automatic measurements require visual review. Verify again if subsequent edits invalidate alignment; missing heats/runtime do not prevent an already saved set from appearing in the full detail export.
 
 ## 2. Warnings and errors — cause and solution
 
