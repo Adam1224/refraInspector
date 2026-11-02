@@ -3595,7 +3595,6 @@ syncAlignmentVerification();
  const restoreBtn=document.createElement('button');restoreBtn.type='button';restoreBtn.className='minibtn';restoreBtn.textContent='Restore backup';restoreBtn.title='Restore a RefraInspector v10.2.9 full backup (replaces current unsaved session)';
  const backupFile=document.createElement('input');backupFile.type='file';backupFile.accept='.json,application/json';backupFile.hidden=true;backupFile.setAttribute('aria-label','RefraInspector backup file');
  backupBar.append(backupBtn,restoreBtn,backupFile);document.querySelector('body>header>.inline').append(backupBar);
-// Read-only original-photo preview bridge.
 window.__riGetActivePlateForPreview=()=>plates[active];
  const photoToDataURL=image=>{
   if(!image)return null;
