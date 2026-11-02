@@ -21,22 +21,24 @@ Hardware revision history is maintained independently of software releases. **La
 
 ## HW-03 iteration history — newest to oldest
 
-| Revision | Main change relative to previous iteration | Status |
+| Revision | Main change relative to previous iteration | — |
 |---|---|---|
-| **v2.8.4** <a id="hw03-v2-8-4"></a> | Rotated `SCAN FOR MANUAL` 180° and moved it closer to the QR; updated version engraving | **Current SCAD design baseline** |
-| v2.8.3 <a id="hw03-v2-8-3"></a> | Corrected the side-label left-to-right reading direction | Historical |
-| v2.8.2 <a id="hw03-v2-8-2"></a> | Rotated the QR and adjacent side text 180° to correct upside-down display | Historical |
-| v2.8.1 <a id="hw03-v2-8-1"></a> | Corrected top-face project name and version lettering after global model mirroring | Historical |
-| v2.8 <a id="hw03-v2-8"></a> | Added `SCAN FOR MANUAL` instruction and engraved project name/version | Historical |
-| v2.7 <a id="hw03-v2-7"></a> | Verified the embedded QR URL against the RefraInspector repository link; clarified that earlier displayed example QR was incorrect | Historical |
-| v2.6 <a id="hw03-v2-6"></a> | Added recessed QR to the outer face of the top bar for access to project instructions | Historical |
-| **v2.5** <a id="hw03-v2-5"></a> | Rotated the top ruler numbers by 90° and adjusted text size to avoid overlap | Historical |
-| v2.4 <a id="hw03-v2-4"></a> | Added underside lightening pockets while retaining load-bearing regions around the M6 holes | Historical; strength unverified |
-| v2.3 <a id="hw03-v2-3"></a> | Corrected the displayed frame orientation so the open side faces down | Historical |
-| v2.2 <a id="hw03-v2-2"></a> | Added 10 mm numeric labels to the 1 mm scales and two transverse M6 clearance holes in the right bar | Historical |
-| v2.1 <a id="hw03-v2-1"></a> | Trimmed inward-projecting corner-pad features to preserve PL clearance | Historical |
-| v2 <a id="hw03-v2"></a> | Added top/left/right engraved ruler concepts and thicker PL-contact side bars | Historical |
-| Initial HW-03 concept | Aluminum extrusion, orthogonal reference rulers / ArUco mounting and a U-shaped PL positioning fixture | **Superseded concept**, retained for traceability |
+| **v2.8.4** <a id="hw03-v2-8-4"></a> | Rotated `SCAN FOR MANUAL` 180° and moved it closer to the QR; updated version engraving | 2026-10-30 |
+| v2.8.3 <a id="hw03-v2-8-3"></a> | Corrected the side-label left-to-right reading direction | — |
+| v2.8.2 <a id="hw03-v2-8-2"></a> | Rotated the QR and adjacent side text 180° to correct upside-down display | — |
+| v2.8.1 <a id="hw03-v2-8-1"></a> | Corrected top-face project name and version lettering after global model mirroring | — |
+| v2.8 <a id="hw03-v2-8"></a> | Added `SCAN FOR MANUAL` instruction and engraved project name/version | — |
+| v2.7 <a id="hw03-v2-7"></a> | Verified the embedded QR URL against the RefraInspector repository link; clarified that earlier displayed example QR was incorrect | — |
+| v2.6 <a id="hw03-v2-6"></a> | Added recessed QR to the outer face of the top bar for access to project instructions | — |
+| **v2.5** <a id="hw03-v2-5"></a> | Rotated the top ruler numbers by 90° and adjusted text size to avoid overlap | 2026-10-30 |
+| v2.4 <a id="hw03-v2-4"></a> | Added underside lightening pockets while retaining load-bearing regions around the M6 holes | — |
+| v2.3 <a id="hw03-v2-3"></a> | Corrected the displayed frame orientation so the open side faces down | — |
+| v2.2 <a id="hw03-v2-2"></a> | Added 10 mm numeric labels to the 1 mm scales and two transverse M6 clearance holes in the right bar | — |
+| v2.1 <a id="hw03-v2-1"></a> | Trimmed inward-projecting corner-pad features to preserve PL clearance | — |
+| v2 <a id="hw03-v2"></a> | Added top/left/right engraved ruler concepts and thicker PL-contact side bars | — |
+| Initial HW-03 concept | Aluminum extrusion, orthogonal reference rulers / ArUco mounting and a U-shaped PL positioning fixture | — |
+
+**Date note:** Dates above are supported by GitHub commits recording v2.5 and v2.8.4 on 2026-10-30 (JST). A dash indicates that an individual revision date could not be verified from available commit history; it does not imply the revision was never made. Dates refer to the documented repository update, not necessarily the original CAD editing time.
 
 **Versioning note:** These are hardware design iterations, not separately certified prints. Historical SCAD files have intentionally been removed from the repository's `hardware/` directory so it holds only the latest design source.
 
