@@ -42,14 +42,15 @@ Hardware revision history is maintained independently of software releases. **La
 
 ## Other hardware references and verification
 
-### HW-02 — ArUco calibration target (four A4 sheets)
+### HW-02 — ArUco calibration target (four revised A4 sheets)
 
 **State:** Printable PDF reference available; physical precision not certified.
 
-- [Original ArUco 300 × 300 mm 4-A4 PDF](./docs/RefraInspector_ArUco_300x300_4A4_NoZeroLabel.pdf), printed at **Actual Size / 100%** and assembled without overlap.
+- [Revised fixed-label ArUco 300 × 300 mm 4-A4 PDF](./docs/RefraInspector_ArUco_300x300_4A4_NoZeroLabel.pdf), printed at **Actual Size / 100%** and assembled without overlap.
 - `DICT_4X4_50`, IDs 0–3, with 30 mm black-square markers and 300 mm centre spacing in each axis.
 - Scale-origin convention follows the bottom-right black corner of ID 0; this is distinct from the marker-centre-based 300 mm geometry used by Homography.
-- Measure the 100 mm print check and actual marker spacing after print/installation. Compatible with the SW-13.2 four-marker workflow.
+- Revised printable layout: each sheet identifies its marker ID, page number and assembly corner; each sheet carries a 100 mm PRINT CHECK line. Assemble page 1 / ID0 top-left, page 2 / ID1 top-right, page 3 / ID2 bottom-left and page 4 / ID3 bottom-right.
+- Measure the 100 mm print check **on every sheet** and actual 300 × 300 mm nominal marker-centre spacing after print/installation. The print-layout revision does not change the SW-13.2 DICT_4X4_50 IDs 0–3 or Homography reference geometry; compatibility remains conditional on verified printed dimensions and marker readability.
 
 ### HW-01 — Two-ruler photographic reference (legacy)
 
