@@ -44,6 +44,8 @@ RefraInspector is a browser-based application for inspection and analysis of ref
 | **ArUco (recommended)** | Four markers (IDs 0–3), correctly positioned **300 × 300 mm centre-to-centre**; keep all markers visible and coplanar with the PL reference face. [Print / set up markers](#6-aruco-target--printing-and-physical-setup) · [Marker PDF](./hardware/RefraInspector_ArUco_300x300_4A4_REVIEW_v13_fixed_labels.pdf) | Automatic detection and perspective correction |
 | **Two rulers (fallback)** | Two perpendicular metric rulers, each with at least **100 mm** visible beside the PL. [See ruler calibration](#34-state-s2--traditional-leveling-and-xy-ruler-calibration) | Level the photo, then calibrate X and Y |
 
+**When taking photos with the ArUco jig:** Press the PL firmly against the **upper-left positioning corner of the jig** (the top and left locating surfaces), without covering the markers. Position the **camera lens approximately above the PL bore/opening**, and frame the shot so **all four ArUco markers (IDs 0–3), including their white margins, are fully visible and unobstructed**. A modest off-axis camera angle is generally acceptable when the markers are correctly detected: planar Homography compensates for perspective, so slight camera tilt alone should not materially affect planar measurement accuracy. This is conditional on coplanar reference surfaces, adequate image quality and independently verified dimensions; severe tilt, parallax from height offsets, lens distortion and worn/nonplanar surfaces can still cause error.
+
 **For either method:** photograph the full PL and reference targets in focus, with steady lighting. Check that the reference lies close to the PL's unworn measurement plane. A [3D-printable jig design](./hardware/HW03_v2.8.4_QR_adjacent_label_rotated.scad) is available but **not required** to use the application.
 
 ## 1. Quick start — complete one PL inspection
@@ -320,9 +322,10 @@ For metrology, mount the printed target on a stable rigid jig once its dimension
 
 ### Position the frame relative to the PL
 
-- Place the target around the **short-end / bore and surrounding damage measurement area** of the spindle-shaped PL; the less relevant long-end tail can extend beyond the target, provided everything you need to inspect remains visible.
+- **Seat the PL firmly against the jig's top and left locating surfaces (upper-left corner)** so its placement is repeatable. Place the target around the **short-end / bore and surrounding damage measurement area** of the spindle-shaped PL; the less relevant long-end tail can extend beyond the target, provided everything you need to inspect remains visible.
 - The **four marker faces must be coplanar with the PL's intended flat, unworn measurement reference surface**. Support the PL and jig independently if needed; **placing both on the same floor/table is insufficient when their heights differ**.
-- Keep all four markers fully visible, with adequate white quiet zones, and avoid glare, shadows, perspective extremes and motion blur. A near-perpendicular camera position is recommended even though Homography can correct planar perspective.
+- **Aim the camera lens approximately over the PL bore/opening**, and keep all four ArUco markers (IDs 0–3) and their white quiet zones fully in frame, unobstructed by the PL, jig, hands or shadows. Avoid glare and motion blur.
+- **Slight camera tilt is acceptable with valid ArUco detection and coplanar mounting**: Homography corrects planar perspective, so modest off-axis shooting should not by itself significantly degrade planar dimensional accuracy. Near-perpendicular shooting is still preferable; large tilt, lens distortion and any height offset between marker and PL planes may introduce measurement error.
 - Homography assumes a single plane: recessed erosion, raised edges, camera lens distortion and fixture flex can still introduce errors. Use known dimensions at multiple positions for independent precision checks.
 
 ### Two supported inspection workflows
