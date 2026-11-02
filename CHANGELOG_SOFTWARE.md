@@ -6,6 +6,9 @@ See [hardware changes](./CHANGELOG_HARDWARE.md), [software-to-hardware mapping](
 
 ## SW-13.3 · v13.3 — 2026-11-02 (Beta)
 
+- Fixed Campaign Report / Export Campaign Info area metrics J (Used Bore), K (Bore Enlargement), L (Edge Damage), and M (Enlargement Ratio) previously shown as N/A despite existing in PL Inspection. The report now computes them for each saved Upper/Lower plate using that set's saved image, guides, calibration and Y₀, with an in-memory cache. Truly unmeasurable values remain N/A.
+
+
 - Added click-only workspace ↑/↓ PL Set navigation preserving the current Upper/Lower side, plus circular ←/→ Upper/Lower navigation. No hover-triggered switching.
 - Unified ArUco and legacy control-panel grids: stable #0–#4 positions, with an ArUco Homography status cell replacing the unused ruler calibration controls.
 
