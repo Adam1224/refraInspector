@@ -35,7 +35,7 @@ RefraInspector is a browser-based application for inspection and analysis of ref
 
 ## Before you start — use an existing photo or take a new one
 
-**Already have PL photos?** Open [RefraInspector](./refraInspector_v13.2.8.html) and import the Upper and/or Lower images. No physical jig is needed to *open* a photo. For calibrated measurements, however, the photo must include usable references: **all four ArUco markers** or **two visible perpendicular metric rulers**. If neither is present, accurate dimensional calibration cannot be established from the photo alone. [See calibration options](#5-how-image-calibration-works-technical).
+**Already have PL photos?** Open [RefraInspector](./refraInspector_v13.3.html) and import the Upper and/or Lower images. No physical jig is needed to *open* a photo. For calibrated measurements, however, the photo must include usable references: **all four ArUco markers** or **two visible perpendicular metric rulers**. If neither is present, accurate dimensional calibration cannot be established from the photo alone. [See calibration options](#5-how-image-calibration-works-technical).
 
 **Taking new photos?** Choose one reference method before shooting:
 
@@ -54,7 +54,7 @@ RefraInspector is a browser-based application for inspection and analysis of ref
 
 | Step | Action | More details |
 |---|---|---|
-| **1 · Prepare** | Open [RefraInspector v13.2.7](./refraInspector_v13.2.8.html); enter the PL Geometry reference dimensions and prepare the PL and calibration target. | [Hardware setup](#before-you-start--use-an-existing-photo-or-take-a-new-one) · [PL Geometry / initial state](#32-state-s0--no-photo-imported) |
+| **1 · Prepare** | Open [RefraInspector v13.2.7](./refraInspector_v13.3.html); enter the PL Geometry reference dimensions and prepare the PL and calibration target. | [Hardware setup](#before-you-start--use-an-existing-photo-or-take-a-new-one) · [PL Geometry / initial state](#32-state-s0--no-photo-imported) |
 | **2 · Import** | Upload the **Upper** and/or **Lower** PL photo. Confirm that the photos are correctly assigned. | [Photo import](#33-state-s1--photo-imported-automatic-setup-being-evaluated) · [Warnings](#2-warnings-and-errors--cause-and-solution) |
 | **3 · Calibrate & align** | Let **Auto ArUco** correct the image; without ArUco, level and calibrate the two rulers. Check and adjust the H/V measurement guides. | [Ruler calibration](#34-state-s2--traditional-leveling-and-xy-ruler-calibration) · [Alignment](#35-state-s3--calibrated-photo-alignment-not-yet-verified) |
 | **4 · Verify** | Review A–F and damage boundaries; click **Verify Alignment** for each imported PL. | [Verification](#36-state-s4--photo-alignment-verified) · [Measurement limitations](#9-measurement-guidance-and-limitations) |
@@ -356,7 +356,10 @@ The ArUco workflow should be **automatic**, not require the user to click each m
 
 ## 8. Export and data preservation
 
-**Campaign Backup (v13.2.8):** The JSON preserves both `photoDataURL` (the processed workspace PNG) and `originalPhotoDataURL` (the unchanged imported camera file bytes, including embedded metadata) for each saved Upper/Lower PL. A top-level `originalPhotoIndex` identifies originals by Campaign ID, PL Set ID, Upper/Lower side, original upload filename, file size, and a suggested filename such as `CMP001_PL001_Upper_ORIGINAL.heic`. Both versions are embedded in the same JSON, not separately downloaded. Older backups cannot retroactively recover missing originals. Save each PL set first; unsaved changes are not included. Expect larger JSON files.
+**v13.3 inspection controls:** Use **Show Original Photo** in the upper-left of the photo workspace to preview the uncorrected uploaded image. This read-only preview does not modify calibration, dimensions, saved records or the processed image. If a browser cannot display original HEIC directly, the app attempts a decoded source preview. Clicking **Export Campaign Info** while in PL Inspection first switches to **Campaign Report**, then opens the export dialog. Header controls have consistent touch targets and spacing.
+
+
+**Campaign Backup (v13.3; introduced in v13.2.8):** The JSON preserves both `photoDataURL` (the processed workspace PNG) and `originalPhotoDataURL` (the unchanged imported camera file bytes, including embedded metadata) for each saved Upper/Lower PL. A top-level `originalPhotoIndex` identifies originals by Campaign ID, PL Set ID, Upper/Lower side, original upload filename, file size, and a suggested filename such as `CMP001_PL001_Upper_ORIGINAL.heic`. Both versions are embedded in the same JSON, not separately downloaded. Older backups cannot retroactively recover missing originals. Save each PL set first; unsaved changes are not included. Expect larger JSON files.
 
 
 - **Copy PLs details** and **Copy Campaign data** produce spreadsheet-compatible content.
@@ -379,13 +382,13 @@ The ArUco workflow should be **automatic**, not require the user to click each m
 
 ## 10. Documentation and support
 
-- [Current application — refraInspector_v13.2.8.html](./refraInspector_v13.2.8.html)
+- [Current application — refraInspector_v13.3.html](./refraInspector_v13.3.html)
 - [Printable four-sheet ArUco target — 300 × 300 mm](./hardware/RefraInspector_ArUco_300x300_4A4_REVIEW_v13_fixed_labels.pdf)
 - [SW/HW version mapping — CHANGELOG.md](./CHANGELOG.md)
 - [Software releases (SW codes) — CHANGELOG_SOFTWARE.md](./CHANGELOG_SOFTWARE.md)
 - [Hardware and ArUco target (HW codes) — CHANGELOG_HARDWARE.md](./CHANGELOG_HARDWARE.md)
 - [Detailed historical changes — CHANGELOG_ARCHIVE.md](./CHANGELOG_ARCHIVE.md)
 
-The current executable is **refraInspector_v13.2.8.html**. Only this HTML release is retained on the current branch. Obsolete **v13.0** and **v12.1.7** HTML files were removed from the current branch; their prior contents remain recoverable through Git history. Historical versions may still be mentioned in the software change log.
+The current executable is **refraInspector_v13.3.html**. Only this HTML release is retained on the current branch. Obsolete **v13.0** and **v12.1.7** HTML files were removed from the current branch; their prior contents remain recoverable through Git history. Historical versions may still be mentioned in the software change log.
 
 **Developer / Help Desk:** xuh@shinagawa-ref.jp
