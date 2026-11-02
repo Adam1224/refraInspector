@@ -1,8 +1,15 @@
 # RefraInspector — Software Change History (SW)
 
-**Current software:** v13.2.8 (Beta) · **ID scheme:** `SW-<release>` (e.g. `SW-13.0`). Software version numbers reflect the executable HTML, not the physical fixture's revision.
+**Current software:** v13.3 (Beta) · **ID scheme:** `SW-<release>` (e.g. `SW-13.0`). Software version numbers reflect the executable HTML, not the physical fixture's revision.
 
 See [hardware changes](./CHANGELOG_HARDWARE.md), [software-to-hardware mapping](./CHANGELOG.md), and [original detailed history](./CHANGELOG_ARCHIVE.md).
+
+## SW-13.3 · v13.3 — 2026-11-02 (Beta)
+
+- Added **Show Original Photo** in the upper-left of the PL photo workspace, with a read-only preview of the imported original image (HEIC decoding fallback where needed).
+- Improved header control size and spacing. **Export Campaign Info** first switches from PL Inspection to Campaign Report, then opens the export panel.
+- Retains v13.2.8 dual-image JSON backup and restore capabilities. Original and processed photos are not overwritten by preview selection.
+- Supersedes v13.2.8 for current use; earlier files remain available for rollback. Complete cross-browser regression remains outstanding.
 
 ## SW-13.2.8 · v13.2.8 — 2026-11-02 (Beta)
 
