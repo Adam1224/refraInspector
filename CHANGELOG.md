@@ -11,7 +11,7 @@ Detailed version histories: [Software](./CHANGELOG_SOFTWARE.md) · [Hardware](./
 |---|---|---|---|
 | Software | `SW-<version>` | Browser inspection application | [Software changelog](./CHANGELOG_SOFTWARE.md) |
 | Hardware | `HW-01` | U-shaped 3D-printed PL positioning jig (**STL deliverable**) | [Latest OpenSCAD design source, v2.8.4](./hardware/HW03_v2.8.4_QR_adjacent_label_rotated.scad) |
-| Hardware | `HW-02` | Four-page ArUco marker print (**PDF deliverable**) | [ArUco PDF](./docs/RefraInspector_ArUco_300x300_4A4_REVIEW_v13_fixed_labels.pdf) |
+| Hardware | `HW-02` | Four-page ArUco marker print (**PDF deliverable**) | [ArUco PDF](./hardware/RefraInspector_ArUco_300x300_4A4_REVIEW_v13_fixed_labels.pdf) |
 
 Hardware IDs identify **two deliverables**, not individual development revisions. The jig design retains its internal version number (currently v2.8.4). **STL supplied and inspected:** `HW03_v2.8.4_original_unmodified(1).stl` (user-provided; not yet committed to GitHub). The linked SCAD remains the repository design source. The STL contains five disconnected watertight bodies and is not yet confirmed as a single printable piece.
 
