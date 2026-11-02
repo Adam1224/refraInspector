@@ -1185,7 +1185,7 @@ function ellipseGeometry(pl){
    crx:validOrig?Y*pl.sx/w:null,cry:validOrig?Y*pl.sy/h:null};
 }
 function inEllipse(x,y,cx,cy,rx,ry){return rx>0&&ry>0&&((x-cx)/rx)**2+((y-cy)/ry)**2<=1}
-function computeAreaGrid(pl){
+function computeAreaGrid(pl, originalRadiusOverride){
  const empty={bore:null,edge:null,usedBore:null,step:null,reason:null,boundsSource:null};
  if(!pl.image)return {...empty,reason:'Import the PL photo first.'};
  if(!valid(pl.sx)||pl.sx<=0||!valid(pl.sy)||pl.sy<=0){
@@ -1204,7 +1204,7 @@ function computeAreaGrid(pl){
   const nx=(x+step*.5)/w,ny=(y+step*.5)/h;
   if(inEllipse(nx,ny,g.ocx,g.ocy,g.orx,g.ory)&&!inEllipse(nx,ny,g.cx,g.cy,g.rx,g.ry))edge++;
  }
- const originalRadius=num('bore'),originalArea=valid(originalRadius)&&originalRadius>0?Math.PI*originalRadius**2:null;
+ const originalRadius=originalRadiusOverride===undefined?num('bore'):originalRadiusOverride,originalArea=valid(originalRadius)&&originalRadius>0?Math.PI*originalRadius**2:null;
  const fallback=!pl.innerBounds;
  return {bore:valid(originalArea)?usedBore-originalArea:null,edge:edge*step*step/(pl.sx*pl.sy),usedBore,step,
   boundsSource:fallback?'estimated default guides':'photo-detected or manually adjusted',
@@ -3115,7 +3115,20 @@ syncAlignmentVerification();
   if(saved.has(id))saved.set(id,snapshot());
   refresh();
  });
- window.__campaignReportRows=()=>[...saved.entries()].map(([id,data])=>({id,fields:{...data.fields},upper:dimensionValues(data.plates.upper),lower:dimensionValues(data.plates.lower),upperPlate:data.plates.upper,lowerPlate:data.plates.lower,record:records.find(row=>row.id===id)||null})).filter(row=>row.record);
+ // Derive area metrics from each saved PL snapshot, independent of the active workspace.
+ const reportAreaCache=new WeakMap();
+ function savedAreaPair(data){
+  const cached=reportAreaCache.get(data);if(cached)return cached;
+  const rawRadius=data.fields?.bore;
+  const radius=rawRadius===null||rawRadius===undefined||rawRadius===''?null:Number(rawRadius);
+  const safeRadius=Number.isFinite(radius)?radius:null;
+  const upper=computeAreaGrid(data.plates.upper,safeRadius);
+  const lower=computeAreaGrid(data.plates.lower,safeRadius);
+  const pct=g=>valid(g.bore)&&safeRadius>0?100*g.bore/(Math.PI*safeRadius*safeRadius):null;
+  const areas={upper:{J:upper.usedBore,K:upper.bore,L:upper.edge,M:pct(upper)},lower:{J:lower.usedBore,K:lower.bore,L:lower.edge,M:pct(lower)}};
+  reportAreaCache.set(data,areas);return areas;
+ }
+ window.__campaignReportRows=()=>[...saved.entries()].map(([id,data])=>({id,fields:{...data.fields},upper:dimensionValues(data.plates.upper),lower:dimensionValues(data.plates.lower),upperPlate:data.plates.upper,lowerPlate:data.plates.lower,areas:savedAreaPair(data),record:records.find(row=>row.id===id)||null})).filter(row=>row.record);
  window.__savedPlList=()=>[...saved.keys()].map(id=>({id,record:records.find(r=>r.id===id)||null}));
   window.__savedPlHeats=id=>{const raw=saved.get(id)?.fields?.heats;return raw===undefined||raw===null||raw===''?null:Number(raw);};
  let hasUnsavedChanges=true;
@@ -4265,7 +4278,7 @@ function collect(){
  const campaign=($('cid')?.value||'').trim();
  const source=typeof window.__campaignReportRows==='function'?window.__campaignReportRows():[];
  const rows=source.filter(p=>p.id.split(' / ')[0]===campaign).map(p=>{
-   const g=p.fields||{},u=p.upper||{},l=p.lower||{};
+   const g=p.fields||{},u=p.upper||{},l=p.lower||{},areas=p.areas||{};
    const W=number(g.W),X=number(g.X),Y=number(g.bore),Z=number(g.Z),R0=number(g.R0);
    const t=F=>[F,W,X,Y].every(good)?F-(W-X+Y):null;
    const tUpper=t(number(u.F)),tLower=t(number(l.F));
@@ -4275,6 +4288,7 @@ function collect(){
    const heats=number(g.heats),runtime=number(g.runtime);
    return {id:p.id.split(' / ').slice(1).join(' / '),heats,runtime,upperPresent:!!p.upperPlate?.image,lowerPresent:!!p.lowerPlate?.image,
      ...Object.fromEntries('ABCDEF'.split('').flatMap(k=>[['upper'+k,number(u[k])],['lower'+k,number(l[k])]])),
+     ...Object.fromEntries(['J','K','L','M'].flatMap(k=>[['upper'+k,number(areas.upper?.[k])],['lower'+k,number(areas.lower?.[k])]])),
      tUpper,tLower,totalT,stroke,delta,er:good(delta)&&runtime>0?delta/runtime:null,eph:good(delta)&&heats>0?delta/heats:null};
  }).sort((a,b)=>a.id.localeCompare(b.id,undefined,{numeric:true}));
  const values=k=>rows.map(r=>r[k]).filter(good);
@@ -4340,10 +4354,10 @@ const detailItems=[
  ['エッジ損傷合計長さ','Total Edge Damage Length (B + C + D)','Calculation','Formula','TED','G','mm','edge'],
  ['非摺動面摺動方向使用後穴径','Bore Diameter After Use – Non-Sliding Face','Measured','Manual','EB-NS','H','mm','missing'],
  ['ネック部厚さ','Neck Thickness','Measured','Manual','NT','I','mm','missing'],
- ['使用後孔面積','Used Bore Area','Calculation','Image Model','UBA','J','mm²','missing'],
- ['使用後孔径拡大面積','Bore Enlargement Area','Calculation','Image Model','BEA','K','mm²','missing'],
- ['孔周辺エッジ損傷面積','Bore Edge Damage Area','Calculation','Image Model','BEDA','L','mm²','missing'],
- ['孔面積拡大率','Bore Area Enlargement Ratio','Calculation','Formula','BAER','M','%','missing'],
+ ['使用後孔面積','Used Bore Area','Calculation','Image Model','UBA','J','mm²','J'],
+ ['使用後孔径拡大面積','Bore Enlargement Area','Calculation','Image Model','BEA','K','mm²','K'],
+ ['孔周辺エッジ損傷面積','Bore Edge Damage Area','Calculation','Image Model','BEDA','L','mm²','L'],
+ ['孔面積拡大率','Bore Area Enlargement Ratio','Calculation','Formula','BAER','M','%','M'],
  ['長端側損傷長さ','Long-End Damage Length (T)','Calculation','Formula','LD','T','mm','thickness'],
  ['T_upper と T_lower の絶対差','Absolute Difference between T Upper and T Lower','Calculation','Formula','ΔT','—','mm','difference'],
  ['残存ストローク','Remaining Stroke','Calculation','Formula','RS','R','mm','stroke'],
@@ -4358,7 +4372,7 @@ function detailValue(row,side,key,unit){
  if(key==='id')return (side==='upper'?'U-':'L-')+row.id;
  if(key==='heats'||key==='runtime')return dval(row[key],unit);
  if(key==='missing'||key==='olt'||key==='cracks')return 'N/A';
- if('ABCDEF'.includes(key)&&key.length===1)return dval(row[side+key],unit);
+ if('ABCDEFJKLM'.includes(key)&&key.length===1)return dval(row[side+key],unit);
  if(key==='edge'){
   const xs=['B','C','D'].map(k=>row[side+k]);return xs.every(good)?dval(xs.reduce((a,b)=>a+b,0),unit):'N/A';
  }
