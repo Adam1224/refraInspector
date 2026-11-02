@@ -9,7 +9,7 @@ Hardware revision history is maintained independently of software releases. **La
 - **Source:** [HW-03 v2.8.4 OpenSCAD](./hardware/HW03_v2.8.4_QR_adjacent_label_rotated.scad).
 - **Purpose:** reproducibly locate the refractory plate (PL), expose the inspection region and provide four ArUco fiducials for Homography-based perspective correction.
 - **Structure:** integrated U-shaped frame, **opening downward** for the PL long end; top, left and right sides act as positioning surfaces. The earlier aluminum-extrusion concept is superseded as the intended build method, but retained in the history.
-- **References:** four 30 × 30 mm ArUco mounting positions (IDs 0 top-left, 1 top-right, 2 bottom-left, 3 bottom-right), **300 × 300 mm nominal marker-centre spacing**. Print and apply real [HW-02 ArUco targets](./docs/RefraInspector_ArUco_300x300_4A4_NoZeroLabel.pdf); CAD marker placeholders are not decodable targets.
+- **References:** four 30 × 30 mm ArUco mounting positions (IDs 0 top-left, 1 top-right, 2 bottom-left, 3 bottom-right), **300 × 300 mm nominal marker-centre spacing**. Print and apply real [HW-02 ArUco targets](./docs/RefraInspector_ArUco_300x300_4A4_REVIEW_v13_fixed_labels.pdf); CAD marker placeholders are not decodable targets.
 - **Measurement aids:** 1 mm engraved scales and numbered 10 mm marks on all three sides; top-side numeral orientation adjusted to avoid overlaps.
 - **Fixing provision:** two right-side Ø6.6 mm M6 clearance holes for a future lateral PL-clamping mechanism. They are **not** a completed clamp; protective contact pads and secure fastening still require design.
 - **Material reduction:** underside relief pockets, retaining the intended PL contact, ruler and fiducial surfaces.
@@ -46,7 +46,7 @@ Hardware revision history is maintained independently of software releases. **La
 
 **State:** Printable PDF reference available; physical precision not certified.
 
-- [Revised fixed-label ArUco 300 × 300 mm 4-A4 PDF](./docs/RefraInspector_ArUco_300x300_4A4_NoZeroLabel.pdf), printed at **Actual Size / 100%** and assembled without overlap.
+- [Revised fixed-label ArUco 300 × 300 mm 4-A4 PDF](./docs/RefraInspector_ArUco_300x300_4A4_REVIEW_v13_fixed_labels.pdf), printed at **Actual Size / 100%** and assembled without overlap.
 - `DICT_4X4_50`, IDs 0–3, with 30 mm black-square markers and 300 mm centre spacing in each axis.
 - Scale-origin convention follows the bottom-right black corner of ID 0; this is distinct from the marker-centre-based 300 mm geometry used by Homography.
 - Revised printable layout: each sheet identifies its marker ID, page number and assembly corner; each sheet carries a 100 mm PRINT CHECK line. Assemble page 1 / ID0 top-left, page 2 / ID1 top-right, page 3 / ID2 bottom-left and page 4 / ID3 bottom-right.
