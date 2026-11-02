@@ -1,8 +1,15 @@
 # RefraInspector — Software Change History (SW)
 
-**Current software:** v13.2.7 (Beta) · **ID scheme:** `SW-<release>` (e.g. `SW-13.0`). Software version numbers reflect the executable HTML, not the physical fixture's revision.
+**Current software:** v13.2.8 (Beta) · **ID scheme:** `SW-<release>` (e.g. `SW-13.0`). Software version numbers reflect the executable HTML, not the physical fixture's revision.
 
 See [hardware changes](./CHANGELOG_HARDWARE.md), [software-to-hardware mapping](./CHANGELOG.md), and [original detailed history](./CHANGELOG_ARCHIVE.md).
+
+## SW-13.2.8 · v13.2.8 — 2026-11-02 (Beta)
+
+- Campaign JSON Backup preserves both processed workspace PNG images and the exact originally imported JPEG/HEIC/image file bytes, including source metadata.
+- Added `originalPhotoIndex` to identify each original by Campaign, PL Set, Upper/Lower, file name, size and JSON path.
+- Restore carries original file data forward when present; older JSON backups remain supported but cannot recover originals omitted by earlier versions.
+- Browser import/backup/restore regression testing remains outstanding.
 
 ## SW-13.2.7 · v13.2.7 — 2026-10-30 (Beta)
 
