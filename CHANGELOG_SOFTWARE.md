@@ -6,6 +6,10 @@ See [hardware changes](./CHANGELOG_HARDWARE.md), [software-to-hardware mapping](
 
 ## SW-13.3 · v13.3 — 2026-11-02 (Beta)
 
+- Added click-only workspace ↑/↓ PL Set navigation preserving the current Upper/Lower side, plus circular ←/→ Upper/Lower navigation. No hover-triggered switching.
+- Unified ArUco and legacy control-panel grids: stable #0–#4 positions, with an ArUco Homography status cell replacing the unused ruler calibration controls.
+
+
 - Refreshed the integrated **Help & User Manual** to cover both ArUco/Homography and Legacy two-point leveling + X/Y ruler calibration workflows, their shared Auto Align / verification steps, Show Original Photo, first-save and missing-usage warnings, Campaign Report export, and dual-image JSON backup/restore.
 - Added direct GitHub README links inside the manual for full instructions and jig setup.
 
