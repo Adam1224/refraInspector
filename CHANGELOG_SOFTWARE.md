@@ -6,6 +6,9 @@ See [hardware changes](./CHANGELOG_HARDWARE.md), [software-to-hardware mapping](
 
 ## SW-13.3 · v13.3 — 2026-11-02 (Beta)
 
+- Fixed Campaign Report mouse-wheel scrolling by removing competing nested vertical scroll areas; wide tables retain horizontal overflow, and export modal scrolling is unchanged.
+
+
 - Updated original-photo preview to show a workspace loading spinner while decoding/loading; caches HEIC previews to make repeated toggles faster and downscales **preview only** to 2000 px maximum side, leaving original camera bytes in Campaign Backup unchanged.
 - Yellow first-save Campaign button until a PL set has a Campaign record, and yellow empty Runtime/Heats inputs. These are visual reminders, not changes to save conditions.
 
