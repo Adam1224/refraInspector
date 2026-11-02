@@ -4290,49 +4290,7 @@ $('mainTabs').addEventListener('click',e=>{const btn=e.target.closest('button[da
 $('reportRefresh').onclick=render;
 $('reportCopy').onclick=()=>{render();const data=[['Campaign summary','Value'],...current.geometry,...current.stats,[],...grid()].map(row=>row.join('\t')).join('\n');const promise=navigator.clipboard?.writeText(data);if(promise)promise.then(()=>alert('Campaign report copied.')).catch(()=>{const area=document.createElement('textarea');area.value=data;document.body.append(area);area.select();document.execCommand('copy');area.remove()});else{const area=document.createElement('textarea');area.value=data;document.body.append(area);area.select();document.execCommand('copy');area.remove();alert('Campaign report copied.')}};
 $('reportCsv').onclick=()=>{render();let data=[['Campaign summary','Value'],...current.geometry,...current.stats,[],...grid()].map(csvRow).join('\r\n');file(filename()+'_Campaign_Report.csv','\ufeff'+data,'text/csv;charset=utf-8')};
-$('reportXls').onclick=()=>{render();file(filename()+'_Campaign_Report.xls','<html><head><meta charset="utf-8"></head><body>'+detailTableHtml()+'<script id="ri133PhotoAndHeaderBehavior">
-(()=>{
-'use strict';
-const exportButton=document.getElementById('reportUnifiedExport');
-exportButton?.addEventListener('click',()=>{
- const reportTab=document.querySelector('#mainTabs .mainTab[data-view="report"]');
- if(reportTab&&!reportTab.classList.contains('selected'))reportTab.click();
-},{capture:true});
-const area=document.querySelector('.photoareaWrap');if(!area)return;
-const label=document.createElement('label');label.id='riShowOriginalWrap';
-label.innerHTML='<input type="checkbox" id="riShowOriginal" aria-label="Show original photo"><span>Show Original Photo</span>';
-const overlay=document.createElement('div');overlay.id='riOriginalPreview';overlay.hidden=true;
-const img=document.createElement('img');img.alt='Original imported PL photo';
-const note=document.createElement('div');note.className='riOriginalNote';note.textContent='Original photo · measurement guides hidden';
-overlay.append(img,note);area.append(overlay,label);
-const toggle=document.getElementById('riShowOriginal');let previewVersion=0;
-function refreshOriginal(){
- const plate=window.__riGetActivePlateForPreview?.()||null;
- const hasOriginal=!!(plate?.originalPhotoDataURL||plate?.source);
- toggle.disabled=!hasOriginal;
- label.title=hasOriginal?'Display imported photograph without changing measurements':'Import a photo first';
- overlay.hidden=!(toggle.checked&&hasOriginal);
- if(overlay.hidden){img.removeAttribute('src');return;}
- const id=++previewVersion;
- img.onerror=()=>{
-  if(id!==previewVersion)return;
-  try{
-   const src=plate.source; if(!src)throw Error('No source image');
-   const cv=document.createElement('canvas');cv.width=src.naturalWidth||src.width;cv.height=src.naturalHeight||src.height;
-   cv.getContext('2d').drawImage(src,0,0);
-   img.onerror=null;img.src=cv.toDataURL('image/jpeg',.94);
-   note.textContent='Original view (decoded preview) · measurements unchanged';
-  }catch(e){overlay.hidden=true;console.warn('Original preview unavailable',e)}
- };
- note.textContent='Original photo · measurement guides hidden';
- img.src=plate.originalPhotoDataURL||'';
- if(!plate.originalPhotoDataURL)img.onerror?.();
-}
-toggle.addEventListener('change',refreshOriginal);
-window.addEventListener('riPhotoViewChanged',refreshOriginal);
-refreshOriginal();
-})();
-</script></body></html>','application/vnd.ms-excel')};
+$('reportXls').onclick=()=>{render();file(filename()+'_Campaign_Report.xls','<html><head><meta charset="utf-8"></head><body>'+detailTableHtml()+'</body></html>','application/vnd.ms-excel')};
 $('reportPrint').onclick=()=>{render();window.print()};
 $('reportContent').addEventListener('click',e=>{
  const actionButton=e.target.closest('button[data-panel-action],button[data-chart-copy],button[data-chart-csv]');
@@ -4435,6 +4393,49 @@ $('reportExportConfirm').onclick=()=>{
   refresh();
  };
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
+})();
+</script>
+<script id="ri133PhotoAndHeaderBehavior">
+(()=>{
+'use strict';
+const exportButton=document.getElementById('reportUnifiedExport');
+exportButton?.addEventListener('click',()=>{
+ const reportTab=document.querySelector('#mainTabs .mainTab[data-view="report"]');
+ if(reportTab&&!reportTab.classList.contains('selected'))reportTab.click();
+},{capture:true});
+const area=document.querySelector('.photoareaWrap');if(!area)return;
+const label=document.createElement('label');label.id='riShowOriginalWrap';
+label.innerHTML='<input type="checkbox" id="riShowOriginal" aria-label="Show original photo"><span>Show Original Photo</span>';
+const overlay=document.createElement('div');overlay.id='riOriginalPreview';overlay.hidden=true;
+const img=document.createElement('img');img.alt='Original imported PL photo';
+const note=document.createElement('div');note.className='riOriginalNote';note.textContent='Original photo · measurement guides hidden';
+overlay.append(img,note);area.append(overlay,label);
+const toggle=document.getElementById('riShowOriginal');let previewVersion=0;
+function refreshOriginal(){
+ const plate=window.__riGetActivePlateForPreview?.()||null;
+ const hasOriginal=!!(plate?.originalPhotoDataURL||plate?.source);
+ toggle.disabled=!hasOriginal;
+ label.title=hasOriginal?'Display imported photograph without changing measurements':'Import a photo first';
+ overlay.hidden=!(toggle.checked&&hasOriginal);
+ if(overlay.hidden){img.removeAttribute('src');return;}
+ const id=++previewVersion;
+ img.onerror=()=>{
+  if(id!==previewVersion)return;
+  try{
+   const src=plate.source; if(!src)throw Error('No source image');
+   const cv=document.createElement('canvas');cv.width=src.naturalWidth||src.width;cv.height=src.naturalHeight||src.height;
+   cv.getContext('2d').drawImage(src,0,0);
+   img.onerror=null;img.src=cv.toDataURL('image/jpeg',.94);
+   note.textContent='Original view (decoded preview) · measurements unchanged';
+  }catch(e){overlay.hidden=true;console.warn('Original preview unavailable',e)}
+ };
+ note.textContent='Original photo · measurement guides hidden';
+ img.src=plate.originalPhotoDataURL||'';
+ if(!plate.originalPhotoDataURL)img.onerror?.();
+}
+toggle.addEventListener('change',refreshOriginal);
+window.addEventListener('riPhotoViewChanged',refreshOriginal);
+refreshOriginal();
 })();
 </script>
 </body></html>
