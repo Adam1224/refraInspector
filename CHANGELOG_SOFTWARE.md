@@ -6,6 +6,10 @@ See [hardware changes](./CHANGELOG_HARDWARE.md), [software-to-hardware mapping](
 
 ## SW-13.3 · v13.3 — 2026-11-02 (Beta)
 
+- Updated original-photo preview to show a workspace loading spinner while decoding/loading; caches HEIC previews to make repeated toggles faster and downscales **preview only** to 2000 px maximum side, leaving original camera bytes in Campaign Backup unchanged.
+- Yellow first-save Campaign button until a PL set has a Campaign record, and yellow empty Runtime/Heats inputs. These are visual reminders, not changes to save conditions.
+
+
 - Added **Show Original Photo** in the upper-left of the PL photo workspace, with a read-only preview of the imported original image (HEIC decoding fallback where needed).
 - Improved header control size and spacing. **Export Campaign Info** first switches from PL Inspection to Campaign Report, then opens the export panel.
 - Retains v13.2.8 dual-image JSON backup and restore capabilities. Original and processed photos are not overwritten by preview selection.
