@@ -817,6 +817,34 @@ body>header .campaignBackupActions>button{height:38px!important;min-height:38px!
  body>header>.inline>#showUserManual{order:4!important;margin-left:auto!important}
  body>header>.inline>.campaignBackupActions{margin-left:0!important;padding-left:9px!important}
 }
+</style><style id="ri133CampaignReportNaturalScroll">
+/* One vertical scroll owner on Report view: the document. No wheel trapping in cards. */
+@media screen {
+ html:has(#campaignReportView:not([hidden])),
+ body:has(#campaignReportView:not([hidden])) {
+   height:auto!important;min-height:100%!important;max-height:none!important;
+   overflow-x:hidden!important;overflow-y:auto!important;overscroll-behavior-y:auto!important;
+ }
+ body:has(#campaignReportView:not([hidden])) {display:block!important;}
+ #campaignReportView:not([hidden]) {
+   display:block!important;height:auto!important;max-height:none!important;min-height:calc(100dvh - 100px)!important;
+   overflow:visible!important;overscroll-behavior:auto!important;
+   width:100%;padding-bottom:48px!important;
+ }
+ #campaignReportView #reportContent,
+ #campaignReportView .reportCard,
+ #campaignReportView .reportCardBody {
+   height:auto!important;max-height:none!important;min-height:0!important;
+   overflow:visible!important;overscroll-behavior-y:auto!important;
+ }
+ /* Preserve horizontal scrolling only for wide numerical tables. */
+ #campaignReportView .reportScroll {
+   overflow-x:auto!important;overflow-y:hidden!important;
+   max-width:100%;overscroll-behavior-x:contain!important;overscroll-behavior-y:auto!important;
+ }
+ /* Modal retains its own scroll when actually open. */
+ #campaignReportView .riExportDialog {max-height:92vh;overflow:auto!important;}
+}
 </style></head><body><header><div><h1>RN Plate Pair Inspector <span class="small">v13.3</span></h1></div><div class="inline"><button id="showUserManual" type="button" aria-haspopup="dialog" aria-label="Help and User Manual" title="Help and User Manual">? Help &amp; Manual</button><button class="primary" id="exportAll" hidden aria-hidden="true" tabindex="-1">Export pair JSON + images</button><button id="copyAll" hidden style="display:none!important" aria-hidden="true" tabindex="-1">Copy PLs details</button><button id="copyCampaign" type="button" hidden style="display:none!important" aria-hidden="true" tabindex="-1">Copy Campaign data</button><nav id="mainTabs" class="mainTabs" aria-label="RefraInspector tabs"><button class="mainTab selected" type="button" data-view="inspection" aria-selected="true">PL Inspection</button><button class="mainTab" type="button" data-view="report" aria-selected="false">Campaign Report</button></nav><button type="button" id="reportUnifiedExport" title="Preview and export all saved PL set details">Export Campaign Info</button></div></header><div id="inspectionView"><main class="three">
 <section class="panel"><details class="leftCollapsible" open><summary>PL Geometry</summary><div class="leftCollapseBody"><details class="bulkPaste" open><summary>PL geometry (Excel / TSV)</summary><p class="small">Paste or edit the six-column geometry table below (W0, X0, Y0, Z0, R0, H0). Values are recognized automatically; H0 = 2×Y0. Other Excel layouts are accepted on paste.</p><textarea aria-label="PL geometry paste" id="campaignPaste" placeholder="W0	X0	Y0	Z0	R0	H0
 200	5	45	270	180	90" style="min-height:78px"></textarea><div id="campaignPasteStatus" role="status" hidden></div></details><div class="field"><label for="cid">Campaign ID</label><input id="cid" value="CMP-001"/></div><div class="field"><label for="bore">Bore radius before use · Y (mm)</label><input id="bore" min="0" placeholder="Enter Y" step="0.1" type="number"/></div><div class="field"><label for="W">W: Center-to-edge incl. band (mm)</label><input id="W" min="0" placeholder="W" step="0.1" type="number"/></div><div class="field"><label for="X">X: Band thickness (mm)</label><input id="X" min="0" step="0.1" type="number" value="0"/></div><div class="field"><label for="Z">Z: Closed center distance (mm)</label><input id="Z" min="0" placeholder="Z" step="0.1" type="number"/></div><div class="field"><label for="R0">R0 / SD: Initial stroke (mm)</label><input id="R0" min="0" placeholder="R0" step="0.1" type="number"/></div><div class="field"><label for="H0">H0 / BDia: Bore diameter before use (mm)</label><input aria-label="Calculated original bore diameter" id="H0" placeholder="2 × Y0" readonly="" type="number"/></div><div class="field"><label for="safe">Remaining stroke safe limit (mm) *</label><input id="safe" required aria-required="true" min="0" step="0.1" type="number" value="10"/></div><p class="small"></p></div></details><details class="leftCollapsible" open><summary id="plPerformanceTitle">Campaign Performance</summary><div class="leftCollapseBody"><div class="stat"><span class="small">Campaign ID</span><b id="performanceCampaignId">CMP-001</b></div><div class="stat"><span class="small">Recorded sets</span><b id="pairsCount">0</b></div>
