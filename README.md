@@ -356,6 +356,8 @@ The ArUco workflow should be **automatic**, not require the user to click each m
 
 ## 8. Export and data preservation
 
+**Campaign Report scrolling (v13.3):** The report now scrolls vertically as one page with the mouse wheel from anywhere in the content. Wide numerical tables still scroll horizontally; the export modal keeps its own scrolling. PL Inspection's independently scrolling columns are unchanged.
+
 **v13.3 inspection controls:** Original photo loading shows a workspace spinner; decoded HEIC previews are cached, and only the display preview is downscaled to 2000 px while stored original files remain intact. First-time unsaved PL sets have a yellow Save to Campaign button and empty Runtime/Heats inputs are highlighted yellow.  Use **Show Original Photo** in the upper-left of the photo workspace to preview the uncorrected uploaded image. This read-only preview does not modify calibration, dimensions, saved records or the processed image. If a browser cannot display original HEIC directly, the app attempts a decoded source preview. Clicking **Export Campaign Info** while in PL Inspection first switches to **Campaign Report**, then opens the export dialog. Header controls have consistent touch targets and spacing.
 
 
