@@ -845,6 +845,24 @@ body>header .campaignBackupActions>button{height:38px!important;min-height:38px!
  /* Modal retains its own scroll when actually open. */
  #campaignReportView .riExportDialog {max-height:92vh;overflow:auto!important;}
 }
+</style><style id="ri133WorkspaceNavigationAndGrid">
+.riNavArrow{position:absolute;z-index:18;display:flex;align-items:center;justify-content:center;width:38px;height:38px;padding:0!important;border:1px solid #bad0e3;border-radius:11px;background:rgba(255,255,255,.92);box-shadow:0 2px 8px #0005;color:#174c7f;font-size:24px;font-weight:750;line-height:1;cursor:pointer;touch-action:manipulation}
+.riNavArrow:hover,.riNavArrow:focus-visible{background:#d9ecff;outline:2px solid #237bb8;outline-offset:1px}
+.riNavArrow:disabled{opacity:.38;cursor:not-allowed}
+.riNavArrow[data-direction="up"]{top:15px;left:calc(50% - 30px);transform:translateX(-50%)}
+.riNavArrow[data-direction="down"]{top:15px;left:calc(50% + 30px);transform:translateX(-50%)}
+.riNavArrow[data-direction="left"]{left:14px;top:50%;transform:translateY(-50%)}
+.riNavArrow[data-direction="right"]{right:14px;top:50%;transform:translateY(-50%)}
+@media(max-width:720px){.riNavArrow{width:42px;height:42px;font-size:25px}.riNavArrow[data-direction="up"]{left:calc(50% - 34px)}.riNavArrow[data-direction="down"]{left:calc(50% + 34px)}}
+.photoControlGrid{display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1fr)!important;grid-template-areas:"import level" "calibration alignment"!important;align-items:stretch!important;gap:5px 8px!important}
+.photoControlGrid>.importStep{grid-area:import!important}
+.photoControlGrid>.workspaceStepGroup:has(#autoLevel){grid-area:level!important}
+.photoControlGrid>.workspaceStepGroup:has(.workspaceCal){grid-area:calibration!important}
+.photoControlGrid>.alignmentSaveRow{grid-area:alignment!important;min-width:0!important;display:grid!important;grid-template-columns:minmax(0,1fr) minmax(112px,28%)!important;align-items:stretch!important}
+.photoControlGrid.arucoActive::before{content:"#2 Calibration · ArUco Homography ✓";grid-area:calibration!important;display:flex;align-items:center;border:1px solid #d4e3f2;border-radius:7px;background:#f2f8fd;color:#245b89;padding:5px 9px;font-size:11px;font-weight:650;min-width:0;box-sizing:border-box}
+.photoControlGrid.arucoActive>.workspaceStepGroup:has(.workspaceCal){display:none!important}
+.photoControlGrid>.alignmentSaveRow>.workspaceStepGroup{height:auto!important;min-height:40px!important}
+@media(max-width:700px){.photoControlGrid{grid-template-columns:minmax(0,1fr)!important;grid-template-areas:"import" "level" "calibration" "alignment"!important}.photoControlGrid>.alignmentSaveRow{grid-template-columns:minmax(0,1fr) minmax(108px,30%)!important}}
 </style></head><body><header><div><h1>RN Plate Pair Inspector <span class="small">v13.3</span></h1></div><div class="inline"><button id="showUserManual" type="button" aria-haspopup="dialog" aria-label="Help and User Manual" title="Help and User Manual">? Help &amp; Manual</button><button class="primary" id="exportAll" hidden aria-hidden="true" tabindex="-1">Export pair JSON + images</button><button id="copyAll" hidden style="display:none!important" aria-hidden="true" tabindex="-1">Copy PLs details</button><button id="copyCampaign" type="button" hidden style="display:none!important" aria-hidden="true" tabindex="-1">Copy Campaign data</button><nav id="mainTabs" class="mainTabs" aria-label="RefraInspector tabs"><button class="mainTab selected" type="button" data-view="inspection" aria-selected="true">PL Inspection</button><button class="mainTab" type="button" data-view="report" aria-selected="false">Campaign Report</button></nav><button type="button" id="reportUnifiedExport" title="Preview and export all saved PL set details">Export Campaign Info</button></div></header><div id="inspectionView"><main class="three">
 <section class="panel"><details class="leftCollapsible" open><summary>PL Geometry</summary><div class="leftCollapseBody"><details class="bulkPaste" open><summary>PL geometry (Excel / TSV)</summary><p class="small">Paste or edit the six-column geometry table below (W0, X0, Y0, Z0, R0, H0). Values are recognized automatically; H0 = 2×Y0. Other Excel layouts are accepted on paste.</p><textarea aria-label="PL geometry paste" id="campaignPaste" placeholder="W0	X0	Y0	Z0	R0	H0
 200	5	45	270	180	90" style="min-height:78px"></textarea><div id="campaignPasteStatus" role="status" hidden></div></details><div class="field"><label for="cid">Campaign ID</label><input id="cid" value="CMP-001"/></div><div class="field"><label for="bore">Bore radius before use · Y (mm)</label><input id="bore" min="0" placeholder="Enter Y" step="0.1" type="number"/></div><div class="field"><label for="W">W: Center-to-edge incl. band (mm)</label><input id="W" min="0" placeholder="W" step="0.1" type="number"/></div><div class="field"><label for="X">X: Band thickness (mm)</label><input id="X" min="0" step="0.1" type="number" value="0"/></div><div class="field"><label for="Z">Z: Closed center distance (mm)</label><input id="Z" min="0" placeholder="Z" step="0.1" type="number"/></div><div class="field"><label for="R0">R0 / SD: Initial stroke (mm)</label><input id="R0" min="0" placeholder="R0" step="0.1" type="number"/></div><div class="field"><label for="H0">H0 / BDia: Bore diameter before use (mm)</label><input aria-label="Calculated original bore diameter" id="H0" placeholder="2 × Y0" readonly="" type="number"/></div><div class="field"><label for="safe">Remaining stroke safe limit (mm) *</label><input id="safe" required aria-required="true" min="0" step="0.1" type="number" value="10"/></div><p class="small"></p></div></details><details class="leftCollapsible" open><summary id="plPerformanceTitle">Campaign Performance</summary><div class="leftCollapseBody"><div class="stat"><span class="small">Campaign ID</span><b id="performanceCampaignId">CMP-001</b></div><div class="stat"><span class="small">Recorded sets</span><b id="pairsCount">0</b></div>
@@ -3397,6 +3415,30 @@ syncAlignmentVerification();
   refresh();
   $('savedStatus').textContent='Loaded '+target+' (working PL set; CAMP status shown in selector).';
  });
+ // Click-only workspace navigation. Preserve the currently viewed Upper/Lower side.
+ const riNavArea=document.querySelector('.photoareaWrap');
+ if(riNavArea){
+  const arrows=[['up','↑','Previous PL set'],['down','↓','Next PL set'],['left','←','Previous PL (Upper / Lower, circular)'],['right','→','Next PL (Upper / Lower, circular)']];
+  function stepPLSet(direction){
+   refresh();
+   const ids=Array.from(picker.options).map(option=>option.value).filter(Boolean);
+   const currentIndex=ids.indexOf(picker.value);
+   const nextIndex=currentIndex+(direction==='up'?-1:1);
+   if(currentIndex<0||nextIndex<0||nextIndex>=ids.length)return;
+   const keepSide=active;
+   picker.value=ids[nextIndex];picker.dispatchEvent(new Event('change',{bubbles:true}));
+   if(active!==keepSide)select(keepSide);
+  }
+  function stepPlate(){select(active==='upper'?'lower':'upper');}
+  for(const [direction,glyph,description] of arrows){
+   const button=document.createElement('button');button.type='button';
+   button.className='riNavArrow';button.dataset.direction=direction;
+   button.textContent=glyph;button.title=description+' · click or tap';
+   button.setAttribute('aria-label',description);
+   button.addEventListener('click',()=>{if(direction==='left'||direction==='right')stepPlate();else stepPLSet(direction)});
+   riNavArea.appendChild(button);
+  }
+ }
  const saveOld=$('savePair').onclick;
  $('savePair').onclick=function(e){
   const imported=importedSides();
