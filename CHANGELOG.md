@@ -51,7 +51,7 @@ Jump directly to an individual release or hardware iteration. The linked descrip
 - **Historical concept:** aluminum-extrusion jig with PL reference-plane alignment.
 - **Current design baseline:** [HW-03 v2.8.4 OpenSCAD](./hardware/HW03_v2.8.4_QR_adjacent_label_rotated.scad), conceived as a **one-piece 3D-printed**, bottom-open U-frame rather than a kit of separately printed rails and corner pods.
 - **Incorporated features:** three-positioning-side geometry and numbered ruler marks; four 30 mm ArUco target locations with 300 × 300 mm nominal centres; two right-bar M6 transverse clearance holes; underside weight-relief pockets; outward-facing QR/manual label and engraved name/version.
-- **Unchanged interface:** software v13.2.7 continues to use the four-marker Homography workflow; marker print is [HW-02 PDF](./docs/RefraInspector_ArUco_300x300_4A4_NoZeroLabel.pdf). Changing fabrication method does not change the SW marker geometry.
+- **Unchanged interface:** software v13.2.7 continues to use the four-marker Homography workflow; marker print is the revised fixed-label four-page [HW-02 PDF](./docs/RefraInspector_ArUco_300x300_4A4_NoZeroLabel.pdf). Changing fabrication method does not change the SW marker geometry.
 - **Verification gate:** no approved continuous/watertight STL, printer fit, jig stiffness, clamping-force deflection, QR readability, marker-to-PL coplanarity or dimensional accuracy claim is established. Do not modify the authoritative v2.8.4 SCAD merely to get a one-piece STL; discrepancies must be reported and separately approved.
 
 ## Interface and release rules
