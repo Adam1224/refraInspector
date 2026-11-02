@@ -3102,7 +3102,7 @@ syncAlignmentVerification();
  const markSaved=()=>{hasUnsavedChanges=false;refreshSaveAttention();if(typeof refresh==='function')refresh();};
  // Track edits to inspection inputs, including dragged measurement lines.
  document.addEventListener('input',event=>{
-  if(event.target.closest('#campaignPaste, #plSetDeleteList')||['savedPairSelector','photoFile','backupFile'].includes(event.target.id))return;
+  if(event.target.closest('#campaignPaste, #plSetDeleteList')||['savedPairSelector','photoFile','backupFile','riShowOriginal'].includes(event.target.id))return;
   if(event.target.matches('input,textarea,select')){
    // A–F edits only invalidate the corresponding PL verification; do not silently
    // revoke the previously committed Campaign membership or performance record.
@@ -3596,6 +3596,16 @@ syncAlignmentVerification();
  const backupFile=document.createElement('input');backupFile.type='file';backupFile.accept='.json,application/json';backupFile.hidden=true;backupFile.setAttribute('aria-label','RefraInspector backup file');
  backupBar.append(backupBtn,restoreBtn,backupFile);document.querySelector('body>header>.inline').append(backupBar);
 window.__riGetActivePlateForPreview=()=>plates[active];
+window.__riDecodeStoredOriginal=async(dataURL,filename,mime)=>{
+ const blob=await (await fetch(dataURL)).blob();
+ const file=new File([blob],filename,{type:mime});
+ const decoded=await decodeUploadedPhoto(file);
+ const canvas=document.createElement('canvas');
+ canvas.width=decoded.naturalWidth||decoded.width;
+ canvas.height=decoded.naturalHeight||decoded.height;
+ canvas.getContext('2d').drawImage(decoded,0,0);
+ return canvas.toDataURL('image/png');
+};
  const photoToDataURL=image=>{
   if(!image)return null;
   const canvas=document.createElement('canvas');canvas.width=image.naturalWidth||image.width;canvas.height=image.naturalHeight||image.height;
@@ -4410,27 +4420,31 @@ const img=document.createElement('img');img.alt='Original imported PL photo';
 const note=document.createElement('div');note.className='riOriginalNote';note.textContent='Original photo · measurement guides hidden';
 overlay.append(img,note);area.append(overlay,label);
 const toggle=document.getElementById('riShowOriginal');let previewVersion=0;
-function refreshOriginal(){
- const plate=window.__riGetActivePlateForPreview?.()||null;
- const hasOriginal=!!(plate?.originalPhotoDataURL||plate?.source);
- toggle.disabled=!hasOriginal;
- label.title=hasOriginal?'Display imported photograph without changing measurements':'Import a photo first';
- overlay.hidden=!(toggle.checked&&hasOriginal);
- if(overlay.hidden){img.removeAttribute('src');return;}
- const id=++previewVersion;
- img.onerror=()=>{
-  if(id!==previewVersion)return;
-  try{
-   const src=plate.source; if(!src)throw Error('No source image');
-   const cv=document.createElement('canvas');cv.width=src.naturalWidth||src.width;cv.height=src.naturalHeight||src.height;
-   cv.getContext('2d').drawImage(src,0,0);
-   img.onerror=null;img.src=cv.toDataURL('image/jpeg',.94);
-   note.textContent='Original view (decoded preview) · measurements unchanged';
-  }catch(e){overlay.hidden=true;console.warn('Original preview unavailable',e)}
- };
- note.textContent='Original photo · measurement guides hidden';
- img.src=plate.originalPhotoDataURL||'';
- if(!plate.originalPhotoDataURL)img.onerror?.();
+async function refreshOriginal(){
+ const token=++previewVersion;
+ const pl=window.__riGetActivePlateForPreview?.()||null;
+ const raw=pl?.originalPhotoDataURL;
+ const available=typeof raw==='string'&&raw.startsWith('data:');
+ toggle.disabled=!available;
+ label.title=available?'Show imported camera file without modifying inspection':'No original camera file was retained';
+ overlay.hidden=!(toggle.checked&&available);
+ img.removeAttribute('src');
+ if(overlay.hidden)return;
+ note.textContent='Original camera file · no changes to inspection';
+ try{
+  const mime=pl.originalPhotoMime||raw.slice(5,raw.indexOf(';'))||'application/octet-stream';
+  const heic=mime.toLowerCase().includes('heic')||mime.toLowerCase().includes('heif')||String(pl.filename).toLowerCase().endsWith('.heic')||String(pl.filename).toLowerCase().endsWith('.heif');
+  if(!heic){img.src=raw;return;}
+  const decoded=await window.__riDecodeStoredOriginal?.(raw,pl.filename||'original.heic',mime);
+  if(token!==previewVersion||!toggle.checked)return;
+  if(!decoded)throw Error('HEIC decoding unavailable');
+  img.src=decoded;
+  note.textContent='Original camera photo (decoded HEIC) · no changes to inspection';
+ }catch(error){
+  if(token!==previewVersion)return;
+  overlay.hidden=true;
+  console.warn('Original camera photo could not be displayed',error);
+ }
 }
 toggle.addEventListener('change',refreshOriginal);
 window.addEventListener('riPhotoViewChanged',refreshOriginal);
