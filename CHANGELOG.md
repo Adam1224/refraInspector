@@ -1,6 +1,6 @@
 # RefraInspector — Change History and SW/HW Correspondence
 
-**Current software:** [SW-13.2.7](./CHANGELOG_SOFTWARE.md) (Beta)  
+**Current software:** [SW-13.2.8](./CHANGELOG_SOFTWARE.md) (Beta)  
 **Hardware:** HW-01 U-shaped 3D-printed jig · HW-02 ArUco marker print (PDF)
 
 Detailed version histories: [Software](./CHANGELOG_SOFTWARE.md) · [Hardware](./CHANGELOG_HARDWARE.md) · [Archived software changes](./CHANGELOG_ARCHIVE.md).
