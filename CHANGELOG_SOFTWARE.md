@@ -6,6 +6,10 @@ See [hardware changes](./CHANGELOG_HARDWARE.md), [software-to-hardware mapping](
 
 ## SW-13.3 · v13.3 — 2026-11-02 (Beta)
 
+- Refreshed the integrated **Help & User Manual** to cover both ArUco/Homography and Legacy two-point leveling + X/Y ruler calibration workflows, their shared Auto Align / verification steps, Show Original Photo, first-save and missing-usage warnings, Campaign Report export, and dual-image JSON backup/restore.
+- Added direct GitHub README links inside the manual for full instructions and jig setup.
+
+
 - Fixed Campaign Report mouse-wheel scrolling by removing competing nested vertical scroll areas; wide tables retain horizontal overflow, and export modal scrolling is unchanged.
 
 
