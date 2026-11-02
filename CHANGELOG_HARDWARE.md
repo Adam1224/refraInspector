@@ -15,7 +15,7 @@ Hardware numbering describes the **two deliverables** used with the inspection a
 
 ## HW-02 — ArUco marker target (PDF)
 
-**File:** [Revised four-page A4 printable PDF](./docs/RefraInspector_ArUco_300x300_4A4_REVIEW_v13_fixed_labels.pdf)  
+**File:** [Revised four-page A4 printable PDF](./hardware/RefraInspector_ArUco_300x300_4A4_REVIEW_v13_fixed_labels.pdf)  
 **Deliverable:** Print-and-assemble four ArUco markers, IDs 0–3, with millimetre scales.
 
 - Layout: page 1 ID0 top-left; page 2 ID1 top-right; page 3 ID2 bottom-left; page 4 ID3 bottom-right.
