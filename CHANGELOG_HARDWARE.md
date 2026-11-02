@@ -21,7 +21,7 @@ Hardware revision history is maintained independently of software releases. **La
 
 ## HW-03 iteration history — newest to oldest
 
-| Revision | Main change relative to previous iteration | — |
+| Revision | Main change relative to previous iteration | Updated on (JST) |
 |---|---|---|
 | **v2.8.4** <a id="hw03-v2-8-4"></a> | Rotated `SCAN FOR MANUAL` 180° and moved it closer to the QR; updated version engraving | 2026-10-30 |
 | v2.8.3 <a id="hw03-v2-8-3"></a> | Corrected the side-label left-to-right reading direction | — |
