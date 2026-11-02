@@ -299,22 +299,22 @@ If no markers are present, the application falls back to the traditional **Auto 
 
 ## 6. ArUco target — printing and physical setup
 
-**Printable target:** [Four A4 sheets · 300 × 300 mm · 1 mm rulers · ID 0 corner origin (PDF)](./docs/RefraInspector_ArUco_300x300_4A4_NoZeroLabel.pdf)
+**Printable target (revised fixed-label layout):** [Four A4 sheets · 300 × 300 mm nominal ArUco geometry · millimetre rulers · per-page 100 mm print checks (PDF)](./docs/RefraInspector_ArUco_300x300_4A4_NoZeroLabel.pdf)
 
-### Print four A4 sheets (no cutting)
+### Print and assemble the revised four-page A4 target
 
 1. Open the PDF and print **all four pages on A4 at Actual size / 100%**. Disable **Fit to page**, auto-scaling, poster/tile printing, and printer-driver enlargement/reduction. Print in the intended page orientation.
-2. Check the **100 mm print verification scale** with a reliable physical ruler on the printed sheet. If it is not 100 mm, correct the print settings and reprint.
-3. Lay the pages on a flat, rigid backing **without overlapping, trimming, or gaps**; align the actual paper edges and join in this order:
+2. Check the **100 mm PRINT CHECK** line printed on **each of the four sheets** with a reliable physical ruler. If it is not 100 mm, correct the print settings and reprint.
+3. Identify each page from its printed `IDx | PAGE n/4 | POSITION` header and corner-placement icon. Lay the pages on a flat, rigid backing **without overlapping, trimming, or gaps**; align the actual paper edges and join in this order:
 
    | | Left | Right |
    |---|---|---|
    | **Top** | Page 1 · ID 0 (top-left) | Page 2 · ID 1 (top-right) |
    | **Bottom** | Page 3 · ID 2 (bottom-left) | Page 4 · ID 3 (bottom-right) |
 
-4. Fix the pages against slipping, wrinkling, curling, or stretching. Tape the **back of the sheets or the outer margins**; never cover a marker's black squares or surrounding white quiet zone. Keep all markers flat and unobstructed.
-5. Measure actual **marker-centre distances** horizontally (ID 0–1 and ID 2–3) and vertically (ID 0–2 and ID 1–3). The intended values are **300 mm in both directions**. Confirm the assembled marker corners also form an accurate rectangular/square geometry. Paper-edge alignment alone cannot guarantee those distances because printers have feed/registration tolerances.
-6. The left and top rulers use the **bottom-right corner of the black ID 0 marker** as their 0 mm coordinate origin (the numeric zero labels are intentionally omitted). **This ruler origin is different from the ArUco marker-centre coordinate references used by the Homography calculation.** Some tick marks near markers and interior paper seams are intentionally omitted to prevent interference; do not use these omissions as physical gaps in the distance scale.
+4. Before fixing the pages, check that the printed millimetre tick progression continues in the intended direction across the top and left reference rulers. The page labels and corner-placement icons are assembly aids, **not** calibration features. Fix the pages against slipping, wrinkling, curling, or stretching. Tape the **back of the sheets or the outer margins**; never cover a marker's black squares or surrounding white quiet zone. Keep all markers flat and unobstructed.
+5. Measure actual **marker-centre distances** horizontally (ID 0–1 and ID 2–3) and vertically (ID 0–2 and ID 1–3). The intended values are **300 mm in both directions**. Confirm the assembled marker corners also form an accurate rectangular/square geometry. Paper-edge alignment alone cannot guarantee those distances because printers have feed/registration tolerances. **Do not use the target for metric measurements if the assembled marker-centre geometry fails verification.**
+6. The left and top rulers use the **bottom-right corner of the black ID 0 marker** as their 0 mm coordinate origin (the numeric zero labels are intentionally omitted). **This ruler origin is different from the ArUco marker-centre coordinate references used by the Homography calculation.** The revised page labels do not change this distinction. Some tick marks near markers and interior paper seams are intentionally omitted to prevent interference; do not use these omissions as physical gaps in the distance scale.
 
 For metrology, mount the printed target on a stable rigid jig once its dimensions have been checked. Ordinary printed paper is a prototype/reference target, not by itself a precision-certified calibration standard. Do not use an assembled set with wrong centre spacing as a valid 300 × 300 mm reference.
 
