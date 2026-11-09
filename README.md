@@ -403,6 +403,43 @@ The ArUco workflow should be **automatic**, not require the user to click each m
 
 **Import targets to confirm:** STL / point cloud (geometry), exportable texture/color data, CAD reference, and numerical difference results. **STL alone does not preserve photographic texture.** Verify scan units, registration and reference surfaces before reporting wear depth or volume; CAD deviation may include warpage as well as erosion.
 
+### 3D scan resolution, file size and compression (proposed)
+
+**Measurement accuracy is not the same as sampling resolution or mesh fidelity.** More points preserve finer detail but do not inherently improve the scanner's absolute accuracy. For a roughly 300 × 300 mm scanned area, reducing uniform XY point spacing by half increases the number of samples by approximately **4×**. Illustrative uncompressed XYZ data estimates (12 bytes/point, no texture or metadata):
+
+| XY sampling interval | Points per PL | Raw XYZ data per Upper + Lower |
+|---|---:|---:|
+| 1.0 mm | 90,000 | ~2.2 MB |
+| 0.5 mm | 360,000 | ~8.6 MB |
+| 0.25 mm | 1,440,000 | ~34.6 MB |
+| 0.1 mm | 9,000,000 | ~216 MB |
+
+These figures are **theoretical grid estimates, not verified WM-6000 file sizes**. Triangle-mesh size, actual scanned area, holes/occlusion, scan overlap, point attributes, texture resolution and compression all affect real exports; binary STL is approximately **50 bytes per triangle** excluding file overhead.
+
+**Recommended approach:** Keep the original high-density scan as a separate archived source, but load a lighter, independently validated measurement mesh in RefraInspector:
+
+- **Adaptive mesh simplification:** retain dense data near bore edges, edge damage, sliding-wear tracks and suspected cracks; simplify relatively flat, undamaged surfaces.
+- **Lossless compression** where practical; store geometry and color texture separately. Compress visualization textures independently from metrology data, and preserve any high-resolution crack-region patches needed for analysis.
+- **Per-PL processing:** retain scan units/coordinate transformation, quality/coverage masks, reference-surface method, original file hash, simplification settings and validation metrics. Do not mistake missing scan points for erosion.
+- **Two storage levels:** lightweight meshes, previews and computed metrics for routine Campaign review; external full-resolution scan archives for traceability or reanalysis. A portable 3D export may package geometry, texture (if available), measurements and metadata.
+
+**Initial size targets (not guarantees):** about **20–80 MB per Upper/Lower pair** for an optimized, textured inspection package, and **~100 MB/pair** as an initial typical archive-planning allowance; high-density originals can be much larger. Establish real budgets using exported WM-6000 sample files, not scanner point-rate specifications.
+
+**Compression acceptance must be based on calculated PL results**, not just polygon count. Re-run the same registration/reference/measurement pipeline before and after simplification. The following are *candidate additional differences introduced by compression*, not scanner accuracy specifications or approved product tolerances:
+
+| Measurement | Proposed maximum change after compression |
+|---|---:|
+| A–F dimensions | ≤ 0.10 mm |
+| Maximum wear depth | ≤ 0.10 mm |
+| J–L areas | ≤ 1% |
+| M enlargement ratio | ≤ 0.5 percentage points |
+| Estimated wear volume | ≤ 2% |
+| Detected crack length | ≤ 0.5 mm |
+
+Also validate **crack recall / false negatives**, especially for fine cracks: a small length difference on *detected* cracks does not prove that compression preserved all cracks. Validate across new, moderately worn and severely worn PLs, and retain only a compression profile that passes all required dimensional and detection checks. These thresholds require confirmation against actual PL engineering tolerances and scanning repeatability.
+
+
+
 ## 10. Documentation and support
 
 - [Current application — refraInspector_v13.3.html](./refraInspector_v13.3.html)
