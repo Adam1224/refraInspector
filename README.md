@@ -32,6 +32,7 @@ RefraInspector is a browser-based application for inspection and analysis of ref
 - [8. Data export and preservation](#8-export-and-data-preservation)
 - [9. Measurement limitations](#9-measurement-guidance-and-limitations)
 - [10. Documents and support](#10-documentation-and-support)
+- [11. Planned 3D laser scanner workflow](#11-planned-3d-laser-scanner-workflow--not-yet-implemented)
 
 ## Before you start — use an existing photo or take a new one
 
@@ -383,6 +384,58 @@ The ArUco workflow should be **automatic**, not require the user to click each m
 - Investigate improbable stroke or erosion results for incorrect geometry, calibration, or missing inputs.
 
 **Beta limitation:** Automatic image recognition, contour-derived areas, and touch behavior require validation with physical reference measurements and real devices.
+
+## 11. Planned 3D laser scanner workflow — not yet implemented
+
+> **Roadmap / proposal only.** The current RefraInspector HTML implements the **Legacy ruler** and **ArUco photographic** workflows. **3D scanner import, textured 3D viewing, depth-based measurements, and automatic crack recognition are NOT implemented yet.** Existing 2D measurement definitions, verification, and Campaign records will remain supported.
+
+### 11.1 Objective and scanner data sources
+
+Introduce a **third, independent `3D Laser Scan` workflow** alongside Legacy 2D and ArUco 2D, initially targeting existing **KEYENCE WM-6000** scan data (when equipped with the appropriate laser scanning probe). Later, enable other RGB-D / structured-light or laser scanning instruments via format-specific import adapters. The first integration will be **file-based** rather than direct hardware control.
+
+**Initial import targets and items to verify with the WM-6000 software:**
+
+| Data / file | Planned use | Availability and caveats |
+|---|---|---|
+| **STL (binary / ASCII)** | 3D triangle mesh and geometric surface analysis | Candidate for initial implementation. STL ordinarily **does not contain texture, colors, units or camera calibration**; confirm millimeter units and axis orientation separately. |
+| **Point cloud (e.g., XYZ / PLY)** | Original 3D surface samples, optional point colors, and resampling | Confirm which **exact formats** the installed KEYENCE software exports and whether per-point RGB is available. |
+| **Textured mesh (e.g., OBJ + MTL + texture image, or textured GLB)** | Realistic surface-color 3D inspection | **Not confirmed for WM-6000 export.** KEYENCE's in-software texture display does not prove that external texture coordinates or images are exportable. |
+| **CAD reference (STEP / IGES or a converted mesh)** | Nominal geometry, coordinate registration and deviation comparison | Verify accessible CAD/export formats and whether conversion is needed in the browser. |
+| **Difference map / measurement values (CSV or equivalent)** | Import reference deviations and independently measured dimensions | Confirm whether numerical per-point deviations can be exported, not just screenshots or PDF reports. |
+| **KEYENCE native project / offline viewer** | Archive and inspection in the vendor environment | Treat as vendor-specific unless the file specification or a supported converter is available. |
+
+**Required accompanying metadata:** PL ID, Upper/Lower, scan date, equipment/probe, length unit, PL coordinate axes, scan registration method, reference geometry, and source-file checksum. A KEYENCE measurement **PDF alone is insufficient** to reconstruct a dense 3D surface.
+
+### 11.2 Planned features
+
+| Feature | Planned behavior |
+|---|---|
+| **3D PL Display with Real Texture** | Interactive orbit/zoom/pan of the plate, with selectable **Real Texture / Plain Mesh / Height Map** rendering; preserve visible cracks, slag, marks and refractory surface appearance **only if the export provides usable colors/textures or a registered photograph**. |
+| **Wear Depth Color Map** | False-color, millimeter-scaled wear depth relative to a verified reference surface, with probe/cursor readings, threshold overlays, invalid-data masks and a color legend. Distinguish **raw height**, **CAD deviation**, and **estimated wear**. |
+| **3D Section Analysis** | Select or draw sections through the bore, short/long ends and sliding direction; display profiles, local height differences, erosion width and cross-sectional loss; export profile samples. |
+| **Before / After 3D Comparison** | Register unused vs used PL scans, or compare a used scan to a nominal CAD model; show a difference color map, local change and registration quality. **CAD deviations are not necessarily wear** because heating, deformation, manufacturing tolerance and alignment contribute. |
+| **Automatic Crack Recognition** | Combine available texture/color information with 3D grooves, discontinuities and local geometry to propose crack centerlines, length, width, orientation and classifications; allow operator confirmation and edits. Depth/width measurement is conditional on scan resolution and visibility; dark marks, pores and slag can create false detections. |
+| **Depth-assisted A–F Auto Alignment** | Independent `autoAlign3D()` using bore geometry, 3D edge damage and connected wear regions for H1–H6 / V1–V2. Example **proposed** H6/F rule: farthest stable boundary connected to the bore at a configurable **1 mm wear-depth threshold**; validate definitions before adopting them. |
+| **3D J–M and Damage Analysis** | Preserve the existing A–F/J–M definitions while evaluating depth-aided area segmentation, maximum/average wear depth, area above selected depth thresholds and **material-loss volume** where the reference and data coverage are reliable. |
+| **Reference Surface & Thermal Deformation Compensation** | Fit verified undamaged regions or register a before-use scan; consider plate warpage and thermal deformation independently of local material loss. Report fitting residuals and uncertainty; suppress unreliable wear/volume outputs. |
+| **3D Measurement Verification** | Separate checks for 3D registration, reference-surface validity, data coverage and segmentation results, before saving derived 3D measurements to the Campaign. |
+| **3D Campaign Analytics & Exports** | Link scans to existing Campaign / PL Set / Upper-Lower records; add depth/volume trends against Heats and Runtime, 3D comparison snapshots, section plots and workflow labels in CSV/Excel/report exports. |
+| **Offline review and portable preservation** | Make imported data viewable without requiring the KEYENCE application, when supported open formats are provided; optionally archive original mesh/texture and analysis metadata together. This is distinct from the vendor's proprietary offline viewer. |
+
+### 11.3 Workflow and validation
+
+1. **Scan and export** an RN PL using WM-6000; retain original scan/project files and any available texture, point cloud, CAD and measurement-value exports.
+2. **Auto-detect** supported 3D input, validate geometry/units and open the independent **3D Laser Scan** workflow; photo uploads continue through ArUco or Legacy.
+3. **Register PL coordinates** using stable geometric features; inspect scan completeness at the bore, bore wall, edge damage and sliding-wear track.
+4. **Estimate and verify the reference surface**, accounting for possible post-heating distortion. Use the 3D height/depth maps and optional reference CAD or before-use scan.
+5. **Run dedicated 3D measurement and crack-detection algorithms**, show surface texture when available, allow manual review, and preserve the distinction between measured values and uncertain estimates.
+6. **Verify → Save to Campaign → Export**, sharing the existing PL Set / Upper-Lower model. Missing 3D metrics in older 2D records must display **N/A**, not zero.
+
+**Initial acceptance tests:** import a real WM-6000 STL/point-cloud sample; verify mm-scale and axis orientation; test whether real texture exports are possible; compare a measured standard and selected PL dimensions against contact measurement; quantify mesh missing-data coverage and scan-to-scan repeatability; and assess baseline uncertainty before relying on wear depth or volume.
+
+**Storage:** Large raw meshes and texture images should normally be kept as separate referenced assets (with hashes and metadata), rather than automatically embedded into the existing Campaign JSON. A complete portable 3D archive can be offered as an explicit export mode.
+
+**Implementation sequence:** (1) 3D parser and viewer, (2) texture and reference registration, (3) difference maps and sections, (4) A–F / J–M plus crack proposals and depth/volume metrics, (5) Campaign integration, regression tests and validation. Scope and schedule depend on access to representative WM-6000 exported files and the actual export formats.
 
 ## 10. Documentation and support
 
