@@ -386,6 +386,19 @@ The ArUco workflow should be **automatic**, not require the user to click each m
 
 **Beta limitation:** Automatic image recognition, contour-derived areas, and touch behavior require validation with physical reference measurements and real devices.
 
+## 10. Documentation and support
+
+- [Current application — refraInspector_v13.3.html](./refraInspector_v13.3.html)
+- [Printable four-sheet ArUco target — 300 × 300 mm](./hardware/RefraInspector_ArUco_300x300_4A4_REVIEW_v13_fixed_labels.pdf)
+- [SW/HW version mapping — CHANGELOG.md](./CHANGELOG.md)
+- [Software releases (SW codes) — CHANGELOG_SOFTWARE.md](./CHANGELOG_SOFTWARE.md)
+- [Hardware and ArUco target (HW codes) — CHANGELOG_HARDWARE.md](./CHANGELOG_HARDWARE.md)
+- [Detailed historical changes — CHANGELOG_ARCHIVE.md](./CHANGELOG_ARCHIVE.md)
+
+The current executable is **refraInspector_v13.3.html**. Only this HTML release is retained on the current branch. Obsolete **v13.0** and **v12.1.7** HTML files were removed from the current branch; their prior contents remain recoverable through Git history. Historical versions may still be mentioned in the software change log.
+
+**Developer / Help Desk:** xuh@shinagawa-ref.jp
+
 ## 11. Planned 3D Scanner Features — not yet implemented
 
 > **Future development:** These features are proposed for integrating **KEYENCE WM-6000 laser scan data** into RefraInspector. The current Legacy / ArUco 2D workflows remain unchanged. Implementation depends on which scan, texture and CAD-difference files can actually be exported.
@@ -438,21 +451,6 @@ These figures are **theoretical grid estimates, not verified WM-6000 file sizes*
 | Detected crack length | ≤ 0.5 mm |
 
 Also validate **crack recall / false negatives**, especially for fine cracks: a small length difference on *detected* cracks does not prove that compression preserved all cracks. Validate across new, moderately worn and severely worn PLs, and retain only a compression profile that passes all required dimensional and detection checks. These thresholds require confirmation against actual PL engineering tolerances and scanning repeatability.
-
-
-
-## 10. Documentation and support
-
-- [Current application — refraInspector_v13.3.html](./refraInspector_v13.3.html)
-- [Printable four-sheet ArUco target — 300 × 300 mm](./hardware/RefraInspector_ArUco_300x300_4A4_REVIEW_v13_fixed_labels.pdf)
-- [SW/HW version mapping — CHANGELOG.md](./CHANGELOG.md)
-- [Software releases (SW codes) — CHANGELOG_SOFTWARE.md](./CHANGELOG_SOFTWARE.md)
-- [Hardware and ArUco target (HW codes) — CHANGELOG_HARDWARE.md](./CHANGELOG_HARDWARE.md)
-- [Detailed historical changes — CHANGELOG_ARCHIVE.md](./CHANGELOG_ARCHIVE.md)
-
-The current executable is **refraInspector_v13.3.html**. Only this HTML release is retained on the current branch. Obsolete **v13.0** and **v12.1.7** HTML files were removed from the current branch; their prior contents remain recoverable through Git history. Historical versions may still be mentioned in the software change log.
-
-**Developer / Help Desk:** xuh@shinagawa-ref.jp
 
 ## 12. Future Development Options — not yet implemented
 
