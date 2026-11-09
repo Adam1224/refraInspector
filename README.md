@@ -393,6 +393,8 @@ The ArUco workflow should be **automatic**, not require the user to click each m
 
 Introduce a **third, independent `3D Laser Scan` workflow** alongside Legacy 2D and ArUco 2D, initially targeting existing **KEYENCE WM-6000** scan data (when equipped with the appropriate laser scanning probe). Later, enable other RGB-D / structured-light or laser scanning instruments via format-specific import adapters. The first integration will be **file-based** rather than direct hardware control.
 
+**Wide-area measurement opportunity:** Explore scanning several PLs in one WM-6000 measurement session rather than requiring one scan file per plate. Batch processing will need independent geometric segmentation and per-plate coordinate registration, plus explicit Upper/Lower and Campaign assignment; scanner range alone does not guarantee simultaneous full-surface capture.
+
 **Initial import targets and items to verify with the WM-6000 software:**
 
 | Data / file | Planned use | Availability and caveats |
@@ -410,6 +412,7 @@ Introduce a **third, independent `3D Laser Scan` workflow** alongside Legacy 2D 
 
 | Feature | Planned behavior |
 |---|---|
+| **Multi-PL Wide-Area / Batch Scanning** | Use WM-6000 wide-area scanning to capture **multiple PLs within one measurement session** where practical, then automatically segment individual PL meshes/point-cloud clusters, identify and assign each plate to a **PL ID / Upper or Lower / PL Set**, and run the 3D measurement workflow independently for each. Support manual corrections, batch verification, and batch Campaign saving. Confirm actual scan range, registration accuracy, occlusion, and reliable separation of touching/overlapping plates with representative samples. |
 | **3D PL Display with Real Texture** | Interactive orbit/zoom/pan of the plate, with selectable **Real Texture / Plain Mesh / Height Map** rendering; preserve visible cracks, slag, marks and refractory surface appearance **only if the export provides usable colors/textures or a registered photograph**. |
 | **Wear Depth Color Map** | False-color, millimeter-scaled wear depth relative to a verified reference surface, with probe/cursor readings, threshold overlays, invalid-data masks and a color legend. Distinguish **raw height**, **CAD deviation**, and **estimated wear**. |
 | **3D Section Analysis** | Select or draw sections through the bore, short/long ends and sliding direction; display profiles, local height differences, erosion width and cross-sectional loss; export profile samples. |
@@ -431,7 +434,7 @@ Introduce a **third, independent `3D Laser Scan` workflow** alongside Legacy 2D 
 5. **Run dedicated 3D measurement and crack-detection algorithms**, show surface texture when available, allow manual review, and preserve the distinction between measured values and uncertain estimates.
 6. **Verify → Save to Campaign → Export**, sharing the existing PL Set / Upper-Lower model. Missing 3D metrics in older 2D records must display **N/A**, not zero.
 
-**Initial acceptance tests:** import a real WM-6000 STL/point-cloud sample; verify mm-scale and axis orientation; test whether real texture exports are possible; compare a measured standard and selected PL dimensions against contact measurement; quantify mesh missing-data coverage and scan-to-scan repeatability; and assess baseline uncertainty before relying on wear depth or volume.
+**Initial acceptance tests:** import a real WM-6000 STL/point-cloud sample; verify mm-scale and axis orientation; test whether real texture exports are possible; compare a measured standard and selected PL dimensions against contact measurement; quantify mesh missing-data coverage and scan-to-scan repeatability; test a wide-area scan containing two or more distinct PLs and check segmentation, independent registration and correct PL Set assignments; and assess baseline uncertainty before relying on wear depth or volume.
 
 **Storage:** Large raw meshes and texture images should normally be kept as separate referenced assets (with hashes and metadata), rather than automatically embedded into the existing Campaign JSON. A complete portable 3D archive can be offered as an explicit export mode.
 
