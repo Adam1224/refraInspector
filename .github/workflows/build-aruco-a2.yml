@@ -1,0 +1,46 @@
+name: Build ArUco A2 print sheet
+on:
+  push:
+    paths:
+      - .github/workflows/build-aruco-a2.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Create one-sheet A2 vector PDF from original 4 A4 pages
+        run: |
+          python -m pip install --quiet pymupdf
+          python - <<'PY'
+          import fitz
+          from pathlib import Path
+          src=Path('hardware/RefraInspector_ArUco_300x300_4A4_REVIEW_v13_fixed_labels.pdf')
+          dst=Path('hardware/RefraInspector_ArUco_300x300_A2_OneSheet_ActualSize.pdf')
+          original=fitz.open(src)
+          assert len(original)==4, f'Expected four A4 pages, got {len(original)}'
+          w,h=original[0].rect.width,original[0].rect.height
+          out=fitz.open()
+          sheet=out.new_page(width=w*2,height=h*2)
+          # Preserves all original page vectors and physical sizes: TL, TR, BL, BR.
+          for i,(x,y) in enumerate([(0,0),(w,0),(0,h),(w,h)]):
+              sheet.show_pdf_page(fitz.Rect(x,y,x+w,y+h),original,i)
+          out.save(dst,garbage=4,deflate=True)
+          out.close()
+          check=fitz.open(dst)
+          assert len(check)==1 and abs(check[0].rect.width-1190.551)<0.05 and abs(check[0].rect.height-1683.78)<0.05
+          print('A2 PDF created:', dst, dst.stat().st_size, 'bytes')
+          PY
+      - name: Commit new A2 alongside unchanged A4
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add hardware/RefraInspector_ArUco_300x300_A2_OneSheet_ActualSize.pdf
+          if ! git diff --cached --quiet; then
+            git commit -m "hardware: add single-sheet A2 ArUco print PDF alongside original 4-A4"
+            git push
+          fi
