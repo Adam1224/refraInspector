@@ -2,48 +2,37 @@
 
 **Refractory Sliding Gate Plate Inspection & Campaign Analysis**
 
-**Current version:** v13.2.7  
-**Status:** Beta  
 **Platform:** Modern desktop and mobile web browsers
 
 RefraInspector is a browser-based application for inspection and analysis of refractory sliding gate plates (PLs) used in steelmaking. It supports Upper/Lower PL photographic inspection, dimensional measurement, damage assessment, remaining-stroke calculations, and Campaign performance analysis.
 
 ## Contents
 
-- [Hardware preparation — before Step 1](#before-you-start--use-an-existing-photo-or-take-a-new-one)
+- [Before you start](#before-you-start--use-an-existing-photo-or-take-a-new-one)
 - [1. Quick start — one inspection](#1-quick-start--complete-one-pl-inspection)
-- [2. Warnings and errors](#2-warnings-and-errors--cause-and-solution)
-  - [Diagnostic code index](#diagnostic-code-index-v132)
-- [3. Detailed operation — states and transitions](#3-detailed-operation--states-permitted-actions-and-transitions)
-  - [3.1 State flow](#31-at-a-glance-the-state-flow)
-  - [3.2 S0 — No photo](#32-state-s0--no-photo-imported)
-  - [3.3 S1 — Photo imported](#33-state-s1--photo-imported-automatic-setup-being-evaluated)
-  - [3.4 S2 — Legacy calibration](#34-state-s2--traditional-leveling-and-xy-ruler-calibration)
-  - [3.5 S3 — Alignment in progress](#35-state-s3--calibrated-photo-alignment-not-yet-verified)
-  - [3.6 S4 — Verified photo](#36-state-s4--photo-alignment-verified)
-  - [3.7 S5 — Ready to save](#37-state-s5--working-pl-set-ready-for-campaign-saving)
-  - [3.8 S6 — Campaign saved](#38-state-s6--pl-set-saved-to-campaign)
-  - [3.9 Actions that reset or alter state](#39-operations-that-can-change-the-state-unexpectedly)
-  - [3.10 Troubleshooting by state](#310-state-transition-troubleshooting-shortcuts)
-- [4. Features](#4-features-at-a-glance)
-- [5. Calibration principles](#5-how-image-calibration-works-technical)
-- [6. ArUco printing and installation](#6-aruco-target--printing-and-physical-setup)
-- [7. Ellipse detection and constraints](#7-innerouter-ellipse-recognition-and-constraints-technical)
-- [8. Data export and preservation](#8-export-and-data-preservation)
-- [9. Measurement limitations](#9-measurement-guidance-and-limitations)
-- [10. Documents and support](#10-documentation-and-support)
-- [11. Planned 3D scanner features](#11-planned-3d-scanner-features--not-yet-implemented)
-- [12. Future development options](#12-future-development-options--not-yet-implemented)
+- [2. Warnings and troubleshooting](#2-warnings-and-errors--cause-and-solution)
+  - [Diagnostic code index](#diagnostic-code-index)
+- [3. Detailed operation and verification states](#3-detailed-operation--states-permitted-actions-and-transitions)
+- [4. Measurement Principles and Assumptions](#4-measurement-principles-and-assumptions)
+  - [4.1 Calibration and perspective correction](#41-image-calibration-and-perspective-correction)
+  - [4.2 Bore and wear-boundary recognition](#42-bore-and-wear-boundary-recognition)
+  - [4.3 Verification and limitations](#43-measurement-assumptions-verification-and-limitations)
+- [5. Jig Preparation, Printing and Installation](#5-jig-preparation-printing-and-installation)
+- [6. Inspection Features](#6-inspection-features)
+- [7. Data Storage, Loading and Export](#7-data-storage-loading-and-export)
+- [8. Documentation and Support](#8-documentation-and-support)
+- [9. Planned 3D Scanner Features](#9-planned-3d-scanner-features--not-yet-implemented)
+- [10. Future Development Options](#10-future-development-options--not-yet-implemented)
 
 ## Before you start — use an existing photo or take a new one
 
-**Already have PL photos?** Open [RefraInspector](./refraInspector_v13.3.html) and import the Upper and/or Lower images. No physical jig is needed to *open* a photo. For calibrated measurements, however, the photo must include usable references: **all four ArUco markers** or **two visible perpendicular metric rulers**. If neither is present, accurate dimensional calibration cannot be established from the photo alone. [See calibration options](#5-how-image-calibration-works-technical).
+**Already have PL photos?** Open [RefraInspector](./refraInspector_v13.3.html) and import the Upper and/or Lower images. No physical jig is needed to *open* a photo. For calibrated measurements, however, the photo must include usable references: **all four ArUco markers** or **two visible perpendicular metric rulers**. If neither is present, accurate dimensional calibration cannot be established from the photo alone. [See calibration options](#41-image-calibration-and-perspective-correction).
 
 **Taking new photos?** Choose one reference method before shooting:
 
 | Reference method | What to prepare | In the app |
 |---|---|---|
-| **ArUco (recommended)** | Four markers (IDs 0–3), correctly positioned **300 × 300 mm centre-to-centre**; keep all markers visible and coplanar with the PL reference face. [Print / set up markers](#6-aruco-target--printing-and-physical-setup) · [Marker PDF](./hardware/RefraInspector_ArUco_300x300_4A4_REVIEW_v13_fixed_labels.pdf) | Automatic detection and perspective correction |
+| **ArUco (recommended)** | Four markers (IDs 0–3), correctly positioned **300 × 300 mm centre-to-centre**; keep all markers visible and coplanar with the PL reference face. [Print / set up markers](#5-jig-preparation-printing-and-installation) · [Marker PDF](./hardware/RefraInspector_ArUco_300x300_4A4_REVIEW_v13_fixed_labels.pdf) | Automatic detection and perspective correction |
 | **Two rulers (fallback)** | Two perpendicular metric rulers, each with at least **100 mm** visible beside the PL. [See ruler calibration](#34-state-s2--traditional-leveling-and-xy-ruler-calibration) | Level the photo, then calibrate X and Y |
 
 **When taking photos with the ArUco jig:** Press the PL firmly against the **upper-left positioning corner of the jig** (the top and left locating surfaces), without covering the markers. Position the **camera lens approximately above the PL bore/opening**, and frame the shot so **all four ArUco markers (IDs 0–3), including their white margins, are fully visible and unobstructed**. A modest off-axis camera angle is generally acceptable when the markers are correctly detected: planar Homography compensates for perspective, so slight camera tilt alone should not materially affect planar measurement accuracy. This is conditional on coplanar reference surfaces, adequate image quality and independently verified dimensions; severe tilt, parallax from height offsets, lens distortion and worn/nonplanar surfaces can still cause error.
@@ -56,12 +45,12 @@ RefraInspector is a browser-based application for inspection and analysis of ref
 
 | Step | Action | More details |
 |---|---|---|
-| **1 · Prepare** | Open [RefraInspector v13.2.7](./refraInspector_v13.3.html); enter the PL Geometry reference dimensions and prepare the PL and calibration target. | [Hardware setup](#before-you-start--use-an-existing-photo-or-take-a-new-one) · [PL Geometry / initial state](#32-state-s0--no-photo-imported) |
+| **1 · Prepare** | Open [RefraInspector](./refraInspector_v13.3.html); enter the PL Geometry reference dimensions and prepare the PL and calibration target. | [Hardware setup](#before-you-start--use-an-existing-photo-or-take-a-new-one) · [PL Geometry / initial state](#32-state-s0--no-photo-imported) |
 | **2 · Import** | Upload the **Upper** and/or **Lower** PL photo. Confirm that the photos are correctly assigned. | [Photo import](#33-state-s1--photo-imported-automatic-setup-being-evaluated) · [Warnings](#2-warnings-and-errors--cause-and-solution) |
 | **3 · Calibrate & align** | Let **Auto ArUco** correct the image; without ArUco, level and calibrate the two rulers. Check and adjust the H/V measurement guides. | [Ruler calibration](#34-state-s2--traditional-leveling-and-xy-ruler-calibration) · [Alignment](#35-state-s3--calibrated-photo-alignment-not-yet-verified) |
-| **4 · Verify** | Review A–F and damage boundaries; click **Verify Alignment** for each imported PL. | [Verification](#36-state-s4--photo-alignment-verified) · [Measurement limitations](#9-measurement-guidance-and-limitations) |
+| **4 · Verify** | Review A–F and damage boundaries; click **Verify Alignment** for each imported PL. | [Verification](#36-state-s4--photo-alignment-verified) · [Measurement limitations](#43-measurement-assumptions-verification-and-limitations) |
 | **5 · Save** | Enter available usage information (e.g. heats/runtime), then **Save set to campaign**. | [Ready to save](#37-state-s5--working-pl-set-ready-for-campaign-saving) · [Saved records](#38-state-s6--pl-set-saved-to-campaign) |
-| **6 · Export** | Open **Export Campaign Info**, preview **Campaign Summary** or **Saved PL Set Details**, then export (Excel is the default). | [Export and backup](#8-export-and-data-preservation) |
+| **6 · Export** | Open **Export Campaign Info**, preview **Campaign Summary** or **Saved PL Set Details**, then export (Excel is the default). | [Export and backup](#7-data-storage-loading-and-export) |
 
 **Before saving:** Automatic measurements require visual review. Verify again if subsequent edits invalidate alignment; missing heats/runtime do not prevent an already saved set from appearing in the full detail export.
 
@@ -91,7 +80,7 @@ These are common on-screen warnings, restrictions or symptoms. The wording may d
 
 For detailed operation, see **Section 3**. Technical reasons behind image and geometry constraints appear later in this README.
 
-### Diagnostic code index (v13.2)
+### Diagnostic code index
 
 Each listed code is displayed in the matching application warning, error or confirmation message. **Find a code:** open this README and use **Ctrl+F** (Windows) or **⌘+F** (Mac), then enter the full code (for example, `RI-ALN-003`). The code identifies the condition; it does not by itself indicate the severity. Older screenshots without codes refer to earlier application builds.
 
@@ -277,23 +266,11 @@ The current Upper **or** Lower photo is marked verified. **Verification is per p
 - **Cannot save?** Check all **imported** photos' verification (`RI-VER-002`) and the required operating fields (`RI-SAV-001`).
 - **Campaign results seem changed or missing?** Check the active Campaign, saved-vs-unsaved data, shared geometry updates (`RI-SAV-002`) and backup history.
 
+## 4. Measurement Principles and Assumptions
 
-## 4. Features at a glance
+### 4.1 Image calibration and perspective correction
 
-- **Photo inspection:** Import one or two photographs, switch between Upper/Lower PLs, automatically or manually level images, and verify alignment.
-- **Perspective correction (v13.2 beta):** Automatic detection of four 30 mm ArUco markers, 300 × 300 mm centre-spacing reference, 16-corner least-squares Homography, adaptive rectification resolution, and alignment re-verification.
-- **Ruler calibration:** Independent horizontal and vertical px/mm scales, automatic 100 mm calibration, and manual fallback.
-- **A–F dimensions and Auto Align (v13.2 beta):** Inner-opening detection proposes H3/H4 and bore sides; independent outer-wear ellipse detection proposes tangent guides H2/H5/V1/V2. H1–H6 ordering, V1/V2 inner-bore exclusion, and whole-arc inner/outer containment checks protect against invalid guide geometries. Automatic readings and editable manual overrides remain available.
-- **Damage assessment:** Used-bore and enlargement areas, edge-damage area estimates, long-end damage, crack counts, and inspection remarks.
-- **PL Set and Campaign management:** ID and usage records, saved-set selector, independent photo verification, selective deletion, Campaign Performance statistics, browser-local recovery and backups.
-- **Performance calculations:** Remaining Stroke (R), Stroke Reduction (ΔR), Erosion Rate (ER), Erosion per Heat (EPH), and comparison with a safe-stroke limit.
-- **Campaign Report:** Saved-set data table, Campaign summary, Remaining Stroke versus Used Heats, Upper/Lower long-end damage versus Used Heats, and report/chart exports.
-- **Capture-time validation:** If original EXIF timestamps are available for both photos and differ by more than 30 minutes, show a dismissible warning. Replacing either photo resets dismissal. Missing EXIF times are not substituted with file modification times; the warning never blocks inspection or export.
-- **Mobile-friendly layout:** Continuous page scrolling, compact help control, thin guides with enlarged drag targets.
-
-## 5. How image calibration works (technical)
-
-The current v13.2 application automatically attempts ArUco detection after importing each Upper/Lower photo. It uses **DICT_4X4_50, IDs 0–3**, mounted as four **30 × 30 mm markers with 300 × 300 mm marker-centre spacing**: ID 0 top-left, ID 1 top-right, ID 2 bottom-left and ID 3 bottom-right. The intended calibration region is around the PL bore and surrounding damage rather than the distant long-end tail.
+The application automatically attempts ArUco detection after importing each Upper/Lower photo. It uses **DICT_4X4_50, IDs 0–3**, mounted as four **30 × 30 mm markers with 300 × 300 mm marker-centre spacing**: ID 0 top-left, ID 1 top-right, ID 2 bottom-left and ID 3 bottom-right. The intended calibration region is around the PL bore and surrounding damage rather than the distant long-end tail.
 
 When four markers are detected, the system estimates a planar Homography by **least-squares fitting all 16 marker corners** to their known physical positions, checks geometric residuals, and rectifies the image. The output size and displayed X/Y px/mm are selected from estimated original image sampling density rather than the former fixed 900 × 900 px output (with a maximum output dimension to protect browser memory). Homography success supersedes traditional ruler calibration for that photo, clears the obsolete manual-calibration/red warning state, and requires checking A–F guide positions and re-verifying alignment before saving.
 
@@ -301,7 +278,31 @@ If no markers are present, the application falls back to the traditional **Auto 
 
 **Important limitations:** These specifications require the actual physical markers to be mounted with accurate 300 × 300 mm centre spacing and consistent orientation on the PL reference plane. An A4 printout of four markers at a different spacing is only an identification test, **not** a valid metric calibration frame. Printed marker dimensions, camera lens distortion, PL surface height differences, edge detection, and image resampling affect real-world accuracy. The displayed px/mm describes the output image grid, **not** a certified measurement resolution. 16-corner RMS/max residuals measure fit consistency rather than actual A–F errors. Validate against independent known-length references before production use; full browser/device regression testing is still required.
 
-## 6. ArUco target — printing and physical setup
+### 4.2 Bore and wear-boundary recognition
+
+**Auto Align now treats the inner opening and outer wear boundary as distinct features.** The image-based inner-bore region detector proposes the inner opening's top/bottom guides (**H3/H4**) and left/right bounds. The outer wear-ring detector independently searches farther outside the inner opening and proposes an **outer ellipse**; its top, bottom, left and right tangents determine **H2/H5/V1/V2**. The two ellipses **may be eccentric**—their centres are not forced to coincide.
+
+**Geometric safeguards:**
+
+- Horizontal guide positions must remain ordered from the short end to the long end: **H1 < H2 < H3 < H4 < H5 < H6**. The constraint applies to auto placement and manual guide movement.
+- **V1** must stay to the *left* of the detected inner-bore left boundary, and **V2** to its *right*; manual movement cannot drag these outside their permitted ranges.
+- **The full fitted inner ellipse must lie strictly inside the fitted outer ellipse**. The outer-candidate check samples the inner perimeter at 720 points with a safety margin, not just the four tangent locations. If a candidate intersects or encroaches on the inner ellipse, the algorithm retries its search farther outward (up to three search passes). When no acceptable candidate is found, it retains the previous outer-guide positions and requires manual review.
+- These are **software geometric constraints**, not a guarantee that a detected edge corresponds to the physically correct wear boundary. Strong shadows, slag, oxidation, poor focus, and non-elliptical damage can still mislead the algorithm. A geometrically valid ellipse can still be the wrong feature.
+
+**Recommended operator check after Auto Align:** Confirm H3/H4 on the actual inner opening, confirm H2/H5/V1/V2 are tangential to the *outer wear boundary* rather than the plate perimeter or another contrast edge, check asymmetric wear, then use **Verify Alignment**. The inner-hole detector has shown promising results on a sample PL photo, but outer-boundary accuracy and complete browser regression remain **unverified**.
+
+### 4.3 Measurement assumptions, verification and limitations
+
+- Position the plate and either the ArUco target or traditional rulers on stable supports; keep the relevant reference surfaces at the PL measurement-plane height.
+- Ensure ruler marks and plate damage boundaries are visible.
+- Check independent X/Y scale validity before using photo-derived dimensions.
+- Manually review suggested alignment lines and contours.
+- Report precision in accordance with the actual measuring tool.
+- Investigate improbable stroke or erosion results for incorrect geometry, calibration, or missing inputs.
+
+**Beta limitation:** Automatic image recognition, contour-derived areas, and touch behavior require validation with physical reference measurements and real devices.
+
+## 5. Jig Preparation, Printing and Installation
 
 **Printable target (revised fixed-label layout):** [Four A4 sheets · 300 × 300 mm nominal ArUco geometry · millimetre rulers · per-page 100 mm print checks (PDF)](./hardware/RefraInspector_ArUco_300x300_4A4_REVIEW_v13_fixed_labels.pdf)
 
@@ -343,29 +344,29 @@ For metrology, mount the printed target on a stable rigid jig once its dimension
 
 The ArUco workflow should be **automatic**, not require the user to click each marker. If detection or geometry validation fails, inspect the marker ID/position, print dimensions, orientation and image clarity. A missing marker does **not** justify pretending that a failed Homography has succeeded; use the legacy ruler workflow only if the photograph includes suitable ruler references. Manual A–F review and alignment verification remain mandatory in both paths.
 
-## 7. Inner/outer ellipse recognition and constraints (technical)
+## 6. Inspection Features
 
-**Auto Align now treats the inner opening and outer wear boundary as distinct features.** The image-based inner-bore region detector proposes the inner opening's top/bottom guides (**H3/H4**) and left/right bounds. The outer wear-ring detector independently searches farther outside the inner opening and proposes an **outer ellipse**; its top, bottom, left and right tangents determine **H2/H5/V1/V2**. The two ellipses **may be eccentric**—their centres are not forced to coincide.
+- **Photo inspection:** Import one or two photographs, switch between Upper/Lower PLs, automatically or manually level images, and verify alignment.
+- **Perspective correction:** Automatic detection of four 30 mm ArUco markers, 300 × 300 mm centre-spacing reference, 16-corner least-squares Homography, adaptive rectification resolution, and alignment re-verification.
+- **Ruler calibration:** Independent horizontal and vertical px/mm scales, automatic 100 mm calibration, and manual fallback.
+- **A–F dimensions and Auto Align:** Inner-opening detection proposes H3/H4 and bore sides; independent outer-wear ellipse detection proposes tangent guides H2/H5/V1/V2. H1–H6 ordering, V1/V2 inner-bore exclusion, and whole-arc inner/outer containment checks protect against invalid guide geometries. Automatic readings and editable manual overrides remain available.
+- **Damage assessment:** Used-bore and enlargement areas, edge-damage area estimates, long-end damage, crack counts, and inspection remarks.
+- **PL Set and Campaign management:** ID and usage records, saved-set selector, independent photo verification, selective deletion, Campaign Performance statistics, browser-local recovery and backups.
+- **Performance calculations:** Remaining Stroke (R), Stroke Reduction (ΔR), Erosion Rate (ER), Erosion per Heat (EPH), and comparison with a safe-stroke limit.
+- **Campaign Report:** Saved-set data table, Campaign summary, Remaining Stroke versus Used Heats, Upper/Lower long-end damage versus Used Heats, and report/chart exports.
+- **Capture-time validation:** If original EXIF timestamps are available for both photos and differ by more than 30 minutes, show a dismissible warning. Replacing either photo resets dismissal. Missing EXIF times are not substituted with file modification times; the warning never blocks inspection or export.
+- **Mobile-friendly layout:** Continuous page scrolling, compact help control, thin guides with enlarged drag targets.
 
-**Geometric safeguards:**
+## 7. Data Storage, Loading and Export
 
-- Horizontal guide positions must remain ordered from the short end to the long end: **H1 < H2 < H3 < H4 < H5 < H6**. The constraint applies to auto placement and manual guide movement.
-- **V1** must stay to the *left* of the detected inner-bore left boundary, and **V2** to its *right*; manual movement cannot drag these outside their permitted ranges.
-- **The full fitted inner ellipse must lie strictly inside the fitted outer ellipse**. The outer-candidate check samples the inner perimeter at 720 points with a safety margin, not just the four tangent locations. If a candidate intersects or encroaches on the inner ellipse, the algorithm retries its search farther outward (up to three search passes). When no acceptable candidate is found, it retains the previous outer-guide positions and requires manual review.
-- These are **software geometric constraints**, not a guarantee that a detected edge corresponds to the physically correct wear boundary. Strong shadows, slag, oxidation, poor focus, and non-elliptical damage can still mislead the algorithm. A geometrically valid ellipse can still be the wrong feature.
+**Campaign Report navigation:** The report now scrolls vertically as one page with the mouse wheel from anywhere in the content. Wide numerical tables still scroll horizontally; the export modal keeps its own scrolling. PL Inspection's independently scrolling columns are unchanged.
 
-**Recommended operator check after Auto Align:** Confirm H3/H4 on the actual inner opening, confirm H2/H5/V1/V2 are tangential to the *outer wear boundary* rather than the plate perimeter or another contrast edge, check asymmetric wear, then use **Verify Alignment**. The inner-hole detector has shown promising results on a sample PL photo, but outer-boundary accuracy and complete browser regression remain **unverified**.
+**Workspace navigation and layout:** Click ↑ / ↓ at the top of the PL photo workspace to move between PL Sets while retaining the current Upper/Lower view. Click ← / → at the left and right edges to cycle between Upper and Lower. Hovering does not switch views. ArUco and legacy photo workflows share a consistent #0 Import, #1 Level/Perspective, #2 Calibration, #3 Alignment and #4 Save control layout; the ArUco #2 cell shows its Homography calibration status.
 
-## 8. Export and data preservation
-
-**Campaign Report scrolling (v13.3):** The report now scrolls vertically as one page with the mouse wheel from anywhere in the content. Wide numerical tables still scroll horizontally; the export modal keeps its own scrolling. PL Inspection's independently scrolling columns are unchanged.
-
-**Workspace navigation and layout (v13.3):** Click ↑ / ↓ at the top of the PL photo workspace to move between PL Sets while retaining the current Upper/Lower view. Click ← / → at the left and right edges to cycle between Upper and Lower. Hovering does not switch views. ArUco and legacy photo workflows share a consistent #0 Import, #1 Level/Perspective, #2 Calibration, #3 Alignment and #4 Save control layout; the ArUco #2 cell shows its Homography calibration status.
-
-**v13.3 inspection controls:** Original photo loading shows a workspace spinner; decoded HEIC previews are cached, and only the display preview is downscaled to 2000 px while stored original files remain intact. First-time unsaved PL sets have a yellow Save to Campaign button and empty Runtime/Heats inputs are highlighted yellow.  Use **Show Original Photo** in the upper-left of the photo workspace to preview the uncorrected uploaded image. This read-only preview does not modify calibration, dimensions, saved records or the processed image. If a browser cannot display original HEIC directly, the app attempts a decoded source preview. Clicking **Export Campaign Info** while in PL Inspection first switches to **Campaign Report**, then opens the export dialog. Header controls have consistent touch targets and spacing.
+**Inspection controls:** Original photo loading shows a workspace spinner; decoded HEIC previews are cached, and only the display preview is downscaled to 2000 px while stored original files remain intact. First-time unsaved PL sets have a yellow Save to Campaign button and empty Runtime/Heats inputs are highlighted yellow.  Use **Show Original Photo** in the upper-left of the photo workspace to preview the uncorrected uploaded image. This read-only preview does not modify calibration, dimensions, saved records or the processed image. If a browser cannot display original HEIC directly, the app attempts a decoded source preview. Clicking **Export Campaign Info** while in PL Inspection first switches to **Campaign Report**, then opens the export dialog. Header controls have consistent touch targets and spacing.
 
 
-**Campaign Backup (v13.3; introduced in v13.2.8):** The JSON preserves both `photoDataURL` (the processed workspace PNG) and `originalPhotoDataURL` (the unchanged imported camera file bytes, including embedded metadata) for each saved Upper/Lower PL. A top-level `originalPhotoIndex` identifies originals by Campaign ID, PL Set ID, Upper/Lower side, original upload filename, file size, and a suggested filename such as `CMP001_PL001_Upper_ORIGINAL.heic`. Both versions are embedded in the same JSON, not separately downloaded. Older backups cannot retroactively recover missing originals. Save each PL set first; unsaved changes are not included. Expect larger JSON files.
+**Campaign backup:** The JSON preserves both `photoDataURL` (the processed workspace PNG) and `originalPhotoDataURL` (the unchanged imported camera file bytes, including embedded metadata) for each saved Upper/Lower PL. A top-level `originalPhotoIndex` identifies originals by Campaign ID, PL Set ID, Upper/Lower side, original upload filename, file size, and a suggested filename such as `CMP001_PL001_Upper_ORIGINAL.heic`. Both versions are embedded in the same JSON, not separately downloaded. Older backups cannot retroactively recover missing originals. Save each PL set first; unsaved changes are not included. Expect larger JSON files.
 
 
 - **Copy PLs details** and **Copy Campaign data** produce spreadsheet-compatible content.
@@ -375,31 +376,21 @@ The ArUco workflow should be **automatic**, not require the user to click each m
 
 **Before clearing browser data, preserve required inspection records.** Never commit confidential customer images, production records, credentials, or exported inspection data without authorization.
 
-## 9. Measurement guidance and limitations
-
-- Position the plate and either the ArUco target or traditional rulers on stable supports; keep the relevant reference surfaces at the PL measurement-plane height.
-- Ensure ruler marks and plate damage boundaries are visible.
-- Check independent X/Y scale validity before using photo-derived dimensions.
-- Manually review suggested alignment lines and contours.
-- Report precision in accordance with the actual measuring tool.
-- Investigate improbable stroke or erosion results for incorrect geometry, calibration, or missing inputs.
-
-**Beta limitation:** Automatic image recognition, contour-derived areas, and touch behavior require validation with physical reference measurements and real devices.
-
-## 10. Documentation and support
+## 8. Documentation and Support
 
 - [Current application — refraInspector_v13.3.html](./refraInspector_v13.3.html)
-- [Printable four-sheet ArUco target — 300 × 300 mm](./hardware/RefraInspector_ArUco_300x300_4A4_REVIEW_v13_fixed_labels.pdf)
+- [Printable four-sheet A4 ArUco target — 300 × 300 mm](./hardware/RefraInspector_ArUco_300x300_4A4_REVIEW_v13_fixed_labels.pdf)
+- [Printable single-sheet A2 ArUco target — actual size](./hardware/RefraInspector_ArUco_300x300_A2_OneSheet_ActualSize.pdf)
 - [SW/HW version mapping — CHANGELOG.md](./CHANGELOG.md)
 - [Software releases (SW codes) — CHANGELOG_SOFTWARE.md](./CHANGELOG_SOFTWARE.md)
 - [Hardware and ArUco target (HW codes) — CHANGELOG_HARDWARE.md](./CHANGELOG_HARDWARE.md)
 - [Detailed historical changes — CHANGELOG_ARCHIVE.md](./CHANGELOG_ARCHIVE.md)
 
-The current executable is **refraInspector_v13.3.html**. Only this HTML release is retained on the current branch. Obsolete **v13.0** and **v12.1.7** HTML files were removed from the current branch; their prior contents remain recoverable through Git history. Historical versions may still be mentioned in the software change log.
+Use the linked RefraInspector HTML file for the current application. See the changelog for release history.
 
 **Developer / Help Desk:** xuh@shinagawa-ref.jp
 
-## 11. Planned 3D Scanner Features — not yet implemented
+## 9. Planned 3D Scanner Features — not yet implemented
 
 > **Future development:** These features are proposed for integrating **KEYENCE WM-6000 laser scan data** into RefraInspector. The current Legacy / ArUco 2D workflows remain unchanged. Implementation depends on which scan, texture and CAD-difference files can actually be exported.
 
@@ -452,9 +443,9 @@ These figures are **theoretical grid estimates, not verified WM-6000 file sizes*
 
 Also validate **crack recall / false negatives**, especially for fine cracks: a small length difference on *detected* cracks does not prove that compression preserved all cracks. Validate across new, moderately worn and severely worn PLs, and retain only a compression profile that passes all required dimensional and detection checks. These thresholds require confirmation against actual PL engineering tolerances and scanning repeatability.
 
-## 12. Future Development Options — not yet implemented
+## 10. Future Development Options — not yet implemented
 
-The following options extend RefraInspector beyond its existing browser-based 2D inspection and the separately proposed [3D scanner workflow](#11-planned-3d-scanner-features--not-yet-implemented). **All items below are future concepts, not currently available features.**
+The following options extend RefraInspector beyond its existing browser-based 2D inspection and the separately proposed [3D scanner workflow](#9-planned-3d-scanner-features--not-yet-implemented). **All items below are future concepts, not currently available features.**
 
 | Future option | Planned capability / benefit |
 |---|---|
