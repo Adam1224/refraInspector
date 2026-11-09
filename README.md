@@ -32,7 +32,8 @@ RefraInspector is a browser-based application for inspection and analysis of ref
 - [8. Data export and preservation](#8-export-and-data-preservation)
 - [9. Measurement limitations](#9-measurement-guidance-and-limitations)
 - [10. Documents and support](#10-documentation-and-support)
-- [11. Planned 3D laser scanner workflow](#11-planned-3d-laser-scanner-workflow--not-yet-implemented)
+- [11. Planned 3D scanner features](#11-planned-3d-scanner-features--not-yet-implemented)
+- [12. Future development options](#12-future-development-options--not-yet-implemented)
 
 ## Before you start — use an existing photo or take a new one
 
@@ -452,3 +453,16 @@ Also validate **crack recall / false negatives**, especially for fine cracks: a 
 The current executable is **refraInspector_v13.3.html**. Only this HTML release is retained on the current branch. Obsolete **v13.0** and **v12.1.7** HTML files were removed from the current branch; their prior contents remain recoverable through Git history. Historical versions may still be mentioned in the software change log.
 
 **Developer / Help Desk:** xuh@shinagawa-ref.jp
+
+## 12. Future Development Options — not yet implemented
+
+The following options extend RefraInspector beyond its existing browser-based 2D inspection and the separately proposed [3D scanner workflow](#11-planned-3d-scanner-features--not-yet-implemented). **All items below are future concepts, not currently available features.**
+
+| Future option | Planned capability / benefit |
+|---|---|
+| **Web App / Server Deployment** | Host RefraInspector as an internal HTTPS web application instead of distributing standalone HTML files; keep 2D/3D modules and large scan assets separate, while retaining local/offline file import where practical. |
+| **Cloud Measurement Data Storage & Sharing** | Centrally save and retrieve PL Sets, Campaign measurements, original photos, STL/point-cloud files and texture data; enable authorized colleagues across sites to view and compare records with permissions, version history, audit trails and backup/recovery. |
+| **Continuous Casting Controller Communication** | Explore read-only integration with relevant continuous-casting / slide-gate control systems to associate PL inspections with operational data such as heats, casting time, slide-gate position/stroke, actuation cycles and alarms, **subject to controller interfaces and plant approval**. Use a segregated, secure data interface; no automatic controller commands in the initial scope. |
+| **AI-Based PL Remaining Life Prediction** | Train and validate models using historical A–F / J–M measurements, optional 3D wear/crack features, heats/runtime and controller operating data to estimate remaining useful life, risk level and recommended inspection/replacement timing. Show prediction confidence and supporting factors; **operator review remains mandatory**. |
+
+**Implementation prerequisites:** Company-approved hosting and access controls; data ownership and customer confidentiality rules; confirmed controller data interfaces and cybersecurity review; sufficient consistent historical PL failure/replacement records; and validation of AI predictions against actual service outcomes. Prioritize centralized data collection before deploying predictive models.
