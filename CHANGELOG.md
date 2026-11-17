@@ -1,6 +1,6 @@
 # RefraInspector — Change History and SW/HW Correspondence
 
-**Current software:** [SW-14.20](./CHANGELOG_SOFTWARE.md) (Beta · experimental STL workflow)  
+**Current software:** [SW-14.23](./CHANGELOG_SOFTWARE.md) (Beta · experimental STL workflow)  
 **Hardware:** HW-01 U-shaped 3D-printed jig · HW-02 ArUco marker print (PDF)
 
 Detailed version histories: [Software](./CHANGELOG_SOFTWARE.md) · [Hardware](./CHANGELOG_HARDWARE.md) · [Archived software changes](./CHANGELOG_ARCHIVE.md).
@@ -21,6 +21,7 @@ Hardware IDs identify **two deliverables**, not individual development revisions
 |---|---|---|---|
 | SW-9.0 onward (legacy fallback) | External perpendicular metric rulers (not a numbered deliverable) | Level and calibrate X/Y against known ruler spans | Supported fallback; measurement accuracy requires checking |
 | SW-13.0 onward | **HW-02 · ArUco PDF** | `DICT_4X4_50` IDs 0–3; 30 mm markers, 300 × 300 mm centre spacing; automatic 16-corner planar Homography | Software implemented; printed geometry and real-world dimensional accuracy require verification |
+| SW-14.23 (3D display refinement) | Same STL input and hardware assumptions as SW-14.20 | Default longitudinal X–Z section, 180° plot display rotation and application title correction | Visualization update; real-world STL dimension and complete workflow checks still pending |
 | SW-14.20 (3D STL beta) | STL mesh from a 3D scanner (no numbered physical fixture needed) | Third workflow: Upper/Lower STL models, adjustable X–Z/Y–Z cut sections, approximate A/B bore openings and common PL-set navigation/approval | Software implemented; STL accuracy, coordinate conventions, persistence and 3D Campaign export require validation |
 | SW-13.2 onward | **HW-01 · U-shaped printed jig** + **HW-02 · ArUco PDF** | Mount markers on a stable frame, position PL and keep marker/reference planes coplanar | STL supplied; five separate watertight components. Print feasibility, rigidity and accuracy not yet confirmed |
 
