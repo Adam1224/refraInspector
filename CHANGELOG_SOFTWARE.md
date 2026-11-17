@@ -1,8 +1,19 @@
 # RefraInspector — Software Change History (SW)
 
-**Current software:** v13.3 (Beta) · **ID scheme:** `SW-<release>` (e.g. `SW-13.0`). Software version numbers reflect the executable HTML, not the physical fixture's revision.
+**Current software:** v14.20 (Beta · STL workflow experimental) · **ID scheme:** `SW-<release>` (e.g. `SW-13.0`). Software version numbers reflect the executable HTML, not the physical fixture's revision.
 
 See [hardware changes](./CHANGELOG_HARDWARE.md), [software-to-hardware mapping](./CHANGELOG.md), and [original detailed history](./CHANGELOG_ARCHIVE.md).
+
+## SW-14.20 · v14.20 — 2026-11-17 (Beta · experimental STL workflow)
+
+- Added a **third, STL-based 3D inspection workflow** to the single-page application, preserving the legacy ruler-calibrated and ArUco/Homography 2D workflows. Open [v14.20](./refraInspector_v14.20.html); [v13.3](./refraInspector_v13.3.html) remains available unchanged.
+- The existing **#0 Import / Replace**, Upper/Lower PL selector and PL Set dropdown are shared across photo and STL workflows; the #1–#3 workspace controls adapt to STL when a 3D set is selected.
+- Added binary/ASCII STL import, interactive model manipulation, appearance/color shading, orthographic views, and simultaneous longitudinal (X–Z) and transverse (Y–Z) cross-section previews. The model remains fully visible with two adjustable, semi-transparent cutting rectangles; each direction has a manual slider and an Auto cut action.
+- Registered approximate bore-opening readings from the STL cross sections as **B (longitudinal)** and **A (transverse)**, separately for Upper and Lower PLs; manual overrides are supported. **C–F are not yet measured from STL.** STL units/orientation and model geometry must be checked; these estimates are not metrology-validated.
+- Added STL-specific **Verify Alignment**, required before 3D Campaign saving; an imported Upper and/or Lower side must be verified independently. Shared sequential PL IDs, selector, saving status, recorded-set display, and deletion/recovery controls cover 2D and 3D records.
+- Added STL validation and save warnings for missing sides/usage data, implausible dimensions, differing A/B readings, mesh sampling and browser backup availability. Photo EXIF and ArUco/ruler-calibration warnings are intentionally not applied to STL input.
+- Original STL bytes, section choices, measurements and approval states are retained in **browser IndexedDB**; unified recovery/deletion also handles STL records. **STLs are not included in the existing consolidated Campaign JSON export**, and 3D entries have no validated C–F/stroke/erosion metrics.
+- **Validation status:** Beta. Complete Chrome/Edge regression testing, durable backup/reload, STL accuracy and cross-workflow Campaign export verification remain outstanding. No 3D remaining-life prediction is implemented.
 
 ## SW-13.3 · v13.3 — 2026-11-02 (Beta)
 
