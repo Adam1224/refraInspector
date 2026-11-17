@@ -1,8 +1,17 @@
 # RefraInspector — Software Change History (SW)
 
-**Current software:** v14.20 (Beta · STL workflow experimental) · **ID scheme:** `SW-<release>` (e.g. `SW-13.0`). Software version numbers reflect the executable HTML, not the physical fixture's revision.
+**Current software:** v14.23 (Beta · STL workflow experimental) · **ID scheme:** `SW-<release>` (e.g. `SW-13.0`). Software version numbers reflect the executable HTML, not the physical fixture's revision.
 
 See [hardware changes](./CHANGELOG_HARDWARE.md), [software-to-hardware mapping](./CHANGELOG.md), and [original detailed history](./CHANGELOG_ARCHIVE.md).
+
+## SW-14.23 · v14.23 — 2026-11-17 (Beta · 3D section display refinements)
+
+- Released [RefraInspector v14.23](./refraInspector_v14.23.html) as a separate HTML file; prior v14.20 and v13.3 releases remain intact.
+- Updated the 3D cross-section workspace layout: preserve a full-width 3D model area and arrange the longitudinal/transverse plots below the viewer when displayed, avoiding narrow, vertically squeezed charts.
+- The **longitudinal X–Z (B/D/E)** section is the default visible graph. Its display direction is flipped vertically and horizontally (180° presentation rotation); original STL coordinates and A/B numerical measurements remain unchanged.
+- The transverse Y–Z (A/C) section remains available via its Width cut control.
+- Renamed the application and browser title from the older RN Plate Pair Inspector label to **RefraInspector**.
+- **Validation status:** JavaScript syntax checks passed in the local build; browser visual behavior and full 2D/3D regression remain to be confirmed. The previously documented STL Campaign export and metrology limitations remain.
 
 ## SW-14.20 · v14.20 — 2026-11-17 (Beta · experimental STL workflow)
 
