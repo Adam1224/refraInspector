@@ -2,7 +2,7 @@
 
 **Refractory Sliding Gate Plate Inspection & Campaign Analysis**
 
-**Current beta:** [v14.20 — integrated 2D + STL 3D](./refraInspector_v14.20.html) · **Stable 2D reference:** [v13.3](./refraInspector_v13.3.html)
+**Current beta:** [v14.23 — integrated 2D + STL 3D](./refraInspector_v14.23.html) · **Stable 2D reference:** [v13.3](./refraInspector_v13.3.html)
 
 **Platform:** Modern desktop and mobile web browsers
 
@@ -11,7 +11,7 @@ RefraInspector is a browser-based application for inspection and analysis of ref
 ## Contents
 
 - [Before you start](#before-you-start--use-an-existing-photo-or-take-a-new-one)
-- [v14.20 STL beta — quick start and limitations](#v1420-stl-beta--quick-start-and-limitations)
+- [v14.23 STL beta — quick start and limitations](#v1423-stl-beta--quick-start-and-limitations)
 - [1. Quick start — one inspection](#1-quick-start--complete-one-pl-inspection)
 - [2. Warnings and troubleshooting](#2-warnings-and-errors--cause-and-solution)
   - [Diagnostic code index](#diagnostic-code-index)
@@ -27,13 +27,13 @@ RefraInspector is a browser-based application for inspection and analysis of ref
 - [9. Planned 3D Scanner Features](#9-planned-3d-scanner-features--not-yet-implemented)
 - [10. Future Development Options](#10-future-development-options--not-yet-implemented)
 
-## v14.20 STL beta — quick start and limitations
+## v14.23 STL beta — quick start and limitations
 
-**Application:** [Open RefraInspector v14.20](./refraInspector_v14.20.html) · [v13.3 2D-only rollback](./refraInspector_v13.3.html) · [SW-14.20 changes](./CHANGELOG_SOFTWARE.md)
+**Application:** [Open RefraInspector v14.23](./refraInspector_v14.23.html) · [v14.20 previous beta](./refraInspector_v14.20.html) · [v13.3 2D-only rollback](./refraInspector_v13.3.html) · [SW-14.23 changes](./CHANGELOG_SOFTWARE.md)
 
 In **#0 Import / Replace**, choose an STL instead of a photograph to activate the third inspection workflow. A single STL is assigned to the selected Upper/Lower side; two STLs are assigned Upper then Lower. The existing Upper/Lower switch, PL Set selector, shared PL-### numbering, Verify Alignment and Save set to campaign controls are reused. Photograph imports retain the two original ruler/ArUco 2D workflows.
 
-**3D beta controls:** rotate/pan/zoom, appearance and shaded-color options, orthographic/preset views, two visible cross sections (longitudinal X–Z and transverse Y–Z), their translucent section rectangles, sliders and Auto cut controls. The entire STL stays visible. Section estimates populate **B (longitudinal bore opening)** and **A (transverse bore opening)** per plate. Inspect the cut position, model coordinate system and units before accepting values; estimates are not yet validated metrology.
+**3D beta controls:** rotate/pan/zoom, appearance and shaded-color options, orthographic/preset views, the **longitudinal X–Z cross-section shown by default** (display rotated 180°), and an optional transverse Y–Z cross-section, with translucent section rectangles, sliders and Auto cut controls. The entire STL stays visible. Section estimates populate **B (longitudinal bore opening)** and **A (transverse bore opening)** per plate. Inspect the cut position, model coordinate system and units before accepting values; estimates are not yet validated metrology.
 
 **Data and limitations:** Upper/Lower STL bytes and inspection state use browser IndexedDB auto-backup. Recovery/deletion and saved-set listings include STL records, but **the consolidated Campaign JSON export does not yet embed STL originals**, and STL-based C–F, wear depth/volume, remaining stroke and erosion-per-Heat results are not implemented. 3D records may appear as saved without these unimplemented metrics; do not treat a saved record as a verified full-condition assessment. Clear browser data only after making external copies of source STL files.
 
@@ -407,7 +407,7 @@ Use the linked RefraInspector HTML file for the current application. See the cha
 
 ## 9. Further Planned 3D Scanner Features — beyond the v14.20 STL beta
 
-> **Future development beyond v14.20:** Basic STL geometry viewing, longitudinal/transverse section previews, and estimated A/B bore openings are implemented as an experimental third workflow. The remaining features below (including texture-based analysis, quantitative wear depth and full A–F / J–M) are still proposals. The current Legacy / ArUco 2D workflows remain available. Implementation depends on which scan, texture and CAD-difference files can actually be exported.
+> **Future development beyond v14.23:** Basic STL geometry viewing, longitudinal/transverse section previews, and estimated A/B bore openings are implemented as an experimental third workflow. The remaining features below (including texture-based analysis, quantitative wear depth and full A–F / J–M) are still proposals. The current Legacy / ArUco 2D workflows remain available. Implementation depends on which scan, texture and CAD-difference files can actually be exported.
 
 | Planned RefraInspector feature | Scanner function to be utilized |
 |---|---|
@@ -460,7 +460,7 @@ Also validate **crack recall / false negatives**, especially for fine cracks: a 
 
 ## 10. Future Development Options — not yet implemented
 
-The following options extend RefraInspector beyond its existing browser-based 2D inspection and [experimental STL workflow](#v1420-stl-beta--quick-start-and-limitations). **All items below are future concepts, not currently available features.**
+The following options extend RefraInspector beyond its existing browser-based 2D inspection and [experimental STL workflow](#v1423-stl-beta--quick-start-and-limitations). **All items below are future concepts, not currently available features.**
 
 | Future option | Planned capability / benefit |
 |---|---|
