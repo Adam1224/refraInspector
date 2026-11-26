@@ -47,7 +47,7 @@ In **#0 Import / Replace**, choose an STL instead of a photograph to activate th
 
 | Reference method | What to prepare | In the app |
 |---|---|---|
-| **ArUco (recommended)** | Four markers (IDs 0–3), correctly positioned **300 × 300 mm centre-to-centre**; keep all markers visible and coplanar with the PL reference face. [Print / set up markers](#5-jig-preparation-printing-and-installation) · [Marker PDF](./hardware/RefraInspector_ArUco_300x300_4A4_REVIEW_v13_fixed_labels.pdf) | Automatic detection and perspective correction |
+| **ArUco (recommended)** | Four markers (IDs 0–3), correctly positioned **300 × 300 mm centre-to-centre**; keep all markers visible and coplanar with the PL reference face. [Print / set up markers](#5-jig-preparation-printing-and-installation) · [Marker PDF](./hardware/RefraInspector_ArUco_300x300_2A4_10mm_Overlap_v12_corrected.pdf) | Automatic detection and perspective correction |
 | **Two rulers (fallback)** | Two perpendicular metric rulers, each with at least **100 mm** visible beside the PL. [See ruler calibration](#34-state-s2--traditional-leveling-and-xy-ruler-calibration) | Level the photo, then calibrate X and Y |
 
 **When taking photos with the ArUco jig:** Press the PL firmly against the **upper-left positioning corner of the jig** (the top and left locating surfaces), without covering the markers. Position the **camera lens approximately above the PL bore/opening**, and frame the shot so **all four ArUco markers (IDs 0–3), including their white margins, are fully visible and unobstructed**. A modest off-axis camera angle is generally acceptable when the markers are correctly detected: planar Homography compensates for perspective, so slight camera tilt alone should not materially affect planar measurement accuracy. This is conditional on coplanar reference surfaces, adequate image quality and independently verified dimensions; severe tilt, parallax from height offsets, lens distortion and worn/nonplanar surfaces can still cause error.
@@ -319,24 +319,18 @@ If no markers are present, the application falls back to the traditional **Auto 
 
 ## 5. Jig Preparation, Printing and Installation
 
-**Printable target (revised fixed-label layout):** [Four A4 sheets · 300 × 300 mm nominal ArUco geometry · millimetre rulers · per-page 100 mm print checks (PDF)](./hardware/RefraInspector_ArUco_300x300_4A4_REVIEW_v13_fixed_labels.pdf)
+**Printable target (current two-sheet layout):** [Two A4 sheets · 10 mm overlap · 300 × 300 mm nominal ArUco geometry (PDF)](./hardware/RefraInspector_ArUco_300x300_2A4_10mm_Overlap_v12_corrected.pdf)
 
-### Print and assemble the revised four-page A4 target
+### Print, cut, align and mount the two-sheet A4 target
 
-1. Open the PDF and print **all four pages on A4 at Actual size / 100%**. Disable **Fit to page**, auto-scaling, poster/tile printing, and printer-driver enlargement/reduction. Print in the intended page orientation.
-2. Check the **100 mm PRINT CHECK** line printed on **each of the four sheets** with a reliable physical ruler. If it is not 100 mm, correct the print settings and reprint.
-3. Identify each page from its printed `IDx | PAGE n/4 | POSITION` header and corner-placement icon. Lay the pages on a flat, rigid backing **without overlapping, trimming, or gaps**; align the actual paper edges and join in this order:
+1. Print both A4 pages at **Actual size / 100%**. Disable Fit to page and all printer scaling. Verify printed ruler distances with a reliable physical ruler.
+2. Cut along the indicated trimming lines, preserving the marker faces, white quiet zones and overlap/alignment features.
+3. On a flat surface, overlap the two sheets using the nominal **10 mm overlap** and align the printed registration features and ruler ticks. Check scale continuity across the seam.
+4. **Temporarily secure the aligned sheets with sticky notes (Post-it notes)** so they cannot shift relative to each other. Place the notes on non-measurement areas or the back; do not obscure markers or scales.
+5. Verify the horizontal and vertical marker-centre distances (ID 0–1, 2–3, 0–2 and 1–3): each must match the nominal **300 mm** reference. Check squareness and flatness. Realign or reprint if necessary.
+6. Attach the temporarily assembled target to the jig as a single aligned assembly. Keep the paper flat and avoid stretching, wrinkles and movement. Remove temporary notes once the target is securely attached, and recheck spacing, scale continuity and coplanarity with the PL reference plane.
 
-   | | Left | Right |
-   |---|---|---|
-   | **Top** | Page 1 · ID 0 (top-left) | Page 2 · ID 1 (top-right) |
-   | **Bottom** | Page 3 · ID 2 (bottom-left) | Page 4 · ID 3 (bottom-right) |
-
-4. Before fixing the pages, check that the printed millimetre tick progression continues in the intended direction across the top and left reference rulers. The page labels and corner-placement icons are assembly aids, **not** calibration features. Fix the pages against slipping, wrinkling, curling, or stretching. Tape the **back of the sheets or the outer margins**; never cover a marker's black squares or surrounding white quiet zone. Keep all markers flat and unobstructed.
-5. Measure actual **marker-centre distances** horizontally (ID 0–1 and ID 2–3) and vertically (ID 0–2 and ID 1–3). The intended values are **300 mm in both directions**. Confirm the assembled marker corners also form an accurate rectangular/square geometry. Paper-edge alignment alone cannot guarantee those distances because printers have feed/registration tolerances. **Do not use the target for metric measurements if the assembled marker-centre geometry fails verification.**
-6. The left and top rulers use the **bottom-right corner of the black ID 0 marker** as their 0 mm coordinate origin (the numeric zero labels are intentionally omitted). **This ruler origin is different from the ArUco marker-centre coordinate references used by the Homography calculation.** The revised page labels do not change this distinction. Some tick marks near markers and interior paper seams are intentionally omitted to prevent interference; do not use these omissions as physical gaps in the distance scale.
-
-For metrology, mount the printed target on a stable rigid jig once its dimensions have been checked. Ordinary printed paper is a prototype/reference target, not by itself a precision-certified calibration standard. Do not use an assembled set with wrong centre spacing as a valid 300 × 300 mm reference.
+The ruler origin and Homography marker-centre references are distinct. Printed paper is not a certified calibration standard; verify actual geometry before metric use.
 
 ### Position the frame relative to the PL
 
@@ -394,8 +388,7 @@ The ArUco workflow should be **automatic**, not require the user to click each m
 ## 8. Documentation and Support
 
 - [Current application — refraInspector_v13.3.html](./refraInspector_v13.3.html)
-- [Printable four-sheet A4 ArUco target — 300 × 300 mm](./hardware/RefraInspector_ArUco_300x300_4A4_REVIEW_v13_fixed_labels.pdf)
-- [Printable single-sheet A2 ArUco target — actual size](./hardware/RefraInspector_ArUco_300x300_A2_OneSheet_ActualSize.pdf)
+- [Printable two-sheet A4 ArUco target — 300 × 300 mm, 10 mm overlap](./hardware/RefraInspector_ArUco_300x300_2A4_10mm_Overlap_v12_corrected.pdf)
 - [SW/HW version mapping — CHANGELOG.md](./CHANGELOG.md)
 - [Software releases (SW codes) — CHANGELOG_SOFTWARE.md](./CHANGELOG_SOFTWARE.md)
 - [Hardware and ArUco target (HW codes) — CHANGELOG_HARDWARE.md](./CHANGELOG_HARDWARE.md)

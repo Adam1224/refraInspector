@@ -15,13 +15,16 @@ Hardware numbering describes the **two deliverables** used with the inspection a
 
 ## HW-02 — ArUco marker target (PDF)
 
-**File:** [Revised four-page A4 printable PDF](./hardware/RefraInspector_ArUco_300x300_4A4_REVIEW_v13_fixed_labels.pdf)  
-**Deliverable:** Print-and-assemble four ArUco markers, IDs 0–3, with millimetre scales.
+**Current revision:** 2A4 v12 corrected · **Documented:** 2026-11-26  
+**File:** [Two-sheet A4 printable PDF, 10 mm overlap](./hardware/RefraInspector_ArUco_300x300_2A4_10mm_Overlap_v12_corrected.pdf)  
+**Deliverable:** Four ArUco markers, IDs 0–3, with millimetre scales.
 
-- Layout: page 1 ID0 top-left; page 2 ID1 top-right; page 3 ID2 bottom-left; page 4 ID3 bottom-right.
-- Print all pages at **100% / Actual Size**; check each sheet's 100 mm verification line and confirm actual 300 × 300 mm marker-centre spacing after assembly.
-- `DICT_4X4_50`, nominal 30 mm squares. The ruler zero convention is distinct from Homography's marker-centre coordinate system.
-- Keep marker faces aligned with the PL measurement plane. Printed accuracy, marker readability and complete optical measurement accuracy remain subject to testing.
+- Replaces the previous four-sheet A4, A2 and alternative overlap layouts with a single two-sheet A4 release, reducing the number of paper joins.
+- Print at **100% / Actual Size**, cut along the indicated lines, overlap and align the sheets using the nominal 10 mm overlap and printed alignment features.
+- Temporarily secure the aligned sheets using sticky notes before attaching the assembled paper target to the jig. Keep marker faces, quiet zones and scales unobstructed.
+- Verify 300 × 300 mm marker-centre spacing, ruler continuity, squareness and flatness before and after mounting.
+- Calibration interface remains DICT_4X4_50, IDs 0–3, nominal 30 mm markers and 300 × 300 mm centre spacing. Keep the marker faces coplanar with the PL reference plane.
+- Physical print and assembly accuracy remain subject to verification; no improvement in measurement accuracy is claimed without testing.
 
 ## References
 
